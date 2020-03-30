@@ -9,13 +9,45 @@
 import UIKit
 
 class SaveView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+  
+  // MARK: -Property
+  let saveLabel = UIButton().then {
+    $0.setTitle("저장", for: .normal)
+    $0.setTitleColor(UIColor(named: "SaveTextColor"), for: .normal)
+    $0.titleLabel?.font = .systemFont(ofSize: 16)
+    $0.backgroundColor = .clear
+  }
+  
+  // MARK: -init
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    self.backgroundColor = UIColor(named: "SaveButtonColor")
+    
+    setupUI()
+  }
+  
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  
+  
+  // MARK: -setupUI
+  
+  private func setupUI() {
+    self.addSubview(saveLabel)
+    setupConstraint()
+  }
+  
+  // MARK: -setupConstraint
+  
+  private func setupConstraint() {
+    
+    saveLabel.snp.makeConstraints {
+      $0.top.bottom.leading.trailing.equalToSuperview()
     }
-    */
+  }
+  
 
 }

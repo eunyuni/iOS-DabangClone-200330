@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 삭제해도되는 뷰~
 class MCHeaderView: UIView {
   
   // MARK: -Property
@@ -113,4 +114,17 @@ class MCHeaderView: UIView {
     }
   }
   
+}
+
+// MARK: -UITextFieldDelegate
+
+extension MCHeaderView: UITextFieldDelegate {
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.endEditing(true)
+  }
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+  }
 }
