@@ -16,7 +16,7 @@ class PriceTopTableViewCell: UITableViewCell {
   // MARK: -Property
   
   let priceLabel = UILabel().then {
-    $0.text = "가격을 입력하세요"
+//    $0.text = "가격을 입력하세요"
     $0.font = .systemFont(ofSize: 16, weight: .regular)
   }
   
@@ -32,7 +32,11 @@ class PriceTopTableViewCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: -Action
   
+  func configue(title: String) {
+    priceLabel.text = title
+  }
   
   // MARK: -setupUI
   

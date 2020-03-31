@@ -14,7 +14,7 @@ class CountfloorsViewController: UIViewController {
   // MARK: -Property
   private let tableView = UITableView().then {
     $0.allowsSelection = false
-//    $0.separatorStyle = .none
+    $0.separatorStyle = .none
   }
   private let saveButton = SaveView()
   private let category = ["해당 층 수", "건물 층 수"]
@@ -40,12 +40,8 @@ class CountfloorsViewController: UIViewController {
     
     tableView.register(CFTopTableViewCell.self, forCellReuseIdentifier: CFTopTableViewCell.identifier)
     tableView.register(CFBodyTableViewCell.self, forCellReuseIdentifier: CFBodyTableViewCell.identifier)
-//    tableView.register(PriceBottomTableViewCell.self, forCellReuseIdentifier: PriceBottomTableViewCell.identifier)
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     tableView.dataSource = self
-    //    tableView.delegate = self
-    //    tableView.backgroundColor = UIColor(named: "SaveTextColor")
-    
     setupConstraint()
   }
   
@@ -73,10 +69,6 @@ class CountfloorsViewController: UIViewController {
 // MARK: -UITableViewDataSource
 
 extension CountfloorsViewController: UITableViewDataSource {
-  
-//  func numberOfSections(in tableView: UITableView) -> Int {
-//    return 1
-//  }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 3
@@ -88,10 +80,8 @@ extension CountfloorsViewController: UITableViewDataSource {
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: CFBodyTableViewCell.identifier , for: indexPath) as! CFBodyTableViewCell
-//      cell.configue(category: category[indexPath.row - 1])
+      cell.configue(category: category[indexPath.row - 1])
       return cell
     }
-    
   }
-  
 }

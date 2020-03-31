@@ -20,24 +20,20 @@ class CFBodyTableViewCell: UITableViewCell {
     $0.font = .systemFont(ofSize: 17, weight: .regular)
   }
   private let toolbar = UIToolbar()
+  private let buttonLabel = UILabel().then {
+    $0.font = .systemFont(ofSize: 12, weight: .regular)
+    $0.text = "↓"
+  }
   private let textField = UITextField().then {
     $0.layer.borderWidth = 0.6
     $0.layer.borderColor = UIColor.lightGray.cgColor
     $0.layer.cornerRadius = 4
-//    $0.placeholder = "0"
-//    $0.inputAccessoryView = tool
-//    $0.type
+    $0.placeholder = "선택하세요"
     $0.addLeftPadding(20)
   }
-//  private lazy var imagePickerController: UIImagePickerController = {
-//    let picker = UIImagePickerController()
-////    picker.delegate = self
-//    picker.allowsEditing = true
-//    return picker
-//  }()
+
   private lazy var pickerView = UIPickerView().then {
     $0.backgroundColor = .white
-//    $0.
   }
   // MARK: -init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -51,9 +47,11 @@ class CFBodyTableViewCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-
-
-
+  // MARK: -Action
+  
+  func configue(category: String) {
+    titleLabel.text = category
+  }
   
   // MARK: -setupUI
   
@@ -65,9 +63,11 @@ class CFBodyTableViewCell: UITableViewCell {
     
     titleLabel,
     textField,
-//    pickerView,
     
     ])
+    
+    textField.addSubview(buttonLabel)
+    
     toolbar.sizeToFit()
     textField.inputAccessoryView = toolbar
     textField.inputView = pickerView
@@ -86,14 +86,12 @@ class CFBodyTableViewCell: UITableViewCell {
       $0.centerX.equalToSuperview()
       $0.width.equalToSuperview().multipliedBy(0.9)
       $0.height.equalTo(50)
+      $0.bottom.equalToSuperview().offset(-20)
     }
-//    pickerView.snp.makeConstraints {
-//      $0.top.equalTo(textField).offset(12)
-//      $0.centerX.equalToSuperview()
-//      $0.width.equalToSuperview().multipliedBy(0.9)
-//      $0.height.equalTo(50)
-//      $0.bottom.equalToSuperview().offset(-10)
-//    }
+    buttonLabel.snp.makeConstraints {
+      $0.trailing.equalToSuperview().offset(-12)
+      $0.centerY.equalToSuperview()
+    }
   }
 
 
@@ -116,7 +114,7 @@ extension CFBodyTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
 
   // 피커뷰 데이터 제목
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    floorsData[row]
+    return floorsData[row]
   }
 
   // 피커뷰 선택시
@@ -130,3 +128,15 @@ extension CFBodyTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
 }
 
 
+// MARK: -UITextFieldDelegate
+// 키보드 터치, 내려가도록
+extension CFBodyTableViewCell: UITextFieldDelegate {
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.endEditing(true)
+  }
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+  }
+}

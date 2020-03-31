@@ -100,6 +100,7 @@ extension PriceViewController: UITableViewDataSource {
     switch indexPath.row {
     case 0:
       let cell = tableView.dequeueReusableCell(withIdentifier: PriceTopTableViewCell.identifier, for: indexPath) as! PriceTopTableViewCell
+      cell.configue(title: "가격을 입력하세요.")
       return cell
     case 1, 2:
       let cell = tableView.dequeueReusableCell(withIdentifier: PriceBodyTableViewCell.identifier , for: indexPath) as! PriceBodyTableViewCell
