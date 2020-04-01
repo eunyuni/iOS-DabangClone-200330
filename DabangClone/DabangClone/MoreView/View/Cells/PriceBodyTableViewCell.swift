@@ -36,7 +36,7 @@ class PriceBodyTableViewCell: UITableViewCell {
     $0.keyboardType = .numberPad
     $0.addLeftPadding(20)
   }
-  
+     
   
   // MARK: -init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

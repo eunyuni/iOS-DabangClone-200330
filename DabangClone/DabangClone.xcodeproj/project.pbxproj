@@ -78,6 +78,7 @@
 		E7BB1C12243350A300C66B48 /* RSTopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C11243350A300C66B48 /* RSTopTableViewCell.swift */; };
 		E7BB1C14243353F200C66B48 /* RSBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C13243353F200C66B48 /* RSBodyTableViewCell.swift */; };
 		E7BB1C162433670600C66B48 /* ParkingFeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C152433670600C66B48 /* ParkingFeeViewController.swift */; };
+		E7BB1C182434801300C66B48 /* InquiryBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C172434801300C66B48 /* InquiryBodyTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,6 +157,7 @@
 		E7BB1C11243350A300C66B48 /* RSTopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSTopTableViewCell.swift; sourceTree = "<group>"; };
 		E7BB1C13243353F200C66B48 /* RSBodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSBodyTableViewCell.swift; sourceTree = "<group>"; };
 		E7BB1C152433670600C66B48 /* ParkingFeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingFeeViewController.swift; sourceTree = "<group>"; };
+		E7BB1C172434801300C66B48 /* InquiryBodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryBodyTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -443,6 +445,7 @@
 				E7BB1C0D24320C3D00C66B48 /* CFBodyTableViewCell.swift */,
 				E7BB1C11243350A300C66B48 /* RSTopTableViewCell.swift */,
 				E7BB1C13243353F200C66B48 /* RSBodyTableViewCell.swift */,
+				E7BB1C172434801300C66B48 /* InquiryBodyTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -642,6 +645,7 @@
 				E7BB1C14243353F200C66B48 /* RSBodyTableViewCell.swift in Sources */,
 				6F4DECEC242A1585008D77E5 /* SettingTableViewCell.swift in Sources */,
 				1516005524287ED40003DDCF /* SaleViewController.swift in Sources */,
+				E7BB1C182434801300C66B48 /* InquiryBodyTableViewCell.swift in Sources */,
 				152DD9B2242B3E2400C80E10 /* FrequentlyViewController.swift in Sources */,
 				15D9B3552431C2A900A38A76 /* MCBottomTableViewCell.swift in Sources */,
 				15D9B342242E230800A38A76 /* AddRoomCollectionViewCell.swift in Sources */,

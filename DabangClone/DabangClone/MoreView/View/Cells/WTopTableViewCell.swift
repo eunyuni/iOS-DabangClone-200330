@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 import Then
-
+  
 protocol WTopTableViewCelldelegate: class {
     func didTapReasonButton()
 }

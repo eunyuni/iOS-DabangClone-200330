@@ -9,12 +9,22 @@
 import UIKit
 
 class CFBodyTableViewCell: UITableViewCell {
-
+  
+  enum CFBodyCellPickerType {
+    case 해당층수
+    case 건물층수
+    case 문의
+  }
+  
   // MARK: -Identifier
   static let identifier = "CFBodyTableViewCell"
   
+  private var cellType: CFBodyCellPickerType = .해당층수
+  
   // MARK: -Property
-  private let floorsData = ["반지층", "옥탑", "1층", "2층", "3층", "4층", "5층", "6층", "7층", "8층", "9층", "10층"]
+  private let 해당층수 = ["반지층", "옥탑", "1층", "2층", "3층", "4층", "5층", "6층", "7층", "8층", "9층", "10층"]
+  private let 건물층수 = ["1층", "2층", "3층", "4층", "5층", "6층", "7층", "8층", "9층", "10층"]
+  private let 문의 = ["일반문의", "허위매물신고"]
   
   private let titleLabel = UILabel().then {
     $0.font = .systemFont(ofSize: 17, weight: .regular)
@@ -31,10 +41,11 @@ class CFBodyTableViewCell: UITableViewCell {
     $0.placeholder = "선택하세요"
     $0.addLeftPadding(20)
   }
-
   private lazy var pickerView = UIPickerView().then {
     $0.backgroundColor = .white
   }
+  private let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: nil, action: nil)
+  
   // MARK: -init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -49,8 +60,10 @@ class CFBodyTableViewCell: UITableViewCell {
   
   // MARK: -Action
   
-  func configue(category: String) {
+  func configue(category: String, pickerType: CFBodyCellPickerType) {
+    cellType = pickerType
     titleLabel.text = category
+    pickerView.reloadAllComponents()
   }
   
   // MARK: -setupUI
@@ -60,15 +73,17 @@ class CFBodyTableViewCell: UITableViewCell {
     pickerView.dataSource = self
     
     contentView.addSubviews([
-    
-    titleLabel,
-    textField,
-    
+      
+      titleLabel,
+      textField,
+      
     ])
     
     textField.addSubview(buttonLabel)
     
     toolbar.sizeToFit()
+    
+    toolbar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), doneButton]
     textField.inputAccessoryView = toolbar
     textField.inputView = pickerView
     setupConstraint()
@@ -93,8 +108,8 @@ class CFBodyTableViewCell: UITableViewCell {
       $0.centerY.equalToSuperview()
     }
   }
-
-
+  
+  
 }
 
 
@@ -109,22 +124,40 @@ extension CFBodyTableViewCell: UIPickerViewDelegate, UIPickerViewDataSource {
   
   // 데이터 행의 개수
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    floorsData.count
+    switch cellType {
+    case .해당층수:
+      return 해당층수.count
+    case .건물층수:
+      return 건물층수.count
+    case .문의:
+      return 문의.count
+    }
   }
-
+  
   // 피커뷰 데이터 제목
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return floorsData[row]
+    switch cellType {
+    case .해당층수:
+      return 해당층수[row]
+    case .건물층수:
+      return 건물층수[row]
+    case .문의:
+      return 문의[row]
+    }
   }
-
+  
   // 피커뷰 선택시
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     print("row: \(row)")
-    print("value: \(floorsData[row])")
-    textField.text = floorsData[row]
+    switch cellType {
+    case .해당층수:
+      return textField.text = 해당층수[row]
+    case .건물층수:
+      return textField.text = 건물층수[row]
+    case .문의:
+      return textField.text = 문의[row]
+    }
   }
-
-
 }
 
 

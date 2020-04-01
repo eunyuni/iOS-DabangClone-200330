@@ -78,10 +78,14 @@ extension CountfloorsViewController: UITableViewDataSource {
     if indexPath.row == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: CFTopTableViewCell.identifier, for: indexPath) as! CFTopTableViewCell
       return cell
+    } else if indexPath.row == 1 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CFBodyTableViewCell.identifier , for: indexPath) as! CFBodyTableViewCell
+      cell.configue(category: category[indexPath.row - 1], pickerType: .해당층수)
+      return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: CFBodyTableViewCell.identifier , for: indexPath) as! CFBodyTableViewCell
-      cell.configue(category: category[indexPath.row - 1])
-      return cell
+      cell.configue(category: category[indexPath.row - 1], pickerType: .건물층수)
+            return cell
     }
   }
 }
