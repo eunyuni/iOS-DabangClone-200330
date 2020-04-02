@@ -87,7 +87,7 @@ class InquiryBodyTableViewCell: UITableViewCell {
       $0.top.equalTo(contentLabel.snp.bottom).offset(16)
       $0.centerX.equalToSuperview()
       $0.width.equalToSuperview().multipliedBy(0.9)
-      $0.height.equalTo(textField).multipliedBy(2.4)
+      $0.height.equalTo(textField).multipliedBy(2.6)
       $0.bottom.equalToSuperview().offset(-26)
     }
     

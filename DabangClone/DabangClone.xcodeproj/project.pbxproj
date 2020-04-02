@@ -57,6 +57,7 @@
 		6F4DECEC242A1585008D77E5 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DECEB242A1585008D77E5 /* SettingTableViewCell.swift */; };
 		6F4DECEE242A19A6008D77E5 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DECED242A19A6008D77E5 /* SettingModel.swift */; };
 		AAD0A9599381D7CA708D6E31 /* Pods_DabangClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90B70ED9EB0B15C4D6FEDE4D /* Pods_DabangClone.framework */; };
+		E78AD93B2435E2E30098BE6E /* InquiryBottomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AD93A2435E2E30098BE6E /* InquiryBottomTableViewCell.swift */; };
 		E79D81802429E0770006029E /* RoomGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D817F2429E0770006029E /* RoomGuideViewController.swift */; };
 		E79D81842429E8E50006029E /* RGTopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D81832429E8E50006029E /* RGTopTableViewCell.swift */; };
 		E79D81872429EA340006029E /* RGBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D81862429EA340006029E /* RGBodyTableViewCell.swift */; };
@@ -136,6 +137,7 @@
 		6F4DECED242A19A6008D77E5 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		90B70ED9EB0B15C4D6FEDE4D /* Pods_DabangClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DabangClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6E307BB0DBA8293AA6779F /* Pods-DabangClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DabangClone.debug.xcconfig"; path = "Target Support Files/Pods-DabangClone/Pods-DabangClone.debug.xcconfig"; sourceTree = "<group>"; };
+		E78AD93A2435E2E30098BE6E /* InquiryBottomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryBottomTableViewCell.swift; sourceTree = "<group>"; };
 		E79D817F2429E0770006029E /* RoomGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGuideViewController.swift; sourceTree = "<group>"; };
 		E79D81832429E8E50006029E /* RGTopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGTopTableViewCell.swift; sourceTree = "<group>"; };
 		E79D81862429EA340006029E /* RGBodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBodyTableViewCell.swift; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 				E7BB1C11243350A300C66B48 /* RSTopTableViewCell.swift */,
 				E7BB1C13243353F200C66B48 /* RSBodyTableViewCell.swift */,
 				E7BB1C172434801300C66B48 /* InquiryBodyTableViewCell.swift */,
+				E78AD93A2435E2E30098BE6E /* InquiryBottomTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				15D9B338242E226C00A38A76 /* WTopTableViewCell.swift in Sources */,
 				E7BB1C162433670600C66B48 /* ParkingFeeViewController.swift in Sources */,
 				152DD9B8242B4D3400C80E10 /* Model.swift in Sources */,
+				E78AD93B2435E2E30098BE6E /* InquiryBottomTableViewCell.swift in Sources */,
 				1516002F24247BA20003DDCF /* AppDelegate.swift in Sources */,
 				E7BB1C12243350A300C66B48 /* RSTopTableViewCell.swift in Sources */,
 				E7BB1C062431F4D000C66B48 /* PriceBodyTableViewCell.swift in Sources */,

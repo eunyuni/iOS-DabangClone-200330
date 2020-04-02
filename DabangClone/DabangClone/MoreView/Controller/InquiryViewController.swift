@@ -8,12 +8,13 @@
 
 import UIKit
 
+// 더보기 - 1:1 문의
 class InquiryViewController: UIViewController {
   
   // MARK: -Property
   private let tableView = UITableView().then {
     $0.allowsSelection = false
-//        $0.separatorStyle = .none
+    $0.separatorStyle = .none
     $0.backgroundColor = UIColor(named: "TextFieldColor")
   }
   private let category = "문의유형"
@@ -37,6 +38,7 @@ class InquiryViewController: UIViewController {
     
     tableView.register(CFBodyTableViewCell.self, forCellReuseIdentifier: CFBodyTableViewCell.identifier)
     tableView.register(InquiryBodyTableViewCell.self, forCellReuseIdentifier: InquiryBodyTableViewCell.identifier)
+    tableView.register(InquiryBottomTableViewCell.self, forCellReuseIdentifier: InquiryBottomTableViewCell.identifier)
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     tableView.dataSource = self
     
@@ -71,7 +73,7 @@ extension InquiryViewController: UITableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: InquiryBodyTableViewCell.identifier , for: indexPath) as! InquiryBodyTableViewCell
       return cell
     } else {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+      let cell = tableView.dequeueReusableCell(withIdentifier: InquiryBottomTableViewCell.identifier, for: indexPath) as! InquiryBottomTableViewCell
       return cell
     }
   }

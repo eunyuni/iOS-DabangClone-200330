@@ -93,7 +93,7 @@ class CFBodyTableViewCell: UITableViewCell {
   
   private func setupConstraint() {
     titleLabel.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(8)
+      $0.top.equalToSuperview().offset(16)
       $0.leading.equalToSuperview().offset(24)
     }
     textField.snp.makeConstraints {
