@@ -20,8 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window = UIWindow(frame: UIScreen.main.bounds)
     
 //    let mainVC = MainTabBarViewController()
-    let mainVC = EventViewController()
-    
+//    let mainVC = BaseViewController()
+    let mainVC = ApartmentAddInfoViewController()
+
     window?.rootViewController = mainVC
     window?.makeKeyAndVisible()
     ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
