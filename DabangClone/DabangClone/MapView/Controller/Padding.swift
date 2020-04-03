@@ -6,4 +6,10 @@
 //  Copyright © 2020 pandaman. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+struct Padding {
+  static let topBottom: CGFloat = 32
+  static let spacing: CGFloat = 6
+}
+

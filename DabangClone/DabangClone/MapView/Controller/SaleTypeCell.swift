@@ -11,7 +11,7 @@ import UIKit
 class FilterSaleTypeCell: UITableViewCell {
   
   // MARK: -Identifier
-  static let identifier = "FilterSaleTypeCell"
+  static let identifier = "FilterRoomTypeCell"
   
   
   // MARK: -Property
@@ -83,10 +83,6 @@ class FilterSaleTypeCell: UITableViewCell {
     titleLabel.snp.makeConstraints {
       $0.top.equalToSuperview().offset(Padding.topBottom)
       $0.leading.equalToSuperview().offset(16)
-    }
-    subTitleLabel.snp.makeConstraints {
-      $0.top.equalTo(titleLabel)
-      $0.leading.equalTo(titleLabel.snp.trailing).offset(4)
     }
     monthlyButton.snp.makeConstraints {
       $0.top.equalTo(titleLabel.snp.bottom).offset(8)
