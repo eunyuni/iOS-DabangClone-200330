@@ -64,6 +64,11 @@
 		E78AD96724371BBE0098BE6E /* FilterSaleTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AD96624371BBE0098BE6E /* FilterSaleTypeCell.swift */; };
 		E78AD969243727130098BE6E /* Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AD968243727130098BE6E /* Padding.swift */; };
 		E78AD96B243729BB0098BE6E /* FilterFloorCountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AD96A243729BB0098BE6E /* FilterFloorCountCell.swift */; };
+		E78AD96D2438CF730098BE6E /* FilterRoomStructureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AD96C2438CF730098BE6E /* FilterRoomStructureCell.swift */; };
+		E78AD96F2438D0EC0098BE6E /* FilterTwoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AD96E2438D0EC0098BE6E /* FilterTwoButtonView.swift */; };
+		E78AD9712438D4B50098BE6E /* FileteAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AD9702438D4B50098BE6E /* FileteAddCell.swift */; };
+		E78AD9732438D9A20098BE6E /* FilterTradeTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AD9722438D9A20098BE6E /* FilterTradeTypeCell.swift */; };
+		E78AD9752438E3F20098BE6E /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AD9742438E3F20098BE6E /* ButtonView.swift */; };
 		E79D81802429E0770006029E /* RoomGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D817F2429E0770006029E /* RoomGuideViewController.swift */; };
 		E79D81842429E8E50006029E /* RGTopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D81832429E8E50006029E /* RGTopTableViewCell.swift */; };
 		E79D81872429EA340006029E /* RGBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D81862429EA340006029E /* RGBodyTableViewCell.swift */; };
@@ -150,6 +155,11 @@
 		E78AD96624371BBE0098BE6E /* FilterSaleTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterSaleTypeCell.swift; path = DabangClone/MapView/Controller/FilterSaleTypeCell.swift; sourceTree = SOURCE_ROOT; };
 		E78AD968243727130098BE6E /* Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Padding.swift; path = DabangClone/MapView/Controller/Padding.swift; sourceTree = SOURCE_ROOT; };
 		E78AD96A243729BB0098BE6E /* FilterFloorCountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterFloorCountCell.swift; path = DabangClone/MapView/Controller/FilterFloorCountCell.swift; sourceTree = SOURCE_ROOT; };
+		E78AD96C2438CF730098BE6E /* FilterRoomStructureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterRoomStructureCell.swift; path = DabangClone/MapView/Controller/FilterRoomStructureCell.swift; sourceTree = SOURCE_ROOT; };
+		E78AD96E2438D0EC0098BE6E /* FilterTwoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterTwoButtonView.swift; path = DabangClone/MapView/Controller/FilterTwoButtonView.swift; sourceTree = SOURCE_ROOT; };
+		E78AD9702438D4B50098BE6E /* FileteAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FileteAddCell.swift; path = DabangClone/MapView/Controller/FileteAddCell.swift; sourceTree = SOURCE_ROOT; };
+		E78AD9722438D9A20098BE6E /* FilterTradeTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterTradeTypeCell.swift; path = DabangClone/MapView/Controller/FilterTradeTypeCell.swift; sourceTree = SOURCE_ROOT; };
+		E78AD9742438E3F20098BE6E /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ButtonView.swift; path = DabangClone/MapView/Controller/ButtonView.swift; sourceTree = SOURCE_ROOT; };
 		E79D817F2429E0770006029E /* RoomGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGuideViewController.swift; sourceTree = "<group>"; };
 		E79D81832429E8E50006029E /* RGTopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGTopTableViewCell.swift; sourceTree = "<group>"; };
 		E79D81862429EA340006029E /* RGBodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBodyTableViewCell.swift; sourceTree = "<group>"; };
@@ -328,6 +338,8 @@
 		15D9B31A242B9FD300A38A76 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E78AD96E2438D0EC0098BE6E /* FilterTwoButtonView.swift */,
+				E78AD9742438E3F20098BE6E /* ButtonView.swift */,
 				15D9B325242BA21200A38A76 /* Cells */,
 			);
 			path = View;
@@ -481,6 +493,9 @@
 				E78AD9602437119C0098BE6E /* FilterRoomTypeCell.swift */,
 				E78AD96624371BBE0098BE6E /* FilterSaleTypeCell.swift */,
 				E78AD96A243729BB0098BE6E /* FilterFloorCountCell.swift */,
+				E78AD96C2438CF730098BE6E /* FilterRoomStructureCell.swift */,
+				E78AD9702438D4B50098BE6E /* FileteAddCell.swift */,
+				E78AD9722438D9A20098BE6E /* FilterTradeTypeCell.swift */,
 				E78AD9642437186B0098BE6E /* GrayLineViewCell.swift */,
 			);
 			path = Cells;
@@ -630,6 +645,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15D9B334242E225900A38A76 /* PersonalModifyViewController.swift in Sources */,
+				E78AD96D2438CF730098BE6E /* FilterRoomStructureCell.swift in Sources */,
 				E7ACD430242B360300C5D097 /* InquiryViewController.swift in Sources */,
 				E79D81802429E0770006029E /* RoomGuideViewController.swift in Sources */,
 				15D9B33E242E22EB00A38A76 /* AddRoomViewController.swift in Sources */,
@@ -645,6 +661,7 @@
 				6F41B40B242A383000CACDCE /* MarketingImfomationViewController.swift in Sources */,
 				15D9B3582431C2B600A38A76 /* ExplainView.swift in Sources */,
 				E7BB1C082431F9B600C66B48 /* PriceBottomTableViewCell.swift in Sources */,
+				E78AD96F2438D0EC0098BE6E /* FilterTwoButtonView.swift in Sources */,
 				E7BB1C0E24320C3D00C66B48 /* CFBodyTableViewCell.swift in Sources */,
 				6F41B409242A32D800CACDCE /* SettingSectionView.swift in Sources */,
 				E79D81872429EA340006029E /* RGBodyTableViewCell.swift in Sources */,
@@ -653,6 +670,7 @@
 				15D9B338242E226C00A38A76 /* WTopTableViewCell.swift in Sources */,
 				E7BB1C162433670600C66B48 /* ParkingFeeViewController.swift in Sources */,
 				152DD9B8242B4D3400C80E10 /* Model.swift in Sources */,
+				E78AD9712438D4B50098BE6E /* FileteAddCell.swift in Sources */,
 				E78AD93B2435E2E30098BE6E /* InquiryBottomTableViewCell.swift in Sources */,
 				1516002F24247BA20003DDCF /* AppDelegate.swift in Sources */,
 				E78AD969243727130098BE6E /* Padding.swift in Sources */,
@@ -661,6 +679,7 @@
 				15D9B340242E22EB00A38A76 /* PrivacyPolicyViewController.swift in Sources */,
 				E7BB1C022431E5AB00C66B48 /* PriceViewController.swift in Sources */,
 				15D9B3562431C2A900A38A76 /* MCTopTableViewCell.swift in Sources */,
+				E78AD9752438E3F20098BE6E /* ButtonView.swift in Sources */,
 				15160049242483730003DDCF /* MainTabBarViewController.swift in Sources */,
 				6F4DECE72429F78E008D77E5 /* SettingViewController.swift in Sources */,
 				15D9B34A2430A8A900A38A76 /* EventTableViewCell.swift in Sources */,
@@ -702,6 +721,7 @@
 				E78AD963243711C80098BE6E /* FilterViewController.swift in Sources */,
 				6F41B40F242A38FB00CACDCE /* MarketingImfomationView.swift in Sources */,
 				6F4DECEE242A19A6008D77E5 /* SettingModel.swift in Sources */,
+				E78AD9732438D9A20098BE6E /* FilterTradeTypeCell.swift in Sources */,
 				1516005324287E6F0003DDCF /* MapViewController.swift in Sources */,
 				15D9B32A242CA42F00A38A76 /* SellMyRoomViewController.swift in Sources */,
 				E7BB1C002431DC8200C66B48 /* SaveView.swift in Sources */,

@@ -15,32 +15,32 @@ class FilterRoomTypeCell: UITableViewCell {
   
   
   // MARK: -Property
-  let titleLabel = UILabel().then {
+  private let titleLabel = UILabel().then {
     $0.text = "방 종류"
-    $0.font = .systemFont(ofSize: 13, weight: .regular)
+    $0.font = .systemFont(ofSize: 13, weight: .bold)
   }
-  let oneRoomButton = UIButton().then {
+  private let oneRoomButton = UIButton().then {
     $0.setTitle("원룸", for: .normal)
     $0.setTitleColor(.white, for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14)
     $0.backgroundColor = UIColor(named: "DabangLightBlue")
     $0.layer.cornerRadius = 4
   }
-  let twoRoomButton = UIButton().then {
+  private let twoRoomButton = UIButton().then {
     $0.setTitle("투∙쓰리룸", for: .normal)
     $0.setTitleColor(.white, for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14)
     $0.backgroundColor = UIColor(named: "DabangLightBlue")
     $0.layer.cornerRadius = 4
   }
-  let officetelButton = UIButton().then {
+  private let officetelButton = UIButton().then {
     $0.setTitle("오피스텔", for: .normal)
     $0.setTitleColor(.white, for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14)
     $0.backgroundColor = UIColor(named: "DabangLightBlue")
     $0.layer.cornerRadius = 4
   }
-  let apartButton = UIButton().then {
+  private let apartButton = UIButton().then {
     $0.setTitle("아파트", for: .normal)
     $0.setTitleColor(.black, for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .light)

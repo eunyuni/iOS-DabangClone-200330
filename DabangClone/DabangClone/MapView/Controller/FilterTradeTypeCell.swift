@@ -1,22 +1,22 @@
 //
-//  SaleTypeCell.swift
+//  FilterTradeTypeCell.swift
 //  DabangClone
 //
-//  Created by 은영김 on 2020/04/03.
+//  Created by 은영김 on 2020/04/05.
 //  Copyright © 2020 pandaman. All rights reserved.
 //
 
 import UIKit
 
-class FilterSaleTypeCell: UITableViewCell {
+class FilterTradeTypeCell: UITableViewCell {
   
   // MARK: -Identifier
-  static let identifier = "FilterSaleTypeCell"
+  static let identifier = "FilterTradeTypeCell"
   
   
   // MARK: -Property
   private let titleLabel = UILabel().then {
-    $0.text = "매물종류"
+    $0.text = "거래 종류"
     $0.font = .systemFont(ofSize: 13, weight: .bold)
   }
   private let subTitleLabel = UILabel().then {
@@ -24,29 +24,21 @@ class FilterSaleTypeCell: UITableViewCell {
     $0.font = .systemFont(ofSize: 13, weight: .regular)
     $0.textColor = .gray
   }
-  private let monthlyButton = UIButton().then {
-    $0.setTitle("월세", for: .normal)
+  private let brokerageButton = UIButton().then {
+    $0.setTitle("중개", for: .normal)
     $0.setTitleColor(.white, for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14)
     $0.backgroundColor = UIColor(named: "DabangLightBlue")
     $0.layer.cornerRadius = 4
   }
-  private let charterButton = UIButton().then {
-    $0.setTitle("전세", for: .normal)
+  private let directButton = UIButton().then {
+    $0.setTitle("직거래", for: .normal)
     $0.setTitleColor(.white, for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14)
     $0.backgroundColor = UIColor(named: "DabangLightBlue")
     $0.layer.cornerRadius = 4
   }
-  private let tradingButton = UIButton().then {
-    $0.setTitle("매매", for: .normal)
-    $0.setTitleColor(.black, for: .normal)
-    $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .light)
-    $0.backgroundColor = UIColor(named: "LightGrayColor")
-    $0.layer.borderWidth = 0.6
-    $0.layer.borderColor = UIColor.lightGray.cgColor
-    $0.layer.cornerRadius = 4
-  }
+  
   // MARK: -init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -68,11 +60,11 @@ class FilterSaleTypeCell: UITableViewCell {
     contentView.addSubviews([
       titleLabel,
       subTitleLabel,
-      monthlyButton,
-      charterButton,
-      tradingButton,
+      brokerageButton,
+      directButton
       
     ])
+    
     setupConstraint()
   }
   
@@ -86,29 +78,20 @@ class FilterSaleTypeCell: UITableViewCell {
     }
     subTitleLabel.snp.makeConstraints {
       $0.top.equalTo(titleLabel)
-      $0.leading.equalTo(titleLabel.snp.trailing).offset(4)
+      $0.leading.equalTo(titleLabel.snp.trailing).offset(6)
     }
-    monthlyButton.snp.makeConstraints {
+    brokerageButton.snp.makeConstraints {
       $0.top.equalTo(titleLabel.snp.bottom).offset(8)
       $0.leading.equalTo(titleLabel)
       $0.bottom.equalToSuperview().offset(-Padding.topBottom)
       $0.width.equalTo(40)
       $0.height.equalTo(32)
     }
-    charterButton.snp.makeConstraints {
+    directButton.snp.makeConstraints {
       $0.top.equalTo(titleLabel.snp.bottom).offset(8)
-      $0.leading.equalTo(monthlyButton.snp.trailing).offset(Padding.spacing)
-      $0.width.equalTo(40)
-      $0.height.equalTo(monthlyButton)
+      $0.leading.equalTo(brokerageButton.snp.trailing).offset(Padding.spacing)
+      $0.width.equalTo(44)
+      $0.height.equalTo(brokerageButton)
     }
-    tradingButton.snp.makeConstraints {
-      $0.top.equalTo(titleLabel.snp.bottom).offset(8)
-      $0.leading.equalTo(charterButton.snp.trailing).offset(Padding.spacing)
-      $0.width.equalTo(40)
-      $0.height.equalTo(monthlyButton)
-    }
-
-    
   }
-  
 }
