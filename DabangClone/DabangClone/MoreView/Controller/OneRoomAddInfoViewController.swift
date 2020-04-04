@@ -33,6 +33,8 @@ class OneRoomAddInfoViewController: UIViewController {
       tableView.dataSource = self
       tableView.delegate = self
       tableView.rowHeight = 50
+      tableView.isScrollEnabled = false
+
       tableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
 
       
@@ -49,7 +51,7 @@ class OneRoomAddInfoViewController: UIViewController {
     
     private func setupConstraints() {
       tableView.snp.makeConstraints {
-        $0.edges.equalTo(view.safeAreaLayoutGuide).inset(UIEdgeInsets(top: 100, left: 20, bottom: 20, right: 20))
+        $0.edges.equalTo(view.safeAreaLayoutGuide).inset(UIEdgeInsets(top: 10, left: 10, bottom: 30, right: 10))
       }
     }
     

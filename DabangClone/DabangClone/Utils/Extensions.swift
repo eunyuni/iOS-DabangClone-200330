@@ -149,3 +149,12 @@ extension UISegmentedControl {
         return image!
     }
 }
+
+extension UISegmentedControl{
+    func selectedSegmentTintColor(_ color: UIColor) {
+        self.setTitleTextAttributes([.foregroundColor: color], for: .selected)
+    }
+    func unselectedSegmentTintColor(_ color: UIColor) {
+        self.setTitleTextAttributes([.foregroundColor: color], for: .normal)
+    }
+}
