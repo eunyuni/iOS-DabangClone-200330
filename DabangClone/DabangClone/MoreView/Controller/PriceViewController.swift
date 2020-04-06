@@ -41,6 +41,7 @@ class PriceViewController: UIViewController {
     tableView.register(PriceTopTableViewCell.self, forCellReuseIdentifier: PriceTopTableViewCell.identifier)
     tableView.register(PriceBodyTableViewCell.self, forCellReuseIdentifier: PriceBodyTableViewCell.identifier)
     tableView.register(PriceBottomTableViewCell.self, forCellReuseIdentifier: PriceBottomTableViewCell.identifier)
+    tableView.register(FindTitleCell.self, forCellReuseIdentifier: FindTitleCell.identifier)
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     tableView.dataSource = self
     //    tableView.delegate = self

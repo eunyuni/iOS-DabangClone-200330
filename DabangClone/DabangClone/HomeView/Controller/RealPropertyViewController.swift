@@ -8,23 +8,33 @@
 
 import UIKit
 
+// 부동산/중개사무소뷰
 class RealPropertyViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+  // MARK: -Property
+  
+  
+  // MARK: -Lift cycle
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    setupUI()
+  }
+  
+  // MARK: -Action
+  
+  
+  // MARK: -setupUI
+  private func setupUI() {
+    
+    setupConstraint()
+  }
+  
+  // MARK: -setupConstraint
+  
+  private func setupConstraint() {
+    
+  }
 
 }

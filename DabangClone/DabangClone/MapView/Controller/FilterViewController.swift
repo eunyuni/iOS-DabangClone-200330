@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 지도 - 필터
 class FilterViewController: UIViewController {
   
   // MARK: -Property
@@ -35,7 +36,7 @@ class FilterViewController: UIViewController {
       tableView,
       button
     ])
-    button.configue(buttonLabel: "적용하기")
+    button.configue(buttonLabel: "적용하기", fontSize: CGFloat(16))
     tableView.register(FilterRoomTypeCell.self, forCellReuseIdentifier: FilterRoomTypeCell.identifier)
     tableView.register(GrayLineViewCell.self, forCellReuseIdentifier: GrayLineViewCell.identifier)
     tableView.register(FilterSaleTypeCell.self, forCellReuseIdentifier: FilterSaleTypeCell.identifier)

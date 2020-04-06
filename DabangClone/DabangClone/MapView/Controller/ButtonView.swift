@@ -13,7 +13,7 @@ class ButtonView: UIView {
   // MARK: -Property
   private let button = UIButton().then {
     $0.setTitleColor(.white, for: .normal)
-    $0.titleLabel?.font = .systemFont(ofSize: 16)
+//    $0.titleLabel?.font = .systemFont(ofSize: 16)
     $0.backgroundColor = .clear
   }
   
@@ -32,8 +32,9 @@ class ButtonView: UIView {
   
   // MARK: -Action
    
-  func configue(buttonLabel: String) {
+  func configue(buttonLabel: String, fontSize: CGFloat) {
     self.button.setTitle(buttonLabel, for: .normal)
+    self.button.titleLabel?.font = .systemFont(ofSize: fontSize)
    }
   
   // MARK: -setupUI

@@ -11,7 +11,7 @@ import UIKit
 class FilterTwoButtonView: UIView {
 
    // MARK: -Property
-  var leftButton = UIButton().then {
+  private let leftButton = UIButton().then {
     $0.setTitleColor(.black, for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .light)
     $0.backgroundColor = UIColor(named: "LightGrayColor")
@@ -20,7 +20,7 @@ class FilterTwoButtonView: UIView {
     $0.layer.borderColor = UIColor.lightGray.cgColor
         
   }
-  var rightButton = UIButton().then {
+  private let rightButton = UIButton().then {
     $0.setTitleColor(.black, for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .light)
     $0.backgroundColor = UIColor(named: "LightGrayColor")
