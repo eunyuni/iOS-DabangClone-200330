@@ -56,15 +56,12 @@ class RoomGuideViewController: UIViewController {
     view.addSubview(tableView)
     
     tableView.snp.makeConstraints {
-      
       $0.top.equalToSuperview()
       $0.bottom.equalToSuperview()
       $0.leading.equalToSuperview()
       $0.trailing.equalToSuperview()
     }
   }
-  
-  
 }
 
 

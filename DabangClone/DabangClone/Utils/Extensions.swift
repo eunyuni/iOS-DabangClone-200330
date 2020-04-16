@@ -18,6 +18,13 @@ extension UIView {
     }
     
 }
+extension UIStackView {
+  func addArrangedSubviews(_ views: [UIView]) {
+    views.forEach {
+      addArrangedSubview($0)
+    }
+  }
+}
 
 
 extension UITextField {
@@ -147,5 +154,14 @@ extension UISegmentedControl {
         let image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         return image!
+    }
+}
+
+extension UISegmentedControl{
+    func selectedSegmentTintColor(_ color: UIColor) {
+        self.setTitleTextAttributes([.foregroundColor: color], for: .selected)
+    }
+    func unselectedSegmentTintColor(_ color: UIColor) {
+        self.setTitleTextAttributes([.foregroundColor: color], for: .normal)
     }
 }

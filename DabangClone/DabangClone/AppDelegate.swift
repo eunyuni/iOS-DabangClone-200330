@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 //    let mainVC = MainTabBarViewController()
 //    let mainVC = BaseViewController()
-    let mainVC = ApartmentAddInfoViewController()
+    let mainVC = NewMainRoomViewController()
 
     window?.rootViewController = mainVC
     window?.makeKeyAndVisible()

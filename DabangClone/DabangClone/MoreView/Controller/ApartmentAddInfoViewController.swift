@@ -34,7 +34,8 @@ class ApartmentAddInfoViewController: UIViewController {
       tableView.delegate = self
       tableView.rowHeight = 50
       tableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-      
+      tableView.isScrollEnabled = false
+
       
       tableView.register(AddTitleTableViewCell.self, forCellReuseIdentifier: AddTitleTableViewCell.identifier)
       tableView.register(InputCell.self, forCellReuseIdentifier: InputCell.identifier)
@@ -49,7 +50,7 @@ class ApartmentAddInfoViewController: UIViewController {
     
     private func setupConstraints() {
       tableView.snp.makeConstraints {
-        $0.edges.equalTo(view.safeAreaLayoutGuide).inset(UIEdgeInsets(top: 100, left: 20, bottom: 20, right: 20))
+        $0.edges.equalTo(view.safeAreaLayoutGuide).inset(UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10))
       }
     }
     //MARK: - Action
