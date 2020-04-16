@@ -77,6 +77,47 @@
 		15D9B35B2431C2BB00A38A76 /* MaintenanceCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D9B3592431C2BB00A38A76 /* MaintenanceCostViewController.swift */; };
 		15D9B35C2431C2BB00A38A76 /* ExplainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D9B35A2431C2BB00A38A76 /* ExplainViewController.swift */; };
 		15EEBE4324446DF80049952E /* CostInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEBE4224446DF80049952E /* CostInfoTableViewCell.swift */; };
+		6F389E34244849B000A440A4 /* AddressApartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E33244849B000A440A4 /* AddressApartViewController.swift */; };
+		6F389E36244849FD00A440A4 /* AddressApartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E35244849FD00A440A4 /* AddressApartView.swift */; };
+		6F389E3824484A7600A440A4 /* AddressSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E3724484A7600A440A4 /* AddressSelectViewController.swift */; };
+		6F389E3A24484AD100A440A4 /* AddressSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E3924484AD100A440A4 /* AddressSelectView.swift */; };
+		6F389E3C24484B2A00A440A4 /* TextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E3B24484B2A00A440A4 /* TextCollectionViewCell.swift */; };
+		6F389E3E24484BD500A440A4 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E3D24484BD500A440A4 /* OptionViewController.swift */; };
+		6F389E4024484BF900A440A4 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E3F24484BF900A440A4 /* OptionView.swift */; };
+		6F389E4224484C2F00A440A4 /* OptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E4124484C2F00A440A4 /* OptionCollectionViewCell.swift */; };
+		6F389E4424484D0D00A440A4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E4324484D0D00A440A4 /* HomeView.swift */; };
+		6F389E4624484D8E00A440A4 /* HomeTopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E4524484D8E00A440A4 /* HomeTopTableViewCell.swift */; };
+		6F389E4824484DA300A440A4 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E4724484DA300A440A4 /* HomeTableViewCell.swift */; };
+		6F389E4A24484DC400A440A4 /* HomeBottomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E4924484DC400A440A4 /* HomeBottomTableViewCell.swift */; };
+		6F389E4C24484E3600A440A4 /* SearchRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E4B24484E3600A440A4 /* SearchRoomViewController.swift */; };
+		6F389E4E24484F1100A440A4 /* EasySearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E4D24484F1100A440A4 /* EasySearchTableViewCell.swift */; };
+		6F389E5024484F5600A440A4 /* UniversityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E4F24484F5600A440A4 /* UniversityTableViewCell.swift */; };
+		6F389E5224484F8D00A440A4 /* SubwayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E5124484F8D00A440A4 /* SubwayTableViewCell.swift */; };
+		6F389E5424484FA600A440A4 /* ApartmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E5324484FA600A440A4 /* ApartmentTableViewCell.swift */; };
+		6F389E5624484FBB00A440A4 /* OfficetelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E5524484FBB00A440A4 /* OfficetelTableViewCell.swift */; };
+		6F389E5824484FD200A440A4 /* AreaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E5724484FD200A440A4 /* AreaTableViewCell.swift */; };
+		6F389E5A2448501700A440A4 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E592448501700A440A4 /* SearchView.swift */; };
+		6F389E5C2448505500A440A4 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E5B2448505500A440A4 /* HomeModel.swift */; };
+		6F389E5E2448522600A440A4 /* AddressTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E5D2448522600A440A4 /* AddressTextView.swift */; };
+		6F389E602448531100A440A4 /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E5F2448531100A440A4 /* ThemeModel.swift */; };
+		6F389E622448537000A440A4 /* SaleMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E612448537000A440A4 /* SaleMainViewController.swift */; };
+		6F389E64244853D400A440A4 /* SaleTopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E63244853D400A440A4 /* SaleTopTableViewCell.swift */; };
+		6F389E66244853F700A440A4 /* SaleNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E65244853F700A440A4 /* SaleNewsTableViewCell.swift */; };
+		6F389E682448544000A440A4 /* SaleThemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E672448544000A440A4 /* SaleThemeTableViewCell.swift */; };
+		6F389E6A2448546C00A440A4 /* SaleGuideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E692448546C00A440A4 /* SaleGuideTableViewCell.swift */; };
+		6F389E6C244854E100A440A4 /* SaleTopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E6B244854E100A440A4 /* SaleTopCollectionViewCell.swift */; };
+		6F389E6E2448551700A440A4 /* SaleThemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E6D2448551700A440A4 /* SaleThemeCollectionViewCell.swift */; };
+		6F389E702448555200A440A4 /* ImageViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E6F2448555200A440A4 /* ImageViewCollectionViewCell.swift */; };
+		6F389E722448559000A440A4 /* SaleAreaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E712448559000A440A4 /* SaleAreaCollectionViewCell.swift */; };
+		6F389E74244855DF00A440A4 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E73244855DF00A440A4 /* HomeCollectionViewCell.swift */; };
+		6F389E76244856BC00A440A4 /* ScrollButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E75244856BC00A440A4 /* ScrollButton.swift */; };
+		6F389E78244856FD00A440A4 /* SaleInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E77244856FD00A440A4 /* SaleInformationViewController.swift */; };
+		6F389E7C2448574200A440A4 /* SaleAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E7B2448574200A440A4 /* SaleAreaViewController.swift */; };
+		6F389E7E2448575D00A440A4 /* SaleNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E7D2448575D00A440A4 /* SaleNewsViewController.swift */; };
+		6F389E802448577600A440A4 /* SaleThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E7F2448577600A440A4 /* SaleThemeViewController.swift */; };
+		6F389E82244857A000A440A4 /* SaleInformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E81244857A000A440A4 /* SaleInformationTableViewCell.swift */; };
+		6F389E84244857CC00A440A4 /* SaleNewsDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E83244857CC00A440A4 /* SaleNewsDetailTableViewCell.swift */; };
+		6F389E862448587500A440A4 /* SaleScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E852448587500A440A4 /* SaleScheduleTableViewCell.swift */; };
 		6F41B409242A32D800CACDCE /* SettingSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F41B408242A32D800CACDCE /* SettingSectionView.swift */; };
 		6F41B40B242A383000CACDCE /* MarketingImfomationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F41B40A242A383000CACDCE /* MarketingImfomationViewController.swift */; };
 		6F41B40D242A389800CACDCE /* MarketingImfomationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F41B40C242A389800CACDCE /* MarketingImfomationTableViewCell.swift */; };
@@ -227,6 +268,47 @@
 		15D9B35A2431C2BB00A38A76 /* ExplainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplainViewController.swift; sourceTree = "<group>"; };
 		15EEBE4224446DF80049952E /* CostInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostInfoTableViewCell.swift; sourceTree = "<group>"; };
 		3AEABCBF869ADF9D5DC4566F /* Pods-DabangClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DabangClone.release.xcconfig"; path = "Target Support Files/Pods-DabangClone/Pods-DabangClone.release.xcconfig"; sourceTree = "<group>"; };
+		6F389E33244849B000A440A4 /* AddressApartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressApartViewController.swift; sourceTree = "<group>"; };
+		6F389E35244849FD00A440A4 /* AddressApartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressApartView.swift; sourceTree = "<group>"; };
+		6F389E3724484A7600A440A4 /* AddressSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSelectViewController.swift; sourceTree = "<group>"; };
+		6F389E3924484AD100A440A4 /* AddressSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSelectView.swift; sourceTree = "<group>"; };
+		6F389E3B24484B2A00A440A4 /* TextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCollectionViewCell.swift; sourceTree = "<group>"; };
+		6F389E3D24484BD500A440A4 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
+		6F389E3F24484BF900A440A4 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
+		6F389E4124484C2F00A440A4 /* OptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCollectionViewCell.swift; sourceTree = "<group>"; };
+		6F389E4324484D0D00A440A4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		6F389E4524484D8E00A440A4 /* HomeTopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopTableViewCell.swift; sourceTree = "<group>"; };
+		6F389E4724484DA300A440A4 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		6F389E4924484DC400A440A4 /* HomeBottomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomTableViewCell.swift; sourceTree = "<group>"; };
+		6F389E4B24484E3600A440A4 /* SearchRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRoomViewController.swift; sourceTree = "<group>"; };
+		6F389E4D24484F1100A440A4 /* EasySearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasySearchTableViewCell.swift; sourceTree = "<group>"; };
+		6F389E4F24484F5600A440A4 /* UniversityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityTableViewCell.swift; sourceTree = "<group>"; };
+		6F389E5124484F8D00A440A4 /* SubwayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayTableViewCell.swift; sourceTree = "<group>"; };
+		6F389E5324484FA600A440A4 /* ApartmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApartmentTableViewCell.swift; sourceTree = "<group>"; };
+		6F389E5524484FBB00A440A4 /* OfficetelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficetelTableViewCell.swift; sourceTree = "<group>"; };
+		6F389E5724484FD200A440A4 /* AreaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTableViewCell.swift; sourceTree = "<group>"; };
+		6F389E592448501700A440A4 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		6F389E5B2448505500A440A4 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		6F389E5D2448522600A440A4 /* AddressTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTextView.swift; sourceTree = "<group>"; };
+		6F389E5F2448531100A440A4 /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThemeModel.swift; path = DabangClone/MoreView/View/ThemeModel.swift; sourceTree = SOURCE_ROOT; };
+		6F389E612448537000A440A4 /* SaleMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleMainViewController.swift; sourceTree = "<group>"; };
+		6F389E63244853D400A440A4 /* SaleTopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleTopTableViewCell.swift; path = DabangClone/SaleView/Controller/SaleTopTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		6F389E65244853F700A440A4 /* SaleNewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleNewsTableViewCell.swift; path = DabangClone/SaleView/Controller/SaleNewsTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		6F389E672448544000A440A4 /* SaleThemeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleThemeTableViewCell.swift; path = DabangClone/SaleView/Controller/SaleThemeTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		6F389E692448546C00A440A4 /* SaleGuideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleGuideTableViewCell.swift; path = DabangClone/SaleView/Controller/SaleGuideTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		6F389E6B244854E100A440A4 /* SaleTopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleTopCollectionViewCell.swift; path = DabangClone/SaleView/Controller/SaleTopCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		6F389E6D2448551700A440A4 /* SaleThemeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleThemeCollectionViewCell.swift; path = DabangClone/SaleView/Controller/SaleThemeCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		6F389E6F2448555200A440A4 /* ImageViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageViewCollectionViewCell.swift; path = DabangClone/SaleView/Controller/ImageViewCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		6F389E712448559000A440A4 /* SaleAreaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleAreaCollectionViewCell.swift; path = DabangClone/SaleView/Controller/SaleAreaCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		6F389E73244855DF00A440A4 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		6F389E75244856BC00A440A4 /* ScrollButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScrollButton.swift; path = DabangClone/HomeView/View/Cells/ScrollButton.swift; sourceTree = SOURCE_ROOT; };
+		6F389E77244856FD00A440A4 /* SaleInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleInformationViewController.swift; sourceTree = "<group>"; };
+		6F389E7B2448574200A440A4 /* SaleAreaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleAreaViewController.swift; sourceTree = "<group>"; };
+		6F389E7D2448575D00A440A4 /* SaleNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleNewsViewController.swift; sourceTree = "<group>"; };
+		6F389E7F2448577600A440A4 /* SaleThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleThemeViewController.swift; sourceTree = "<group>"; };
+		6F389E81244857A000A440A4 /* SaleInformationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleInformationTableViewCell.swift; path = DabangClone/SaleView/Controller/SaleInformationTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		6F389E83244857CC00A440A4 /* SaleNewsDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleNewsDetailTableViewCell.swift; path = DabangClone/SaleView/Controller/SaleNewsDetailTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		6F389E852448587500A440A4 /* SaleScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleScheduleTableViewCell.swift; path = DabangClone/SaleView/Controller/SaleScheduleTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		6F41B408242A32D800CACDCE /* SettingSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSectionView.swift; sourceTree = "<group>"; };
 		6F41B40A242A383000CACDCE /* MarketingImfomationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingImfomationViewController.swift; sourceTree = "<group>"; };
 		6F41B40C242A389800CACDCE /* MarketingImfomationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingImfomationTableViewCell.swift; sourceTree = "<group>"; };
@@ -387,6 +469,7 @@
 				157C4E78243A060D008559FD /* RoomModel.swift */,
 				15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */,
 				E7E6044E243DB21B0050D540 /* DabangModel.swift */,
+				6F389E5B2448505500A440A4 /* HomeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -400,6 +483,8 @@
 				15D9B327242BA21E00A38A76 /* Cells */,
 				15AB31212445DF5F002AC5B8 /* CostInfoStackView.swift */,
 				15AB31232446E33C002AC5B8 /* DetailInfoStackView.swift */,
+				6F389E4324484D0D00A440A4 /* HomeView.swift */,
+				6F389E592448501700A440A4 /* SearchView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -413,6 +498,7 @@
 				E7E6043E243B14DB0050D540 /* FindEasyRoomViewController.swift */,
 				E7E6044A243B42BF0050D540 /* BrokerageOfficeViewController.swift */,
 				E77D8C64243FB65500A263AE /* BrokerageTestViewController.swift */,
+				6F389E4B24484E3600A440A4 /* SearchRoomViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -516,6 +602,10 @@
 				157C4E7424386A63008559FD /* CustomSegmentView.swift */,
 				E7BB1BFD2431D6BE00C66B48 /* MCHeaderView.swift */,
 				E7BB1BFF2431DC8200C66B48 /* SaveView.swift */,
+				6F389E35244849FD00A440A4 /* AddressApartView.swift */,
+				6F389E3924484AD100A440A4 /* AddressSelectView.swift */,
+				6F389E3F24484BF900A440A4 /* OptionView.swift */,
+				6F389E5D2448522600A440A4 /* AddressTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -556,6 +646,9 @@
 				E7BB1C09243208A300C66B48 /* CountfloorsViewController.swift */,
 				E7BB1C0F24334F5E00C66B48 /* RoomSizeViewController.swift */,
 				E7BB1C152433670600C66B48 /* ParkingFeeViewController.swift */,
+				6F389E33244849B000A440A4 /* AddressApartViewController.swift */,
+				6F389E3724484A7600A440A4 /* AddressSelectViewController.swift */,
+				6F389E3D24484BD500A440A4 /* OptionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -573,6 +666,7 @@
 		15D9B320242BA01D00A38A76 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6F389E5F2448531100A440A4 /* ThemeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -582,6 +676,7 @@
 			children = (
 				15D9B328242BA22200A38A76 /* Cells */,
 				E77D8C802447416100A263AE /* SaleDetailBottomView.swift */,
+				6F389E75244856BC00A440A4 /* ScrollButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -592,6 +687,11 @@
 				1516005424287ED40003DDCF /* SaleViewController.swift */,
 				E77D8C6C2443466D00A263AE /* SaleDetailViewController.swift */,
 				E77D8C8224474DC600A263AE /* SaleDetailAlertViewController.swift */,
+				6F389E612448537000A440A4 /* SaleMainViewController.swift */,
+				6F389E77244856FD00A440A4 /* SaleInformationViewController.swift */,
+				6F389E7B2448574200A440A4 /* SaleAreaViewController.swift */,
+				6F389E7D2448575D00A440A4 /* SaleNewsViewController.swift */,
+				6F389E7F2448577600A440A4 /* SaleThemeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -631,6 +731,8 @@
 				E7BB1C13243353F200C66B48 /* RSBodyTableViewCell.swift */,
 				E7BB1C172434801300C66B48 /* InquiryBodyTableViewCell.swift */,
 				E78AD93A2435E2E30098BE6E /* InquiryBottomTableViewCell.swift */,
+				6F389E3B24484B2A00A440A4 /* TextCollectionViewCell.swift */,
+				6F389E4124484C2F00A440A4 /* OptionCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -683,6 +785,16 @@
 				E77D8C62243FA59600A263AE /* BrokerageReviewTapCell.swift */,
 				E77D8C68243FBD7600A263AE /* BrokerageReviewBodyCell.swift */,
 				E77D8C6A243FBF2600A263AE /* BrokerageReviewBottomCell.swift */,
+				6F389E4524484D8E00A440A4 /* HomeTopTableViewCell.swift */,
+				6F389E73244855DF00A440A4 /* HomeCollectionViewCell.swift */,
+				6F389E4724484DA300A440A4 /* HomeTableViewCell.swift */,
+				6F389E4924484DC400A440A4 /* HomeBottomTableViewCell.swift */,
+				6F389E4D24484F1100A440A4 /* EasySearchTableViewCell.swift */,
+				6F389E4F24484F5600A440A4 /* UniversityTableViewCell.swift */,
+				6F389E5124484F8D00A440A4 /* SubwayTableViewCell.swift */,
+				6F389E5324484FA600A440A4 /* ApartmentTableViewCell.swift */,
+				6F389E5524484FBB00A440A4 /* OfficetelTableViewCell.swift */,
+				6F389E5724484FD200A440A4 /* AreaTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -698,6 +810,17 @@
 				E77D8C782445C93900A263AE /* SaleDetailNearMapCell.swift */,
 				E77D8C7C2447301200A263AE /* SaleDetailRecommendCell.swift */,
 				E77D8C7E2447306100A263AE /* SaleDetailRecommendCollectionCell.swift */,
+				6F389E63244853D400A440A4 /* SaleTopTableViewCell.swift */,
+				6F389E6B244854E100A440A4 /* SaleTopCollectionViewCell.swift */,
+				6F389E65244853F700A440A4 /* SaleNewsTableViewCell.swift */,
+				6F389E83244857CC00A440A4 /* SaleNewsDetailTableViewCell.swift */,
+				6F389E852448587500A440A4 /* SaleScheduleTableViewCell.swift */,
+				6F389E672448544000A440A4 /* SaleThemeTableViewCell.swift */,
+				6F389E6D2448551700A440A4 /* SaleThemeCollectionViewCell.swift */,
+				6F389E692448546C00A440A4 /* SaleGuideTableViewCell.swift */,
+				6F389E6F2448555200A440A4 /* ImageViewCollectionViewCell.swift */,
+				6F389E712448559000A440A4 /* SaleAreaCollectionViewCell.swift */,
+				6F389E81244857A000A440A4 /* SaleInformationTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -826,37 +949,48 @@
 			files = (
 				15D9B334242E225900A38A76 /* PersonalModifyViewController.swift in Sources */,
 				E78AD96D2438CF730098BE6E /* FilterRoomStructureCell.swift in Sources */,
+				6F389E5C2448505500A440A4 /* HomeModel.swift in Sources */,
 				E7ACD430242B360300C5D097 /* InquiryViewController.swift in Sources */,
+				6F389E4424484D0D00A440A4 /* HomeView.swift in Sources */,
+				6F389E3C24484B2A00A440A4 /* TextCollectionViewCell.swift in Sources */,
 				E79D81802429E0770006029E /* RoomGuideViewController.swift in Sources */,
+				6F389E4824484DA300A440A4 /* HomeTableViewCell.swift in Sources */,
 				15D9B33E242E22EB00A38A76 /* AddRoomViewController.swift in Sources */,
 				15D9B345242E232300A38A76 /* AddRoomTitleView.swift in Sources */,
 				E7ACD434242B392F00C5D097 /* PMTopTableViewCell.swift in Sources */,
 				E77D8C65243FB65500A263AE /* BrokerageTestViewController.swift in Sources */,
 				E7BB1C1024334F5E00C66B48 /* RoomSizeViewController.swift in Sources */,
 				151600592429E0260003DDCF /* MoreView.swift in Sources */,
+				6F389E5024484F5600A440A4 /* UniversityTableViewCell.swift in Sources */,
 				1516005124287E620003DDCF /* FavoriteListViewController.swift in Sources */,
 				156B616E24346CEA00054FE9 /* ThreeSegmentTableViewCell.swift in Sources */,
 				E77D8C752445882700A263AE /* SaleDetailParcelPriceCell.swift in Sources */,
 				E7BB1BEC242B6F1500C66B48 /* PMBottomTableViewCell.swift in Sources */,
 				E77D8C5D243DD87000A263AE /* BrokerageSectionView.swift in Sources */,
 				E77D8C5B243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift in Sources */,
+				6F389E5424484FA600A440A4 /* ApartmentTableViewCell.swift in Sources */,
 				15D9B3482430A89900A38A76 /* EventViewController.swift in Sources */,
 				E78AD9612437119C0098BE6E /* FilterRoomTypeCell.swift in Sources */,
 				E77D8C69243FBD7600A263AE /* BrokerageReviewBodyCell.swift in Sources */,
+				6F389E862448587500A440A4 /* SaleScheduleTableViewCell.swift in Sources */,
 				1516003324247BA20003DDCF /* LoginViewController.swift in Sources */,
 				6F41B40B242A383000CACDCE /* MarketingImfomationViewController.swift in Sources */,
 				158473EB243602DB00C49FC1 /* ApartmentAddInfoViewController.swift in Sources */,
 				15D9B3582431C2B600A38A76 /* ExplainView.swift in Sources */,
+				6F389E74244855DF00A440A4 /* HomeCollectionViewCell.swift in Sources */,
 				156B616424345DC400054FE9 /* AdditionalView.swift in Sources */,
 				15AB31222445DF5F002AC5B8 /* CostInfoStackView.swift in Sources */,
 				E7BB1C082431F9B600C66B48 /* PriceBottomTableViewCell.swift in Sources */,
 				E78AD96F2438D0EC0098BE6E /* FilterTwoButtonView.swift in Sources */,
+				6F389E4624484D8E00A440A4 /* HomeTopTableViewCell.swift in Sources */,
 				E7BB1C0E24320C3D00C66B48 /* CFBodyTableViewCell.swift in Sources */,
 				6F41B409242A32D800CACDCE /* SettingSectionView.swift in Sources */,
 				E77D8C8324474DC600A263AE /* SaleDetailAlertViewController.swift in Sources */,
 				E79D81872429EA340006029E /* RGBodyTableViewCell.swift in Sources */,
 				15D9B3522431C29C00A38A76 /* AddressView.swift in Sources */,
 				15AB31242446E33C002AC5B8 /* DetailInfoStackView.swift in Sources */,
+				6F389E64244853D400A440A4 /* SaleTopTableViewCell.swift in Sources */,
+				6F389E5E2448522600A440A4 /* AddressTextView.swift in Sources */,
 				E7E6044B243B42BF0050D540 /* BrokerageOfficeViewController.swift in Sources */,
 				E78AD9652437186B0098BE6E /* GrayLineViewCell.swift in Sources */,
 				15D9B338242E226C00A38A76 /* WTopTableViewCell.swift in Sources */,
@@ -864,27 +998,37 @@
 				157C4E7D243C49F9008559FD /* MainRoomTableViewCell.swift in Sources */,
 				158473DF2435D88500C49FC1 /* BaseViewController.swift in Sources */,
 				E7BB1C162433670600C66B48 /* ParkingFeeViewController.swift in Sources */,
+				6F389E5824484FD200A440A4 /* AreaTableViewCell.swift in Sources */,
 				152DD9B8242B4D3400C80E10 /* Model.swift in Sources */,
 				E78AD9712438D4B50098BE6E /* FileteAddCell.swift in Sources */,
 				E78AD93B2435E2E30098BE6E /* InquiryBottomTableViewCell.swift in Sources */,
 				1516002F24247BA20003DDCF /* AppDelegate.swift in Sources */,
+				6F389E4224484C2F00A440A4 /* OptionCollectionViewCell.swift in Sources */,
 				157C4E81243C5778008559FD /* MainRoomCollectionViewCell.swift in Sources */,
 				E78AD969243727130098BE6E /* Padding.swift in Sources */,
 				E77D8C63243FA59600A263AE /* BrokerageReviewTapCell.swift in Sources */,
 				E7BB1C12243350A300C66B48 /* RSTopTableViewCell.swift in Sources */,
+				6F389E622448537000A440A4 /* SaleMainViewController.swift in Sources */,
 				E7BB1C062431F4D000C66B48 /* PriceBodyTableViewCell.swift in Sources */,
+				6F389E802448577600A440A4 /* SaleThemeViewController.swift in Sources */,
 				15D9B340242E22EB00A38A76 /* PrivacyPolicyViewController.swift in Sources */,
 				E7BB1C022431E5AB00C66B48 /* PriceViewController.swift in Sources */,
+				6F389E5A2448501700A440A4 /* SearchView.swift in Sources */,
+				6F389E3824484A7600A440A4 /* AddressSelectViewController.swift in Sources */,
+				6F389E4C24484E3600A440A4 /* SearchRoomViewController.swift in Sources */,
 				15D9B3562431C2A900A38A76 /* MCTopTableViewCell.swift in Sources */,
 				E78AD9752438E3F20098BE6E /* ButtonView.swift in Sources */,
+				6F389E3A24484AD100A440A4 /* AddressSelectView.swift in Sources */,
 				15160049242483730003DDCF /* MainTabBarViewController.swift in Sources */,
 				1584F1B2244219AA0002C9E5 /* MainRoomSecondCollectionViewCell.swift in Sources */,
 				6F4DECE72429F78E008D77E5 /* SettingViewController.swift in Sources */,
 				15D9B34A2430A8A900A38A76 /* EventTableViewCell.swift in Sources */,
 				15EEBE4324446DF80049952E /* CostInfoTableViewCell.swift in Sources */,
 				E7E60449243B33BF0050D540 /* FindRoomConditionCell.swift in Sources */,
+				6F389E722448559000A440A4 /* SaleAreaCollectionViewCell.swift in Sources */,
 				E77D8C61243FA46200A263AE /* BrokerageRoomTapCell.swift in Sources */,
 				E77D8C7F2447306100A263AE /* SaleDetailRecommendCollectionCell.swift in Sources */,
+				6F389E6A2448546C00A440A4 /* SaleGuideTableViewCell.swift in Sources */,
 				E7BB1BFE2431D6BE00C66B48 /* MCHeaderView.swift in Sources */,
 				6F41B411242A435800CACDCE /* NoticeViewController.swift in Sources */,
 				E7BB1C0C2432090B00C66B48 /* CFTopTableViewCell.swift in Sources */,
@@ -892,11 +1036,13 @@
 				E77D8C7D2447301200A263AE /* SaleDetailRecommendCell.swift in Sources */,
 				E77D8C792445C93900A263AE /* SaleDetailNearMapCell.swift in Sources */,
 				E7E6044F243DB21B0050D540 /* DabangModel.swift in Sources */,
+				6F389E6E2448551700A440A4 /* SaleThemeCollectionViewCell.swift in Sources */,
 				E77D8C5F243DF52B00A263AE /* BrokerageHomeInfoCell.swift in Sources */,
 				6F4DECEC242A1585008D77E5 /* SettingTableViewCell.swift in Sources */,
 				1516005524287ED40003DDCF /* SaleViewController.swift in Sources */,
 				156B616224345DAD00054FE9 /* AdditionalViewController.swift in Sources */,
 				E77D8C732443C15600A263AE /* SaleDetailSaleInfoCell.swift in Sources */,
+				6F389E602448531100A440A4 /* ThemeModel.swift in Sources */,
 				E7BB1C182434801300C66B48 /* InquiryBodyTableViewCell.swift in Sources */,
 				152DD9B2242B3E2400C80E10 /* FrequentlyViewController.swift in Sources */,
 				158473E52435F4AD00C49FC1 /* AddTitleTableViewCell.swift in Sources */,
@@ -904,6 +1050,8 @@
 				15D1284D2431D4A100E75AC8 /* BaseInfoView.swift in Sources */,
 				15D9B3552431C2A900A38A76 /* MCBottomTableViewCell.swift in Sources */,
 				156B616624345E0100054FE9 /* BoxView.swift in Sources */,
+				6F389E34244849B000A440A4 /* AddressApartViewController.swift in Sources */,
+				6F389E7C2448574200A440A4 /* SaleAreaViewController.swift in Sources */,
 				15D9B342242E230800A38A76 /* AddRoomCollectionViewCell.swift in Sources */,
 				157C4E77243A0566008559FD /* MainRoomViewController.swift in Sources */,
 				E7BB1C042431E5F600C66B48 /* PriceTopTableViewCell.swift in Sources */,
@@ -911,7 +1059,9 @@
 				15D9B33D242E22EB00A38A76 /* TermsAndConditionsViewController.swift in Sources */,
 				6F41B413242A441C00CACDCE /* NoticeEmptyView.swift in Sources */,
 				156B616824346B3F00054FE9 /* InfoModel.swift in Sources */,
+				6F389E702448555200A440A4 /* ImageViewCollectionViewCell.swift in Sources */,
 				156B61722434748000054FE9 /* IsThereCell.swift in Sources */,
+				6F389E7E2448575D00A440A4 /* SaleNewsViewController.swift in Sources */,
 				157C4E712437142E008559FD /* AddressViewController.swift in Sources */,
 				157C4E7324371F60008559FD /* RoomSellScrollViewController.swift in Sources */,
 				156B617024346CF900054FE9 /* CheckBoxCell.swift in Sources */,
@@ -923,9 +1073,11 @@
 				E79D81842429E8E50006029E /* RGTopTableViewCell.swift in Sources */,
 				E79D81892429EA830006029E /* RGBottomTableViewCell.swift in Sources */,
 				E78AD96724371BBE0098BE6E /* FilterSaleTypeCell.swift in Sources */,
+				6F389E4024484BF900A440A4 /* OptionView.swift in Sources */,
 				15D9B3502431C25600A38A76 /* AddressSearchViewController.swift in Sources */,
 				15D9B35C2431C2BB00A38A76 /* ExplainViewController.swift in Sources */,
 				15D9B337242E226C00A38A76 /* WBottomTableViewCell.swift in Sources */,
+				6F389E84244857CC00A440A4 /* SaleNewsDetailTableViewCell.swift in Sources */,
 				1516004B242495FE0003DDCF /* Extensions.swift in Sources */,
 				E77D8C6F244348D500A263AE /* SaleDetailMainCell.swift in Sources */,
 				1516004D24285FCB0003DDCF /* SignUpViewController.swift in Sources */,
@@ -936,31 +1088,43 @@
 				15D9B32C242CA44500A38A76 /* SellMyRoomTableViewCell.swift in Sources */,
 				E77D8C712443B29900A263AE /* SaleDetailSectionCell.swift in Sources */,
 				15D9B346242E232300A38A76 /* AddRoomView.swift in Sources */,
+				6F389E3E24484BD500A440A4 /* OptionViewController.swift in Sources */,
 				E77D8C67243FB90500A263AE /* BrokerageHomeBottomCell.swift in Sources */,
 				6F4DECE02429EC69008D77E5 /* NoticeTopView.swift in Sources */,
 				E77D8C6B243FBF2600A263AE /* BrokerageReviewBottomCell.swift in Sources */,
+				6F389E4E24484F1100A440A4 /* EasySearchTableViewCell.swift in Sources */,
 				6F41B40D242A389800CACDCE /* MarketingImfomationTableViewCell.swift in Sources */,
 				158473E92436020D00C49FC1 /* OfficetelAdditionalInfoViewController.swift in Sources */,
 				158473E72436006800C49FC1 /* TwoAndThreeRoomAdditionalInfoViewController.swift in Sources */,
+				6F389E82244857A000A440A4 /* SaleInformationTableViewCell.swift in Sources */,
 				1584F1B0244219950002C9E5 /* MainRoomSecondTableViewCell.swift in Sources */,
 				157C4E7B243B5C5B008559FD /* NewMainRoomViewController.swift in Sources */,
 				E7E6043F243B14DB0050D540 /* FindEasyRoomViewController.swift in Sources */,
+				6F389E6C244854E100A440A4 /* SaleTopCollectionViewCell.swift in Sources */,
 				15D9B33F242E22EB00A38A76 /* AddPotoViewController.swift in Sources */,
 				158473E12435D89700C49FC1 /* OneRoomAddInfoViewController.swift in Sources */,
+				6F389E4A24484DC400A440A4 /* HomeBottomTableViewCell.swift in Sources */,
 				E7BB1BEA242B58A000C66B48 /* PMBodyTableViewCell.swift in Sources */,
 				E7E60447243B28460050D540 /* FindAreaTypeCell.swift in Sources */,
 				15D9B331242E220700A38A76 /* WithdrawalViewController.swift in Sources */,
+				6F389E36244849FD00A440A4 /* AddressApartView.swift in Sources */,
+				6F389E76244856BC00A440A4 /* ScrollButton.swift in Sources */,
+				6F389E5624484FBB00A440A4 /* OfficetelTableViewCell.swift in Sources */,
 				15D9B35B2431C2BB00A38A76 /* MaintenanceCostViewController.swift in Sources */,
 				E78AD963243711C80098BE6E /* FilterViewController.swift in Sources */,
+				6F389E5224484F8D00A440A4 /* SubwayTableViewCell.swift in Sources */,
 				6F41B40F242A38FB00CACDCE /* MarketingImfomationView.swift in Sources */,
+				6F389E682448544000A440A4 /* SaleThemeTableViewCell.swift in Sources */,
 				6F4DECEE242A19A6008D77E5 /* SettingModel.swift in Sources */,
 				15D1284B2431D48B00E75AC8 /* BaseInfoViewController.swift in Sources */,
 				E78AD9732438D9A20098BE6E /* FilterTradeTypeCell.swift in Sources */,
 				E77D8C77244593BA00A263AE /* SaleDetailScheduleCell.swift in Sources */,
 				1516005324287E6F0003DDCF /* MapViewController.swift in Sources */,
 				156B616A24346CB300054FE9 /* InputCell.swift in Sources */,
+				6F389E78244856FD00A440A4 /* SaleInformationViewController.swift in Sources */,
 				157C4E7524386A63008559FD /* CustomSegmentView.swift in Sources */,
 				E7E6044D243DAAAC0050D540 /* BrokerageOfficeTopCell.swift in Sources */,
+				6F389E66244853F700A440A4 /* SaleNewsTableViewCell.swift in Sources */,
 				E77D8C812447416100A263AE /* SaleDetailBottomView.swift in Sources */,
 				E7E60445243B21570050D540 /* FindTitleCell.swift in Sources */,
 				15D9B32A242CA42F00A38A76 /* SellMyRoomViewController.swift in Sources */,
