@@ -18,6 +18,13 @@ extension UIView {
     }
     
 }
+extension UIStackView {
+  func addArrangedSubviews(_ views: [UIView]) {
+    views.forEach {
+      addArrangedSubview($0)
+    }
+  }
+}
 
 
 extension UITextField {
@@ -121,3 +128,40 @@ extension NSMutableAttributedString {
 
 
 
+extension UIView {
+    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+         let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+         let mask = CAShapeLayer()
+         mask.path = path.cgPath
+         self.layer.mask = mask
+    }
+}
+
+extension UISegmentedControl {
+    func forcedImplementBackgroundColor() {
+        setBackgroundImage(imageWithColor(color: backgroundColor!), for: .normal, barMetrics: .default)
+        setBackgroundImage(imageWithColor(color: tintColor!), for: .selected, barMetrics: .default)
+        setDividerImage(imageWithColor(color: UIColor.clear), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+    }
+
+    // create a 1x1 image with this color
+    private func imageWithColor(color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0.0, y: 0.0, width:  1.0, height: 1.0)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context!.setFillColor(color.cgColor);
+        context!.fill(rect);
+        let image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return image!
+    }
+}
+
+extension UISegmentedControl{
+    func selectedSegmentTintColor(_ color: UIColor) {
+        self.setTitleTextAttributes([.foregroundColor: color], for: .selected)
+    }
+    func unselectedSegmentTintColor(_ color: UIColor) {
+        self.setTitleTextAttributes([.foregroundColor: color], for: .normal)
+    }
+}
