@@ -219,9 +219,7 @@ class FavoriteListViewController: UIViewController {
         guard self.roomsToCompare.count > 1 else { return }
         let compareVC = CompareViewController()
         compareVC.roomsToCompare = self.roomsToCompare
-        let navi = UINavigationController(rootViewController: compareVC)
-        navi.modalPresentationStyle = .fullScreen
-        present(navi, animated: true)
+      navigationController?.pushViewController(compareVC, animated: true)
     }
     
     @objc private func showCompareViewButton(isCompareMode: Bool) {

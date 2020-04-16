@@ -15,7 +15,6 @@
 		1516004B242495FE0003DDCF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1516004A242495FE0003DDCF /* Extensions.swift */; };
 		1516004D24285FCB0003DDCF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1516004C24285FCB0003DDCF /* SignUpViewController.swift */; };
 		1516004F24287E450003DDCF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1516004E24287E450003DDCF /* HomeViewController.swift */; };
-		1516005124287E620003DDCF /* FavoriteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1516005024287E620003DDCF /* FavoriteListViewController.swift */; };
 		1516005324287E6F0003DDCF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1516005224287E6F0003DDCF /* MapViewController.swift */; };
 		1516005524287ED40003DDCF /* SaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1516005424287ED40003DDCF /* SaleViewController.swift */; };
 		1516005724287EDC0003DDCF /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1516005624287EDC0003DDCF /* MoreViewController.swift */; };
@@ -23,6 +22,22 @@
 		152DD9B2242B3E2400C80E10 /* FrequentlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B1242B3E2400C80E10 /* FrequentlyViewController.swift */; };
 		152DD9B6242B3EEA00C80E10 /* FrequentlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B5242B3EEA00C80E10 /* FrequentlyTableViewCell.swift */; };
 		152DD9B8242B4D3400C80E10 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B7242B4D3400C80E10 /* Model.swift */; };
+		15315A55244857250033EA47 /* CompareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A3E244857250033EA47 /* CompareViewModel.swift */; };
+		15315A56244857250033EA47 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A3F244857250033EA47 /* FavoriteViewModel.swift */; };
+		15315A57244857250033EA47 /* DanziInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A40244857250033EA47 /* DanziInfoCell.swift */; };
+		15315A58244857250033EA47 /* FavoriteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A42244857250033EA47 /* FavoriteListViewController.swift */; };
+		15315A59244857250033EA47 /* CompareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A43244857250033EA47 /* CompareViewController.swift */; };
+		15315A5B244857250033EA47 /* FavoSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A49244857250033EA47 /* FavoSelectButton.swift */; };
+		15315A5C244857250033EA47 /* FavoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A4A244857250033EA47 /* FavoModel.swift */; };
+		15315A5D244857250033EA47 /* CompareViewAskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A4B244857250033EA47 /* CompareViewAskButton.swift */; };
+		15315A5E244857250033EA47 /* CompareCellInsideStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A4D244857250033EA47 /* CompareCellInsideStack.swift */; };
+		15315A5F244857250033EA47 /* CompareDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A50244857250033EA47 /* CompareDetailView.swift */; };
+		15315A60244857250033EA47 /* CompareHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A51244857250033EA47 /* CompareHeaderView.swift */; };
+		15315A61244857250033EA47 /* CompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A52244857250033EA47 /* CompareView.swift */; };
+		15315A62244857250033EA47 /* BrokerInfoAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A53244857250033EA47 /* BrokerInfoAlertVC.swift */; };
+		15315A63244857250033EA47 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A54244857250033EA47 /* EmptyStateView.swift */; };
+		15315A66244857680033EA47 /* BudongsanInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A64244857670033EA47 /* BudongsanInfoCell.swift */; };
+		15315A67244857680033EA47 /* RoomInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A65244857680033EA47 /* RoomInfoCell.swift */; };
 		156B616224345DAD00054FE9 /* AdditionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156B616124345DAD00054FE9 /* AdditionalViewController.swift */; };
 		156B616424345DC400054FE9 /* AdditionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156B616324345DC400054FE9 /* AdditionalView.swift */; };
 		156B616624345E0100054FE9 /* BoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156B616524345E0100054FE9 /* BoxView.swift */; };
@@ -150,7 +165,6 @@
 		E7E60449243B33BF0050D540 /* FindRoomConditionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E60448243B33BF0050D540 /* FindRoomConditionCell.swift */; };
 		E7E6044B243B42BF0050D540 /* BrokerageOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E6044A243B42BF0050D540 /* BrokerageOfficeViewController.swift */; };
 		E7E6044D243DAAAC0050D540 /* BrokerageOfficeTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E6044C243DAAAC0050D540 /* BrokerageOfficeTopCell.swift */; };
-		E7E6044F243DB21B0050D540 /* DabangModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E6044E243DB21B0050D540 /* DabangModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -164,7 +178,6 @@
 		1516004A242495FE0003DDCF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1516004C24285FCB0003DDCF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		1516004E24287E450003DDCF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		1516005024287E620003DDCF /* FavoriteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewController.swift; sourceTree = "<group>"; };
 		1516005224287E6F0003DDCF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1516005424287ED40003DDCF /* SaleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleViewController.swift; sourceTree = "<group>"; };
 		1516005624287EDC0003DDCF /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +185,22 @@
 		152DD9B1242B3E2400C80E10 /* FrequentlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyViewController.swift; sourceTree = "<group>"; };
 		152DD9B5242B3EEA00C80E10 /* FrequentlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyTableViewCell.swift; sourceTree = "<group>"; };
 		152DD9B7242B4D3400C80E10 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		15315A3E244857250033EA47 /* CompareViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareViewModel.swift; sourceTree = "<group>"; };
+		15315A3F244857250033EA47 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
+		15315A40244857250033EA47 /* DanziInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanziInfoCell.swift; sourceTree = "<group>"; };
+		15315A42244857250033EA47 /* FavoriteListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteListViewController.swift; sourceTree = "<group>"; };
+		15315A43244857250033EA47 /* CompareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareViewController.swift; sourceTree = "<group>"; };
+		15315A49244857250033EA47 /* FavoSelectButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoSelectButton.swift; sourceTree = "<group>"; };
+		15315A4A244857250033EA47 /* FavoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoModel.swift; sourceTree = "<group>"; };
+		15315A4B244857250033EA47 /* CompareViewAskButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareViewAskButton.swift; sourceTree = "<group>"; };
+		15315A4D244857250033EA47 /* CompareCellInsideStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareCellInsideStack.swift; sourceTree = "<group>"; };
+		15315A50244857250033EA47 /* CompareDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareDetailView.swift; sourceTree = "<group>"; };
+		15315A51244857250033EA47 /* CompareHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareHeaderView.swift; sourceTree = "<group>"; };
+		15315A52244857250033EA47 /* CompareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareView.swift; sourceTree = "<group>"; };
+		15315A53244857250033EA47 /* BrokerInfoAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerInfoAlertVC.swift; sourceTree = "<group>"; };
+		15315A54244857250033EA47 /* EmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		15315A64244857670033EA47 /* BudongsanInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudongsanInfoCell.swift; sourceTree = "<group>"; };
+		15315A65244857680033EA47 /* RoomInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomInfoCell.swift; sourceTree = "<group>"; };
 		156B616124345DAD00054FE9 /* AdditionalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalViewController.swift; sourceTree = "<group>"; };
 		156B616324345DC400054FE9 /* AdditionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalView.swift; sourceTree = "<group>"; };
 		156B616524345E0100054FE9 /* BoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxView.swift; sourceTree = "<group>"; };
@@ -301,7 +330,6 @@
 		E7E60448243B33BF0050D540 /* FindRoomConditionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindRoomConditionCell.swift; path = DabangClone/HomeView/Controller/FindRoomConditionCell.swift; sourceTree = SOURCE_ROOT; };
 		E7E6044A243B42BF0050D540 /* BrokerageOfficeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerageOfficeViewController.swift; sourceTree = "<group>"; };
 		E7E6044C243DAAAC0050D540 /* BrokerageOfficeTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageOfficeTopCell.swift; path = DabangClone/HomeView/Controller/BrokerageOfficeTopCell.swift; sourceTree = SOURCE_ROOT; };
-		E7E6044E243DB21B0050D540 /* DabangModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DabangModel.swift; path = DabangClone/HomeView/Controller/DabangModel.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,7 +377,7 @@
 			children = (
 				15D9B324242BA12000A38A76 /* Utils */,
 				15D9B318242B9FB300A38A76 /* MapView */,
-				15D9B314242B9F5E00A38A76 /* FavoriteView */,
+				15315A3C244857250033EA47 /* FavoriteView */,
 				15D9B310242B9F2C00A38A76 /* HomeView */,
 				15D9B31F242BA01600A38A76 /* SaleView */,
 				1516005A242B2C1D0003DDCF /* MoreView */,
@@ -371,6 +399,101 @@
 			path = MoreView;
 			sourceTree = "<group>";
 		};
+		15315A3C244857250033EA47 /* FavoriteView */ = {
+			isa = PBXGroup;
+			children = (
+				15315A3D244857250033EA47 /* ViewModel */,
+				15315A41244857250033EA47 /* Controller */,
+				15315A44244857250033EA47 /* Model */,
+				15315A46244857250033EA47 /* View */,
+			);
+			path = FavoriteView;
+			sourceTree = "<group>";
+		};
+		15315A3D244857250033EA47 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				15315A3E244857250033EA47 /* CompareViewModel.swift */,
+				15315A3F244857250033EA47 /* FavoriteViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		15315A41244857250033EA47 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				15315A42244857250033EA47 /* FavoriteListViewController.swift */,
+				15315A43244857250033EA47 /* CompareViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		15315A44244857250033EA47 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		15315A46244857250033EA47 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				15315A47244857250033EA47 /* Cells */,
+				15315A48244857250033EA47 /* Buttons */,
+				15315A4C244857250033EA47 /* StackView */,
+				15315A4E244857250033EA47 /* Views */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		15315A47244857250033EA47 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				15315A64244857670033EA47 /* BudongsanInfoCell.swift */,
+				15315A65244857680033EA47 /* RoomInfoCell.swift */,
+				15315A40244857250033EA47 /* DanziInfoCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		15315A48244857250033EA47 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				15315A49244857250033EA47 /* FavoSelectButton.swift */,
+				15315A4A244857250033EA47 /* FavoModel.swift */,
+				15315A4B244857250033EA47 /* CompareViewAskButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		15315A4C244857250033EA47 /* StackView */ = {
+			isa = PBXGroup;
+			children = (
+				15315A4D244857250033EA47 /* CompareCellInsideStack.swift */,
+			);
+			path = StackView;
+			sourceTree = "<group>";
+		};
+		15315A4E244857250033EA47 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				15315A4F244857250033EA47 /* CompareVC SubViews */,
+				15315A52244857250033EA47 /* CompareView.swift */,
+				15315A53244857250033EA47 /* BrokerInfoAlertVC.swift */,
+				15315A54244857250033EA47 /* EmptyStateView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		15315A4F244857250033EA47 /* CompareVC SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				15315A50244857250033EA47 /* CompareDetailView.swift */,
+				15315A51244857250033EA47 /* CompareHeaderView.swift */,
+			);
+			path = "CompareVC SubViews";
+			sourceTree = "<group>";
+		};
 		15D9B310242B9F2C00A38A76 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,7 +509,6 @@
 			children = (
 				157C4E78243A060D008559FD /* RoomModel.swift */,
 				15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */,
-				E7E6044E243DB21B0050D540 /* DabangModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -413,39 +535,6 @@
 				E7E6043E243B14DB0050D540 /* FindEasyRoomViewController.swift */,
 				E7E6044A243B42BF0050D540 /* BrokerageOfficeViewController.swift */,
 				E77D8C64243FB65500A263AE /* BrokerageTestViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		15D9B314242B9F5E00A38A76 /* FavoriteView */ = {
-			isa = PBXGroup;
-			children = (
-				15D9B317242B9FA300A38A76 /* Controller */,
-				15D9B316242B9FA000A38A76 /* View */,
-				15D9B315242B9F9B00A38A76 /* Model */,
-			);
-			path = FavoriteView;
-			sourceTree = "<group>";
-		};
-		15D9B315242B9F9B00A38A76 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		15D9B316242B9FA000A38A76 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				15D9B326242BA21B00A38A76 /* Cells */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		15D9B317242B9FA300A38A76 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				1516005024287E620003DDCF /* FavoriteListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -657,13 +746,6 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		15D9B326242BA21B00A38A76 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
 		15D9B327242BA21E00A38A76 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -831,13 +913,14 @@
 				15D9B33E242E22EB00A38A76 /* AddRoomViewController.swift in Sources */,
 				15D9B345242E232300A38A76 /* AddRoomTitleView.swift in Sources */,
 				E7ACD434242B392F00C5D097 /* PMTopTableViewCell.swift in Sources */,
+				15315A5C244857250033EA47 /* FavoModel.swift in Sources */,
 				E77D8C65243FB65500A263AE /* BrokerageTestViewController.swift in Sources */,
 				E7BB1C1024334F5E00C66B48 /* RoomSizeViewController.swift in Sources */,
 				151600592429E0260003DDCF /* MoreView.swift in Sources */,
-				1516005124287E620003DDCF /* FavoriteListViewController.swift in Sources */,
 				156B616E24346CEA00054FE9 /* ThreeSegmentTableViewCell.swift in Sources */,
 				E77D8C752445882700A263AE /* SaleDetailParcelPriceCell.swift in Sources */,
 				E7BB1BEC242B6F1500C66B48 /* PMBottomTableViewCell.swift in Sources */,
+				15315A5B244857250033EA47 /* FavoSelectButton.swift in Sources */,
 				E77D8C5D243DD87000A263AE /* BrokerageSectionView.swift in Sources */,
 				E77D8C5B243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift in Sources */,
 				15D9B3482430A89900A38A76 /* EventViewController.swift in Sources */,
@@ -849,6 +932,7 @@
 				15D9B3582431C2B600A38A76 /* ExplainView.swift in Sources */,
 				156B616424345DC400054FE9 /* AdditionalView.swift in Sources */,
 				15AB31222445DF5F002AC5B8 /* CostInfoStackView.swift in Sources */,
+				15315A5D244857250033EA47 /* CompareViewAskButton.swift in Sources */,
 				E7BB1C082431F9B600C66B48 /* PriceBottomTableViewCell.swift in Sources */,
 				E78AD96F2438D0EC0098BE6E /* FilterTwoButtonView.swift in Sources */,
 				E7BB1C0E24320C3D00C66B48 /* CFBodyTableViewCell.swift in Sources */,
@@ -877,6 +961,7 @@
 				E7BB1C022431E5AB00C66B48 /* PriceViewController.swift in Sources */,
 				15D9B3562431C2A900A38A76 /* MCTopTableViewCell.swift in Sources */,
 				E78AD9752438E3F20098BE6E /* ButtonView.swift in Sources */,
+				15315A55244857250033EA47 /* CompareViewModel.swift in Sources */,
 				15160049242483730003DDCF /* MainTabBarViewController.swift in Sources */,
 				1584F1B2244219AA0002C9E5 /* MainRoomSecondCollectionViewCell.swift in Sources */,
 				6F4DECE72429F78E008D77E5 /* SettingViewController.swift in Sources */,
@@ -884,6 +969,7 @@
 				15EEBE4324446DF80049952E /* CostInfoTableViewCell.swift in Sources */,
 				E7E60449243B33BF0050D540 /* FindRoomConditionCell.swift in Sources */,
 				E77D8C61243FA46200A263AE /* BrokerageRoomTapCell.swift in Sources */,
+				15315A59244857250033EA47 /* CompareViewController.swift in Sources */,
 				E77D8C7F2447306100A263AE /* SaleDetailRecommendCollectionCell.swift in Sources */,
 				E7BB1BFE2431D6BE00C66B48 /* MCHeaderView.swift in Sources */,
 				6F41B411242A435800CACDCE /* NoticeViewController.swift in Sources */,
@@ -891,14 +977,15 @@
 				E7BB1C14243353F200C66B48 /* RSBodyTableViewCell.swift in Sources */,
 				E77D8C7D2447301200A263AE /* SaleDetailRecommendCell.swift in Sources */,
 				E77D8C792445C93900A263AE /* SaleDetailNearMapCell.swift in Sources */,
-				E7E6044F243DB21B0050D540 /* DabangModel.swift in Sources */,
 				E77D8C5F243DF52B00A263AE /* BrokerageHomeInfoCell.swift in Sources */,
 				6F4DECEC242A1585008D77E5 /* SettingTableViewCell.swift in Sources */,
 				1516005524287ED40003DDCF /* SaleViewController.swift in Sources */,
 				156B616224345DAD00054FE9 /* AdditionalViewController.swift in Sources */,
+				15315A63244857250033EA47 /* EmptyStateView.swift in Sources */,
 				E77D8C732443C15600A263AE /* SaleDetailSaleInfoCell.swift in Sources */,
 				E7BB1C182434801300C66B48 /* InquiryBodyTableViewCell.swift in Sources */,
 				152DD9B2242B3E2400C80E10 /* FrequentlyViewController.swift in Sources */,
+				15315A66244857680033EA47 /* BudongsanInfoCell.swift in Sources */,
 				158473E52435F4AD00C49FC1 /* AddTitleTableViewCell.swift in Sources */,
 				156B616C24346CE100054FE9 /* AbleSegmentCell.swift in Sources */,
 				15D1284D2431D4A100E75AC8 /* BaseInfoView.swift in Sources */,
@@ -911,6 +998,7 @@
 				15D9B33D242E22EB00A38A76 /* TermsAndConditionsViewController.swift in Sources */,
 				6F41B413242A441C00CACDCE /* NoticeEmptyView.swift in Sources */,
 				156B616824346B3F00054FE9 /* InfoModel.swift in Sources */,
+				15315A58244857250033EA47 /* FavoriteListViewController.swift in Sources */,
 				156B61722434748000054FE9 /* IsThereCell.swift in Sources */,
 				157C4E712437142E008559FD /* AddressViewController.swift in Sources */,
 				157C4E7324371F60008559FD /* RoomSellScrollViewController.swift in Sources */,
@@ -921,17 +1009,21 @@
 				157C4E79243A060D008559FD /* RoomModel.swift in Sources */,
 				1516005724287EDC0003DDCF /* MoreViewController.swift in Sources */,
 				E79D81842429E8E50006029E /* RGTopTableViewCell.swift in Sources */,
+				15315A61244857250033EA47 /* CompareView.swift in Sources */,
 				E79D81892429EA830006029E /* RGBottomTableViewCell.swift in Sources */,
 				E78AD96724371BBE0098BE6E /* FilterSaleTypeCell.swift in Sources */,
 				15D9B3502431C25600A38A76 /* AddressSearchViewController.swift in Sources */,
 				15D9B35C2431C2BB00A38A76 /* ExplainViewController.swift in Sources */,
 				15D9B337242E226C00A38A76 /* WBottomTableViewCell.swift in Sources */,
+				15315A5E244857250033EA47 /* CompareCellInsideStack.swift in Sources */,
 				1516004B242495FE0003DDCF /* Extensions.swift in Sources */,
 				E77D8C6F244348D500A263AE /* SaleDetailMainCell.swift in Sources */,
 				1516004D24285FCB0003DDCF /* SignUpViewController.swift in Sources */,
 				E7E60443243B1AC30050D540 /* FindBottomView.swift in Sources */,
+				15315A62244857250033EA47 /* BrokerInfoAlertVC.swift in Sources */,
 				E7BB1C0A243208A300C66B48 /* CountfloorsViewController.swift in Sources */,
 				1516004F24287E450003DDCF /* HomeViewController.swift in Sources */,
+				15315A67244857680033EA47 /* RoomInfoCell.swift in Sources */,
 				E7E60441243B154E0050D540 /* FindHeaderView.swift in Sources */,
 				15D9B32C242CA44500A38A76 /* SellMyRoomTableViewCell.swift in Sources */,
 				E77D8C712443B29900A263AE /* SaleDetailSectionCell.swift in Sources */,
@@ -954,17 +1046,21 @@
 				E78AD963243711C80098BE6E /* FilterViewController.swift in Sources */,
 				6F41B40F242A38FB00CACDCE /* MarketingImfomationView.swift in Sources */,
 				6F4DECEE242A19A6008D77E5 /* SettingModel.swift in Sources */,
+				15315A60244857250033EA47 /* CompareHeaderView.swift in Sources */,
 				15D1284B2431D48B00E75AC8 /* BaseInfoViewController.swift in Sources */,
 				E78AD9732438D9A20098BE6E /* FilterTradeTypeCell.swift in Sources */,
 				E77D8C77244593BA00A263AE /* SaleDetailScheduleCell.swift in Sources */,
 				1516005324287E6F0003DDCF /* MapViewController.swift in Sources */,
 				156B616A24346CB300054FE9 /* InputCell.swift in Sources */,
+				15315A57244857250033EA47 /* DanziInfoCell.swift in Sources */,
 				157C4E7524386A63008559FD /* CustomSegmentView.swift in Sources */,
 				E7E6044D243DAAAC0050D540 /* BrokerageOfficeTopCell.swift in Sources */,
 				E77D8C812447416100A263AE /* SaleDetailBottomView.swift in Sources */,
 				E7E60445243B21570050D540 /* FindTitleCell.swift in Sources */,
+				15315A56244857250033EA47 /* FavoriteViewModel.swift in Sources */,
 				15D9B32A242CA42F00A38A76 /* SellMyRoomViewController.swift in Sources */,
 				E7BB1C002431DC8200C66B48 /* SaveView.swift in Sources */,
+				15315A5F244857250033EA47 /* CompareDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
