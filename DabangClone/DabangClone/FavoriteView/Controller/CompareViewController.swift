@@ -36,6 +36,7 @@ class CompareViewController: UIViewController {
     
     private func setNavigationBar() {
         title = "비교하기"
+        view.backgroundColor = .white
         let leftBarButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(didTapCloseButton))
         navigationItem.leftBarButtonItem = leftBarButton
         navigationController?.navigationBar.tintColor = .black
@@ -264,7 +265,7 @@ class CompareViewController: UIViewController {
     }
     
     @objc func didTapCloseButton() {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 
 }
