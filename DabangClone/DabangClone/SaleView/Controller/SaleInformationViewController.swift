@@ -1,0 +1,78 @@
+//
+//  SaleInformationViewController.swift
+//  URLTest
+//
+//  Created by 황정덕 on 2020/04/08.
+//  Copyright © 2020 Gitbot. All rights reserved.
+//
+
+import UIKit
+// 분양 모두보기
+class SaleInformationViewController: UIViewController {
+  
+  // MARK: - Property
+  private let tableView = UITableView().then {
+    $0.register(SaleNewsDetailTableViewCell.self, forCellReuseIdentifier: SaleNewsDetailTableViewCell.identifier)
+  }
+  private let topView = UIView().then {
+    $0.backgroundColor = #colorLiteral(red: 0.9371830225, green: 0.9372954965, blue: 0.9371448159, alpha: 1)
+  }
+  private let topLabel = UILabel().then {
+    $0.font = .systemFont(ofSize: 15)
+    $0.text = "전국"
+  }
+  private let tapGesture = UITapGestureRecognizer()
+  // MARK: - Lift cycle
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.view.backgroundColor = .red
+    setupUI()
+  }
+  
+  // MARK: - Action
+  @objc private func didTapGesture(_ sender: UITapGestureRecognizer){
+    let vc = SaleAreaViewController()
+    vc.modalPresentationStyle = .custom
+    present(vc, animated: true, completion: nil)
+  }
+  // MARK: - setupUI
+  private func setupUI() {
+    tableView.dataSource = self
+    self.tapGesture.addTarget(self, action: #selector(didTapGesture(_:)))
+    self.topView.addGestureRecognizer(tapGesture)
+    self.view.addSubviews([tableView,topView,topLabel])
+    self.topView.addSubviews([topLabel])
+    setupConstraint()
+  }
+  
+  // MARK: - setupConstraint
+  private func setupConstraint() {
+    
+    topView.snp.makeConstraints {
+      $0.top.leading.trailing.equalToSuperview()
+      $0.height.equalToSuperview().dividedBy(14)
+    }
+    topLabel.snp.makeConstraints {
+      $0.centerY.equalToSuperview()
+      $0.leading.equalToSuperview().offset(10)
+    }
+    tableView.snp.makeConstraints {
+      $0.top.equalTo(topView.snp.bottom)
+      $0.leading.trailing.bottom.equalToSuperview()
+    }
+  }
+}
+
+extension SaleInformationViewController: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    4
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: SaleNewsDetailTableViewCell.identifier, for: indexPath) as! SaleNewsDetailTableViewCell
+    cell.configue()
+    return cell
+  }
+  
+  
+}
