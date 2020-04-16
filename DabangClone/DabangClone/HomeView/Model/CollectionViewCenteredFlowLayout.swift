@@ -8,6 +8,8 @@
 
 import UIKit
 
+//https://github.com/Coeur/CollectionViewCenteredFlowLayout
+
 /**
  *  Simple UICollectionViewFlowLayout that centers the cells rather than justify them
  *
