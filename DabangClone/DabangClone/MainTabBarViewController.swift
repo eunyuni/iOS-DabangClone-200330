@@ -11,7 +11,7 @@ import KakaoOpenSDK
 
 class MainTabBarViewController: UITabBarController {
   private let homeVC = UINavigationController(rootViewController: ExplainViewController())
-  private let favoriteVC = UINavigationController(rootViewController: MaintenanceCostViewController())
+  private let favoriteVC = UINavigationController(rootViewController: FavoriteListViewController())
   private let mapVC = UINavigationController(rootViewController: MapViewController())
   private let saleVC = UINavigationController(rootViewController: SaleViewController())
   private let moreVC = UINavigationController(rootViewController: MoreViewController())
@@ -22,7 +22,7 @@ class MainTabBarViewController: UITabBarController {
     
     homeVC.navigationBar.isHidden = true
     homeVC.tabBarItem = UITabBarItem(title: "홈", image: nil, tag: 0)
-    favoriteVC.navigationBar.isHidden = true
+    favoriteVC.navigationBar.isHidden = false
     favoriteVC.tabBarItem = UITabBarItem(title: "관심목록", image: nil, tag: 1)
     mapVC.navigationBar.isHidden = true
     mapVC.tabBarItem = UITabBarItem(title: "지도", image: nil, tag: 2)
