@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 //    let mainVC = MainTabBarViewController()
 //    let mainVC = BaseViewController()
-    let mainVC = RoomSellScrollViewController()
+    let mainVC = NewMainRoomViewController()
 
     window?.rootViewController = mainVC
     window?.makeKeyAndVisible()

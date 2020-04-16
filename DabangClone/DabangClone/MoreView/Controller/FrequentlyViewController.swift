@@ -10,6 +10,7 @@ import UIKit
 
 class FrequentlyViewController: UIViewController {
   
+  //MARK: - Data
   var questions: [Question] = [
     Question(title: titleArray[0], content: contentArray[0]),
     Question(title: titleArray[1], content: contentArray[1]),
