@@ -15,4 +15,6 @@ target 'DabangClone' do
   pod 'RxViewController'
   pod 'Alamofire'
   pod 'Then'
+  pod 'Kingfisher', '~> 5.0'
+  pod 'SwiftSVG', '~> 2.0'
 end
