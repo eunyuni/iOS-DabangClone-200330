@@ -14,7 +14,9 @@ class MCBottomTableViewCell: UITableViewCell {
   static let identifier = "MCBottomTableViewCell"
   
   // MARK: -Property
-  private let categoryLabel = UILabel()
+  private let categoryLabel = UILabel().then {
+    $0.font = .systemFont(ofSize: 15)
+  }
   private let checkButton = UIButton().then {
     $0.layer.borderWidth = 1.4
     $0.layer.borderColor = UIColor.lightGray.cgColor
