@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     window = UIWindow(frame: UIScreen.main.bounds)
     
-    let mainVC = MainTabBarViewController()
-//    let mainVC = FindEasyRoomViewController()
+//    let mainVC = MainTabBarViewController()
+    let mainVC = SaleDetailViewController()
     
     window?.rootViewController = mainVC
     window?.makeKeyAndVisible()

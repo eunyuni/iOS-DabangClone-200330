@@ -57,6 +57,26 @@
 		6F4DECEC242A1585008D77E5 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DECEB242A1585008D77E5 /* SettingTableViewCell.swift */; };
 		6F4DECEE242A19A6008D77E5 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DECED242A19A6008D77E5 /* SettingModel.swift */; };
 		AAD0A9599381D7CA708D6E31 /* Pods_DabangClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90B70ED9EB0B15C4D6FEDE4D /* Pods_DabangClone.framework */; };
+		E77D8C5B243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C5A243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift */; };
+		E77D8C5D243DD87000A263AE /* BrokerageSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C5C243DD87000A263AE /* BrokerageSectionView.swift */; };
+		E77D8C5F243DF52B00A263AE /* BrokerageHomeInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C5E243DF52B00A263AE /* BrokerageHomeInfoCell.swift */; };
+		E77D8C61243FA46200A263AE /* BrokerageRoomTapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C60243FA46200A263AE /* BrokerageRoomTapCell.swift */; };
+		E77D8C63243FA59600A263AE /* BrokerageReviewTapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C62243FA59600A263AE /* BrokerageReviewTapCell.swift */; };
+		E77D8C65243FB65500A263AE /* BrokerageTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C64243FB65500A263AE /* BrokerageTestViewController.swift */; };
+		E77D8C67243FB90500A263AE /* BrokerageHomeBottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C66243FB90500A263AE /* BrokerageHomeBottomCell.swift */; };
+		E77D8C69243FBD7600A263AE /* BrokerageReviewBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C68243FBD7600A263AE /* BrokerageReviewBodyCell.swift */; };
+		E77D8C6B243FBF2600A263AE /* BrokerageReviewBottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C6A243FBF2600A263AE /* BrokerageReviewBottomCell.swift */; };
+		E77D8C6D2443466D00A263AE /* SaleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C6C2443466D00A263AE /* SaleDetailViewController.swift */; };
+		E77D8C6F244348D500A263AE /* SaleDetailMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C6E244348D500A263AE /* SaleDetailMainCell.swift */; };
+		E77D8C712443B29900A263AE /* SaleDetailSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C702443B29900A263AE /* SaleDetailSectionCell.swift */; };
+		E77D8C732443C15600A263AE /* SaleDetailSaleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C722443C15600A263AE /* SaleDetailSaleInfoCell.swift */; };
+		E77D8C752445882700A263AE /* SaleDetailParcelPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C742445882700A263AE /* SaleDetailParcelPriceCell.swift */; };
+		E77D8C77244593BA00A263AE /* SaleDetailScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C76244593BA00A263AE /* SaleDetailScheduleCell.swift */; };
+		E77D8C792445C93900A263AE /* SaleDetailNearMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C782445C93900A263AE /* SaleDetailNearMapCell.swift */; };
+		E77D8C7D2447301200A263AE /* SaleDetailRecommendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C7C2447301200A263AE /* SaleDetailRecommendCell.swift */; };
+		E77D8C7F2447306100A263AE /* SaleDetailRecommendCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C7E2447306100A263AE /* SaleDetailRecommendCollectionCell.swift */; };
+		E77D8C812447416100A263AE /* SaleDetailBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C802447416100A263AE /* SaleDetailBottomView.swift */; };
+		E77D8C8324474DC600A263AE /* SaleDetailAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C8224474DC600A263AE /* SaleDetailAlertViewController.swift */; };
 		E78AD93B2435E2E30098BE6E /* InquiryBottomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AD93A2435E2E30098BE6E /* InquiryBottomTableViewCell.swift */; };
 		E78AD9612437119C0098BE6E /* FilterRoomTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AD9602437119C0098BE6E /* FilterRoomTypeCell.swift */; };
 		E78AD963243711C80098BE6E /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AD962243711C80098BE6E /* FilterViewController.swift */; };
@@ -97,7 +117,9 @@
 		E7E60445243B21570050D540 /* FindTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E60444243B21570050D540 /* FindTitleCell.swift */; };
 		E7E60447243B28460050D540 /* FindAreaTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E60446243B28460050D540 /* FindAreaTypeCell.swift */; };
 		E7E60449243B33BF0050D540 /* FindRoomConditionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E60448243B33BF0050D540 /* FindRoomConditionCell.swift */; };
-		E7E6044B243B42BF0050D540 /* RealPropertyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E6044A243B42BF0050D540 /* RealPropertyViewController.swift */; };
+		E7E6044B243B42BF0050D540 /* BrokerageOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E6044A243B42BF0050D540 /* BrokerageOfficeViewController.swift */; };
+		E7E6044D243DAAAC0050D540 /* BrokerageOfficeTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E6044C243DAAAC0050D540 /* BrokerageOfficeTopCell.swift */; };
+		E7E6044F243DB21B0050D540 /* DabangModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E6044E243DB21B0050D540 /* DabangModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -155,6 +177,26 @@
 		6F4DECED242A19A6008D77E5 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		90B70ED9EB0B15C4D6FEDE4D /* Pods_DabangClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DabangClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6E307BB0DBA8293AA6779F /* Pods-DabangClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DabangClone.debug.xcconfig"; path = "Target Support Files/Pods-DabangClone/Pods-DabangClone.debug.xcconfig"; sourceTree = "<group>"; };
+		E77D8C5A243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageOfficeSectionCell.swift; path = DabangClone/HomeView/Controller/BrokerageOfficeSectionCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C5C243DD87000A263AE /* BrokerageSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageSectionView.swift; path = DabangClone/HomeView/Controller/BrokerageSectionView.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C5E243DF52B00A263AE /* BrokerageHomeInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageHomeInfoCell.swift; path = DabangClone/HomeView/Controller/BrokerageHomeInfoCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C60243FA46200A263AE /* BrokerageRoomTapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageRoomTapCell.swift; path = DabangClone/HomeView/Controller/BrokerageRoomTapCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C62243FA59600A263AE /* BrokerageReviewTapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageReviewTapCell.swift; path = DabangClone/HomeView/Controller/BrokerageReviewTapCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C64243FB65500A263AE /* BrokerageTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerageTestViewController.swift; sourceTree = "<group>"; };
+		E77D8C66243FB90500A263AE /* BrokerageHomeBottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageHomeBottomCell.swift; path = DabangClone/HomeView/Controller/BrokerageHomeBottomCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C68243FBD7600A263AE /* BrokerageReviewBodyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageReviewBodyCell.swift; path = DabangClone/HomeView/Controller/BrokerageReviewBodyCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C6A243FBF2600A263AE /* BrokerageReviewBottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageReviewBottomCell.swift; path = DabangClone/HomeView/Controller/BrokerageReviewBottomCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C6C2443466D00A263AE /* SaleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleDetailViewController.swift; sourceTree = "<group>"; };
+		E77D8C6E244348D500A263AE /* SaleDetailMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleDetailMainCell.swift; path = DabangClone/SaleView/Controller/SaleDetailMainCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C702443B29900A263AE /* SaleDetailSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleDetailSectionCell.swift; path = DabangClone/SaleView/Controller/SaleDetailSectionCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C722443C15600A263AE /* SaleDetailSaleInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleDetailSaleInfoCell.swift; path = DabangClone/SaleView/Controller/SaleDetailSaleInfoCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C742445882700A263AE /* SaleDetailParcelPriceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleDetailParcelPriceCell.swift; path = DabangClone/SaleView/Controller/SaleDetailParcelPriceCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C76244593BA00A263AE /* SaleDetailScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleDetailScheduleCell.swift; path = DabangClone/SaleView/Controller/SaleDetailScheduleCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C782445C93900A263AE /* SaleDetailNearMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleDetailNearMapCell.swift; path = DabangClone/SaleView/Controller/SaleDetailNearMapCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C7C2447301200A263AE /* SaleDetailRecommendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleDetailRecommendCell.swift; path = DabangClone/SaleView/Controller/SaleDetailRecommendCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C7E2447306100A263AE /* SaleDetailRecommendCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleDetailRecommendCollectionCell.swift; path = DabangClone/SaleView/Controller/SaleDetailRecommendCollectionCell.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C802447416100A263AE /* SaleDetailBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleDetailBottomView.swift; path = DabangClone/SaleView/Controller/SaleDetailBottomView.swift; sourceTree = SOURCE_ROOT; };
+		E77D8C8224474DC600A263AE /* SaleDetailAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleDetailAlertViewController.swift; sourceTree = "<group>"; };
 		E78AD93A2435E2E30098BE6E /* InquiryBottomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryBottomTableViewCell.swift; sourceTree = "<group>"; };
 		E78AD9602437119C0098BE6E /* FilterRoomTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterRoomTypeCell.swift; path = DabangClone/MapView/FilterRoomTypeCell.swift; sourceTree = SOURCE_ROOT; };
 		E78AD962243711C80098BE6E /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
@@ -195,7 +237,9 @@
 		E7E60444243B21570050D540 /* FindTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindTitleCell.swift; path = DabangClone/HomeView/Controller/FindTitleCell.swift; sourceTree = SOURCE_ROOT; };
 		E7E60446243B28460050D540 /* FindAreaTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindAreaTypeCell.swift; path = DabangClone/HomeView/Controller/FindAreaTypeCell.swift; sourceTree = SOURCE_ROOT; };
 		E7E60448243B33BF0050D540 /* FindRoomConditionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindRoomConditionCell.swift; path = DabangClone/HomeView/Controller/FindRoomConditionCell.swift; sourceTree = SOURCE_ROOT; };
-		E7E6044A243B42BF0050D540 /* RealPropertyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealPropertyViewController.swift; sourceTree = "<group>"; };
+		E7E6044A243B42BF0050D540 /* BrokerageOfficeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerageOfficeViewController.swift; sourceTree = "<group>"; };
+		E7E6044C243DAAAC0050D540 /* BrokerageOfficeTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageOfficeTopCell.swift; path = DabangClone/HomeView/Controller/BrokerageOfficeTopCell.swift; sourceTree = SOURCE_ROOT; };
+		E7E6044E243DB21B0050D540 /* DabangModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DabangModel.swift; path = DabangClone/HomeView/Controller/DabangModel.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +322,7 @@
 		15D9B311242B9F3D00A38A76 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E7E6044E243DB21B0050D540 /* DabangModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -287,6 +332,7 @@
 			children = (
 				E7E60440243B154E0050D540 /* FindHeaderView.swift */,
 				E7E60442243B1AC30050D540 /* FindBottomView.swift */,
+				E77D8C5C243DD87000A263AE /* BrokerageSectionView.swift */,
 				15D9B327242BA21E00A38A76 /* Cells */,
 			);
 			path = View;
@@ -297,7 +343,8 @@
 			children = (
 				1516004E24287E450003DDCF /* HomeViewController.swift */,
 				E7E6043E243B14DB0050D540 /* FindEasyRoomViewController.swift */,
-				E7E6044A243B42BF0050D540 /* RealPropertyViewController.swift */,
+				E7E6044A243B42BF0050D540 /* BrokerageOfficeViewController.swift */,
+				E77D8C64243FB65500A263AE /* BrokerageTestViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -453,6 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				15D9B328242BA22200A38A76 /* Cells */,
+				E77D8C802447416100A263AE /* SaleDetailBottomView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -461,6 +509,8 @@
 			isa = PBXGroup;
 			children = (
 				1516005424287ED40003DDCF /* SaleViewController.swift */,
+				E77D8C6C2443466D00A263AE /* SaleDetailViewController.swift */,
+				E77D8C8224474DC600A263AE /* SaleDetailAlertViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -532,6 +582,14 @@
 				E7E60444243B21570050D540 /* FindTitleCell.swift */,
 				E7E60446243B28460050D540 /* FindAreaTypeCell.swift */,
 				E7E60448243B33BF0050D540 /* FindRoomConditionCell.swift */,
+				E7E6044C243DAAAC0050D540 /* BrokerageOfficeTopCell.swift */,
+				E77D8C5A243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift */,
+				E77D8C5E243DF52B00A263AE /* BrokerageHomeInfoCell.swift */,
+				E77D8C66243FB90500A263AE /* BrokerageHomeBottomCell.swift */,
+				E77D8C60243FA46200A263AE /* BrokerageRoomTapCell.swift */,
+				E77D8C62243FA59600A263AE /* BrokerageReviewTapCell.swift */,
+				E77D8C68243FBD7600A263AE /* BrokerageReviewBodyCell.swift */,
+				E77D8C6A243FBF2600A263AE /* BrokerageReviewBottomCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -539,6 +597,14 @@
 		15D9B328242BA22200A38A76 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				E77D8C6E244348D500A263AE /* SaleDetailMainCell.swift */,
+				E77D8C702443B29900A263AE /* SaleDetailSectionCell.swift */,
+				E77D8C722443C15600A263AE /* SaleDetailSaleInfoCell.swift */,
+				E77D8C742445882700A263AE /* SaleDetailParcelPriceCell.swift */,
+				E77D8C76244593BA00A263AE /* SaleDetailScheduleCell.swift */,
+				E77D8C782445C93900A263AE /* SaleDetailNearMapCell.swift */,
+				E77D8C7C2447301200A263AE /* SaleDetailRecommendCell.swift */,
+				E77D8C7E2447306100A263AE /* SaleDetailRecommendCollectionCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -672,12 +738,17 @@
 				15D9B33E242E22EB00A38A76 /* AddRoomViewController.swift in Sources */,
 				15D9B345242E232300A38A76 /* AddRoomTitleView.swift in Sources */,
 				E7ACD434242B392F00C5D097 /* PMTopTableViewCell.swift in Sources */,
+				E77D8C65243FB65500A263AE /* BrokerageTestViewController.swift in Sources */,
 				E7BB1C1024334F5E00C66B48 /* RoomSizeViewController.swift in Sources */,
 				151600592429E0260003DDCF /* MoreView.swift in Sources */,
 				1516005124287E620003DDCF /* FavoriteListViewController.swift in Sources */,
+				E77D8C752445882700A263AE /* SaleDetailParcelPriceCell.swift in Sources */,
 				E7BB1BEC242B6F1500C66B48 /* PMBottomTableViewCell.swift in Sources */,
+				E77D8C5D243DD87000A263AE /* BrokerageSectionView.swift in Sources */,
+				E77D8C5B243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift in Sources */,
 				15D9B3482430A89900A38A76 /* EventViewController.swift in Sources */,
 				E78AD9612437119C0098BE6E /* FilterRoomTypeCell.swift in Sources */,
+				E77D8C69243FBD7600A263AE /* BrokerageReviewBodyCell.swift in Sources */,
 				1516003324247BA20003DDCF /* LoginViewController.swift in Sources */,
 				6F41B40B242A383000CACDCE /* MarketingImfomationViewController.swift in Sources */,
 				15D9B3582431C2B600A38A76 /* ExplainView.swift in Sources */,
@@ -685,9 +756,10 @@
 				E78AD96F2438D0EC0098BE6E /* FilterTwoButtonView.swift in Sources */,
 				E7BB1C0E24320C3D00C66B48 /* CFBodyTableViewCell.swift in Sources */,
 				6F41B409242A32D800CACDCE /* SettingSectionView.swift in Sources */,
+				E77D8C8324474DC600A263AE /* SaleDetailAlertViewController.swift in Sources */,
 				E79D81872429EA340006029E /* RGBodyTableViewCell.swift in Sources */,
 				15D9B3522431C29C00A38A76 /* AddressView.swift in Sources */,
-				E7E6044B243B42BF0050D540 /* RealPropertyViewController.swift in Sources */,
+				E7E6044B243B42BF0050D540 /* BrokerageOfficeViewController.swift in Sources */,
 				E78AD9652437186B0098BE6E /* GrayLineViewCell.swift in Sources */,
 				15D9B338242E226C00A38A76 /* WTopTableViewCell.swift in Sources */,
 				E7BB1C162433670600C66B48 /* ParkingFeeViewController.swift in Sources */,
@@ -696,6 +768,7 @@
 				E78AD93B2435E2E30098BE6E /* InquiryBottomTableViewCell.swift in Sources */,
 				1516002F24247BA20003DDCF /* AppDelegate.swift in Sources */,
 				E78AD969243727130098BE6E /* Padding.swift in Sources */,
+				E77D8C63243FA59600A263AE /* BrokerageReviewTapCell.swift in Sources */,
 				E7BB1C12243350A300C66B48 /* RSTopTableViewCell.swift in Sources */,
 				E7BB1C062431F4D000C66B48 /* PriceBodyTableViewCell.swift in Sources */,
 				15D9B340242E22EB00A38A76 /* PrivacyPolicyViewController.swift in Sources */,
@@ -706,12 +779,19 @@
 				6F4DECE72429F78E008D77E5 /* SettingViewController.swift in Sources */,
 				15D9B34A2430A8A900A38A76 /* EventTableViewCell.swift in Sources */,
 				E7E60449243B33BF0050D540 /* FindRoomConditionCell.swift in Sources */,
+				E77D8C61243FA46200A263AE /* BrokerageRoomTapCell.swift in Sources */,
+				E77D8C7F2447306100A263AE /* SaleDetailRecommendCollectionCell.swift in Sources */,
 				E7BB1BFE2431D6BE00C66B48 /* MCHeaderView.swift in Sources */,
 				6F41B411242A435800CACDCE /* NoticeViewController.swift in Sources */,
 				E7BB1C0C2432090B00C66B48 /* CFTopTableViewCell.swift in Sources */,
 				E7BB1C14243353F200C66B48 /* RSBodyTableViewCell.swift in Sources */,
+				E77D8C7D2447301200A263AE /* SaleDetailRecommendCell.swift in Sources */,
+				E77D8C792445C93900A263AE /* SaleDetailNearMapCell.swift in Sources */,
+				E7E6044F243DB21B0050D540 /* DabangModel.swift in Sources */,
+				E77D8C5F243DF52B00A263AE /* BrokerageHomeInfoCell.swift in Sources */,
 				6F4DECEC242A1585008D77E5 /* SettingTableViewCell.swift in Sources */,
 				1516005524287ED40003DDCF /* SaleViewController.swift in Sources */,
+				E77D8C732443C15600A263AE /* SaleDetailSaleInfoCell.swift in Sources */,
 				E7BB1C182434801300C66B48 /* InquiryBodyTableViewCell.swift in Sources */,
 				152DD9B2242B3E2400C80E10 /* FrequentlyViewController.swift in Sources */,
 				15D9B3552431C2A900A38A76 /* MCBottomTableViewCell.swift in Sources */,
@@ -721,6 +801,7 @@
 				15D9B33D242E22EB00A38A76 /* TermsAndConditionsViewController.swift in Sources */,
 				15D9B34E2431C25600A38A76 /* AddressViewController.swift in Sources */,
 				6F41B413242A441C00CACDCE /* NoticeEmptyView.swift in Sources */,
+				E77D8C6D2443466D00A263AE /* SaleDetailViewController.swift in Sources */,
 				152DD9B6242B3EEA00C80E10 /* FrequentlyTableViewCell.swift in Sources */,
 				1516005724287EDC0003DDCF /* MoreViewController.swift in Sources */,
 				E79D81842429E8E50006029E /* RGTopTableViewCell.swift in Sources */,
@@ -730,14 +811,18 @@
 				15D9B35C2431C2BB00A38A76 /* ExplainViewController.swift in Sources */,
 				15D9B337242E226C00A38A76 /* WBottomTableViewCell.swift in Sources */,
 				1516004B242495FE0003DDCF /* Extensions.swift in Sources */,
+				E77D8C6F244348D500A263AE /* SaleDetailMainCell.swift in Sources */,
 				1516004D24285FCB0003DDCF /* SignUpViewController.swift in Sources */,
 				E7E60443243B1AC30050D540 /* FindBottomView.swift in Sources */,
 				E7BB1C0A243208A300C66B48 /* CountfloorsViewController.swift in Sources */,
 				1516004F24287E450003DDCF /* HomeViewController.swift in Sources */,
 				E7E60441243B154E0050D540 /* FindHeaderView.swift in Sources */,
 				15D9B32C242CA44500A38A76 /* SellMyRoomTableViewCell.swift in Sources */,
+				E77D8C712443B29900A263AE /* SaleDetailSectionCell.swift in Sources */,
 				15D9B346242E232300A38A76 /* AddRoomView.swift in Sources */,
+				E77D8C67243FB90500A263AE /* BrokerageHomeBottomCell.swift in Sources */,
 				6F4DECE02429EC69008D77E5 /* NoticeTopView.swift in Sources */,
+				E77D8C6B243FBF2600A263AE /* BrokerageReviewBottomCell.swift in Sources */,
 				6F41B40D242A389800CACDCE /* MarketingImfomationTableViewCell.swift in Sources */,
 				E7E6043F243B14DB0050D540 /* FindEasyRoomViewController.swift in Sources */,
 				15D9B33F242E22EB00A38A76 /* AddPotoViewController.swift in Sources */,
@@ -749,7 +834,10 @@
 				6F41B40F242A38FB00CACDCE /* MarketingImfomationView.swift in Sources */,
 				6F4DECEE242A19A6008D77E5 /* SettingModel.swift in Sources */,
 				E78AD9732438D9A20098BE6E /* FilterTradeTypeCell.swift in Sources */,
+				E77D8C77244593BA00A263AE /* SaleDetailScheduleCell.swift in Sources */,
 				1516005324287E6F0003DDCF /* MapViewController.swift in Sources */,
+				E7E6044D243DAAAC0050D540 /* BrokerageOfficeTopCell.swift in Sources */,
+				E77D8C812447416100A263AE /* SaleDetailBottomView.swift in Sources */,
 				E7E60445243B21570050D540 /* FindTitleCell.swift in Sources */,
 				15D9B32A242CA42F00A38A76 /* SellMyRoomViewController.swift in Sources */,
 				E7BB1C002431DC8200C66B48 /* SaveView.swift in Sources */,
