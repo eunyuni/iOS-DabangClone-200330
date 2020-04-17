@@ -6,11 +6,17 @@
 //  Copyright © 2020 Gitbot. All rights reserved.
 //
 
+protocol SaleTopTableViewCellDelegate: class {
+  func didTapInformationButton()
+}
+
 import UIKit
 // 메인 셀
 class SaleTopTableViewCell: UITableViewCell {
   // MARK: - Identifier
   static let identifier = "SaleTopTableViewCell"
+  
+  weak var delegate: SaleTopTableViewCellDelegate?
   // MARK: - Property
   private let layout = UICollectionViewFlowLayout().then {
     $0.scrollDirection = .horizontal
@@ -29,9 +35,9 @@ class SaleTopTableViewCell: UITableViewCell {
     $0.titleLabel?.font = .systemFont(ofSize: 16)
     $0.setTitleColor(.black, for: .normal)
   }
-  private let bottomView = UIView().then {
-    $0.backgroundColor = .lightGray
-  }
+//  private let bottomView = UIView().then {
+//    $0.backgroundColor = .lightGray
+//  }
   // MARK: - Init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -43,11 +49,12 @@ class SaleTopTableViewCell: UITableViewCell {
   
   // MARK: - Action
   @objc private func didTapButton(_ sender: UIButton){
+    delegate?.didTapInformationButton()
   }
   // MARK: - setupUI
   private func setupUI() {
     button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
-    self.contentView.addSubviews([collectionView,button, bottomView])
+    self.contentView.addSubviews([collectionView,button])
     setupConstraint()
   }
   
@@ -62,12 +69,12 @@ class SaleTopTableViewCell: UITableViewCell {
       $0.top.equalTo(collectionView.snp.bottom)
       $0.leading.trailing.equalToSuperview()
       $0.height.equalTo(SaleMainViewController.frame.height / 14)
-      $0.bottom.equalTo(bottomView.snp.top)
+      $0.bottom.equalToSuperview()
     }
-    bottomView.snp.makeConstraints {
-      $0.leading.trailing.bottom.equalToSuperview()
-      $0.height.equalTo(10)
-    }
+//    bottomView.snp.makeConstraints {
+//      $0.leading.trailing.bottom.equalToSuperview()
+//      $0.height.equalTo(10)
+//    }
   }
   
 }
