@@ -139,9 +139,7 @@ class RoomInfoCell: UITableViewCell {
         infoStackView.spacing = 5
         infoStackView.distribution = .equalSpacing
         infoStackView.alignment = .fill
-        overralContainerView.addSubview(infoStackView)
         infoStackView.snp.makeConstraints {
-            $0.top.leading.equalToSuperview().inset(15)
             $0.width.equalTo(200)
         }
         
@@ -150,7 +148,7 @@ class RoomInfoCell: UITableViewCell {
     private func configureCheckButton() {
         contentView.backgroundColor = .white
         contentView.addSubview(checkButtonToCompare)
-        checkButtonToCompare.setImage(#imageLiteral(resourceName: "unChecked").withRenderingMode(.alwaysOriginal), for: .normal)
+        checkButtonToCompare.setImage(#imageLiteral(resourceName: "unchecked").withRenderingMode(.alwaysOriginal), for: .normal)
         checkButtonToCompare.setImage(#imageLiteral(resourceName: "checked").withRenderingMode(.alwaysOriginal), for: .selected)
         checkButtonToCompare.addTarget(self, action: #selector(didTapCheckButton), for: .touchUpInside)
         checkButtonToCompare.snp.makeConstraints {
@@ -164,7 +162,6 @@ class RoomInfoCell: UITableViewCell {
         contentView.addSubview(overralContainerView)
         overralContainerView.backgroundColor = .white
         overralContainerView.clipsToBounds = true
-        overralContainerView.addSubview(roomImageView)
         overralContainerView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
@@ -176,9 +173,6 @@ class RoomInfoCell: UITableViewCell {
         roomImageView.layer.cornerRadius = 8
         roomImageView.clipsToBounds = true
         roomImageView.snp.makeConstraints {
-            $0.top.equalTo(infoStackView.snp.top)
-            $0.trailing.equalToSuperview().inset(15)
-            $0.leading.equalTo(infoStackView.snp.trailing).offset(30)
             $0.height.equalTo(100)
         }
         roomImageView.addSubview(heartButton)
@@ -191,11 +185,9 @@ class RoomInfoCell: UITableViewCell {
             $0.top.trailing.equalToSuperview().inset(5)
             $0.width.height.equalTo(30)
         }
-        heartButton.imageView?.translatesAutoresizingMaskIntoConstraints = false
-        heartButton.imageView?.topAnchor.constraint(equalTo: heartButton.topAnchor).isActive = true
-        heartButton.imageView?.leadingAnchor.constraint(equalTo: heartButton.leadingAnchor).isActive = true
-        heartButton.imageView?.trailingAnchor.constraint(equalTo: heartButton.trailingAnchor).isActive = true
-        heartButton.imageView?.bottomAnchor.constraint(equalTo: heartButton.bottomAnchor).isActive = true
+        heartButton.imageView?.snp.makeConstraints({
+            $0.top.leading.trailing.bottom.equalToSuperview()
+        })
     }
     
     private func configureTotalStackView() {

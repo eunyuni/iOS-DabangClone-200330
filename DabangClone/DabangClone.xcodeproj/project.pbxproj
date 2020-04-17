@@ -512,6 +512,7 @@
 		15315A44244857250033EA47 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				15315A4A244857250033EA47 /* FavoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -541,7 +542,6 @@
 			isa = PBXGroup;
 			children = (
 				15315A49244857250033EA47 /* FavoSelectButton.swift */,
-				15315A4A244857250033EA47 /* FavoModel.swift */,
 				15315A4B244857250033EA47 /* CompareViewAskButton.swift */,
 			);
 			path = Buttons;
