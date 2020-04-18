@@ -234,7 +234,7 @@ class RoomInfoCell: UITableViewCell {
         self.roomImageView.image = roomInfo.images.first?.imageStringToImage()
     }
     
-    // MARK: - Action Handle
+    // MARK: - Action Handler
     
     @objc private func didTapHeartButton(_ sender: UIButton) {
         print("tap")

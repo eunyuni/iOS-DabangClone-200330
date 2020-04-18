@@ -25,6 +25,7 @@ enum FavoriteData {
 
 struct DanziInfo {
     var name: String
+    var availableRoomCount: Int
 }
 
 struct BudongsanInfo {

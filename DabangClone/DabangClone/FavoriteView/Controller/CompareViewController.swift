@@ -175,6 +175,7 @@ class CompareViewController: UIViewController {
     }
     
     @objc func didTapCloseButton() {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
+//        navigationController?.popViewController(animated: true)
     }
 }

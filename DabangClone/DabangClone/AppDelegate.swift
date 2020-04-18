@@ -21,8 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let mainVC = MainTabBarViewController()
 //    let mainVC = FavoriteListViewController()
-    window?.rootViewController = UINavigationController(rootViewController: FavoriteListViewController()) 
+    window?.rootViewController = mainVC
     window?.makeKeyAndVisible()
+//    UINavigationController(rootViewController: FavoriteListViewController())
     ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     KOSession.shared()?.isAutomaticPeriodicRefresh = true
     
