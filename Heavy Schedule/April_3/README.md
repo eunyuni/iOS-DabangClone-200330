@@ -11,3 +11,6 @@
 * FavoriteView UI - 성준
 * SaleView 연결, UI수정 - 은영
 
+## 20.04.18
+* SaleView 연결, UI수정 - 은영
+  * 분양정보, 분양 세부디테일화면, 분양뉴스 연결
