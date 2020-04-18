@@ -18,7 +18,7 @@ class RoomInfoCell: UITableViewCell {
 
     // MARK: - Properties
     
-    var data: Room?
+    var data: Room!
     
     weak var delegate: RoomInfoCellDelegate?
     
@@ -191,16 +191,16 @@ class RoomInfoCell: UITableViewCell {
     }
     
     private func configureTotalStackView() {
-        let totalStackView = UIStackView(arrangedSubviews: [infoStackView, roomImageView])
-        totalStackView.axis = .horizontal
-        totalStackView.spacing = 30
-        totalStackView.alignment = .top
-        overralContainerView.addSubview(totalStackView)
-        totalStackView.snp.makeConstraints {
+        let overralStackView = UIStackView(arrangedSubviews: [infoStackView, roomImageView])
+        overralStackView.axis = .horizontal
+        overralStackView.spacing = 30
+        overralStackView.alignment = .top
+        overralContainerView.addSubview(overralStackView)
+        overralStackView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
-        totalStackView.isLayoutMarginsRelativeArrangement = true
-        totalStackView.layoutMargins = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        overralStackView.isLayoutMarginsRelativeArrangement = true
+        overralStackView.layoutMargins = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
     }
     
     private func setNotiCenter() {

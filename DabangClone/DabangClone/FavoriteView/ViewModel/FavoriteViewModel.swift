@@ -27,7 +27,8 @@ class FavoriteViewModel {
     
     init() {
         //API 사용 CurrentUser 데이터 불러와서 초기화
-        checkedRoomData = [dummyRoom, dummyRoom2, dummyRoom, dummyRoom2]
+//        checkedRoomData = [dummyRoom, dummyRoom2, dummyRoom, dummyRoom2]
+        checkedRoomData = [dummyRoom2,dummyRoom]
         markedRoomData = [dummyRoom2, dummyRoom, dummyRoom2, dummyRoom]
     }
     

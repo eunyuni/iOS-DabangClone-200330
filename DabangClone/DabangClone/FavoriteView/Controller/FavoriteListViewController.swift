@@ -71,9 +71,14 @@ class FavoriteListViewController: UIViewController {
         configureTableView()
         setConstraints()
         configureSwipeGesture()
-        setInitialCondition()
+//        setInitialCondition()
         configureRefreshControl()
         configureShowCompareViewButton()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setInitialCondition()
     }
     
     private func setNavigationBar() {
@@ -219,7 +224,7 @@ class FavoriteListViewController: UIViewController {
         guard self.roomsToCompare.count > 1 else { return }
         let compareVC = CompareViewController()
         compareVC.roomsToCompare = self.roomsToCompare
-      navigationController?.pushViewController(compareVC, animated: true)
+        navigationController?.pushViewController(compareVC, animated: true)
     }
     
     @objc private func showCompareViewButton(isCompareMode: Bool) {
@@ -262,8 +267,13 @@ class FavoriteListViewController: UIViewController {
     }
     
     private func showEmptyStateView(message: String, detail: String) {
-        if let emptyView = tableView.subviews.last as? EmptyStateView {
-            emptyView.removeFromSuperview()
+        if isInitial {
+            tableView.subviews.last?.removeFromSuperview()
+            isInitial = false
+        } else {
+            if let emptyView = tableView.subviews.last as? EmptyStateView{
+                emptyView.removeFromSuperview()
+            }
         }
         let emptyView = EmptyStateView(message: message, detail: detail)
         tableView.addSubview(emptyView)
@@ -325,7 +335,7 @@ extension FavoriteListViewController: UITableViewDataSource {
 
 extension FavoriteListViewController: CompareViewDelegate {
     func didTapCompareButton(isCompareMode: Bool) {
-        guard viewModel.checkActiveDataCount() != 0 else { print("비교할 방이 없습니다.Alert띄우기"); return }
+        guard viewModel.checkActiveDataCount() > 1 else { print("비교할 방이 없습니다.Alert띄우기"); return }
         self.isCompareMode = isCompareMode
         showCompareViewButton(isCompareMode: isCompareMode)
     }
