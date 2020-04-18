@@ -8,9 +8,16 @@
 
 import UIKit
 
+protocol SaleNewsTableViewCellDelegate: class {
+  func didTapMoreButton()
+}
+
 class SaleNewsTableViewCell: UITableViewCell {
   // MARK: - Identifier
   static let identifier = "SaleNewsTableViewCell"
+  
+  weak var delegate: SaleNewsTableViewCellDelegate?
+  
   // MARK: - Property
   private let titleLabel = UILabel().then {
     $0.text = "분양 뉴스"
@@ -55,10 +62,14 @@ class SaleNewsTableViewCell: UITableViewCell {
   }
   
   // MARK: - Action
+  @objc private func didTapButton(_ sender: UIButton){
+    delegate?.didTapMoreButton()
+  }
   
   // MARK: - setupUI
   private func setupUI() {
     self.contentView.addSubviews([titleLabel, button, leftView, rightView, firstNewsView, secondNewsView, thirdNewsView, firstLineView, secondLineView, thirdLineView])
+    button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
     setupConstraint()
   }
   

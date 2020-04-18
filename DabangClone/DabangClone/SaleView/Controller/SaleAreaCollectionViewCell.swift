@@ -34,13 +34,13 @@ class SaleAreaCollectionViewCell: UICollectionViewCell {
   
   @objc private func didTapGesture(_ sender: UITapGestureRecognizer) {
     if isactive {
-//      self.contentView.backgroundColor = .lightGray
+      self.contentView.backgroundColor = .white
       self.contentView.layer.borderColor = UIColor.black.cgColor
-      self.contentView.layer.borderWidth = 1
-    } else {
-//      self.contentView.backgroundColor = .white
-      self.contentView.layer.borderColor = UIColor.lightGray.cgColor
       self.contentView.layer.borderWidth = 0.6
+    } else {
+      self.contentView.backgroundColor = UIColor(named: "TextFieldColor")
+      self.contentView.layer.borderColor = UIColor.lightGray.cgColor
+      self.contentView.layer.borderWidth = 0.2
     }
     isactive.toggle()
   }
@@ -48,9 +48,9 @@ class SaleAreaCollectionViewCell: UICollectionViewCell {
   private func setupUI() {
     self.addSubviews([titleLabel])
     tapGesture.addTarget(self, action: #selector(didTapGesture(_:)))
-    self.contentView.layer.borderWidth = 0.6
+    self.contentView.layer.borderWidth = 0.2
     self.contentView.layer.borderColor = UIColor.lightGray.cgColor
-    self.contentView.backgroundColor = .white
+    self.contentView.backgroundColor = UIColor(named: "TextFieldColor")
     self.addGestureRecognizer(tapGesture)
     setupConstraint()
   }

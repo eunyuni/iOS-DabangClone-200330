@@ -28,6 +28,7 @@ class SaleInformationViewController: UIViewController {
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    tabBarController?.tabBar.isHidden = true
     self.view.backgroundColor = .white 
     setupUI()
   }
@@ -40,6 +41,7 @@ class SaleInformationViewController: UIViewController {
   }
   // MARK: - setupUI
   private func setupUI() {
+    self.navigationItem.title = "분양 정보"
     tableView.dataSource = self
     tableView.delegate = self
     self.tapGesture.addTarget(self, action: #selector(didTapGesture(_:)))
