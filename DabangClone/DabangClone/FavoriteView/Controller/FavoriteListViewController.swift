@@ -13,6 +13,8 @@ import RxCocoa
 
 class FavoriteListViewController: UIViewController {
     
+    // MARK: - Properties
+    
     let scrollView = UIScrollView()
     let tableView = UITableView()
     lazy var selectButtons = [recentlyCheckedRoom, recentlyCheckedDanzi, markedRoom, markedDanzi,contactedBudongsan]
@@ -63,6 +65,9 @@ class FavoriteListViewController: UIViewController {
         }
     }
     
+    
+    // MARK: - Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
@@ -71,15 +76,19 @@ class FavoriteListViewController: UIViewController {
         configureTableView()
         setConstraints()
         configureSwipeGesture()
-//        setInitialCondition()
         configureRefreshControl()
         configureShowCompareViewButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setInitialCondition()
+        if isInitial {
+           setInitialCondition()
+           isInitial = false
+        }
     }
+    
+    // MARK: - Initial Setup
     
     private func setNavigationBar() {
         title = "관심 목록"
@@ -162,14 +171,6 @@ class FavoriteListViewController: UIViewController {
         }
     }
     
-    private func resetCompareMode() {
-        isCompareMode = false
-        compareView.compareButton.isSelected = false
-        compareView.compareButton.backgroundColor = .gray
-        compareView.backgroundColor = UIColor(white: 0.9, alpha: 1)
-        compareView.noticeLabel.text = "찜한 방의 매물을 비교해보세요."
-    }
-    
     private func setInitialCondition() {
         didTapButton(tag: 0)
     }
@@ -210,6 +211,16 @@ class FavoriteListViewController: UIViewController {
             $0.leading.equalToSuperview().inset(20)
             $0.trailing.equalToSuperview().inset(20)
         }
+    }
+    
+    // MARK: - Action Handler
+    
+    private func resetCompareMode() {
+        isCompareMode = false
+        compareView.compareButton.isSelected = false
+        compareView.compareButton.backgroundColor = .gray
+        compareView.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        compareView.noticeLabel.text = "찜한 방의 매물을 비교해보세요."
     }
     
     @objc private func rightSwipeAction(_ gesture: UISwipeGestureRecognizer) {
@@ -267,19 +278,44 @@ class FavoriteListViewController: UIViewController {
     }
     
     private func showEmptyStateView(message: String, detail: String) {
-        if isInitial {
-            tableView.subviews.last?.removeFromSuperview()
-            isInitial = false
-        } else {
-            if let emptyView = tableView.subviews.last as? EmptyStateView{
-                emptyView.removeFromSuperview()
-            }
+        if let emptyView = tableView.subviews.last as? EmptyStateView{
+            emptyView.removeFromSuperview()
         }
         let emptyView = EmptyStateView(message: message, detail: detail)
         tableView.addSubview(emptyView)
         emptyView.frame = tableView.bounds
     }
 }
+
+
+
+
+    // MARK: - UITableViewDataSource
+
+extension FavoriteListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.checkActiveDataCount()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return viewModel.checkActiveDataAndSetCell(tableView, cellForRowAt: indexPath, on: self)
+    }
+}
+
+    // MARK: - UITableViewDelegate
+
+extension FavoriteListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? RoomInfoCell else {return}
+        if isCompareMode {
+            cell.isCheckButtonSelected.toggle()
+        } else {
+            // Present Room Detail VC
+        }
+    }
+}
+
+    // MARK: - Custom Delegate
 
 extension FavoriteListViewController: FavoSelectButtonDelegate {
     private func controlAtrributes(_ tag: Int) {
@@ -323,19 +359,9 @@ extension FavoriteListViewController: FavoSelectButtonDelegate {
     }
 }
 
-extension FavoriteListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.checkActiveDataCount()
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return viewModel.checkActiveDataAndSetCell(tableView, cellForRowAt: indexPath, on: self)
-    }
-}
-
 extension FavoriteListViewController: CompareViewDelegate {
     func didTapCompareButton(isCompareMode: Bool) {
-        guard viewModel.checkActiveDataCount() > 1 else { print("비교할 방이 없습니다.Alert띄우기"); return }
+        guard viewModel.checkActiveDataCount() > 1 else { print("비교할 방이 부족합니다.Alert띄우기"); return }
         self.isCompareMode = isCompareMode
         showCompareViewButton(isCompareMode: isCompareMode)
     }
@@ -354,16 +380,8 @@ extension FavoriteListViewController: RoomInfoCellDelegate {
     }
 }
 
-extension FavoriteListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? RoomInfoCell else {return}
-        if isCompareMode {
-            cell.isCheckButtonSelected.toggle()
-        } else {
-            // Present Room Detail VC
-        }
-    }
-}
+
+    // MARK: - Static Properties
 
 extension FavoriteListViewController {
     static let compareModeOn = Notification.Name(rawValue: "On")
