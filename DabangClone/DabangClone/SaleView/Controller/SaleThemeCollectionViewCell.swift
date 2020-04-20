@@ -19,15 +19,15 @@ class SaleThemeCollectionViewCell: UICollectionViewCell {
   }
   private let firstLabel = UILabel().then {
     $0.font = .systemFont(ofSize: 12)
-    $0.backgroundColor = .lightGray
+    $0.backgroundColor = UIColor(named: "TextFieldColor")
   }
   private let secondLabel = UILabel().then {
     $0.font = .systemFont(ofSize: 12)
-    $0.backgroundColor = .lightGray
+    $0.backgroundColor = UIColor(named: "TextFieldColor")
   }
   private let thirdLabel = UILabel().then {
     $0.font = .systemFont(ofSize: 12)
-    $0.backgroundColor = .lightGray
+    $0.backgroundColor = UIColor(named: "TextFieldColor")
   }
   // MARK: - Init
   override init(frame: CGRect) {

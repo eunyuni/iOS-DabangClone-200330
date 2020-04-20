@@ -14,7 +14,7 @@ class SaleAreaViewController: UIViewController {
   }
   
   private let menuView = UIView()
-  private let menuHeight = UIScreen.main.bounds.height / 1.77
+  private let menuHeight = UIScreen.main.bounds.height / 2
   private var isPresenting = false
   
   private let topLabel = UILabel().then {
@@ -61,13 +61,16 @@ class SaleAreaViewController: UIViewController {
     super.viewDidLoad()
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapGesture(_:)))
     backdropView.addGestureRecognizer(tapGesture)
+    cancelButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
     setupUI()
   }
   // MARK: - Action
   @objc private func didTapGesture(_ sender: UITapGestureRecognizer) {
     dismiss(animated: true, completion: nil)
   }
-  
+  @objc private func didTapButton(_ sender: UIButton) {
+    dismiss(animated: true, completion: nil)
+  }
   // MARK: - setupUI
   private func setupUI() {
     self.view.backgroundColor = .clear
@@ -102,7 +105,7 @@ class SaleAreaViewController: UIViewController {
     lineView.snp.makeConstraints {
       $0.top.equalTo(topLabel.snp.bottom).offset(18)
       $0.leading.trailing.equalToSuperview()
-      $0.height.equalTo(2)
+      $0.height.equalTo(1)
     }
     collectionView.snp.makeConstraints {
       $0.top.equalTo(lineView.snp.bottom)
