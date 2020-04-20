@@ -19,16 +19,18 @@ class IsThereCell: UITableViewCell {
       $0.text = ""
     }
     
-    let isThereSegmentControl = UISegmentedControl(items: ["없음", "있음"]).then {
+    lazy var isThereSegmentControl = UISegmentedControl(items: ["없음", "있음"]).then {
       $0.backgroundColor = .white
       $0.tintColor = .blue
       $0.forcedImplementBackgroundColor()
       $0.layer.borderColor = UIColor.gray.cgColor
       $0.layer.borderWidth = 1
       $0.clipsToBounds = true
+      $0.addTarget(self, action: #selector(didTapEnableSegment(_:)), for: .valueChanged)
     }
-    
-
+  
+  weak var delegate: InfoCellDelegate?
+  
       override func awakeFromNib() {
           super.awakeFromNib()
           // Initialization code
@@ -75,5 +77,13 @@ class IsThereCell: UITableViewCell {
         leftTitle.text = "\(AdditionalTitle.setTitle())"
       }
     }
+  
+  @objc private func didTapEnableSegment(_ sender: UISegmentedControl) {
+    if sender.selectedSegmentIndex == 1 && leftTitle.text == "관리비" {
+      delegate?.didTapCell(title: leftTitle.text!)
+      
+    }
+    print("segment tap")
+  }
 
   }
