@@ -28,12 +28,10 @@ class SaleThemeTableViewCell: UITableViewCell {
     //    $0.alwaysBounceHorizontal = false
     //    $0.scrollsToTop = false
     //    $0.bounces = false
-    $0.backgroundColor = .blue
+    $0.backgroundColor = UIColor(named: "PureLoginButtonColor")
     $0.register(SaleThemeCollectionViewCell.self, forCellWithReuseIdentifier: SaleThemeCollectionViewCell.identifier)
   }
-  private let bottomView = UIView().then {
-    $0.backgroundColor = .lightGray
-  }
+
   // MARK: - Init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -49,8 +47,8 @@ class SaleThemeTableViewCell: UITableViewCell {
   private func setupUI() {
     collectionView.dataSource = self
     collectionView.delegate = self
-    self.contentView.backgroundColor = .blue
-    self.contentView.addSubviews([titleLabel, collectionView, bottomView])
+    self.contentView.backgroundColor = UIColor(named: "PureLoginButtonColor")
+    self.contentView.addSubviews([titleLabel, collectionView])
     setupConstraint()
   }
   
@@ -63,12 +61,8 @@ class SaleThemeTableViewCell: UITableViewCell {
     collectionView.snp.makeConstraints {
       $0.top.equalTo(titleLabel.snp.bottom).offset(10)
       $0.leading.trailing.equalToSuperview()
-      $0.bottom.equalTo(bottomView.snp.top).offset(-26)
+      $0.bottom.equalToSuperview().offset(-26)
       $0.height.equalTo(SaleMainViewController.frame.height / 8)
-    }
-    bottomView.snp.makeConstraints {
-      $0.leading.trailing.bottom.equalToSuperview()
-      $0.height.equalTo(10)
     }
   }
 }

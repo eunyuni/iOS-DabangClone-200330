@@ -92,6 +92,8 @@ extension Options {
       imageName = "https://www.dabangapp.com/static/media/tv.476aa44b.svg"
     case .옷장:
       imageName = "https://www.dabangapp.com/static/media/closet.c5f64c5d.svg"
+    case .비데:
+      imageName = "https://www.dabangapp.com/static/media/bidet.3bc9f2e6.svg"
     default:
       break
     }
@@ -163,4 +165,32 @@ func findRoomDataFromRoomID(_ roomArr: [Room], roomID: Int) -> Room {
   }
   return room[0]
 } //방번호로 방 찾기
+
+struct ExpandableRoom {
+  let style: RoomStyle
+  var isOpen: Bool = false
+}
+
+extension ExpandableRoom {
+  func makeTitleText() -> String {
+    switch self.style {
+    case .원룸:
+      return "원룸(주택/빌라)"
+      case .투룸:
+      return "투룸(주택/빌라)"
+      case .쓰리룸:
+      return "쓰리룸(주택/빌라)"
+      case .오피스텔:
+      return "오피스텔"
+      case .아파트:
+      return "아파트"
+    default:
+      break
+    }
+  }
+}
+
+enum RoomType {
+  case 단독주택, 다가구주택, 빌라연립다세대, 상가주택, 오피스텔, 도시형생활주택, 아파트
+}
 

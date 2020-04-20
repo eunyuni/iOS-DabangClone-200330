@@ -26,7 +26,7 @@ class MainTabBarViewController: UITabBarController {
     favoriteVC.tabBarItem = UITabBarItem(title: "관심목록", image: nil, tag: 1)
     mapVC.navigationBar.isHidden = true
     mapVC.tabBarItem = UITabBarItem(title: "지도", image: nil, tag: 2)
-    saleVC.navigationBar.isHidden = true
+    saleVC.navigationBar.isHidden = false
     saleVC.tabBarItem = UITabBarItem(title: "분양", image: nil, tag: 3)
     moreVC.navigationBar.isHidden = true
     moreVC.tabBarItem = UITabBarItem(title: "더보기", image: nil, tag: 4)

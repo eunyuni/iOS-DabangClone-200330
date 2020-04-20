@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol InfoCellDelegate: class {
+  func didTapCell(title: String) -> Void
+}
+
 class InputCell: UITableViewCell {
   
   static let identifier = "InputCell"
@@ -27,6 +31,14 @@ class InputCell: UITableViewCell {
     $0.setImage(UIImage(systemName: "chevron.right"), for: .normal)
     $0.tintColor = .black
   }
+  
+  lazy var emptyButton = UIButton().then {
+    $0.isHidden = true
+    $0.addTarget(self, action: #selector(didTapInfoCell), for: .touchUpInside)
+  }
+  
+  weak var delegate: InfoCellDelegate?
+  
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -50,7 +62,7 @@ class InputCell: UITableViewCell {
   }
   
   private func setupUI() {
-    addSubviews([leftTitle, rightButton, rightChevronButton])
+    addSubviews([leftTitle, rightButton, rightChevronButton, emptyButton])
 
     setupConstraints()
   }
@@ -71,6 +83,9 @@ class InputCell: UITableViewCell {
          $0.height.equalToSuperview()
          $0.width.equalTo(100)
        }
+    emptyButton.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
   }
   
   func configure(title: BaseInfo = .빈케이스, AdditionalTitle: AdditionalInfo = .빈케이스) {
@@ -83,6 +98,13 @@ class InputCell: UITableViewCell {
       self.rightChevronButton.isHidden = true
       self.rightButton.isHidden = true
     }
+    if title == .가격 || title == .방크기 || title == .층수 {
+      emptyButton.isHidden = false
+    }
+  }
+  
+  @objc private func didTapInfoCell() {
+    delegate?.didTapCell(title: leftTitle.text ?? "wrong title")
   }
   
   

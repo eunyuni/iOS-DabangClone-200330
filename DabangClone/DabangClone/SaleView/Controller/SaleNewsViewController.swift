@@ -16,7 +16,10 @@ class SaleNewsViewController: UIViewController {
     $0.showsHorizontalScrollIndicator = false
   }
   private let selectButtons = [
-    ScrollButton(title: "전체뉴스", tag: 0),
+    ScrollButton(title: "전체뉴스", tag: 0).then{
+      $0.setTitleColor(.black, for: .normal)
+      $0.underLineView.isHidden = false
+    },
     ScrollButton(title: "정책", tag: 1),
     ScrollButton(title: "분양", tag: 2),
     ScrollButton(title: "동향", tag: 3),
@@ -37,6 +40,7 @@ class SaleNewsViewController: UIViewController {
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    tabBarController?.tabBar.isHidden = true
     setupUI()
   }
   
@@ -51,6 +55,8 @@ class SaleNewsViewController: UIViewController {
   
   // MARK: - setupUI
   private func setupUI() {
+    view.backgroundColor = .white
+    self.navigationItem.title = "뉴스"
     self.view.addSubviews([scrollView,tableView])
     selectButtons.forEach({
       $0.delegate = self
@@ -74,8 +80,9 @@ class SaleNewsViewController: UIViewController {
   
   // MARK: - setupConstraint
   private func setupConstraint() {
+    let guide = self.view.safeAreaLayoutGuide
     scrollView.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(50)
+      $0.top.equalTo(guide.snp.top)
       $0.leading.trailing.equalToSuperview()
       $0.height.equalTo(40)
     }
