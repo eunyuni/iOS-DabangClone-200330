@@ -8,8 +8,13 @@
 
 import UIKit
 // 홈 메인 검색누르는 뷰
+protocol SearchViewDelegate: class {
+  func didTapPresent()
+}
+
 class SearchView: UIView {
   // MARK: - Property
+  weak var delegate: SearchViewDelegate?
   private let view = UIView().then {
     $0.layer.borderWidth = 0.8
     $0.layer.borderColor = UIColor.blue.cgColor
@@ -38,6 +43,7 @@ class SearchView: UIView {
   // MARK: - Action
   @objc private func didTapGesture(_ sender: UITapGestureRecognizer) {
     print("didTapGesture")
+    delegate?.didTapPresent()
   }
   // MARK: - setupUI
   private func setupUI() {
