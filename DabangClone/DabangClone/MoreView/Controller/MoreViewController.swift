@@ -7,11 +7,23 @@
 //
 
 import UIKit
+import Alamofire
 
 enum MoreViewButtons {
-  case 방내놓기
   case 알림
+  case 방내놓기
+  case 내가쓴리뷰
+  case 연락한부동산
+  case 매물번호조회
   case 자주묻는질문
+  case 이벤트
+  case 공지사항
+  case 일대일문의
+  case 이용약관
+  case 개인정보처리방침
+  case 다방프로
+  case 페이스북
+  case 네이버포스트
 }
 
 class MoreViewController: UIViewController {
@@ -26,6 +38,7 @@ class MoreViewController: UIViewController {
   //MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+//    getTest()
     let moreView = MoreView(frame: view.safeAreaLayoutGuide.layoutFrame)
     moreView.delegate = self
     view.backgroundColor = .white
@@ -53,15 +66,48 @@ class MoreViewController: UIViewController {
   func presentView(_ sender: MoreViewButtons) {
     
     switch sender {
+    case .알림:
+      let vc = NoticeViewController()
+      vc.modalPresentationStyle = .fullScreen
+      self.navigationController?.pushViewController(vc, animated: true)
     case .방내놓기:
       print("잘왔음")
       let vc = RoomGuideViewController()
       vc.modalPresentationStyle = .fullScreen
       self.navigationController?.pushViewController(vc, animated: true)
-    case .알림:
+    case .이벤트:
+      print("이벤트")
+      let vc = EventViewController()
+      vc.modalPresentationStyle = .fullScreen
+      self.navigationController?.pushViewController(vc, animated: true)
+    case .공지사항:
+      print("공지사항")
       let vc = NoticeViewController()
       vc.modalPresentationStyle = .fullScreen
       self.navigationController?.pushViewController(vc, animated: true)
+    case .일대일문의:
+      print("1:1문의")
+      let vc = InquiryViewController()
+      vc.modalPresentationStyle = .fullScreen
+      self.navigationController?.pushViewController(vc, animated: true)
+    case .이용약관:
+      print("이용약관")
+      let vc = TermsAndConditionsViewController()
+      vc.modalPresentationStyle = .fullScreen
+      self.navigationController?.pushViewController(vc, animated: true)
+    case .개인정보처리방침:
+      print("개인정보처리방침")
+      let vc = PrivacyPolicyViewController()
+      vc.modalPresentationStyle = .fullScreen
+      self.navigationController?.pushViewController(vc, animated: true)
+      
+      
+      
+      //    case .내가쓴리뷰:
+      //      print("내가쓴리뷰버튼")
+      //      let vc = NoticeViewController()
+      //      vc.modalPresentationStyle = .fullScreen
+    //      self.navigationController?.pushViewController(vc, animated: true)
     case .자주묻는질문:
       print("Go to 자주묻는질문")
       let vc = FrequentlyViewController()
@@ -73,6 +119,22 @@ class MoreViewController: UIViewController {
     
   }
   
+  private func getTest() {
+    let param: Parameters =
+      ["" : "4/"]
+    let pk = 4
+    
+    let url = URL(string: "https://moonpeter.com/posts/")
+    
+    AF.request(url!, method: .get, parameters: param, encoding: URLEncoding.default, headers: .none, interceptor: .none).responseString { response in
+      
+      guard let jsonObject = try? JSONSerialization.jsonObject(with: response.data!) as? [String: Any] else { return }
+      
+        print(jsonObject)
+     
+      
+    }
+ }
 }
 
 extension MoreViewController: MoreViewDelegate {

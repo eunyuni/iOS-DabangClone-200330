@@ -19,15 +19,17 @@ class AbleSegmentCell: UITableViewCell {
     $0.text = ""
   }
   
-  let ableSegmentControl = UISegmentedControl(items: ["불가", "가능"]).then {
+  lazy var ableSegmentControl = UISegmentedControl(items: ["불가", "가능"]).then {
     $0.backgroundColor = .white
     $0.tintColor = .blue
     $0.forcedImplementBackgroundColor()
     $0.layer.borderColor = UIColor.gray.cgColor
     $0.layer.borderWidth = 1
     $0.clipsToBounds = true
+    $0.addTarget(self, action: #selector(didTapParkingSegment(_:)), for: .valueChanged)
   }
   
+  var delegate: InfoCellDelegate?
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -76,6 +78,11 @@ class AbleSegmentCell: UITableViewCell {
       leftTitle.text = "\(AdditionalTitle.setTitle())"
     }
     
+  }
+  @objc private func didTapParkingSegment(_ sender: UISegmentedControl) {
+    if sender.selectedSegmentIndex == 1 {
+    delegate?.didTapCell(title: leftTitle.text!)
+  }
   }
   
 }

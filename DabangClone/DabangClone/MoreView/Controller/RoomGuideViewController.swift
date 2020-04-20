@@ -10,7 +10,9 @@ import UIKit
 import SnapKit
 import Then
 
-class RoomGuideViewController: UIViewController {
+class RoomGuideViewController: UIViewController, RGBodyTableViewCellDelegate {
+ 
+  
   
   // MARK: -Property
   
@@ -62,6 +64,12 @@ class RoomGuideViewController: UIViewController {
       $0.trailing.equalToSuperview()
     }
   }
+  
+  func didTapButton(_ sender: UIButton) {
+     let vc = SellMyRoomViewController()
+     vc.modalPresentationStyle = .fullScreen
+     navigationController?.pushViewController(vc, animated: true)
+   }
 }
 
 
@@ -78,7 +86,8 @@ extension RoomGuideViewController: UITableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: RGTopTableViewCell.identifier, for: indexPath)
       return cell
     case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: RGBodyTableViewCell.identifier, for: indexPath)
+      let cell = tableView.dequeueReusableCell(withIdentifier: RGBodyTableViewCell.identifier, for: indexPath) as! RGBodyTableViewCell
+      cell.cellDelegate = self
       return cell
     case 2:
       let cell = tableView.dequeueReusableCell(withIdentifier: RGBottomTableViewCell.identifier, for: indexPath)

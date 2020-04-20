@@ -55,7 +55,7 @@ class MoreView: UIView {
   
   let notibutton = UIButton().then {
     $0.setImage(UIImage(named: "noticeImage"), for: .normal)
-    $0.tag = 1
+    $0.tag = 0
   }
   let notibuttonLabel = UILabel().then {
     $0.text = "알림"
@@ -65,7 +65,7 @@ class MoreView: UIView {
   
   let sellRoomButton = UIButton().then {
     $0.setImage(UIImage(named: "sellRoomImage"), for: .normal)
-    $0.tag = 0
+    $0.tag = 1
   }
   
   let sellRoomLabel = UILabel().then {
@@ -76,6 +76,7 @@ class MoreView: UIView {
   
   let myReviewButton = UIButton().then {
     $0.setImage(UIImage(named: "myReviewImage"), for: .normal)
+    $0.tag = 2
   }
   
   let myReviewLabel = UILabel().then {
@@ -86,6 +87,7 @@ class MoreView: UIView {
   
   let callMarketButton = UIButton().then {
     $0.setImage(UIImage(named: "contactedMarketImage"), for: .normal)
+    $0.tag = 3
   }
   
   let callMarketLabel = UILabel().then {
@@ -113,6 +115,7 @@ class MoreView: UIView {
     $0.setTitle("매물번호 조회", for: .normal)
     $0.titleLabel?.font = UIFont.systemFont(ofSize: 19, weight: .regular)
     $0.setTitleColor(.black, for: .normal)
+    $0.tag = 4
   }
   let frequentlyQuestionsButton = UIButton().then {
     $0.setTitle("자주 묻는 질문", for: .normal)
@@ -126,30 +129,36 @@ class MoreView: UIView {
     $0.setTitle("이벤트", for: .normal)
     $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
     $0.setTitleColor(.black, for: .normal)
+    $0.tag = 6
   }
   
   let noticeButton = UIButton().then {
     $0.setTitle("공지사항", for: .normal)
     $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
     $0.setTitleColor(.black, for: .normal)
+    $0.tag = 7
   }
   
   let oneVsOneQuestionButton = UIButton().then {
     $0.setTitle("1:1문의", for: .normal)
     $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
     $0.setTitleColor(.black, for: .normal)
+    $0.tag = 8
   }
   
   let termsButton = UIButton().then {
     $0.setTitle("이용약관", for: .normal)
     $0.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
     $0.setTitleColor(.gray, for: .normal)
+    $0.tag = 9
   }
   
   let privacyButton = UIButton().then {
     $0.setTitle("개인정보처리방침", for: .normal)
     $0.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .bold)
     $0.setTitleColor(.gray, for: .normal)
+    $0.tag = 10
+
   }
   
   let graybezelThree = UIView().then {
@@ -165,12 +174,15 @@ class MoreView: UIView {
   
   let dabangProImageButton = UIButton().then {
     $0.setImage(UIImage(named: "dabangProImage"), for: .normal)
+    $0.tag = 11
   }
   
   let dabangProLabelButton = UIButton().then {
     $0.setTitle("다방프로", for: .normal)
     $0.titleLabel?.font = UIFont.systemFont(ofSize: 13.5, weight: .light)
     $0.setTitleColor(.gray, for: .normal)
+    $0.tag = 11
+
   }
   
   let dabangSnsLabel = UILabel().then {
@@ -181,22 +193,27 @@ class MoreView: UIView {
   
   let dabangFacebookImageButton = UIButton().then {
     $0.setImage(UIImage(named: "facebookImage"), for: .normal)
+    $0.tag = 12
   }
   
   let dabangFacebookLabelButton = UIButton().then {
     $0.setTitle("페이스북", for: .normal)
     $0.setTitleColor(.gray, for: .normal)
     $0.titleLabel?.font = UIFont.systemFont(ofSize: 13.5, weight: .light)
+    $0.tag = 12
   }
   
   let dabangNaverImageButton = UIButton().then {
     $0.setImage(UIImage(named: "naverButtonImage"), for: .normal)
+    $0.tag = 13
   }
   
   let dabangNaverLabelButton = UIButton().then {
     $0.setTitle("네이버포스트", for: .normal)
     $0.setTitleColor(.gray, for: .normal)
     $0.titleLabel?.font = UIFont.systemFont(ofSize: 13.5, weight: .light)
+    $0.tag = 13
+
   }
   
   let lowerGrayView = UIView().then {
@@ -232,6 +249,9 @@ class MoreView: UIView {
     sellRoomButton.addTarget(self, action: #selector(didTapPresentingButton(_:)), for: .touchUpInside)
     notibutton.addTarget(self, action: #selector(didTapPresentingButton(_:)), for: .touchUpInside)
     frequentlyQuestionsButton.addTarget(self, action: #selector(didTapPresentingButton(_:)), for: .touchUpInside)
+    [myReviewButton, callMarketButton, searchRoomNumberButton, eventButton, noticeButton, oneVsOneQuestionButton, termsButton, privacyButton, dabangProImageButton, dabangProLabelButton, dabangFacebookImageButton, dabangFacebookLabelButton, dabangNaverImageButton, dabangNaverLabelButton].forEach {
+      $0.addTarget(self, action: #selector(didTapPresentingButton(_:)), for: .touchUpInside)
+    }
     
     contentView.addSubviews([userNameLabel, userEmailLabel, fixInfoButton, profilePhotoImageView, addProfilePhotoImageButton, notibutton, notibuttonLabel, sellRoomButton, sellRoomLabel, myReviewButton, myReviewLabel, callMarketButton, callMarketLabel, graybezel, searchRoomNumberButton, frequentlyQuestionsButton, eventButton, noticeButton, oneVsOneQuestionButton, graybezelTwo, termsButton, privacyButton, graybezelVertical, graybezelThree, familyAppLabel, dabangProImageButton, dabangProLabelButton, dabangSnsLabel, dabangFacebookImageButton, dabangFacebookLabelButton, dabangNaverImageButton, dabangNaverLabelButton, lowerGrayView, csTextLabel])
     
@@ -451,13 +471,37 @@ class MoreView: UIView {
   @objc private func didTapPresentingButton(_ sender: UIButton) {
     print("didtap")
     switch sender.tag {
-    case 0:
+    case 1:
       delegate?.didTapSellMyRoomButton(MoreViewButtons.방내놓기)
       print("delegate working")
-    case 1:
+    case 0:
       delegate?.didTapSellMyRoomButton(MoreViewButtons.알림)
+    case 2:
+      delegate?.didTapSellMyRoomButton(MoreViewButtons.내가쓴리뷰)
+    case 3:
+      delegate?.didTapSellMyRoomButton(MoreViewButtons.연락한부동산)
+    case 4:
+      delegate?.didTapSellMyRoomButton(MoreViewButtons.매물번호조회)
     case 5:
       delegate?.didTapSellMyRoomButton(MoreViewButtons.자주묻는질문)
+    case 6:
+      delegate?.didTapSellMyRoomButton(MoreViewButtons.이벤트)
+      print("이벤트 tap")
+      case 7:
+      delegate?.didTapSellMyRoomButton(MoreViewButtons.공지사항)
+      case 8:
+      delegate?.didTapSellMyRoomButton(MoreViewButtons.일대일문의)
+    case 9:
+      delegate?.didTapSellMyRoomButton(MoreViewButtons.이용약관)
+      case 10:
+      delegate?.didTapSellMyRoomButton(MoreViewButtons.개인정보처리방침)
+    case 11:
+      delegate?.didTapSellMyRoomButton(MoreViewButtons.다방프로)
+      case 12:
+      delegate?.didTapSellMyRoomButton(MoreViewButtons.페이스북)
+      case 13:
+      delegate?.didTapSellMyRoomButton(MoreViewButtons.네이버포스트)
+      
     default:
       break
     }

@@ -188,7 +188,7 @@ class RoomInfoCell: UITableViewCell {
     
     private func configureHeartButton() {
         heartButton.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview().inset(5)
+          $0.top.trailing.equalToSuperview().inset(5)
             $0.width.height.equalTo(30)
         }
         heartButton.imageView?.translatesAutoresizingMaskIntoConstraints = false
@@ -196,6 +196,8 @@ class RoomInfoCell: UITableViewCell {
         heartButton.imageView?.leadingAnchor.constraint(equalTo: heartButton.leadingAnchor).isActive = true
         heartButton.imageView?.trailingAnchor.constraint(equalTo: heartButton.trailingAnchor).isActive = true
         heartButton.imageView?.bottomAnchor.constraint(equalTo: heartButton.bottomAnchor).isActive = true
+      
+      
     }
     
     private func configureTotalStackView() {
