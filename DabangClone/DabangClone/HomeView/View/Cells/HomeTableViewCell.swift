@@ -21,17 +21,22 @@ class HomeTableViewCell: UITableViewCell {
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
     $0.dataSource = self
     $0.delegate = self
-//    $0.isPagingEnabled = true
+    $0.backgroundColor = .white
+    //    $0.isPagingEnabled = true
     //    $0.alwaysBounceHorizontal = false
     //    $0.scrollsToTop = false
-//    $0.bounces = false
+    //    $0.bounces = false
     $0.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.identifier)
+    $0.register(HomeInterestCollectionViewCell.self, forCellWithReuseIdentifier: HomeInterestCollectionViewCell.identifier)
+    $0.register(HomeSaleCollectionViewCell.self, forCellWithReuseIdentifier: HomeSaleCollectionViewCell.identifier)
+    $0.register(HomeRecommendedCollectionViewCell.self, forCellWithReuseIdentifier: HomeRecommendedCollectionViewCell.identifier)
   }
   
   private let button = UIButton().then {
     $0.isHidden = true
     $0.backgroundColor = .red
   }
+  private var indexPath: IndexPath!
   // MARK: - Init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -42,7 +47,7 @@ class HomeTableViewCell: UITableViewCell {
   }
   
   // MARK: - Action
-  func configue(data: HomeData) {
+  func configue(data: HomeData, indexPath: IndexPath) {
     switch data.homeCellType {
     case .관심지역:
       titleLabel.text = data.homeInfo.setTitle()
@@ -55,6 +60,7 @@ class HomeTableViewCell: UITableViewCell {
     case .추천콘텐츠:
       titleLabel.text = data.homeInfo.setTitle()
     }
+    self.indexPath = indexPath
   }
   
   @objc private func didTapButton(_sender : UIButton) {
@@ -97,15 +103,33 @@ extension HomeTableViewCell: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifier, for: indexPath ) as! HomeCollectionViewCell
-    cell.backgroundColor = .red
-    return cell
+    switch self.indexPath.row {
+    case 0:
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeInterestCollectionViewCell.identifier, for: indexPath ) as! HomeInterestCollectionViewCell
+      return cell
+    case 1:
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeInterestCollectionViewCell.identifier, for: indexPath ) as! HomeInterestCollectionViewCell
+      return cell
+    case 2:
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeSaleCollectionViewCell.identifier, for: indexPath ) as! HomeSaleCollectionViewCell
+      return cell
+    case 3:
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeRecommendedCollectionViewCell.identifier, for: indexPath ) as! HomeRecommendedCollectionViewCell
+      return cell
+    default:
+      return UICollectionViewCell()
+    }
+    
   }
 }
 
 extension HomeTableViewCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: collectionView.frame.width * 3 / 5, height: collectionView.frame.height - 20)
+    if self.indexPath.row == 3 {
+      return CGSize(width: collectionView.frame.width / 3, height: collectionView.frame.height - 20)
+    } else {
+      return CGSize(width: collectionView.frame.width * 3 / 5, height: collectionView.frame.height - 20)
+    }
   }
   // 위아래 패딩
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

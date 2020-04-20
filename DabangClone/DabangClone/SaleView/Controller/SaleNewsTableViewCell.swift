@@ -8,9 +8,16 @@
 
 import UIKit
 
+protocol SaleNewsTableViewCellDelegate: class {
+  func didTapMoreButton()
+}
+
 class SaleNewsTableViewCell: UITableViewCell {
   // MARK: - Identifier
   static let identifier = "SaleNewsTableViewCell"
+  
+  weak var delegate: SaleNewsTableViewCellDelegate?
+  
   // MARK: - Property
   private let titleLabel = UILabel().then {
     $0.text = "분양 뉴스"
@@ -37,16 +44,13 @@ class SaleNewsTableViewCell: UITableViewCell {
     $0.configue(title: "정책", detail: "서울 절반이 집값 '마이너스'... 14개 매매가 하락")
   }
   private let firstLineView = UIView().then {
-    $0.backgroundColor = .lightGray
+    $0.backgroundColor = UIColor(named: "TextFieldColor")
   }
   private let secondLineView = UIView().then {
-    $0.backgroundColor = .lightGray
+    $0.backgroundColor = UIColor(named: "TextFieldColor")
   }
   private let thirdLineView = UIView().then {
-    $0.backgroundColor = .lightGray
-  }
-  private let bottomView = UIView().then {
-    $0.backgroundColor = .lightGray
+    $0.backgroundColor = UIColor(named: "TextFieldColor")
   }
   // MARK: - Init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -58,10 +62,14 @@ class SaleNewsTableViewCell: UITableViewCell {
   }
   
   // MARK: - Action
+  @objc private func didTapButton(_ sender: UIButton){
+    delegate?.didTapMoreButton()
+  }
   
   // MARK: - setupUI
   private func setupUI() {
-    self.contentView.addSubviews([titleLabel, button, leftView, rightView, firstNewsView, secondNewsView, thirdNewsView, bottomView, firstLineView, secondLineView, thirdLineView])
+    self.contentView.addSubviews([titleLabel, button, leftView, rightView, firstNewsView, secondNewsView, thirdNewsView, firstLineView, secondLineView, thirdLineView])
+    button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
     setupConstraint()
   }
   
@@ -116,11 +124,7 @@ class SaleNewsTableViewCell: UITableViewCell {
       $0.top.equalTo(thirdLineView.snp.bottom)
       $0.leading.trailing.equalToSuperview().inset(15)
       $0.height.equalTo(40)
-      $0.bottom.equalTo(bottomView.snp.top)
-    }
-    bottomView.snp.makeConstraints {
-      $0.leading.trailing.bottom.equalToSuperview()
-      $0.height.equalTo(10)
+      $0.bottom.equalToSuperview()
     }
   }
   

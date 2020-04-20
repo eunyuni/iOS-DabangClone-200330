@@ -24,7 +24,7 @@ class AddressSearchViewController: UIViewController , WKScriptMessageHandler {
     super.viewDidLoad()
     
     guard
-      let url = URL(string: "https://trilliwon.github.io/postcode/"),
+      let url = URL(string: "https://dukdamn.github.io/postcode/"),
       let webView = webView
       else { return }
     
