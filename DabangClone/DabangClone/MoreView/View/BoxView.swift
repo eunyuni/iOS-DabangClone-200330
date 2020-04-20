@@ -45,9 +45,9 @@ class BoxView: UIView {
     $0.layer.borderWidth = 1
     $0.layer.borderColor = UIColor.gray.cgColor
   }
-  
-  
-  
+  lazy var emptyButton = UIButton().then {
+    $0.isHidden = true
+  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)

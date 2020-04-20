@@ -38,6 +38,11 @@
 		15315A63244857250033EA47 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A54244857250033EA47 /* EmptyStateView.swift */; };
 		15315A66244857680033EA47 /* BudongsanInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A64244857670033EA47 /* BudongsanInfoCell.swift */; };
 		15315A67244857680033EA47 /* RoomInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A65244857680033EA47 /* RoomInfoCell.swift */; };
+		155B8555244C7EEC009AC6AF /* ThreeRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155B8550244C7EE9009AC6AF /* ThreeRoomTableViewCell.swift */; };
+		155B8556244C7EEC009AC6AF /* OfficeTelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155B8551244C7EEA009AC6AF /* OfficeTelTableViewCell.swift */; };
+		155B8557244C7EEC009AC6AF /* ApartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155B8552244C7EEA009AC6AF /* ApartTableViewCell.swift */; };
+		155B8558244C7EEC009AC6AF /* OneRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155B8553244C7EEB009AC6AF /* OneRoomTableViewCell.swift */; };
+		155B8559244C7EEC009AC6AF /* TwoRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155B8554244C7EEC009AC6AF /* TwoRoomTableViewCell.swift */; };
 		156B616224345DAD00054FE9 /* AdditionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156B616124345DAD00054FE9 /* AdditionalViewController.swift */; };
 		156B616424345DC400054FE9 /* AdditionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156B616324345DC400054FE9 /* AdditionalView.swift */; };
 		156B616624345E0100054FE9 /* BoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156B616524345E0100054FE9 /* BoxView.swift */; };
@@ -242,6 +247,11 @@
 		15315A54244857250033EA47 /* EmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		15315A64244857670033EA47 /* BudongsanInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudongsanInfoCell.swift; sourceTree = "<group>"; };
 		15315A65244857680033EA47 /* RoomInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomInfoCell.swift; sourceTree = "<group>"; };
+		155B8550244C7EE9009AC6AF /* ThreeRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeRoomTableViewCell.swift; sourceTree = "<group>"; };
+		155B8551244C7EEA009AC6AF /* OfficeTelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficeTelTableViewCell.swift; sourceTree = "<group>"; };
+		155B8552244C7EEA009AC6AF /* ApartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApartTableViewCell.swift; sourceTree = "<group>"; };
+		155B8553244C7EEB009AC6AF /* OneRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneRoomTableViewCell.swift; sourceTree = "<group>"; };
+		155B8554244C7EEC009AC6AF /* TwoRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoRoomTableViewCell.swift; sourceTree = "<group>"; };
 		156B616124345DAD00054FE9 /* AdditionalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalViewController.swift; sourceTree = "<group>"; };
 		156B616324345DC400054FE9 /* AdditionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalView.swift; sourceTree = "<group>"; };
 		156B616524345E0100054FE9 /* BoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxView.swift; sourceTree = "<group>"; };
@@ -797,6 +807,11 @@
 				E79D81862429EA340006029E /* RGBodyTableViewCell.swift */,
 				E79D81882429EA830006029E /* RGBottomTableViewCell.swift */,
 				E7ACD433242B392F00C5D097 /* PMTopTableViewCell.swift */,
+				155B8552244C7EEA009AC6AF /* ApartTableViewCell.swift */,
+				155B8551244C7EEA009AC6AF /* OfficeTelTableViewCell.swift */,
+				155B8553244C7EEB009AC6AF /* OneRoomTableViewCell.swift */,
+				155B8550244C7EE9009AC6AF /* ThreeRoomTableViewCell.swift */,
+				155B8554244C7EEC009AC6AF /* TwoRoomTableViewCell.swift */,
 				E7BB1BE9242B58A000C66B48 /* PMBodyTableViewCell.swift */,
 				E7BB1BEB242B6F1500C66B48 /* PMBottomTableViewCell.swift */,
 				6F4DECEB242A1585008D77E5 /* SettingTableViewCell.swift */,
@@ -1060,10 +1075,12 @@
 				6F41B40B242A383000CACDCE /* MarketingImfomationViewController.swift in Sources */,
 				158473EB243602DB00C49FC1 /* ApartmentAddInfoViewController.swift in Sources */,
 				15D9B3582431C2B600A38A76 /* ExplainView.swift in Sources */,
+				155B8558244C7EEC009AC6AF /* OneRoomTableViewCell.swift in Sources */,
 				6F389E74244855DF00A440A4 /* HomeCollectionViewCell.swift in Sources */,
 				156B616424345DC400054FE9 /* AdditionalView.swift in Sources */,
 				15AB31222445DF5F002AC5B8 /* CostInfoStackView.swift in Sources */,
 				15315A5D244857250033EA47 /* CompareViewAskButton.swift in Sources */,
+				155B8559244C7EEC009AC6AF /* TwoRoomTableViewCell.swift in Sources */,
 				E7BB1C082431F9B600C66B48 /* PriceBottomTableViewCell.swift in Sources */,
 				E78AD96F2438D0EC0098BE6E /* FilterTwoButtonView.swift in Sources */,
 				6F389E4624484D8E00A440A4 /* HomeTopTableViewCell.swift in Sources */,
@@ -1089,6 +1106,7 @@
 				1516002F24247BA20003DDCF /* AppDelegate.swift in Sources */,
 				6F389E4224484C2F00A440A4 /* OptionCollectionViewCell.swift in Sources */,
 				157C4E81243C5778008559FD /* MainRoomCollectionViewCell.swift in Sources */,
+				155B8557244C7EEC009AC6AF /* ApartTableViewCell.swift in Sources */,
 				E78AD969243727130098BE6E /* Padding.swift in Sources */,
 				E77D8C63243FA59600A263AE /* BrokerageReviewTapCell.swift in Sources */,
 				E7BB1C12243350A300C66B48 /* RSTopTableViewCell.swift in Sources */,
@@ -1138,6 +1156,7 @@
 				15D9B3552431C2A900A38A76 /* MCBottomTableViewCell.swift in Sources */,
 				156B616624345E0100054FE9 /* BoxView.swift in Sources */,
 				6F389E34244849B000A440A4 /* AddressApartViewController.swift in Sources */,
+				155B8556244C7EEC009AC6AF /* OfficeTelTableViewCell.swift in Sources */,
 				6F389E7C2448574200A440A4 /* SaleAreaViewController.swift in Sources */,
 				15D9B342242E230800A38A76 /* AddRoomCollectionViewCell.swift in Sources */,
 				157C4E77243A0566008559FD /* MainRoomViewController.swift in Sources */,
@@ -1176,6 +1195,7 @@
 				E7BB1C0A243208A300C66B48 /* CountfloorsViewController.swift in Sources */,
 				1516004F24287E450003DDCF /* HomeViewController.swift in Sources */,
 				15315A67244857680033EA47 /* RoomInfoCell.swift in Sources */,
+				155B8555244C7EEC009AC6AF /* ThreeRoomTableViewCell.swift in Sources */,
 				E7E60441243B154E0050D540 /* FindHeaderView.swift in Sources */,
 				15D9B32C242CA44500A38A76 /* SellMyRoomTableViewCell.swift in Sources */,
 				E77D8C712443B29900A263AE /* SaleDetailSectionCell.swift in Sources */,

@@ -23,12 +23,13 @@ class AddressViewController: UIViewController {
     $0.textAlignment = .center
   }
   
-  let findAddressButton = UIButton().then {
+  lazy var findAddressButton = UIButton().then {
     $0.layer.borderWidth = 1
     $0.layer.borderColor = UIColor.gray.cgColor
     $0.layer.cornerRadius = 2
     $0.setTitle("주소 찾기", for: .normal)
     $0.setTitleColor(.black, for: .normal)
+    $0.addTarget(self, action: #selector(didTapFindAddressButton), for: .touchUpInside)
   }
   
   let bottomLable = UILabel().then {
@@ -77,7 +78,11 @@ class AddressViewController: UIViewController {
   }
   
   //MARK: - Action
-  
+  @objc private func didTapFindAddressButton() {
+    let vc = AddressSearchViewController()
+    vc.modalPresentationStyle = .fullScreen
+    navigationController?.pushViewController(vc, animated: true)
+  }
   
     
 

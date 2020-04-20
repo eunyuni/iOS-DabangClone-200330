@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol RGBodyTableViewCellDelegate {
+  func didTapButton(_ sender: UIButton)
+}
+
 class RGBodyTableViewCell: UITableViewCell {
   
   // MARK: -Identifier
@@ -51,6 +55,8 @@ class RGBodyTableViewCell: UITableViewCell {
     $0.font = UIFont.systemFont(ofSize: 12, weight: .light)
   }
   
+  var cellDelegate: RGBodyTableViewCellDelegate?
+  
   // MARK: -init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -63,11 +69,15 @@ class RGBodyTableViewCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
+  @objc private func didTapButton(_ sender: UIButton) {
+    cellDelegate?.didTapButton(sender)
+  }
+  
   
   // MARK: -setupUI
   
   private func setupUI() {
-    
+    roomStartButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
     contentView.addSubviews([
     firstLine,
     secondLine,

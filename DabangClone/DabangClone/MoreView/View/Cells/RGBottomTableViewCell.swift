@@ -17,10 +17,12 @@ class RGBottomTableViewCell: UITableViewCell {
   private let dabangLogoImage = UIImageView().then {
     $0.image = UIImage(named: "roomGuideDabangLogo")
   }
+  
   private let explanationLabel1 = UILabel().then {
     $0.text = "집주인님~ 지금도 늦지 않았어요."
     $0.font = UIFont.systemFont(ofSize: 14, weight: .light)
   }
+  
   private let explanationLabel2 = UILabel().then {
     $0.text = "더 많은 매물등록과 매매를 한번에 하세요!"
     $0.font = UIFont.systemFont(ofSize: 14, weight: .light)
