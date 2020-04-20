@@ -15,9 +15,12 @@ class AddRoomTitleView: UIView {
   //MARK: - Property
   private let titleLabel = UILabel().then {
     $0.textColor = #colorLiteral(red: 0.3999670744, green: 0.4000185132, blue: 0.3999494314, alpha: 1)
+    $0.font = .systemFont(ofSize: 15)
   }
   private let detailLabel = UILabel().then {
     $0.text = "입력하세요"
+    $0.font = .systemFont(ofSize: 13)
+    $0.textColor = #colorLiteral(red: 0.6234803796, green: 0.6235571504, blue: 0.6234542131, alpha: 1)
   }
   private let leftImageView = UIImageView()
   private let rightImageView = UIImageView().then {
