@@ -150,8 +150,8 @@ class RoomInfoCell: UITableViewCell {
     private func configureCheckButton() {
         contentView.backgroundColor = .white
         contentView.addSubview(checkButtonToCompare)
-        checkButtonToCompare.setImage(#imageLiteral(resourceName: "unChecked").withRenderingMode(.alwaysOriginal), for: .normal)
-        checkButtonToCompare.setImage(#imageLiteral(resourceName: "checked").withRenderingMode(.alwaysOriginal), for: .selected)
+//        checkButtonToCompare.setImage(#imageLiteral(resourceName: "unChecked").withRenderingMode(.alwaysOriginal), for: .normal)
+//        checkButtonToCompare.setImage(#imageLiteral(resourceName: "checked").withRenderingMode(.alwaysOriginal), for: .selected)
         checkButtonToCompare.addTarget(self, action: #selector(didTapCheckButton), for: .touchUpInside)
         checkButtonToCompare.snp.makeConstraints {
             $0.centerY.equalToSuperview()
