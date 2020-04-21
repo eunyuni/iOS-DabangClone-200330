@@ -13,6 +13,8 @@ import RxCocoa
 
 class FavoriteListViewController: UIViewController {
     
+    // MARK: - Properties
+    
     let scrollView = UIScrollView()
     let tableView = UITableView()
     lazy var selectButtons = [recentlyCheckedRoom, recentlyCheckedDanzi, markedRoom, markedDanzi,contactedBudongsan]
@@ -39,6 +41,11 @@ class FavoriteListViewController: UIViewController {
                 resetCompareMode()
                 showCompareViewButton(isCompareMode: false)
             }
+            if currentTag == 1 || currentTag == 3 {
+                tableView.separatorStyle = .none
+            } else {
+                tableView.separatorStyle = .singleLine
+            }
         }
     }
     
@@ -63,6 +70,9 @@ class FavoriteListViewController: UIViewController {
         }
     }
     
+    
+    // MARK: - Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
@@ -71,10 +81,19 @@ class FavoriteListViewController: UIViewController {
         configureTableView()
         setConstraints()
         configureSwipeGesture()
-        setInitialCondition()
         configureRefreshControl()
         configureShowCompareViewButton()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if isInitial {
+           setInitialCondition()
+           isInitial = false
+        }
+    }
+    
+    // MARK: - Initial Setup
     
     private func setNavigationBar() {
         title = "관심 목록"
@@ -124,6 +143,7 @@ class FavoriteListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = true
+        tableView.tableFooterView = UIView(frame: .zero)
         tableView.register(RoomInfoCell.self, forCellReuseIdentifier: RoomInfoCell.identifier)
         tableView.register(DanziInfoCell.self, forCellReuseIdentifier: DanziInfoCell.identifier)
         tableView.register(BudongsanInfoCell.self, forCellReuseIdentifier: BudongsanInfoCell.identifier)
@@ -155,14 +175,6 @@ class FavoriteListViewController: UIViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             $0.height.equalTo(50)
         }
-    }
-    
-    private func resetCompareMode() {
-        isCompareMode = false
-        compareView.compareButton.isSelected = false
-        compareView.compareButton.backgroundColor = .gray
-        compareView.backgroundColor = UIColor(white: 0.9, alpha: 1)
-        compareView.noticeLabel.text = "찜한 방의 매물을 비교해보세요."
     }
     
     private func setInitialCondition() {
@@ -207,6 +219,16 @@ class FavoriteListViewController: UIViewController {
         }
     }
     
+    // MARK: - Action Handler
+    
+    private func resetCompareMode() {
+        isCompareMode = false
+        compareView.compareButton.isSelected = false
+        compareView.compareButton.backgroundColor = .gray
+        compareView.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        compareView.noticeLabel.text = "찜한 방의 매물을 비교해보세요."
+    }
+    
     @objc private func rightSwipeAction(_ gesture: UISwipeGestureRecognizer) {
         didTapButton(tag: max(currentTag - 1, 0))
     }
@@ -219,7 +241,10 @@ class FavoriteListViewController: UIViewController {
         guard self.roomsToCompare.count > 1 else { return }
         let compareVC = CompareViewController()
         compareVC.roomsToCompare = self.roomsToCompare
-      navigationController?.pushViewController(compareVC, animated: true)
+        let navi = UINavigationController(rootViewController: compareVC)
+        navi.modalPresentationStyle = .overFullScreen
+        present(navi, animated: true)
+//        navigationController?.pushViewController(compareVC, animated: true)
     }
     
     @objc private func showCompareViewButton(isCompareMode: Bool) {
@@ -262,7 +287,7 @@ class FavoriteListViewController: UIViewController {
     }
     
     private func showEmptyStateView(message: String, detail: String) {
-        if let emptyView = tableView.subviews.last as? EmptyStateView {
+        if let emptyView = tableView.subviews.last as? EmptyStateView{
             emptyView.removeFromSuperview()
         }
         let emptyView = EmptyStateView(message: message, detail: detail)
@@ -270,6 +295,36 @@ class FavoriteListViewController: UIViewController {
         emptyView.frame = tableView.bounds
     }
 }
+
+
+
+
+    // MARK: - UITableViewDataSource
+
+extension FavoriteListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.checkActiveDataCount()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return viewModel.checkActiveDataAndSetCell(tableView, cellForRowAt: indexPath, on: self)
+    }
+}
+
+    // MARK: - UITableViewDelegate
+
+extension FavoriteListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? RoomInfoCell else {return}
+        if isCompareMode {
+            cell.isCheckButtonSelected.toggle()
+        } else {
+            // Present Room Detail VC
+        }
+    }
+}
+
+    // MARK: - Custom Delegate
 
 extension FavoriteListViewController: FavoSelectButtonDelegate {
     private func controlAtrributes(_ tag: Int) {
@@ -313,19 +368,9 @@ extension FavoriteListViewController: FavoSelectButtonDelegate {
     }
 }
 
-extension FavoriteListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.checkActiveDataCount()
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return viewModel.checkActiveDataAndSetCell(tableView, cellForRowAt: indexPath, on: self)
-    }
-}
-
 extension FavoriteListViewController: CompareViewDelegate {
     func didTapCompareButton(isCompareMode: Bool) {
-        guard viewModel.checkActiveDataCount() != 0 else { print("비교할 방이 없습니다.Alert띄우기"); return }
+        guard viewModel.checkActiveDataCount() > 1 else { print("비교할 방이 부족합니다.Alert띄우기"); return }
         self.isCompareMode = isCompareMode
         showCompareViewButton(isCompareMode: isCompareMode)
     }
@@ -344,16 +389,8 @@ extension FavoriteListViewController: RoomInfoCellDelegate {
     }
 }
 
-extension FavoriteListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? RoomInfoCell else {return}
-        if isCompareMode {
-            cell.isCheckButtonSelected.toggle()
-        } else {
-            // Present Room Detail VC
-        }
-    }
-}
+
+    // MARK: - Static Properties
 
 extension FavoriteListViewController {
     static let compareModeOn = Notification.Name(rawValue: "On")

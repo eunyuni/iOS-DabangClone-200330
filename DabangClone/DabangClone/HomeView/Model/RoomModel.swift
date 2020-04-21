@@ -155,7 +155,7 @@ let dummyRoomImages = [RoomImage(image: "https://d1774jszgerdmk.cloudfront.net/1
                        RoomImage(image: "https://d1774jszgerdmk.cloudfront.net/1024/a09271e3-c794-431c-ba2d-fcc002e69d7a"),
                        RoomImage(image: "https://d1774jszgerdmk.cloudfront.net/1024/3fd9b980-b76c-4d2e-9c7d-99e21d8cdfa1")]
 
-let dummyRoom = Room(roomID: 1, images: dummyRoomImages, location: "동작구 사당동 307-11", baseInfo: dummyBaseInfo, addInfo: dummyAddInfo, roomScore: 83.5, detailExplain: "해가 잘 들어옵니다./n사당역에서 걸어서 10분거리에 위치한 복층 1.5룸입니다/n많이 연락 주세요", brokerageOffice: dummyBrokerageOffice)
+let dummyRoom = Room(roomID: 1, images: dummyRoomImages, location: "동작구 사당동 307-11", baseInfo: dummyBaseInfo, addInfo: dummyAddInfo, roomScore: 83.5, detailExplain: "사당역에서 걸어서 10분거리에 위치한 복층 1.5룸입니다/n많이 연락 주세요", brokerageOffice: dummyBrokerageOffice)
 let dummyRoom2 = Room(roomID: 2, images: dummyRoomImages, location: "동작구 사당동 307-11", baseInfo: dummyBaseInfo, addInfo: dummyAddInfo, roomScore: 83.5, detailExplain: "해가 잘 들어옵니다.사당역에서 걸어서 10분거리에 위치한 복층 1.5룸입니다.", brokerageOffice: dummyBrokerageOffice)
 var rooms = [dummyRoom]
 

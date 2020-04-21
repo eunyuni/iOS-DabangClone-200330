@@ -11,11 +11,15 @@ import SnapKit
 
 class CompareViewController: UIViewController {
 
+    // MARK: - Peroperties
+    
     let noticeView = UIView()
     let noticeLabel = UILabel()
     
     var roomsToCompare: [Int : Room]!
-    var compareKeys = [Int]()
+    
+    var compareValues = [Room]()
+    lazy var compareValuesCount = self.compareValues.count
     
     let overralScrollView = UIScrollView()
     let detailScrollView = UIScrollView()
@@ -24,18 +28,26 @@ class CompareViewController: UIViewController {
     var askButton2 = CompareViewAskButton()
     var askButton3 = CompareViewAskButton()
     
+    
+    // MARK: - Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
+        makeCompareValuesArrayUsingDictValues()
         configureNoticePart()
         configureScrollView()
-        configureHeaderViews()
-        configureDetailViews()
+        configureHeaders()
+        configureDetails()
         configureAskButtons()
     }
     
+    
+    // MARK: - Initial Setup
+    
     private func setNavigationBar() {
         title = "비교하기"
+        view.backgroundColor = .white
         let leftBarButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(didTapCloseButton))
         navigationItem.leftBarButtonItem = leftBarButton
         navigationController?.navigationBar.tintColor = .black
@@ -60,201 +72,98 @@ class CompareViewController: UIViewController {
         }
     }
     
+    private func makeCompareValuesArrayUsingDictValues() {
+        for dict in roomsToCompare.sorted(by: {$0.0 < $1.0}) {
+            compareValues.append(dict.value)
+        }
+    }
+    
     private func configureScrollView() {
         view.addSubview(overralScrollView)
-//        overralScrollView.alwaysBounceVertical = true
-//        overralScrollView.isDirectionalLockEnabled = true
-//        detailScrollView.isDirectionalLockEnabled = true
         overralScrollView.showsVerticalScrollIndicator = false
-
-//        if roomsToCompare.count < 3 { overralScrollView.isScrollEnabled = false }
-
         overralScrollView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(noticeView.snp.bottom)
-//            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             $0.bottom.equalToSuperview()
         }
         
         overralScrollView.addSubview(detailScrollView)
-//        detailScrollView.clipsToBounds = true
         detailScrollView.snp.makeConstraints {
             $0.top.equalTo(overralScrollView.snp.top).offset(190)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
-//            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
 
-    private func configureHeaderViews() {
-        for key in roomsToCompare.keys.sorted(by: <){
-            compareKeys.append(key)
-        }
-        
-        if compareKeys.count == 2 {
-            compareDataCountTwoForHeader()
-        } else {
-            compareDataCountThreeForHeader()
-        }
+    private func configureHeaders() {
+        var counter = 0
+        let headers = compareValues.map{CompareHeaderView(data: $0)}
+        headers.forEach({
+                        overralScrollView.addSubview($0)
+                        $0.snp.makeConstraints {
+                            $0.top.equalTo(overralScrollView)
+                            $0.height.equalTo(190)
+                            $0.width.equalTo(view.frame.width / 2)
+                            if counter == 0 {
+                                $0.leading.equalTo(overralScrollView)
+                            } else {
+                                $0.leading.equalTo(headers[counter - 1].snp.trailing)
+                            }
+                        }
+                        counter += 1
+                        if counter == compareValuesCount {
+                            $0.snp.makeConstraints { $0.trailing.equalTo(overralScrollView.snp.trailing)}
+                        }
+                       })
     }
     
-    private func compareDataCountTwoForHeader() {
-        let header1 = CompareHeaderView(data: self.roomsToCompare[compareKeys[0]]!)
-        let header2 = CompareHeaderView(data: self.roomsToCompare[compareKeys[1]]!)
-        [header1, header2].forEach({overralScrollView.addSubview($0)})
-        header1.snp.makeConstraints {
-            $0.top.leading.equalTo(overralScrollView)
-            $0.height.equalTo(190)
-            $0.width.equalTo(view.frame.width / 2)
-        }
-        header2.snp.makeConstraints {
-            $0.top.equalTo(overralScrollView)
-            $0.leading.equalTo(header1.snp.trailing)
-            $0.height.equalTo(190)
-            $0.width.equalTo(view.frame.width / 2)
-            $0.trailing.equalTo(overralScrollView.snp.trailing)
-        }
-    }
-    
-    private func compareDataCountThreeForHeader() {
-        let header1 = CompareHeaderView(data: self.roomsToCompare[compareKeys[0]]!)
-        let header2 = CompareHeaderView(data: self.roomsToCompare[compareKeys[1]]!)
-        let header3 = CompareHeaderView(data: self.roomsToCompare[compareKeys[2]]!)
-        
-        [header1, header2, header3].forEach({overralScrollView.addSubview($0)})
-        header1.snp.makeConstraints {
-            $0.top.leading.equalTo(overralScrollView)
-            $0.height.equalTo(190)
-            $0.width.equalTo(view.frame.width / 2)
-        }
-        header2.snp.makeConstraints {
-            $0.top.equalTo(overralScrollView)
-            $0.leading.equalTo(header1.snp.trailing)
-            $0.height.equalTo(190)
-            $0.width.equalTo(view.frame.width / 2)
-        }
-        header3.snp.makeConstraints {
-            $0.top.equalTo(overralScrollView)
-            $0.leading.equalTo(header2.snp.trailing)
-            $0.height.equalTo(190)
-            $0.width.equalTo(view.frame.width / 2)
-            $0.trailing.equalTo(overralScrollView.snp.trailing)
-        }
-    }
-    
-    private func configureDetailViews() {
-        if compareKeys.count == 2 {
-            compareDataCountTwoForDetail()
-        } else {
-            compareDataCountThreeForDetail()
-        }
-    }
-    
-    private func compareDataCountTwoForDetail() {
-        let detail1 = CompareDetailView(data: self.roomsToCompare[compareKeys[0]]!)
-        let detail2 = CompareDetailView(data: self.roomsToCompare[compareKeys[1]]!)
-        
-        [detail1, detail2].forEach({detailScrollView.addSubview($0)})
-
-        detail1.snp.makeConstraints {
-            $0.top.leading.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(230)
-            $0.width.equalTo(view.frame.width / 2)
-            $0.height.equalTo(detailScrollView)
-        }
-        detail2.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(230)
-            $0.leading.equalTo(detail1.snp.trailing)
-            $0.width.equalTo(view.frame.width / 2)
-            $0.height.equalTo(detailScrollView)
-            $0.trailing.equalToSuperview()
-        }
-    }
-    
-    private func compareDataCountThreeForDetail() {
-        let detail1 = CompareDetailView(data: self.roomsToCompare[compareKeys[0]]!)
-        let detail2 = CompareDetailView(data: self.roomsToCompare[compareKeys[1]]!)
-        let detail3 = CompareDetailView(data: self.roomsToCompare[compareKeys[2]]!)
-        
-        [detail1, detail2, detail3].forEach({detailScrollView.addSubview($0)})
-
-        detail1.snp.makeConstraints {
-            $0.top.leading.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(230)
-            $0.width.equalTo(view.frame.width / 2)
-            $0.height.equalTo(detailScrollView)
-        }
-        detail2.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(230)
-            $0.leading.equalTo(detail1.snp.trailing)
-            $0.width.equalTo(view.frame.width / 2)
-            $0.height.equalTo(detailScrollView)
-        }
-        detail3.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(230)
-            $0.leading.equalTo(detail2.snp.trailing)
-            $0.width.equalTo(view.frame.width / 2)
-            $0.height.equalTo(detailScrollView)
-            $0.trailing.equalToSuperview()
-        }
+    private func configureDetails() {
+        var counter = 0
+        let details = compareValues.map({CompareDetailView(data: $0)})
+        details.forEach({
+                        detailScrollView.addSubview($0)
+                        $0.snp.makeConstraints {
+                            $0.top.equalToSuperview()
+                            $0.bottom.equalToSuperview().inset(230)
+                            $0.width.equalTo(view.frame.width / 2)
+                            $0.height.equalTo(detailScrollView)
+                            if counter == 0 {
+                                $0.leading.equalToSuperview()
+                            } else {
+                                $0.leading.equalTo(details[counter - 1].snp.trailing)
+                            }
+                        }
+                        counter += 1
+                        if counter == compareValuesCount {
+                            $0.snp.makeConstraints({ $0.trailing.equalToSuperview() })
+                        }
+                      })
     }
     
     private func configureAskButtons() {
-        if compareKeys.count == 2 {
-            compareDataCountTwoForAskButton()
-        } else {
-            compareDataCountThreeForAskButton()
-        }
-    }
-    
-    private func compareDataCountTwoForAskButton() {
-        detailScrollView.addSubviews([askButton1,askButton2])
-        [askButton1,askButton2].forEach({
+        var counter = 0
+        let askButtons = (0..<compareValuesCount).map({ (num) -> CompareViewAskButton in
+            return CompareViewAskButton()
+        })
+        askButtons.forEach({
+            detailScrollView.addSubview($0)
             $0.addTarget(self, action: #selector(didTapAskButton(_:)), for: .touchUpInside)
+            $0.snp.makeConstraints {
+                $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+                $0.width.equalTo(view.frame.width / 2)
+                $0.height.equalTo(50)
+                if counter == 0 {
+                    $0.leading.equalToSuperview()
+                } else {
+                    $0.leading.equalTo(askButtons[counter - 1].snp.trailing)
+                }
+                counter += 1
+            }
         })
         
-        askButton1.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-            $0.width.equalTo(view.frame.width / 2)
-            $0.height.equalTo(50)
-        }
-        askButton2.snp.makeConstraints {
-            $0.leading.equalTo(askButton1.snp.trailing)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-            $0.width.equalTo(view.frame.width / 2)
-            $0.height.equalTo(50)
-        }
     }
-    
-    private func compareDataCountThreeForAskButton() {
-        detailScrollView.addSubviews([askButton1,askButton2,askButton3])
-        [askButton1,askButton2,askButton3].forEach({
-            $0.addTarget(self, action: #selector(didTapAskButton(_:)), for: .touchUpInside)
-        })
         
-        askButton1.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-            $0.width.equalTo(view.frame.width / 2)
-            $0.height.equalTo(50)
-        }
-        askButton2.snp.makeConstraints {
-            $0.leading.equalTo(askButton1.snp.trailing)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-            $0.width.equalTo(view.frame.width / 2)
-            $0.height.equalTo(50)
-        }
-        askButton3.snp.makeConstraints {
-            $0.leading.equalTo(askButton2.snp.trailing)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-            $0.width.equalTo(view.frame.width / 2)
-            $0.height.equalTo(50)
-        }
-    }
+    // MARK: - Action Handler
     
     @objc func didTapAskButton(_ sender: UIButton) {
         let brokerInfoVC = BrokerInfoAlertVC()
@@ -265,6 +174,6 @@ class CompareViewController: UIViewController {
     
     @objc func didTapCloseButton() {
         dismiss(animated: true)
+//        navigationController?.popViewController(animated: true)
     }
-
 }
