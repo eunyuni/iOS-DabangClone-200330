@@ -41,6 +41,11 @@ class FavoriteListViewController: UIViewController {
                 resetCompareMode()
                 showCompareViewButton(isCompareMode: false)
             }
+            if currentTag == 1 || currentTag == 3 {
+                tableView.separatorStyle = .none
+            } else {
+                tableView.separatorStyle = .singleLine
+            }
         }
     }
     
@@ -138,6 +143,7 @@ class FavoriteListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = true
+        tableView.tableFooterView = UIView(frame: .zero)
         tableView.register(RoomInfoCell.self, forCellReuseIdentifier: RoomInfoCell.identifier)
         tableView.register(DanziInfoCell.self, forCellReuseIdentifier: DanziInfoCell.identifier)
         tableView.register(BudongsanInfoCell.self, forCellReuseIdentifier: BudongsanInfoCell.identifier)

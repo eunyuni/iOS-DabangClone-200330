@@ -30,6 +30,8 @@ class FavoriteViewModel {
 //        checkedRoomData = [dummyRoom, dummyRoom2, dummyRoom, dummyRoom2]
         checkedRoomData = [dummyRoom2,dummyRoom]
         markedRoomData = [dummyRoom2, dummyRoom, dummyRoom2, dummyRoom]
+        checkedDanziData = [dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
+        markedDanziData = [dummyDanzi, dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
     }
     
     lazy var activeData = FavoriteData.checkedRoomInfo(checkedRoomData)

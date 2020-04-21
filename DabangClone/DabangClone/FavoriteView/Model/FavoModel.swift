@@ -22,11 +22,30 @@ enum FavoriteData {
 //    var name: String?
 //    var image: UIImage
 //}
+// UserInfo 필요함.
+struct UserInfo {
+    let userID: String
+    let userName: String
+    var phoneNumber: String
+    var profileImage: UIImage
+    var myRoomsToOffer: [RoomInfo]
+    var checkedRoomData: [RoomInfo]
+    var checkedDanziData: [DanziInfo]
+    var markedRoomData: [RoomInfo]
+    var markedDanziData: [DanziInfo]
+    var contactBudongsanData: [BudongsanInfo]
+}
 
 struct DanziInfo {
     var name: String
     var availableRoomCount: Int
+    let image: UIImage
+    let type: String
+    let numberOfhouseholds: Int
+    let completeYear: String
+    let address: String
 }
+let dummyDanzi = DanziInfo(name: "위브더스테이트2단지", availableRoomCount: 10, image: #imageLiteral(resourceName: "SampleImage"), type: "아파트", numberOfhouseholds: 71, completeYear: "2006.09", address: "경기도 부천시 중동")
 
 struct BudongsanInfo {
     var name: String
@@ -34,37 +53,31 @@ struct BudongsanInfo {
 
 // MARK: - Room
 struct RoomInfo: Codable {
-    let id: Int
-    let roomDescription: String
-    let floor: String
-    let totalFloor: String
-    let areaInt: Int?
-    let areaChar: String
+    let broker, type, roomDescription, address: String
+    let salesForm, floor, totalFloor, areaChar: String
     let supplyAreaInt: Int
     let supplyAreaChar: String
     let shortRent: Bool
+    let management: [String]
     let parkingDetail: String
     let parkingTF: Bool
-    let livingExpenses: String
-    let livingExpensesDetail: String
-    let moveInChar: String
-    let moveInDate: String?
+    let livingExpenses, livingExpensesDetail, moveInChar: String
+    let moveInDate: Date?
+    let option: [String]
     let heatingType: String
-    let pet, elevator: Bool
-    let multiFloor, pointRoom: String?
-    let builtIn, veranda, depositLoan: Bool
-    let broker, salesForm: String
-    let management, option, securitySafety: [String]
-    let address: Address
+    let pet, elevator, builtIn, veranda: Bool
+    let depositLoan: Bool
+    let totalCitizen, totalPark, complete: String
+    let securitySafety: [String]
 
     enum CodingKeys: String, CodingKey {
-        case id
+        case broker, type
         case roomDescription = "description"
-        case floor, totalFloor, areaInt, areaChar, supplyAreaInt, supplyAreaChar, shortRent, parkingDetail, parkingTF
+        case address, salesForm, floor, totalFloor, areaChar, supplyAreaInt, supplyAreaChar, shortRent, management, parkingDetail, parkingTF
         case livingExpenses = "living_expenses"
         case livingExpensesDetail = "living_expenses_detail"
         case moveInChar = "MoveInChar"
-        case moveInDate, heatingType, pet, elevator, multiFloor, pointRoom, builtIn, veranda, depositLoan, broker, salesForm, management, option, securitySafety, address
+        case moveInDate, option, heatingType, pet, elevator, builtIn, veranda, depositLoan, totalCitizen, totalPark, complete, securitySafety
     }
 }
 

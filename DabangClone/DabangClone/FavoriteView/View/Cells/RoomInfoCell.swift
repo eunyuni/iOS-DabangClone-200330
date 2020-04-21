@@ -18,7 +18,22 @@ class RoomInfoCell: UITableViewCell {
 
     // MARK: - Properties
     
-    var data: Room!
+    var data: Room! {
+        didSet{
+            self.nameLabel.text = data.roomID == 1 ? "" : "서초푸르지오써밋"
+            self.priceLabel.text = "\(data.baseInfo.roomStyle.rawValue)" + " " + data.baseInfo.cost
+            self.infoLabel.text = self.data?.detailExplain ?? ""
+            self.detailLabel.text = data.location
+            etceteraArray = data.addInfo.option.map({$0.rawValue})
+            etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
+            putLabelInStackView()
+            self.roomImageView.image = data.images.first?.imageStringToImage()
+        }
+    }
+    
+    var isMarked: Bool {
+        return heartButton.isSelected
+    }
     
     weak var delegate: RoomInfoCellDelegate?
     
@@ -182,7 +197,7 @@ class RoomInfoCell: UITableViewCell {
     
     private func configureHeartButton() {
         heartButton.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview().inset(5)
+            $0.top.trailing.equalToSuperview().inset(3)
             $0.width.height.equalTo(30)
         }
         heartButton.imageView?.snp.makeConstraints({
@@ -223,15 +238,6 @@ class RoomInfoCell: UITableViewCell {
     
     func set(roomInfo: Room) {
         self.data = roomInfo
-        
-        self.nameLabel.text = roomInfo.roomID == 1 ? "" : "서초푸르지오써밋"
-        self.priceLabel.text = "\(roomInfo.baseInfo.roomStyle.rawValue)" + " " + roomInfo.baseInfo.cost
-        self.infoLabel.text = self.data?.detailExplain ?? ""
-        self.detailLabel.text = roomInfo.location
-        etceteraArray = roomInfo.addInfo.option.map({$0.rawValue})
-        etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
-        putLabelInStackView()
-        self.roomImageView.image = roomInfo.images.first?.imageStringToImage()
     }
     
     // MARK: - Action Handler
@@ -239,6 +245,11 @@ class RoomInfoCell: UITableViewCell {
     @objc private func didTapHeartButton(_ sender: UIButton) {
         print("tap")
         heartButton.isSelected.toggle()
+        if isMarked {
+            //Post Data of this Cell to Server which has database about marked room all together
+        } else {
+            //Delete marked data stored in Server
+        }
         //찜한방 리스트에 POST RoomID만 보내면 될 듯
     }
     

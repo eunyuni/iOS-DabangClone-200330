@@ -22,7 +22,6 @@
 		152DD9B2242B3E2400C80E10 /* FrequentlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B1242B3E2400C80E10 /* FrequentlyViewController.swift */; };
 		152DD9B6242B3EEA00C80E10 /* FrequentlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B5242B3EEA00C80E10 /* FrequentlyTableViewCell.swift */; };
 		152DD9B8242B4D3400C80E10 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B7242B4D3400C80E10 /* Model.swift */; };
-		15315A55244857250033EA47 /* CompareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A3E244857250033EA47 /* CompareViewModel.swift */; };
 		15315A56244857250033EA47 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A3F244857250033EA47 /* FavoriteViewModel.swift */; };
 		15315A57244857250033EA47 /* DanziInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A40244857250033EA47 /* DanziInfoCell.swift */; };
 		15315A58244857250033EA47 /* FavoriteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A42244857250033EA47 /* FavoriteListViewController.swift */; };
@@ -226,7 +225,6 @@
 		152DD9B1242B3E2400C80E10 /* FrequentlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyViewController.swift; sourceTree = "<group>"; };
 		152DD9B5242B3EEA00C80E10 /* FrequentlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyTableViewCell.swift; sourceTree = "<group>"; };
 		152DD9B7242B4D3400C80E10 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		15315A3E244857250033EA47 /* CompareViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareViewModel.swift; sourceTree = "<group>"; };
 		15315A3F244857250033EA47 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		15315A40244857250033EA47 /* DanziInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanziInfoCell.swift; sourceTree = "<group>"; };
 		15315A42244857250033EA47 /* FavoriteListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteListViewController.swift; sourceTree = "<group>"; };
@@ -494,7 +492,6 @@
 		15315A3D244857250033EA47 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				15315A3E244857250033EA47 /* CompareViewModel.swift */,
 				15315A3F244857250033EA47 /* FavoriteViewModel.swift */,
 			);
 			path = ViewModel;
@@ -1103,7 +1100,6 @@
 				15D9B3562431C2A900A38A76 /* MCTopTableViewCell.swift in Sources */,
 				E78AD9752438E3F20098BE6E /* ButtonView.swift in Sources */,
 				6F389E3A24484AD100A440A4 /* AddressSelectView.swift in Sources */,
-				15315A55244857250033EA47 /* CompareViewModel.swift in Sources */,
 				15160049242483730003DDCF /* MainTabBarViewController.swift in Sources */,
 				1584F1B2244219AA0002C9E5 /* MainRoomSecondCollectionViewCell.swift in Sources */,
 				6F4DECE72429F78E008D77E5 /* SettingViewController.swift in Sources */,

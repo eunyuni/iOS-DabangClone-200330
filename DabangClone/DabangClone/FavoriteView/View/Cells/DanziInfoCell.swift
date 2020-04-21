@@ -13,7 +13,11 @@ class DanziInfoCell: UITableViewCell {
     
     var data: DanziInfo! {
         didSet {
-            
+            nameLabel.text = data.name
+            infoLabel.text = data.type + ", " + "\(data.numberOfhouseholds)" + ", " + data.completeYear
+            addressLabel.text = data.address
+            danziImageView.image = data.image
+            availableRoomButton.setAttributedTitle(makeAttributeString(availableRoomCount: data.availableRoomCount), for: .normal)
         }
     }
     
@@ -32,41 +36,38 @@ class DanziInfoCell: UITableViewCell {
     
     let infoLabel: UILabel = {
        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         return label
     }()
     
     let addressLabel: UILabel = {
        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         label.textColor = .lightGray
         return label
     }()
 
     let danziImageView: UIImageView = {
        let iv = UIImageView()
-        iv.layer.cornerRadius = 5
+        iv.layer.cornerRadius = 8
         iv.clipsToBounds = true
         return iv
     }()
     
     lazy var availableRoomButton: UIButton = {
        let btn = UIButton()
-        let attributeString = NSMutableAttributedString(string: "거래 가능한 방", attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .light), .foregroundColor : UIColor.black])
-        let countString = " \(data.availableRoomCount)개"
-        let attribute = NSAttributedString(string: countString, attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .light), .foregroundColor : UIColor.blue])
-        attributeString.append(attribute)
-        btn.setAttributedTitle(attributeString, for: .normal)
         btn.backgroundColor = #colorLiteral(red: 0.8765594363, green: 0.8766859174, blue: 0.876531899, alpha: 1)
         btn.addTarget(self, action: #selector(didTapButtons(_:)), for: .touchUpInside)
         return btn
     }()
     
-    let danziInfoButton: UIButton = {
+    lazy var danziInfoButton: UIButton = {
        let btn = UIButton()
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .light)
+        btn.addTarget(self, action: #selector(didTapButtons(_:)), for: .touchUpInside)
         btn.backgroundColor = #colorLiteral(red: 0.8765594363, green: 0.8766859174, blue: 0.876531899, alpha: 1)
         btn.setTitle("단지정보", for: .normal)
+        btn.setTitleColor(.black, for: .normal)
         return btn
     }()
     
@@ -82,7 +83,7 @@ class DanziInfoCell: UITableViewCell {
         return view
     }()
     
-    lazy var buttonStackView = UIStackView(arrangedSubviews: [availableRoomButton, buttonSeparator, danziInfoButton])
+    lazy var buttonStackView = UIStackView(arrangedSubviews: [availableRoomButton, danziInfoButton])
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -90,19 +91,16 @@ class DanziInfoCell: UITableViewCell {
         setConstraints()
     }
     
-    
     private func setUI() {
         backgroundColor = .white
+        contentView.layer.cornerRadius = 5
         contentView.layer.borderWidth = 0.5
         contentView.layer.borderColor = UIColor.lightGray.cgColor
         contentView.clipsToBounds = true
-        contentView.addSubview(verticalSeparator)
-        contentView.addSubview(overralContainerView)
-
+        [verticalSeparator, overralContainerView, buttonStackView].forEach({contentView.addSubview($0)})
         buttonStackView.distribution = .fillEqually
-        contentView.addSubview(buttonStackView)
-        
         overralContainerView.addSubviews([nameLabel, infoLabel, addressLabel, danziImageView])
+        contentView.addSubview(buttonSeparator)
     }
     
     private func setConstraints() {
@@ -114,29 +112,35 @@ class DanziInfoCell: UITableViewCell {
             $0.bottom.equalTo(verticalSeparator.snp.top)
         }
         nameLabel.snp.makeConstraints {
-            $0.top.leading.equalToSuperview().offset(15)
+            $0.top.leading.equalToSuperview().offset(10)
         }
         infoLabel.snp.makeConstraints {
-            $0.top.equalTo(nameLabel.snp.bottom).offset(15)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(10)
             $0.leading.equalTo(nameLabel)
         }
         addressLabel.snp.makeConstraints {
-            $0.top.equalTo(infoLabel.snp.bottom).offset(10)
+            $0.top.equalTo(infoLabel.snp.bottom).offset(6)
             $0.leading.equalTo(nameLabel)
         }
         buttonStackView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(80)
+            $0.height.equalTo(45)
         }
         danziImageView.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview().inset(15)
-            $0.width.equalToSuperview().multipliedBy(0.25)
-            $0.bottom.equalTo(verticalSeparator.snp.top).offset(-15)
+            $0.top.trailing.equalToSuperview().inset(10)
+            $0.width.equalToSuperview().multipliedBy(0.35)
+            $0.bottom.equalTo(verticalSeparator.snp.top).offset(-10)
+            
         }
         verticalSeparator.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(buttonStackView.snp.top)
             $0.height.equalTo(0.5)
+        }
+        buttonSeparator.snp.makeConstraints {
+            $0.top.bottom.equalTo(buttonStackView)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(0.5)
         }
     }
     
@@ -146,8 +150,14 @@ class DanziInfoCell: UITableViewCell {
     
     func set(danziInfo: DanziInfo) {
         self.data = danziInfo
-        
-        
+    }
+    
+    func makeAttributeString(availableRoomCount: Int) -> NSMutableAttributedString {
+        let attributeString = NSMutableAttributedString(string: "거래 가능한 방", attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .light), .foregroundColor : UIColor.black])
+        let countString = " \(availableRoomCount)개"
+        let attribute = NSAttributedString(string: countString, attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .light), .foregroundColor : UIColor.blue])
+        attributeString.append(attribute)
+        return attributeString
     }
     
     @objc private func didTapButtons(_ sender: UIButton) {

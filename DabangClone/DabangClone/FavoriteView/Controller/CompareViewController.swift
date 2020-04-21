@@ -11,7 +11,6 @@ import SnapKit
 
 class CompareViewController: UIViewController {
 
-    
     // MARK: - Peroperties
     
     let noticeView = UIView()
@@ -164,7 +163,6 @@ class CompareViewController: UIViewController {
         
     }
         
-    
     // MARK: - Action Handler
     
     @objc func didTapAskButton(_ sender: UIButton) {
