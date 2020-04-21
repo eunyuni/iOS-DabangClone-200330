@@ -8,7 +8,11 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController, InfoCellDelegate {
+  
+  
+  
+  
   
   //MARK: - Property
   
@@ -23,7 +27,6 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       view.backgroundColor = .white
-      
       setupUI()
     }
  
@@ -55,7 +58,32 @@ class BaseViewController: UIViewController {
   
   
   //MARK: - Action
-  
+  func didTapCell(title: String) {
+    switch title {
+    case "가격":
+      let vc = PriceViewController()
+      vc.modalPresentationStyle = .fullScreen
+      navigationController?.pushViewController(vc, animated: true)
+    case "층수":
+      let vc = CountfloorsViewController()
+      vc.modalPresentationStyle = .fullScreen
+      navigationController?.pushViewController(vc, animated: true)
+    case "방 크기":
+      let vc = RoomSizeViewController()
+      vc.modalPresentationStyle = .fullScreen
+      navigationController?.pushViewController(vc, animated: true)
+      case "관리비":
+      let vc = MaintenanceCostViewController()
+      vc.modalPresentationStyle = .fullScreen
+      navigationController?.pushViewController(vc, animated: true)
+      case "주차":
+      let vc = ParkingFeeViewController()
+      vc.modalPresentationStyle = .fullScreen
+      navigationController?.pushViewController(vc, animated: true)
+    default:
+      break
+    }
+  }
   
 
 }
@@ -66,28 +94,41 @@ extension BaseViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    var cell: UITableViewCell!
     switch indexPath.row {
     case 0:
-      cell = setTableViewCell(tableView: tableView, indexPath: indexPath, CellType: .Title)
+      let cell = setTableViewCell(tableView: tableView, indexPath: indexPath, CellType: .Title)
+      return cell
     case 1:
-      cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.가격, CellType: .Input)
-    case 2:
-      cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.층수, CellType: .Input)
+      let cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.가격, CellType: .Input) as! InputCell
+      cell.delegate = self
+      return cell
+    case 2: 
+      let cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.층수, CellType: .Input) as! InputCell
+      cell.delegate = self
+      return cell
     case 3:
-      cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.방크기, CellType: .Input)
+      let cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.방크기, CellType: .Input) as! InputCell
+      cell.delegate = self
+      return cell
     case 4:
-      cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.단기임대, CellType: .AbleSegment)
+      let cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.단기임대, CellType: .AbleSegment)
+      return cell
     case 5:
-      cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.관리비, CellType: .IsThere)
+      let cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.관리비, CellType: .IsThere) as! IsThereCell
+      cell.delegate = self
+      return cell
     case 6:
-      cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.주차, CellType: .AbleSegment)
+      let cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.주차, CellType: .AbleSegment) as! AbleSegmentCell
+      cell.delegate = self
+      return cell
     case 7:
-      cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.입주가능일, CellType: .ThreeSegment)
+      let cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.입주가능일, CellType: .ThreeSegment)
+      return cell
     default:
-      break
+      let cell = UITableViewCell()
+      return cell
     }
-    return cell
+    
   }
 }
 

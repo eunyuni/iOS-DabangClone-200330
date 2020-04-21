@@ -24,7 +24,7 @@ class AddressSearchViewController: UIViewController , WKScriptMessageHandler {
     super.viewDidLoad()
     
     guard
-      let url = URL(string: "https://trilliwon.github.io/postcode/"),
+      let url = URL(string: "https://dukdamn.github.io/postcode/"),
       let webView = webView
       else { return }
     
@@ -41,10 +41,10 @@ class AddressSearchViewController: UIViewController , WKScriptMessageHandler {
       print(postCodData)
       postCode = postCodData["zonecode"] as? String ?? ""
       address = postCodData["addr"] as? String ?? ""
-
     }
     print(postCode)
     print(address)
+    self.dismiss(animated: true, completion: nil)
   }
 
 }

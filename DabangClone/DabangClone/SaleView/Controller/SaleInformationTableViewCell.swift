@@ -8,10 +8,15 @@
 
 import UIKit
 // 분양 셀
+protocol SaleInformationTableViewCellDelegate: class {
+  func didTapSaleDetailCell()
+}
 class SaleInformationTableViewCell: UITableViewCell {
 
   // MARK: - Identifier
   static let identifier = "SaleInformationTableViewCell"
+  
+  weak var delegate: SaleInformationTableViewCellDelegate?
   // MARK: - Property
   private let saleTypeLabel = UILabel().then {
     $0.font = .boldSystemFont(ofSize: 11)
@@ -56,7 +61,9 @@ class SaleInformationTableViewCell: UITableViewCell {
     $0.layer.cornerRadius = 10
   }
   private let saleImageView = UIImageView()
-  
+  private lazy var tapGesture = UITapGestureRecognizer().then {
+    $0.addTarget(self, action: #selector(didTapGesture(_:)))
+  }
   // MARK: - Init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -77,9 +84,14 @@ class SaleInformationTableViewCell: UITableViewCell {
     secondLabel.text = " 공공분양 "
     saleImageView.image = UIImage(named: "saleEmptyImage")
   }
+  
+  @objc private func didTapGesture(_ sender: UITapGestureRecognizer){
+    delegate?.didTapSaleDetailCell()
+  }
   // MARK: - setupUI
   private func setupUI() {
     self.contentView.addSubviews([saleTypeLabel, saleDateLabel, saleTitleLabel, saleImageView, priceLabel, firstLabel, secondLabel, thirdLabel, locationLabel])
+    contentView.addGestureRecognizer(tapGesture)
     setupConstraint()
   }
   

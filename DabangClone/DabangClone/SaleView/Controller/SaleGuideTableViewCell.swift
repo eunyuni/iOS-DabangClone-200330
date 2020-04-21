@@ -99,7 +99,7 @@ class SaleGuideTableViewCell: UITableViewCell {
       $0.height.equalTo(60)
     }
     collectionView.snp.makeConstraints {
-      $0.top.equalTo(calculationView.snp.bottom).offset(20)
+      $0.top.equalTo(calculationView.snp.bottom).offset(60)
       $0.leading.trailing.bottom.equalToSuperview()
       $0.height.equalTo(48)
     }
@@ -171,19 +171,17 @@ class GuideView: UIView {
   func setGrayType(imageName: String, title: String) {
     imageView.image = UIImage(named: imageName)
     titleLabel.text = title
-    self.backgroundColor = .white
-    self.layer.borderWidth = 0.6
-    self.layer.borderColor = UIColor.lightGray.cgColor
+    self.backgroundColor = UIColor(named: "TextFieldColor")
     rightImageView.image?.withTintColor(.black, renderingMode: .alwaysOriginal)
     rightImageView.image?.withTintColor(.black, renderingMode: .automatic)
   }
   func setBlueType(imageName: String, title: String) {
     imageView.image = UIImage(named: imageName)
     titleLabel.text = title
-    titleLabel.textColor = .blue
+    titleLabel.textColor = UIColor(named: "regulationColor")
     rightImageView.image?.withTintColor(.blue, renderingMode: .alwaysOriginal)
     self.layer.borderWidth = 0.6
-    self.layer.borderColor = UIColor.blue.cgColor
+    self.layer.borderColor = UIColor(named: "regulationColor")?.cgColor
   }
   // MARK: - setupUI
   private func setupUI() {

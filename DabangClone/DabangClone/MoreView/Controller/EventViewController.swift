@@ -38,7 +38,9 @@ class EventViewController: UIViewController {
   //MARK: - Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    navigationController?.navigationBar.isHidden = false
+    tabBarController?.tabBar.isHidden = true
+//    tabBarController?.hidesBottomBarWhenPushed = true
     tableView.dataSource = self
     tableView.delegate = self
     DispatchQueue.main.async {

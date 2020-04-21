@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window = UIWindow(frame: UIScreen.main.bounds)
     
     let mainVC = MainTabBarViewController()
-//    let mainVC = FavoriteListViewController()
+//    let mainVC = NewMainRoomViewController()
     window?.rootViewController = mainVC
     window?.makeKeyAndVisible()
 //    UINavigationController(rootViewController: FavoriteListViewController())
