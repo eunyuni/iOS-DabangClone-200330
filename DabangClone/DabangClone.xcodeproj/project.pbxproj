@@ -22,7 +22,6 @@
 		152DD9B2242B3E2400C80E10 /* FrequentlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B1242B3E2400C80E10 /* FrequentlyViewController.swift */; };
 		152DD9B6242B3EEA00C80E10 /* FrequentlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B5242B3EEA00C80E10 /* FrequentlyTableViewCell.swift */; };
 		152DD9B8242B4D3400C80E10 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B7242B4D3400C80E10 /* Model.swift */; };
-		15315A55244857250033EA47 /* CompareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A3E244857250033EA47 /* CompareViewModel.swift */; };
 		15315A56244857250033EA47 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A3F244857250033EA47 /* FavoriteViewModel.swift */; };
 		15315A57244857250033EA47 /* DanziInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A40244857250033EA47 /* DanziInfoCell.swift */; };
 		15315A58244857250033EA47 /* FavoriteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A42244857250033EA47 /* FavoriteListViewController.swift */; };
@@ -234,7 +233,6 @@
 		152DD9B1242B3E2400C80E10 /* FrequentlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyViewController.swift; sourceTree = "<group>"; };
 		152DD9B5242B3EEA00C80E10 /* FrequentlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyTableViewCell.swift; sourceTree = "<group>"; };
 		152DD9B7242B4D3400C80E10 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		15315A3E244857250033EA47 /* CompareViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareViewModel.swift; sourceTree = "<group>"; };
 		15315A3F244857250033EA47 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		15315A40244857250033EA47 /* DanziInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanziInfoCell.swift; sourceTree = "<group>"; };
 		15315A42244857250033EA47 /* FavoriteListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteListViewController.swift; sourceTree = "<group>"; };
@@ -510,7 +508,6 @@
 		15315A3D244857250033EA47 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				15315A3E244857250033EA47 /* CompareViewModel.swift */,
 				15315A3F244857250033EA47 /* FavoriteViewModel.swift */,
 			);
 			path = ViewModel;
@@ -528,6 +525,7 @@
 		15315A44244857250033EA47 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				15315A4A244857250033EA47 /* FavoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -557,7 +555,6 @@
 			isa = PBXGroup;
 			children = (
 				15315A49244857250033EA47 /* FavoSelectButton.swift */,
-				15315A4A244857250033EA47 /* FavoModel.swift */,
 				15315A4B244857250033EA47 /* CompareViewAskButton.swift */,
 			);
 			path = Buttons;
