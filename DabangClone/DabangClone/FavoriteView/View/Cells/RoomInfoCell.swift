@@ -18,7 +18,22 @@ class RoomInfoCell: UITableViewCell {
 
     // MARK: - Properties
     
-    var data: Room?
+    var data: Room! {
+        didSet{
+            self.nameLabel.text = data.roomID == 1 ? "" : "서초푸르지오써밋"
+            self.priceLabel.text = "\(data.baseInfo.roomStyle.rawValue)" + " " + data.baseInfo.cost
+            self.infoLabel.text = self.data?.detailExplain ?? ""
+            self.detailLabel.text = data.location
+            etceteraArray = data.addInfo.option.map({$0.rawValue})
+            etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
+            putLabelInStackView()
+            self.roomImageView.image = data.images.first?.imageStringToImage()
+        }
+    }
+    
+    var isMarked: Bool {
+        return heartButton.isSelected
+    }
     
     weak var delegate: RoomInfoCellDelegate?
     
@@ -139,9 +154,7 @@ class RoomInfoCell: UITableViewCell {
         infoStackView.spacing = 5
         infoStackView.distribution = .equalSpacing
         infoStackView.alignment = .fill
-        overralContainerView.addSubview(infoStackView)
         infoStackView.snp.makeConstraints {
-            $0.top.leading.equalToSuperview().inset(15)
             $0.width.equalTo(200)
         }
         
@@ -150,8 +163,8 @@ class RoomInfoCell: UITableViewCell {
     private func configureCheckButton() {
         contentView.backgroundColor = .white
         contentView.addSubview(checkButtonToCompare)
-//        checkButtonToCompare.setImage(#imageLiteral(resourceName: "unChecked").withRenderingMode(.alwaysOriginal), for: .normal)
-//        checkButtonToCompare.setImage(#imageLiteral(resourceName: "checked").withRenderingMode(.alwaysOriginal), for: .selected)
+        checkButtonToCompare.setImage(#imageLiteral(resourceName: "unchecked").withRenderingMode(.alwaysOriginal), for: .normal)
+        checkButtonToCompare.setImage(#imageLiteral(resourceName: "checked").withRenderingMode(.alwaysOriginal), for: .selected)
         checkButtonToCompare.addTarget(self, action: #selector(didTapCheckButton), for: .touchUpInside)
         checkButtonToCompare.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -164,7 +177,6 @@ class RoomInfoCell: UITableViewCell {
         contentView.addSubview(overralContainerView)
         overralContainerView.backgroundColor = .white
         overralContainerView.clipsToBounds = true
-        overralContainerView.addSubview(roomImageView)
         overralContainerView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
@@ -176,9 +188,6 @@ class RoomInfoCell: UITableViewCell {
         roomImageView.layer.cornerRadius = 8
         roomImageView.clipsToBounds = true
         roomImageView.snp.makeConstraints {
-            $0.top.equalTo(infoStackView.snp.top)
-            $0.trailing.equalToSuperview().inset(15)
-            $0.leading.equalTo(infoStackView.snp.trailing).offset(30)
             $0.height.equalTo(100)
         }
         roomImageView.addSubview(heartButton)
@@ -188,29 +197,25 @@ class RoomInfoCell: UITableViewCell {
     
     private func configureHeartButton() {
         heartButton.snp.makeConstraints {
-          $0.top.trailing.equalToSuperview().inset(5)
+            $0.top.trailing.equalToSuperview().inset(3)
             $0.width.height.equalTo(30)
         }
-        heartButton.imageView?.translatesAutoresizingMaskIntoConstraints = false
-        heartButton.imageView?.topAnchor.constraint(equalTo: heartButton.topAnchor).isActive = true
-        heartButton.imageView?.leadingAnchor.constraint(equalTo: heartButton.leadingAnchor).isActive = true
-        heartButton.imageView?.trailingAnchor.constraint(equalTo: heartButton.trailingAnchor).isActive = true
-        heartButton.imageView?.bottomAnchor.constraint(equalTo: heartButton.bottomAnchor).isActive = true
-      
-      
+        heartButton.imageView?.snp.makeConstraints({
+            $0.top.leading.trailing.bottom.equalToSuperview()
+        })
     }
     
     private func configureTotalStackView() {
-        let totalStackView = UIStackView(arrangedSubviews: [infoStackView, roomImageView])
-        totalStackView.axis = .horizontal
-        totalStackView.spacing = 30
-        totalStackView.alignment = .top
-        overralContainerView.addSubview(totalStackView)
-        totalStackView.snp.makeConstraints {
+        let overralStackView = UIStackView(arrangedSubviews: [infoStackView, roomImageView])
+        overralStackView.axis = .horizontal
+        overralStackView.spacing = 30
+        overralStackView.alignment = .top
+        overralContainerView.addSubview(overralStackView)
+        overralStackView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
-        totalStackView.isLayoutMarginsRelativeArrangement = true
-        totalStackView.layoutMargins = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        overralStackView.isLayoutMarginsRelativeArrangement = true
+        overralStackView.layoutMargins = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
     }
     
     private func setNotiCenter() {
@@ -233,22 +238,18 @@ class RoomInfoCell: UITableViewCell {
     
     func set(roomInfo: Room) {
         self.data = roomInfo
-        
-        self.nameLabel.text = roomInfo.roomID == 1 ? "" : "서초푸르지오써밋"
-        self.priceLabel.text = "\(roomInfo.baseInfo.roomStyle.rawValue)" + " " + roomInfo.baseInfo.cost
-        self.infoLabel.text = self.data?.detailExplain ?? ""
-        self.detailLabel.text = roomInfo.location
-        etceteraArray = roomInfo.addInfo.option.map({$0.rawValue})
-        etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
-        putLabelInStackView()
-        self.roomImageView.image = roomInfo.images.first?.imageStringToImage()
     }
     
-    // MARK: - Action Handle
+    // MARK: - Action Handler
     
     @objc private func didTapHeartButton(_ sender: UIButton) {
         print("tap")
         heartButton.isSelected.toggle()
+        if isMarked {
+            //Post Data of this Cell to Server which has database about marked room all together
+        } else {
+            //Delete marked data stored in Server
+        }
         //찜한방 리스트에 POST RoomID만 보내면 될 듯
     }
     

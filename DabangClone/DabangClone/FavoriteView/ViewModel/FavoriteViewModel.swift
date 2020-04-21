@@ -27,10 +27,11 @@ class FavoriteViewModel {
     
     init() {
         //API 사용 CurrentUser 데이터 불러와서 초기화
-        checkedRoomData = [dummyRoom, dummyRoom2, dummyRoom, dummyRoom2]
+//        checkedRoomData = [dummyRoom, dummyRoom2, dummyRoom, dummyRoom2]
+        checkedRoomData = [dummyRoom2,dummyRoom]
         markedRoomData = [dummyRoom2, dummyRoom, dummyRoom2, dummyRoom]
-//        checkedRoomData = [Room(image: UIImage(named: "01")!), Room(image: UIImage(named: "02")!), Room(image: UIImage(named: "03")!)]
-//        markedRoomData = [Room(image: UIImage(named: "01")!), Room(image: UIImage(named: "02")!), Room(image: UIImage(named: "03")!), Room(image: UIImage(named: "04")!)]
+        checkedDanziData = [dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
+        markedDanziData = [dummyDanzi, dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
     }
     
     lazy var activeData = FavoriteData.checkedRoomInfo(checkedRoomData)
