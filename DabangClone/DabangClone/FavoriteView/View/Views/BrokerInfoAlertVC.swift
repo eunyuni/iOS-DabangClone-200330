@@ -11,6 +11,8 @@ import SnapKit
 
 class BrokerInfoAlertVC: UIViewController {
 
+    var brokerData: BudongsanInfo!
+    
     let containerView = UIView()
     let brokerOfficeNameLabel: UILabel = {
        let label = UILabel()

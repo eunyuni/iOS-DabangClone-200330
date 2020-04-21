@@ -21,7 +21,6 @@ class PersonalModifyViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     setupUI()
   }
   

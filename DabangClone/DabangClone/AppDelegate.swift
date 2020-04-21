@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    let mainVC = NewMainRoomViewController()
     window?.rootViewController = mainVC
     window?.makeKeyAndVisible()
+//    UINavigationController(rootViewController: FavoriteListViewController())
     ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     KOSession.shared()?.isAutomaticPeriodicRefresh = true
     
