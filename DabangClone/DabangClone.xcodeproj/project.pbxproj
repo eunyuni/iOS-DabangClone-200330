@@ -19,6 +19,7 @@
 		1516005524287ED40003DDCF /* SaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1516005424287ED40003DDCF /* SaleViewController.swift */; };
 		1516005724287EDC0003DDCF /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1516005624287EDC0003DDCF /* MoreViewController.swift */; };
 		151600592429E0260003DDCF /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151600582429E0260003DDCF /* MoreView.swift */; };
+		1529B01F244EC6D500B80F33 /* ModelNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1529B01E244EC6D500B80F33 /* ModelNew.swift */; };
 		152DD9B2242B3E2400C80E10 /* FrequentlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B1242B3E2400C80E10 /* FrequentlyViewController.swift */; };
 		152DD9B6242B3EEA00C80E10 /* FrequentlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B5242B3EEA00C80E10 /* FrequentlyTableViewCell.swift */; };
 		152DD9B8242B4D3400C80E10 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B7242B4D3400C80E10 /* Model.swift */; };
@@ -230,6 +231,7 @@
 		1516005424287ED40003DDCF /* SaleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleViewController.swift; sourceTree = "<group>"; };
 		1516005624287EDC0003DDCF /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		151600582429E0260003DDCF /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
+		1529B01E244EC6D500B80F33 /* ModelNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelNew.swift; sourceTree = "<group>"; };
 		152DD9B1242B3E2400C80E10 /* FrequentlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyViewController.swift; sourceTree = "<group>"; };
 		152DD9B5242B3EEA00C80E10 /* FrequentlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyTableViewCell.swift; sourceTree = "<group>"; };
 		152DD9B7242B4D3400C80E10 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 				157C4E78243A060D008559FD /* RoomModel.swift */,
 				15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */,
 				6F389E5B2448505500A440A4 /* HomeModel.swift */,
+				1529B01E244EC6D500B80F33 /* ModelNew.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1080,6 +1083,7 @@
 				6F389E862448587500A440A4 /* SaleScheduleTableViewCell.swift in Sources */,
 				1516003324247BA20003DDCF /* LoginViewController.swift in Sources */,
 				6F41B40B242A383000CACDCE /* MarketingImfomationViewController.swift in Sources */,
+				1529B01F244EC6D500B80F33 /* ModelNew.swift in Sources */,
 				158473EB243602DB00C49FC1 /* ApartmentAddInfoViewController.swift in Sources */,
 				15D9B3582431C2B600A38A76 /* ExplainView.swift in Sources */,
 				155B8558244C7EEC009AC6AF /* OneRoomTableViewCell.swift in Sources */,

@@ -50,6 +50,7 @@ class MoreViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.navigationController?.navigationBar.isHidden = true
+    self.tabBarController?.tabBar.isHidden = false
   }
   
   //MARK: - SetupUI & Constraints
