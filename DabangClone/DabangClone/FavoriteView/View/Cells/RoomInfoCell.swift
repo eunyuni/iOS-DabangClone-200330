@@ -74,13 +74,13 @@ class RoomInfoCell: UITableViewCell {
     var etceteraArray = [String]()
     
     let roomImageView = UIImageView()
-    
+    let smallConfiguration = UIImage.SymbolConfiguration(scale: .large)
     lazy var heartButton: UIButton = {
        let btn = UIButton()
-        btn.setImage(UIImage(systemName: "heart"), for: .normal)
-        btn.setImage(UIImage(systemName: "heart.fill"), for: .selected)
+      btn.setImage(UIImage(systemName: "heart", withConfiguration: smallConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
+      btn.setImage(UIImage(systemName: "heart.fill", withConfiguration: smallConfiguration)?.withTintColor(.red, renderingMode: .alwaysOriginal), for: .selected)
         btn.addTarget(self, action: #selector(didTapHeartButton(_:)), for: .touchUpInside)
-        btn.tintColor = #colorLiteral(red: 0.959012568, green: 0.2369959354, blue: 0.287863344, alpha: 1)
+//        btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         btn.imageView?.contentMode = .scaleAspectFill
         return btn
     }()
@@ -250,7 +250,7 @@ class RoomInfoCell: UITableViewCell {
         } else {
             //Delete marked data stored in Server
         }
-        //찜한방 리스트에 POST RoomID만 보내면 될 듯
+        //찜한방 리스트에 POST RoomID만 보내면 될 듯                                                                                      
     }
     
     @objc private func didTapCheckButton(_ sender: UIButton) {
