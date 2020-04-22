@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.0.2)
+  - AvailableHapticFeedback (1.0.2)
   - FBSDKCoreKit (6.2.0):
     - FBSDKCoreKit/Basics (= 6.2.0)
     - FBSDKCoreKit/Core (= 6.2.0)
@@ -17,6 +18,9 @@ PODS:
   - Kingfisher (5.13.3):
     - Kingfisher/Core (= 5.13.3)
   - Kingfisher/Core (5.13.3)
+  - MultiSlider (1.10.9):
+    - AvailableHapticFeedback
+    - SweeterSwift
   - RxCocoa (5.1.0):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -30,6 +34,7 @@ PODS:
     - SDWebImage/Core (= 4.4.8)
   - SDWebImage/Core (4.4.8)
   - SnapKit (5.0.1)
+  - SweeterSwift (1.1.3)
   - SwiftSVG (2.3.2)
   - Then (2.6.0)
 
@@ -39,6 +44,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - Kingfisher (~> 5.0)
+  - MultiSlider
   - RxCocoa
   - RxSwift
   - RxViewController
@@ -50,34 +56,40 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - AvailableHapticFeedback
     - FBSDKCoreKit
     - FBSDKLoginKit
     - FBSDKShareKit
     - Kingfisher
+    - MultiSlider
     - RxCocoa
     - RxRelay
     - RxSwift
     - RxViewController
     - SDWebImage
     - SnapKit
+    - SweeterSwift
     - SwiftSVG
     - Then
 
 SPEC CHECKSUMS:
   Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
+  AvailableHapticFeedback: 9b21b9f6d3e4566015988b5de35b40abefe6c09a
   FBSDKCoreKit: a7bb9f5ac56c1e11d5f8ae0b90a3610f8744b43a
   FBSDKLoginKit: 5877adb09cc249870c352d92ecc3246cb925c771
   FBSDKShareKit: 09ad91955d3a6de171970f2954dc1e955b064899
   Kingfisher: d2b3d6a7200c93b34de9afcdf25c8dd9282ec277
+  MultiSlider: 5b0a78da0b4fd4bbc53c9c2bf917e0de0ebcbb04
   RxCocoa: 13d2a4d7546a34b8ececae8c281e4ea1dbb94f2b
   RxRelay: a168bd6caf712d00c676ac344e9295afc93b418e
   RxSwift: ad5874f24bb0dbffd1e9bb8443604e3578796c7a
   RxViewController: 7330a46e5c31cd680db169da4c9fc8676e975a81
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SweeterSwift: d909211f6833405628c8c7c6bf9f8f2e8a0e9df9
   SwiftSVG: ca7f64e403b8ea7ea8eba8c823b83ba4a059834c
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
-PODFILE CHECKSUM: 1551dbb7fe313821e856b1bdfdd2674a4d028e74
+PODFILE CHECKSUM: 791f3189ba1dee909a9f4204232216777e370d76
 
 COCOAPODS: 1.8.4
