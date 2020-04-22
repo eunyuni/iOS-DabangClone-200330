@@ -26,9 +26,11 @@ class HomeViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
    super.viewDidAppear(animated)
-//   if AuthorizationManager.shared.userInfo == nil {
-    doFirstViewAlert()
-//   }
+    
+    let udDay = (UserDefaults.standard.value(forKey: "TodayPopUp") as? Int) ?? 0
+    if udDay != checkToday() {
+      doFirstViewAlert()
+    }
   }
   
   
@@ -56,6 +58,14 @@ class HomeViewController: UIViewController {
     tableView.snp.makeConstraints {
       $0.top.leading.trailing.bottom.equalTo(guide)
     }
+  }
+  
+  private func checkToday() -> Int {
+     let now = Date()
+       let date = DateFormatter()
+       date.locale = Locale(identifier: "ko_kr")
+       date.dateFormat = "dd"
+       return Int(date.string(from: now)) ?? 0
   }
 }
 
