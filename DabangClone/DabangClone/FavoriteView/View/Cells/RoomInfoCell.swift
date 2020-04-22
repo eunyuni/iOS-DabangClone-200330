@@ -28,6 +28,9 @@ class RoomInfoCell: UITableViewCell {
             etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
             putLabelInStackView()
             self.roomImageView.image = data.images.first?.imageStringToImage()
+            if self.nameLabel.text == "" {
+                infoStackView.removeArrangedSubview(nameLabel)
+            }
         }
     }
     
@@ -149,10 +152,10 @@ class RoomInfoCell: UITableViewCell {
     }
     
     private func configureInfoStackView() {
-        infoStackView.autoresizingMask = [.flexibleHeight]
+        infoStackView.autoresizingMask = [.flexibleWidth]
         infoStackView.axis = .vertical
+        infoStackView.setCustomSpacing(15, after: priceLabel)
         infoStackView.spacing = 5
-        infoStackView.distribution = .equalSpacing
         infoStackView.alignment = .fill
         infoStackView.snp.makeConstraints {
             $0.width.equalTo(200)

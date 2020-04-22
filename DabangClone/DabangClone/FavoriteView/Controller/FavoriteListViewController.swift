@@ -41,10 +41,17 @@ class FavoriteListViewController: UIViewController {
                 resetCompareMode()
                 showCompareViewButton(isCompareMode: false)
             }
+            
             if currentTag == 1 || currentTag == 3 {
                 tableView.separatorStyle = .none
             } else {
                 tableView.separatorStyle = .singleLine
+            }
+            
+            if currentTag == 4 {
+                tableView.rowHeight = 250
+            } else {
+                tableView.rowHeight = UITableView.automaticDimension
             }
         }
     }
@@ -143,6 +150,7 @@ class FavoriteListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = true
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.register(RoomInfoCell.self, forCellReuseIdentifier: RoomInfoCell.identifier)
         tableView.register(DanziInfoCell.self, forCellReuseIdentifier: DanziInfoCell.identifier)
@@ -315,12 +323,18 @@ extension FavoriteListViewController: UITableViewDataSource {
 
 extension FavoriteListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? RoomInfoCell else {return}
-        if isCompareMode {
-            cell.isCheckButtonSelected.toggle()
-        } else {
-            // Present Room Detail VC
+        if let roomCell = tableView.cellForRow(at: indexPath) as? RoomInfoCell {
+            if isCompareMode {
+                roomCell.isCheckButtonSelected.toggle()
+                print("tapaa")
+            } else {
+                // Present Room Detail VC
+            }
         }
+//        if let danziCell = tableView.cellForRow(at: indexPath) as? DanziInfoCell {
+//           let budongsanVC =
+//           navigationController.push(budongsanVC)
+//        }
     }
 }
 
