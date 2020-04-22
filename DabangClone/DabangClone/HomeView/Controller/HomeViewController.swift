@@ -24,7 +24,20 @@ class HomeViewController: UIViewController {
     setupUI()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+   super.viewDidAppear(animated)
+//   if AuthorizationManager.shared.userInfo == nil {
+    doFirstViewAlert()
+//   }
+  }
+  
+  
   // MARK: - Action
+  private func doFirstViewAlert() {
+   let AlertVC = HomeAlertViewController()
+   AlertVC.modalPresentationStyle = .overFullScreen
+   present(AlertVC, animated: false)
+  }
   
   // MARK: - setupUI
   private func setupUI() {
