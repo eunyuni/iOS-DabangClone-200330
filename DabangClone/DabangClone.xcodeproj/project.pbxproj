@@ -225,6 +225,7 @@
 		E7BB1C14243353F200C66B48 /* RSBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C13243353F200C66B48 /* RSBodyTableViewCell.swift */; };
 		E7BB1C162433670600C66B48 /* ParkingFeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C152433670600C66B48 /* ParkingFeeViewController.swift */; };
 		E7BB1C182434801300C66B48 /* InquiryBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C172434801300C66B48 /* InquiryBodyTableViewCell.swift */; };
+		E7DA1634245034B60053E455 /* HomeAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA1633245034B60053E455 /* HomeAlertViewController.swift */; };
 		E7E6043F243B14DB0050D540 /* FindEasyRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E6043E243B14DB0050D540 /* FindEasyRoomViewController.swift */; };
 		E7E60441243B154E0050D540 /* FindHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E60440243B154E0050D540 /* FindHeaderView.swift */; };
 		E7E60443243B1AC30050D540 /* FindBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E60442243B1AC30050D540 /* FindBottomView.swift */; };
@@ -460,6 +461,7 @@
 		E7BB1C13243353F200C66B48 /* RSBodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSBodyTableViewCell.swift; sourceTree = "<group>"; };
 		E7BB1C152433670600C66B48 /* ParkingFeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingFeeViewController.swift; sourceTree = "<group>"; };
 		E7BB1C172434801300C66B48 /* InquiryBodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryBodyTableViewCell.swift; sourceTree = "<group>"; };
+		E7DA1633245034B60053E455 /* HomeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAlertViewController.swift; sourceTree = "<group>"; };
 		E7E6043E243B14DB0050D540 /* FindEasyRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEasyRoomViewController.swift; sourceTree = "<group>"; };
 		E7E60440243B154E0050D540 /* FindHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindHeaderView.swift; path = DabangClone/HomeView/Controller/FindHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		E7E60442243B1AC30050D540 /* FindBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindBottomView.swift; path = DabangClone/HomeView/Controller/FindBottomView.swift; sourceTree = SOURCE_ROOT; };
@@ -691,6 +693,7 @@
 			isa = PBXGroup;
 			children = (
 				1516004E24287E450003DDCF /* HomeViewController.swift */,
+				E7DA1633245034B60053E455 /* HomeAlertViewController.swift */,
 				157C4E76243A0566008559FD /* MainRoomViewController.swift */,
 				157C4E7A243B5C5B008559FD /* NewMainRoomViewController.swift */,
 				E7E6043E243B14DB0050D540 /* FindEasyRoomViewController.swift */,
@@ -1168,6 +1171,7 @@
 				6F389E5424484FA600A440A4 /* ApartmentTableViewCell.swift in Sources */,
 				15D9B3482430A89900A38A76 /* EventViewController.swift in Sources */,
 				6FAA9EA12449A3A30005F2B2 /* HomeSaleCollectionViewCell.swift in Sources */,
+				E7DA1634245034B60053E455 /* HomeAlertViewController.swift in Sources */,
 				E78AD9612437119C0098BE6E /* FilterRoomTypeCell.swift in Sources */,
 				E77D8C69243FBD7600A263AE /* BrokerageReviewBodyCell.swift in Sources */,
 				6F389E862448587500A440A4 /* SaleScheduleTableViewCell.swift in Sources */,
