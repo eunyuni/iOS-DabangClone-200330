@@ -9,6 +9,7 @@
 import UIKit
 import Then
 import SnapKit
+import Alamofire
 
 protocol MoreViewDelegate {
   func didTapSellMyRoomButton(_ sender: MoreViewButtons)
@@ -508,6 +509,8 @@ class MoreView: UIView {
     
     
   }
+  
+  
 }
 
 

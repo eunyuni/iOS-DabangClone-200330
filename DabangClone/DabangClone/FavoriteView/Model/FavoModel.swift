@@ -82,7 +82,7 @@ struct RoomInfo: Codable {
 }
 
 // MARK: - Address
-struct Address: Codable {
+struct AddressSungJun: Codable {
     let id: Int
     let loadAddress: String
     let detailAddress: String

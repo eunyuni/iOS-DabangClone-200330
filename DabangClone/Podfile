@@ -18,4 +18,5 @@ target 'DabangClone' do
   pod 'Kingfisher', '~> 5.0'
   pod 'SwiftSVG', '~> 2.0'
   pod 'SDWebImage','~>4.4.2’
+  pod 'MultiSlider'
 end
