@@ -38,6 +38,11 @@ class SaleDetailViewController: UIViewController {
       bottomButton
     ])
     tableView.backgroundColor = .white
+    tableView.contentInsetAdjustmentBehavior = .never
+//    navigationController?.navigationBar.barTintColor = UIColor.white.withAlphaComponent(0)
+    navigationController?.navigationBar.barTintColor = .red
+    navigationController?.navigationBar.shadowImage = UIImage()
+    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     
     tableView.register(SaleDetailMainCell.self, forCellReuseIdentifier: SaleDetailMainCell.identifier)
     tableView.register(SaleDetailSectionCell.self, forCellReuseIdentifier: SaleDetailSectionCell.identifier)
@@ -62,12 +67,13 @@ class SaleDetailViewController: UIViewController {
   // MARK: -setupConstraint
   
   private func setupConstraint() {
+    let guide = view.safeAreaLayoutGuide
     bottomButton.snp.makeConstraints {
       $0.leading.trailing.bottom.equalToSuperview()
       $0.height.equalTo(70)
     }
     tableView.snp.makeConstraints {
-      $0.top.equalToSuperview()
+      $0.top.equalTo(view.snp.top)
       $0.leading.trailing.equalToSuperview()
       $0.bottom.equalTo(bottomButton.snp.top)
     }
@@ -138,5 +144,15 @@ extension SaleDetailViewController: SaleDetailScheduleCellDelegate {
     let vc = SaleDetailAlertViewController()
     vc.modalPresentationStyle = .custom
     present(vc,animated: true)
+  }
+}
+
+
+extension SaleDetailViewController {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    print(scrollView.contentOffset.y)
+    if scrollView.contentOffset.y == 0.0 {
+      navigationController?.navigationBar.backgroundColor = .clear
+    }
   }
 }
