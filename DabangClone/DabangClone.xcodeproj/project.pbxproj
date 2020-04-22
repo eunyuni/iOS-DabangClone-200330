@@ -1133,7 +1133,6 @@
 				15D9B3562431C2A900A38A76 /* MCTopTableViewCell.swift in Sources */,
 				E78AD9752438E3F20098BE6E /* ButtonView.swift in Sources */,
 				6F389E3A24484AD100A440A4 /* AddressSelectView.swift in Sources */,
-				15315A55244857250033EA47 /* CompareViewModel.swift in Sources */,
 				6FAA9EA32449A3B70005F2B2 /* HomeRecommendedCollectionViewCell.swift in Sources */,
 				15160049242483730003DDCF /* MainTabBarViewController.swift in Sources */,
 				1584F1B2244219AA0002C9E5 /* MainRoomSecondCollectionViewCell.swift in Sources */,
@@ -1389,9 +1388,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)",
-					"${PODS_ROOT}/GooglePlaces/Frameworks",
 					"${PODS_ROOT}/GoogleMaps/Maps/Frameworks",
 					"${PODS_ROOT}/GoogleMaps/Base/Frameworks",
+					"${PODS_ROOT}/GooglePlaces/Frameworks",
 				);
 				INFOPLIST_FILE = DabangClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
