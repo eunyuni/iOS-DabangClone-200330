@@ -26,18 +26,19 @@ class HomeAlertViewController: UIViewController {
     $0.setTitle("오늘 하루 보지 않기", for: .normal)
     $0.setTitleColor(.white, for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 16)
-    //    $0.addTarget(self, action: #selector(didTapButtonsAction(_:)), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(didTapleftButton(_:)), for: .touchUpInside)
   }
   
   private let detailButton = UIButton().then {
     $0.setTitle("자세히 보기", for: .normal)
     $0.setTitleColor(.gray, for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 17)
-    //    $0.addTarget(self, action: #selector(didTapButtonsAction(_:)), for: .touchUpInside)
+//    $0.addTarget(self, action: #selector(didTapleftButton(_)), for: .touchUpInside)
   }
   
   private let menuHeight = UIScreen.main.bounds.height / 2
   private var isPresenting = false
+  
   
   // MARK: - Lift cycle
 //  init() {
@@ -59,6 +60,11 @@ class HomeAlertViewController: UIViewController {
   }
   @objc private func didTapButton(_ sender: UIButton) {
     dismiss(animated: true, completion: nil)
+  }
+  @objc private func didTapleftButton(_ sender: UIButton) {
+//    _ = UserDefaults.standard.integer(forKey: "TodayPopUp")
+    UserDefaults.standard.set(checkToday(), forKey: "TodayPopUp")
+    self.dismiss(animated: true, completion: nil)
   }
   // MARK: - setupUI
   private func setupUI() {
@@ -103,6 +109,15 @@ class HomeAlertViewController: UIViewController {
     
     
   }
+  
+  private func checkToday() -> Int {
+     let now = Date()
+       let date = DateFormatter()
+       date.locale = Locale(identifier: "ko_kr")
+       date.dateFormat = "dd"
+       return Int(date.string(from: now)) ?? 0
+  }
+
   
 }
   //extension HomeAlertViewController: UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {

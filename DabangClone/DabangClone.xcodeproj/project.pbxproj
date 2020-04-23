@@ -34,7 +34,7 @@
 		15315A5F244857250033EA47 /* CompareDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A50244857250033EA47 /* CompareDetailView.swift */; };
 		15315A60244857250033EA47 /* CompareHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A51244857250033EA47 /* CompareHeaderView.swift */; };
 		15315A61244857250033EA47 /* CompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A52244857250033EA47 /* CompareView.swift */; };
-		15315A62244857250033EA47 /* BrokerInfoAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A53244857250033EA47 /* BrokerInfoAlertVC.swift */; };
+		15315A62244857250033EA47 /* BrokerInfoPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A53244857250033EA47 /* BrokerInfoPopUpVC.swift */; };
 		15315A63244857250033EA47 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A54244857250033EA47 /* EmptyStateView.swift */; };
 		15315A66244857680033EA47 /* BudongsanInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A64244857670033EA47 /* BudongsanInfoCell.swift */; };
 		15315A67244857680033EA47 /* RoomInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A65244857680033EA47 /* RoomInfoCell.swift */; };
@@ -88,6 +88,8 @@
 		159121382450557400DA05D8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159121372450557400DA05D8 /* SystemConfiguration.framework */; };
 		1591213A2450557A00DA05D8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159121392450557A00DA05D8 /* UIKit.framework */; };
 		1591213E245056BF00DA05D8 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1591213D245056BE00DA05D8 /* GoogleMaps.bundle */; };
+		159121402450603D00DA05D8 /* GooglePlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1591213F2450603D00DA05D8 /* GooglePlaces.framework */; };
+		159121422450605500DA05D8 /* GooglePlaces.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 159121412450605500DA05D8 /* GooglePlaces.bundle */; };
 		15AB31222445DF5F002AC5B8 /* CostInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AB31212445DF5F002AC5B8 /* CostInfoStackView.swift */; };
 		15AB31242446E33C002AC5B8 /* DetailInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AB31232446E33C002AC5B8 /* DetailInfoStackView.swift */; };
 		15AB3126244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */; };
@@ -266,7 +268,7 @@
 		15315A50244857250033EA47 /* CompareDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareDetailView.swift; sourceTree = "<group>"; };
 		15315A51244857250033EA47 /* CompareHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareHeaderView.swift; sourceTree = "<group>"; };
 		15315A52244857250033EA47 /* CompareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareView.swift; sourceTree = "<group>"; };
-		15315A53244857250033EA47 /* BrokerInfoAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerInfoAlertVC.swift; sourceTree = "<group>"; };
+		15315A53244857250033EA47 /* BrokerInfoPopUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerInfoPopUpVC.swift; sourceTree = "<group>"; };
 		15315A54244857250033EA47 /* EmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		15315A64244857670033EA47 /* BudongsanInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudongsanInfoCell.swift; sourceTree = "<group>"; };
 		15315A65244857680033EA47 /* RoomInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomInfoCell.swift; sourceTree = "<group>"; };
@@ -321,6 +323,8 @@
 		159121372450557400DA05D8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		159121392450557A00DA05D8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1591213D245056BE00DA05D8 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		1591213F2450603D00DA05D8 /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlaces.framework; sourceTree = "<group>"; };
+		159121412450605500DA05D8 /* GooglePlaces.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = GooglePlaces.framework/Resources/GooglePlaces.bundle; sourceTree = "<group>"; };
 		15AB31212445DF5F002AC5B8 /* CostInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostInfoStackView.swift; sourceTree = "<group>"; };
 		15AB31232446E33C002AC5B8 /* DetailInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoStackView.swift; sourceTree = "<group>"; };
 		15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCenteredFlowLayout.swift; sourceTree = "<group>"; };
@@ -490,6 +494,7 @@
 				159121282450553300DA05D8 /* CoreTelephony.framework in Frameworks */,
 				159121262450552A00DA05D8 /* CoreLocation.framework in Frameworks */,
 				159121242450552100DA05D8 /* CoreImage.framework in Frameworks */,
+				159121402450603D00DA05D8 /* GooglePlaces.framework in Frameworks */,
 				159121222450551A00DA05D8 /* CoreGraphics.framework in Frameworks */,
 				159121202450551200DA05D8 /* CoreData.framework in Frameworks */,
 				1591211E2450550800DA05D8 /* Accelerate.framework in Frameworks */,
@@ -516,6 +521,7 @@
 		1516002224247BA20003DDCF = {
 			isa = PBXGroup;
 			children = (
+				159121412450605500DA05D8 /* GooglePlaces.bundle */,
 				1591213D245056BE00DA05D8 /* GoogleMaps.bundle */,
 				1516002D24247BA20003DDCF /* DabangClone */,
 				1516002C24247BA20003DDCF /* Products */,
@@ -638,7 +644,7 @@
 			children = (
 				15315A4F244857250033EA47 /* CompareVC SubViews */,
 				15315A52244857250033EA47 /* CompareView.swift */,
-				15315A53244857250033EA47 /* BrokerInfoAlertVC.swift */,
+				15315A53244857250033EA47 /* BrokerInfoPopUpVC.swift */,
 				15315A54244857250033EA47 /* EmptyStateView.swift */,
 			);
 			path = Views;
@@ -1006,6 +1012,7 @@
 		CE53DD3DED8300E7499EB70D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1591213F2450603D00DA05D8 /* GooglePlaces.framework */,
 				159121392450557A00DA05D8 /* UIKit.framework */,
 				159121372450557400DA05D8 /* SystemConfiguration.framework */,
 				159121352450556D00DA05D8 /* QuartzCore.framework */,
@@ -1094,6 +1101,7 @@
 			files = (
 				1516003824247BA20003DDCF /* Assets.xcassets in Resources */,
 				1591213E245056BF00DA05D8 /* GoogleMaps.bundle in Resources */,
+				159121422450605500DA05D8 /* GooglePlaces.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1297,7 +1305,7 @@
 				E77D8C6F244348D500A263AE /* SaleDetailMainCell.swift in Sources */,
 				1516004D24285FCB0003DDCF /* SignUpViewController.swift in Sources */,
 				E7E60443243B1AC30050D540 /* FindBottomView.swift in Sources */,
-				15315A62244857250033EA47 /* BrokerInfoAlertVC.swift in Sources */,
+				15315A62244857250033EA47 /* BrokerInfoPopUpVC.swift in Sources */,
 				E7BB1C0A243208A300C66B48 /* CountfloorsViewController.swift in Sources */,
 				1516004F24287E450003DDCF /* HomeViewController.swift in Sources */,
 				15315A67244857680033EA47 /* RoomInfoCell.swift in Sources */,

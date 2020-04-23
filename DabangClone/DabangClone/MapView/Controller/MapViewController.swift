@@ -57,7 +57,7 @@ class MapViewController: UIViewController{
   // MARK: - setupConstraint
   private func setupConstraint() {
     mapTest.snp.makeConstraints {
-      $0.edges.equalToSuperview().inset(40)
+      $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
     }
   }
 }

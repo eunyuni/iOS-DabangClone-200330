@@ -6,6 +6,13 @@
 //
 
 import UIKit
+import Alamofire
+
+class BangData {
+  static let shared = BangData()
+  
+  var data: [DabangElement] = []
+}
 
 class HomeViewController: UIViewController {
   // MARK: - Property
@@ -21,14 +28,17 @@ class HomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .white
+    getTest()
     setupUI()
   }
   
   override func viewDidAppear(_ animated: Bool) {
    super.viewDidAppear(animated)
-//   if AuthorizationManager.shared.userInfo == nil {
-    doFirstViewAlert()
-//   }
+    
+    let udDay = (UserDefaults.standard.value(forKey: "TodayPopUp") as? Int) ?? 0
+    if udDay != checkToday() {
+      doFirstViewAlert()
+    }
   }
   
   
@@ -56,6 +66,14 @@ class HomeViewController: UIViewController {
     tableView.snp.makeConstraints {
       $0.top.leading.trailing.bottom.equalTo(guide)
     }
+  }
+  
+  private func checkToday() -> Int {
+     let now = Date()
+       let date = DateFormatter()
+       date.locale = Locale(identifier: "ko_kr")
+       date.dateFormat = "dd"
+       return Int(date.string(from: now)) ?? 0
   }
 }
 
@@ -87,6 +105,25 @@ extension HomeViewController: UITableViewDataSource {
         return cell
       }
     }
+  }
+  
+  private func getTest() {
+    
+    let url = URL(string: "https://moonpeter.com/posts/")
+    
+    
+    AF
+      .request(url!, method: .get, parameters: .none, encoding: URLEncoding.default, headers: .none, interceptor: .none)
+      .responseData(queue: .global(), completionHandler: { (response) in
+        print(response.data as Any)
+        
+        if let jsonObjects = try? JSONDecoder().decode([DabangElement].self, from: response.data!) {
+          BangData.shared.data = jsonObjects
+          print(BangData.shared.data[10].address)
+        } else {
+          print("fail")
+        }
+      })
   }
 }
 
