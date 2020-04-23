@@ -23,11 +23,17 @@ class TermsAndConditionsViewController: UIViewController {
       self.navigationItem.leftBarButtonItem?.tintColor = .black
       setupUI()
     }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.navigationController?.navigationBar.isHidden = false
+
+  }
     
     
     // MARK: -Action
     @objc private func didTapBackButton(_ sender: UIButton) {
-      self.dismiss(animated: true)
+      self.navigationController?.popViewController(animated: true)
     }
     // MARK: -setupUI
     private func setupUI() {
