@@ -147,11 +147,33 @@ class MapViewController: UIViewController{
     let iconGenerator = GMUDefaultClusterIconGenerator()
     let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
     let renderer = GMUDefaultClusterRenderer(mapView: mapTest, clusterIconGenerator: iconGenerator)
+    renderer.delegate = self
     clusterManager = GMUClusterManager(map: mapTest, algorithm: algorithm, renderer: renderer)
     
     // Generate and add random items to the cluster manager.
-    //    generateClusterItems()
-    
+//    generateClusterItems()
+    DispatchQueue.main.async {
+       self.mapGoogleGeocoder()
+      
+      DispatchQueue.main.async {
+        self.clusterManager.cluster()
+        
+        DispatchQueue.main.async {
+                self.clusterManager.setDelegate(self, mapDelegate: self)
+
+          DispatchQueue.main.async {
+            self.setupUI()
+          }
+        }
+      }
+    }
+     
+      // Call cluster() after items have been added to perform the clustering and rendering on map.
+      
+      // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
+      
+      
+      
     
     //    self.mapGoogleGeocoder()
     //
@@ -364,9 +386,9 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
   
   
   func mapGoogleGeocoder() {
-    var items: [GMUClusterItem] = []
+//    var items: [GMUClusterItem] = []
     DispatchQueue.global().async {
-      for i in 100...200 {
+      for i in 0...BangData.shared.data.count-1 {
       let address = BangData.shared.data[i].address.loadAddress
       let geoCoder = CLGeocoder()
       geoCoder.geocodeAddressString(address) { (placemarks, error) in
@@ -376,14 +398,16 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
             
           else {
               // handle no location found
+            print("실패주소 :", address)
               return
           }
+        print("성공주소 :", address)
         let name = "\(BangData.shared.data[i].pk)"
         let item = POIItem(position: CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude), name: name)
 //        items.append(item)
         DispatchQueue.main.async {
                     self.clusterManager.add(item)
-          self.clusterManager.add(items)
+//          self.clusterManager.add(items)
 
         }
         
@@ -394,7 +418,8 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     }
     
   }
-  
+  // MARK: - 클러스터에 포함된 마커들의 name(pk) 값 얻기
+  // Renderer delegate 설정 -> 뭉텅이 POIItem을 GMUCluster 형식으로 형변환.(그래야 내부의 마커들을 forEach로 쪼갤 수 있음. -> forEach 사용하여 각각의 cluster item들을 다시 POIItem으로 형변환 -> 그 다음 각각의 POIItem의 name 값 추출.
   // MARK: - GMUMapViewDelegate
   func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
     if let poiItem = marker.userData as? POIItem {
@@ -402,7 +427,16 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     } else {
       NSLog("Did tap a normal marker")
     }
-    return false
+    
+    guard let cluster = marker.userData as? GMUCluster else { return false }
+    cluster.items.forEach {
+      guard let a = $0 as? POIItem else {return}
+      print(a.name)
+    }
+    print(cluster.items)
+    
+    print("didTap CLUSTER")
+    return true
   }
   // MARK: - GMUClusterManagerDelegate
   func clusterManager(_ clusterManager: GMUClusterManager, didTap cluster: GMUCluster) -> Bool {
@@ -410,6 +444,10 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
       zoom: mapTest.camera.zoom + 1)
     let update = GMSCameraUpdate.setCamera(newCamera)
     mapTest.moveCamera(update)
+    
+    print(cluster.items.count)
+    print(cluster.items)
+    
     return false
   }
   /// cluster manager.
@@ -444,3 +482,6 @@ extension MapViewController: UITableViewDataSource {
   }
 }
 
+extension MapViewController: GMUClusterRendererDelegate {
+  
+}
