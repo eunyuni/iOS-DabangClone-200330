@@ -49,8 +49,11 @@ let dummyDanzi = DanziInfo(name: "위브더스테이트2단지", availableRoomCo
 
 struct BudongsanInfo {
     var name: String
+    var relatedRoomNumber: Int
 }
 
+let dummyBudongsan = BudongsanInfo(name: "다방공인중개사무소", relatedRoomNumber: 2039)
+let dummyBudongsan2 = BudongsanInfo(name: "다방공인중개사무소", relatedRoomNumber: 2031)
 // MARK: - Room
 struct RoomInfo: Codable {
     let broker, type, roomDescription, address: String

@@ -47,7 +47,7 @@ class MoreViewController: UIViewController {
     //      navigationController?.pushViewController(LoginViewController(), animated: true)
     
     self.setupUI(vc: moreView)
-    self.getTest()
+//    self.getTest()
     
     //      DispatchQueue.global(qos: .background).async {
     //        print("async start")
@@ -138,11 +138,16 @@ class MoreViewController: UIViewController {
     
     
     AF
-      .request(url!, method: .get, parameters: param, encoding: URLEncoding.default, headers: .none, interceptor: .none)
-      .responseString(queue: .global(), encoding: nil, completionHandler: { (response) in
-        if let jsonObjects = try? JSONDecoder().decode([DabangAPI].self, from: response.data!) {
-          print(jsonObjects)
-//          print(jsonObjects)
+      .request(url!, method: .get, parameters: .none, encoding: URLEncoding.default, headers: .none, interceptor: .none)
+      .responseData(queue: .global(), completionHandler: { (response) in
+        print(response.data as Any)
+        
+        if let jsonObjects = try? JSONDecoder().decode([DabangElement].self, from: response.data!) {
+          
+          print(jsonObjects[0].address)
+          
+        } else {
+          print("fail")
         }
       })
   }
