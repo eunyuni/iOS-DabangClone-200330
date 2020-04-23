@@ -24,6 +24,7 @@ let kClusterItemCount = 10000
 let kCameraLatitude = 37.5666102
 let kCameraLongitude = 126.9783881
 class MapViewController: UIViewController{
+  var pkArrInCluster: [String] = []
   // MARK: - Property
   private let data = BangData.shared.data
   private var clusterManager: GMUClusterManager!
@@ -430,13 +431,18 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     }
     
     guard let cluster = marker.userData as? GMUCluster else { return false }
+    if pkArrInCluster.count != 0 {
+      pkArrInCluster.removeAll()
+    } else {
     cluster.items.forEach {
       guard let a = $0 as? POIItem else {return}
-      print(a.name)
+      pkArrInCluster.append(a.name)
     }
-    print(cluster.items)
+      tableView.reloadData()
+    print(pkArrInCluster)
     
     print("didTap CLUSTER")
+    }
     return true
   }
   // MARK: - GMUClusterManagerDelegate
@@ -475,10 +481,11 @@ extension MapViewController: CLLocationManagerDelegate {
 // MARK: - TableViewDataSource
 extension MapViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    0
+    pkArrInCluster.count
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: RoomInfoCell.identifier, for: indexPath) as! RoomInfoCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: MapTableViewCell.identifier, for: indexPath) as! MapTableViewCell
+    cell.configure(pk: Int(pkArrInCluster[indexPath.row]) ?? 0)
     return cell
   }
 }

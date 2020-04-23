@@ -118,6 +118,7 @@
 		159121A82451CCCA00DA05D8 /* GMUWeightedLatLng.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591218C2451CCCA00DA05D8 /* GMUWeightedLatLng.m */; };
 		159121A92451CCCA00DA05D8 /* GMUGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591218F2451CCCA00DA05D8 /* GMUGradient.m */; };
 		159121AA2451CCCA00DA05D8 /* GMUHeatmapTileLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 159121902451CCCA00DA05D8 /* GMUHeatmapTileLayer.m */; };
+		159121AD2452295D00DA05D8 /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159121AC2452295D00DA05D8 /* MapTableViewCell.swift */; };
 		15AB31222445DF5F002AC5B8 /* CostInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AB31212445DF5F002AC5B8 /* CostInfoStackView.swift */; };
 		15AB31242446E33C002AC5B8 /* DetailInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AB31232446E33C002AC5B8 /* DetailInfoStackView.swift */; };
 		15AB3126244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */; };
@@ -426,6 +427,7 @@
 		1591218F2451CCCA00DA05D8 /* GMUGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGradient.m; sourceTree = "<group>"; };
 		159121902451CCCA00DA05D8 /* GMUHeatmapTileLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUHeatmapTileLayer.m; sourceTree = "<group>"; };
 		159121AB2451D07F00DA05D8 /* GMUClusterHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMUClusterHeader.h; sourceTree = "<group>"; };
+		159121AC2452295D00DA05D8 /* MapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
 		15AB31212445DF5F002AC5B8 /* CostInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostInfoStackView.swift; sourceTree = "<group>"; };
 		15AB31232446E33C002AC5B8 /* DetailInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoStackView.swift; sourceTree = "<group>"; };
 		15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCenteredFlowLayout.swift; sourceTree = "<group>"; };
@@ -1176,6 +1178,7 @@
 				E78AD9722438D9A20098BE6E /* FilterTradeTypeCell.swift */,
 				E78AD9642437186B0098BE6E /* GrayLineViewCell.swift */,
 				6F49EEA024506B5700D952F8 /* MultiSliderTableViewCell.swift */,
+				159121AC2452295D00DA05D8 /* MapTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1632,6 +1635,7 @@
 				15315A56244857250033EA47 /* FavoriteViewModel.swift in Sources */,
 				15D9B32A242CA42F00A38A76 /* SellMyRoomViewController.swift in Sources */,
 				E7BB1C002431DC8200C66B48 /* SaveView.swift in Sources */,
+				159121AD2452295D00DA05D8 /* MapTableViewCell.swift in Sources */,
 				15315A5F244857250033EA47 /* CompareDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
