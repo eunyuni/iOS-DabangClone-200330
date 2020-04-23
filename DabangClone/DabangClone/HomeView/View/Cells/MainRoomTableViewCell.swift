@@ -116,6 +116,8 @@ class MainRoomTableViewCell: UITableViewCell {
   
   let detailInfoStackView = DetailInfoStackView()
   
+  var bangData = BangData.shared.data[7]
+  
   override func awakeFromNib() {
     super.awakeFromNib()
   }
@@ -139,11 +141,26 @@ class MainRoomTableViewCell: UITableViewCell {
   }
   
   func setupUI() {
-    titleLabel.text = "\(roomData.baseInfo.sellStyle) \(roomData.baseInfo.cost)"
-    subtitleLabel.text = "\(roomData.baseInfo.detailText)"
-    roomStyleLabel.text = "\(roomData.baseInfo.roomStyle)"
-    areaLabel.text = "\(roomData.baseInfo.dedicatedArea)m²"
-    floorLabel.text = "\(roomData.baseInfo.floorOfthisRoom)"
+    
+    if bangData.salesForm.type == .월세 {
+      
+      titleLabel.text = "\(bangData.salesForm.type) \(bangData.salesForm.depositChar)/\(bangData.salesForm.monthlyChar)"
+    } else if bangData.salesForm.type == .매매 || bangData.salesForm.type == .전세 {
+      titleLabel.text = "\(bangData.salesForm.type) \(bangData.salesForm.depositChar)"
+    }
+    let cost = "\(bangData.salesForm.depositChar)/\(bangData.salesForm.monthlyChar)"
+    
+    subtitleLabel.text = "\(bangData.dabangDescription)"
+    roomStyleLabel.text = "\(bangData.type)"
+    let start = bangData.areaChar.index(bangData.areaChar.startIndex, offsetBy: 0)
+    let end = bangData.areaChar.index(bangData.areaChar.firstIndex(of: " ") ?? bangData.areaChar.endIndex, offsetBy: 0)
+    let range = start..<end
+    let mySubstring = bangData.areaChar[range]
+    areaLabel.text = "\(String(mySubstring))m²"
+    floorLabel.text = "\(bangData.floor)"
+    if floorLabel.text?.last == " " {
+      floorLabel.text?.removeLast()
+    }
     
     if roomData.baseInfo.adminCost {
       adminCostLabel.text = "있음"
@@ -155,26 +172,26 @@ class MainRoomTableViewCell: UITableViewCell {
     titleView.addSubviews([titleLabel, subtitleLabel, bezel1, roomStyleImageView, areaImageView, floorImageView, adminCostImageView, roomStyleLabel, areaLabel, floorLabel, adminCostLabel, bezel2,])
     costView.addSubviews([costCellImageView, costInfoLabel, costStackView])
     
-    var parking = ""
-    if roomData.baseInfo.parking { parking = "가능" } else { parking = "불가" }
-    var shortRental = ""
-    if roomData.baseInfo.shortRental { shortRental = "가능" } else { shortRental = "불가능" }
     
-    costStackView.configure(titles: [roomData.baseInfo.cost,  adminCostLabel.text!, parking, shortRental,"\(roomData.baseInfo.sellStyle)\n", "\(roomData.baseInfo.cost) + ɑ"])
+    
+    var shortRental = ""
+    if (bangData.shortRent ?? false) { shortRental = "가능" } else { shortRental = "불가능" }
+    
+    costStackView.configure(salesFormType: "\(bangData.salesForm.type)",titles: [cost,  adminCostLabel.text!, "\(bangData.parkingDetail)", shortRental,"\(bangData.salesForm.type)\n", "\(bangData.salesForm.monthlyChar) + ɑ"])
     
     
     var builtIn = ""
-    if roomData.addInfo.builtIn { builtIn = "있음" } else { builtIn = "없음"}
+    if bangData.builtIn { builtIn = "있음" } else { builtIn = "없음"}
     var elevator = ""
-    if roomData.addInfo.elevator { elevator = "있음" } else { elevator = "없음" }
+    if bangData.elevator { elevator = "있음" } else { elevator = "없음" }
     var pet = ""
-    if roomData.addInfo.pet { pet = "가능" } else { pet = "불가능"}
+    if bangData.pet { pet = "가능" } else { pet = "불가능"}
     var balcony = ""
-    if roomData.addInfo.balcony { balcony = "있음" } else { balcony = "없음" }
+    if bangData.veranda { balcony = "있음" } else { balcony = "없음" }
     var charterLoan = ""
-    if roomData.addInfo.charterLoan { charterLoan = "가능" } else { charterLoan = "불가능" }
+    if bangData.depositLoan { charterLoan = "가능" } else { charterLoan = "불가능" }
     detailInfoView.addSubviews([detailInfoLabel,detailInfoImageView, detailInfoStackView])
-    detailInfoStackView.configure(titles: ["\(roomData.baseInfo.sellStyle)", roomData.baseInfo.floorOfthisRoom + " / \(roomData.baseInfo.floorOfthisBuilding)층", "\(roomData.baseInfo.dedicatedArea)m² / \(roomData.baseInfo.supplyArea)m²", roomData.addInfo.heatingType, builtIn, elevator, pet, balcony, charterLoan, roomData.baseInfo.ableDaysToMoveIn])
+    detailInfoStackView.configure(titles: ["\(bangData.type)", bangData.floor + "/ \(bangData.totalFloor)", "\(bangData.areaChar)", bangData.heatingType.rawValue, builtIn, elevator, pet, balcony, charterLoan, bangData.moveInChar.rawValue])
     
     
     setupConstraints()
@@ -384,17 +401,16 @@ class MainRoomTableViewCell: UITableViewCell {
 extension MainRoomTableViewCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if collectionView == self.collectionView {
-      return roomData.images.count
+      return bangData.postimage.count
     } else {
-      return optionArr.count
+      return bangData.optionSet.count
     }
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     if collectionView == self.collectionView {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainRoomCollectionViewCell.identifier, for: indexPath) as! MainRoomCollectionViewCell
-      let images = roomData.images
-      let url = URL(string: images[indexPath.row].image)
+      let url = URL(string: "https://wpsdabangapi.s3.amazonaws.com/\(bangData.postimage[indexPath.row])")
       cell.imageView.kf.setImage(with: url)
       cell.imageView.contentMode = .scaleAspectFill
       return cell
@@ -402,10 +418,11 @@ extension MainRoomTableViewCell: UICollectionViewDataSource {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Option", for: indexPath)
       cell.contentView.backgroundColor = UIColor(named: "CostCellColor")
       let label = UILabel().then {
-        $0.text = optionArr[indexPath.row]
+        $0.text = bangData.optionSet[indexPath.row].rawValue
         $0.textColor = .gray
         $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
       }
+      print(bangData.optionSet[indexPath.row].rawValue)
       cell.contentView.addSubview(label)
       label.snp.makeConstraints {
         $0.center.equalToSuperview()
@@ -427,15 +444,15 @@ extension MainRoomTableViewCell: UICollectionViewDelegateFlowLayout {
     if collectionView == self.collectionView {
       return CGSize(width: NewMainRoomViewController.frammm.width, height: NewMainRoomViewController.frammm.height/3)
     } else {
-      if optionArr[indexPath.row].count == 3 {
+      if bangData.optionSet.count == 3 {
         return CGSize(width: 50, height: 25)
-      } else if optionArr[indexPath.row].count == 4 {
+      } else if bangData.optionSet.count == 4 {
         return CGSize(width: 60, height: 25)
-      } else if optionArr[indexPath.row].count == 5 {
+      } else if bangData.optionSet.count == 5 {
         return CGSize(width: 70, height: 25)
-      } else if optionArr[indexPath.row].count == 2 {
+      } else if bangData.optionSet.count == 2 {
         return CGSize(width: 40, height: 25)
-      } else if optionArr[indexPath.row].count == 6 {
+      } else if bangData.optionSet.count == 6 {
         return CGSize(width: 80, height: 25)
       } else {
         return CGSize(width: 50, height: 25)
