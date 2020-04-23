@@ -10,11 +10,23 @@ import UIKit
 import Alamofire
 import GoogleMaps
 import GooglePlaces
-public let DEFAULT_CAMERA_POSITION = GMSCameraPosition(latitude: 37.5666102, longitude: 126.9783881, zoom: 18)
 
+public let DEFAULT_CAMERA_POSITION = GMSCameraPosition(latitude: 37.5666102, longitude: 126.9783881, zoom: 18)
+class POIItem: NSObject, GMUClusterItem {
+  var position: CLLocationCoordinate2D
+  var name: String!
+  init(position: CLLocationCoordinate2D, name: String) {
+    self.position = position
+    self.name = name
+  }
+}
+let kClusterItemCount = 10000
+let kCameraLatitude = 37.5666102
+let kCameraLongitude = 126.9783881
 class MapViewController: UIViewController{
   // MARK: - Property
-  let data = BangData.shared.data
+  private let data = BangData.shared.data
+  private var clusterManager: GMUClusterManager!
   private let topView = UIView().then {
     $0.backgroundColor = .white
   }
@@ -27,9 +39,7 @@ class MapViewController: UIViewController{
   }
   private var mapTest = GMSMapView().then {
     $0.showsLargeContentViewer = true
-    
     $0.isMyLocationEnabled = true
-    
     $0.settings.compassButton = true
     $0.settings.zoomGestures = true
   }
@@ -38,9 +48,7 @@ class MapViewController: UIViewController{
     $0.desiredAccuracy = kCLLocationAccuracyBest
     $0.startUpdatingLocation()
   }
-  
   //  private var googleMaps: GMSMapView!
-  
   var currentPlace = CLLocationCoordinate2D()
   private let myLocationButton = UIButton().then {
     $0.setImage(UIImage(named: "MyLocationImage"), for: .normal)
@@ -77,7 +85,6 @@ class MapViewController: UIViewController{
     $0.showsHorizontalScrollIndicator = false
   }
   private var stackView: UIStackView!
-  
   private let selectButtons = [
     MapFilterButton(title: "원룸", tag: 0).then{
       $0.setTitleColor(.black, for: .normal)
@@ -115,10 +122,15 @@ class MapViewController: UIViewController{
     $0.setTitleColor(#colorLiteral(red: 0.4619160891, green: 0.4667593241, blue: 0.4709950089, alpha: 1), for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14)
   }
+  private let tableView = UITableView().then {
+    $0.register(RoomInfoCell.self, forCellReuseIdentifier: RoomInfoCell.identifier)
+  }
   var count = 0
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.view.backgroundColor = .white
+    tableView.dataSource = self
     locationManager.delegate = self
     let coor = locationManager.location?.coordinate
     let latitude = coor?.latitude
@@ -126,6 +138,17 @@ class MapViewController: UIViewController{
     mapTest.camera = GMSCameraPosition.camera(withLatitude: latitude!,
                                               longitude: longtitude!,
                                               zoom: 15)
+//    print(data[10].address.loadAddress)
+    let iconGenerator = GMUDefaultClusterIconGenerator()
+    let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
+    let renderer = GMUDefaultClusterRenderer(mapView: mapTest, clusterIconGenerator: iconGenerator)
+    clusterManager = GMUClusterManager(map: mapTest, algorithm: algorithm, renderer: renderer)
+    // Generate and add random items to the cluster manager.
+    generateClusterItems()
+    // Call cluster() after items have been added to perform the clustering and rendering on map.
+    clusterManager.cluster()
+    // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
+    clusterManager.setDelegate(self, mapDelegate: self)
     setupUI()
   }
   // MARK: - Action
@@ -193,13 +216,11 @@ class MapViewController: UIViewController{
       $0.leading.equalTo(mapTest.snp.leading).offset(10)
       $0.height.width.equalTo(36)
     }
-    
     safeButton.snp.makeConstraints {
       $0.top.equalTo(myLocationButton.snp.bottom).offset(15)
       $0.leading.equalTo(mapTest.snp.leading).offset(10)
       $0.height.width.equalTo(36)
     }
-    
     siseButton.snp.makeConstraints {
       $0.top.equalTo(safeButton.snp.bottom).offset(15)
       $0.leading.equalTo(mapTest.snp.leading).offset(10)
@@ -229,21 +250,17 @@ class MapViewController: UIViewController{
     }
   }
 }
-extension MapViewController: GMSMapViewDelegate {
-  //  func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
-  //    let location: CLLocation? = mapTest.myLocation
-  //     if location != nil {
-  //         mapTest.animate(toLocation: (location?.coordinate)!)
-  //     }
-  //    return true
-  //  }
+
+extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
+  func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
+    print("didLongPressAt")
+  }
   func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
     print("didTapAt")
   }
   func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
     print("didChange")
   }
-  
   func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
     let findLocation = mapView.camera.target
     guard let text = mapView.myLocation?.coordinate else { return }
@@ -269,18 +286,57 @@ extension MapViewController: GMSMapViewDelegate {
         self.count = 0
       }
     }
-    let marker = CustomMarker(labelText: "25")
-    marker.position = mapView.camera.target
-    marker.map = mapView //your mapView object
+//    let marker = CustomMarker(labelText: "25")
+//    marker.position = mapView.camera.target
+//    marker.map = mapView //your mapView object
     print("mapViewDidFinishTileRendering")
   }
-  func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
-    print("didLongPressAt")
+  // MARK: - GMUMapViewDelegate
+  func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+    if let poiItem = marker.userData as? POIItem {
+      NSLog("Did tap marker for cluster item \(poiItem.name)")
+    } else {
+      NSLog("Did tap a normal marker")
+    }
+    return false
+  }
+  // MARK: - GMUClusterManagerDelegate
+  func clusterManager(_ clusterManager: GMUClusterManager, didTap cluster: GMUCluster) -> Bool {
+    let newCamera = GMSCameraPosition.camera(withTarget: cluster.position,
+      zoom: mapTest.camera.zoom + 1)
+    let update = GMSCameraUpdate.setCamera(newCamera)
+    mapTest.moveCamera(update)
+    return false
+  }
+  /// cluster manager.
+  private func generateClusterItems() {
+    let extent = 0.2
+    for index in 1...kClusterItemCount {
+      let lat = kCameraLatitude + extent * randomScale()
+      let lng = kCameraLongitude + extent * randomScale()
+      let name = "Item \(index)"
+      let item = POIItem(position: CLLocationCoordinate2DMake(lat, lng), name: name)
+      clusterManager.add(item)
+    }
+  }
+  /// Returns a random value between -1.0 and 1.0.
+  private func randomScale() -> Double {
+    return Double(arc4random()) / Double(UINT32_MAX) * 2.0 - 1.0
   }
 }
 extension MapViewController: CLLocationManagerDelegate {
   func locationManagerDidPauseLocationUpdates(_ manager: CLLocationManager) {
     print("locationManagerDidPauseLocationUpdates")
+  }
+}
+  // MARK: - TableViewDataSource
+extension MapViewController: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    0
+  }
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: RoomInfoCell.identifier, for: indexPath) as! RoomInfoCell
+    return cell
   }
 }
 
