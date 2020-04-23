@@ -14,7 +14,7 @@ class MainRoomSecondTableViewCell: UITableViewCell {
   
   let roomData = findRoomDataFromRoomID(rooms, roomID: 1)
   
-  let bangData = BangData.shared.data[7]
+  var bangData = BangData.shared.data[7]
   
   private let layout = UICollectionViewFlowLayout().then {
     $0.scrollDirection = .vertical
@@ -87,7 +87,7 @@ class MainRoomSecondTableViewCell: UITableViewCell {
       $0.top.equalToSuperview().offset(25)
       $0.leading.equalToSuperview().offset(20)
     }
-    if roomData.addInfo.option.count <= 5 {
+    if bangData.optionSet.count <= 5 {
       collectionView.snp.makeConstraints {
         $0.top.equalTo(optionLabelView.snp.bottom)
         $0.leading.trailing.equalToSuperview()
@@ -118,6 +118,15 @@ class MainRoomSecondTableViewCell: UITableViewCell {
       $0.height.equalTo(1)
     }
     contentView.clipsToBounds = false
+  }
+  
+  func reloadCollectionView(pk: Int) {
+    let bangDataArr = BangData.shared.data.filter {
+      $0.pk == pk
+    }
+    bangData = bangDataArr[0]
+    
+    
   }
   
 }

@@ -129,7 +129,7 @@ class MainRoomTableViewCell: UITableViewCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    setupUI()
+//    setupUI()
   }
   
   required init?(coder: NSCoder) {
@@ -140,7 +140,13 @@ class MainRoomTableViewCell: UITableViewCell {
     super.layoutSubviews()
   }
   
-  func setupUI() {
+  
+  func setupUI(pk: Int) {
+    let bangDataArr = BangData.shared.data.filter {
+      $0.pk == pk
+    }
+    bangData = bangDataArr[0]
+    
     
     if bangData.salesForm.type == .월세 {
       
@@ -401,6 +407,7 @@ class MainRoomTableViewCell: UITableViewCell {
 extension MainRoomTableViewCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if collectionView == self.collectionView {
+      
       return bangData.postimage.count
     } else {
       return bangData.optionSet.count
