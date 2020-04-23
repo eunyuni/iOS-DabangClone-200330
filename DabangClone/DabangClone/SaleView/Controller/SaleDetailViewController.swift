@@ -78,9 +78,7 @@ class SaleDetailViewController: UIViewController {
       $0.leading.trailing.equalToSuperview()
       $0.height.equalTo(88)
     }
-    
   }
-  
 }
 
 
@@ -125,9 +123,6 @@ extension SaleDetailViewController: UITableViewDataSource {
     case 10:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailRecommendCell.identifier, for: indexPath) as! SaleDetailRecommendCell
       return cell
-      //      case 3, 5:
-      //      let cell = tableView.dequeueReusableCell(withIdentifier: GrayLineViewCell.identifier, for: indexPath) as! GrayLineViewCell
-    //      return cell
     default:
       return UITableViewCell()
     }
@@ -148,21 +143,15 @@ extension SaleDetailViewController: SaleDetailScheduleCellDelegate {
   }
 }
 
-
 extension SaleDetailViewController {
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    print(scrollView.contentOffset.y)
     if scrollView.contentOffset.y < 192.0 {
       self.navigationView.backgroundColor? = UIColor.white.withAlphaComponent(scrollView.contentOffset.y / 192)
-      
-      //      navigationController?.navigationBar.barStyle = .default
     }
-    
     if scrollView.contentOffset.y < 132.0 {
     navigationController?.navigationBar.barStyle = .black
     }else {
       navigationController?.navigationBar.barStyle = .default
     }
-    
   }
 }
