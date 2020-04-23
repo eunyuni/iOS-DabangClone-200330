@@ -53,7 +53,6 @@ class MapViewController: UIViewController{
   var currentPlace = CLLocationCoordinate2D()
   private let myLocationButton = UIButton().then {
     $0.setImage(UIImage(named: "MyLocationImage"), for: .normal)
-    $0.backgroundColor = .red
     $0.layer.cornerRadius = 4
     $0.clipsToBounds = true
   }
@@ -124,8 +123,7 @@ class MapViewController: UIViewController{
     $0.titleLabel?.font = .systemFont(ofSize: 14)
   }
   private let tableView = UITableView().then {
-    $0.backgroundColor = .red
-    $0.register(MapTableViewCell.self, forCellReuseIdentifier: MapTableViewCell.identifier)
+    $0.register(RoomInfoCell.self, forCellReuseIdentifier: RoomInfoCell.identifier)
   }
   var count = 0
   
@@ -202,44 +200,47 @@ class MapViewController: UIViewController{
       mapTest.animate(toLocation: (location?.coordinate)!)
       mapTest.animate(toZoom: 15)
     }
-    UIView.animate(withDuration: 1) {
-      self.bottomView.transform = .identity
-      self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height / 2 )
-    }
     
   }
   
   @objc private func didTapAllRoomButton(_ sender: UIButton) {
     print("didTapAllRoomButton")
-    let screenSize = UIScreen.main.bounds.size
-    bottomView.backgroundColor = .black
-    UIView.animate(withDuration: 1) {
-      self.bottomView.transform = .init(translationX: 0, y: -self.view.frame.maxY / 2)
-      //      self.tableView.snp.updateConstraints {
-      //        $0.top.equalTo(self.bottomView.snp.bottom)
-      //      }
-      
-      self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height / 2 )
+    UIView.animate(withDuration: 0.5) {
+      self.bottomView.frame = CGRect(x: 0, y: 300, width: self.view.frame.width, height: 60 )
+      self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height )
     }
   }
   
   @objc private func didPanGesture(_ sender: UIPanGestureRecognizer) {
     let transition = sender.translation(in: bottomView)
-    if bottomView.frame.minY > scrollView.frame.maxY {
-      let changedY = bottomView.center.y + transition.y
-      let changedTableY = tableView.center.y + transition.y
-      bottomView.center = CGPoint(x: self.view.center.x, y: changedY)
-      tableView.center = CGPoint(x: self.view.center.x, y: changedTableY)
-      sender.setTranslation(CGPoint.zero, in: bottomView)
-      sender.setTranslation(CGPoint.zero, in: tableView)
-    }
-    if sender.state == .ended {
-      
-      UIView.animate(withDuration: 1) {
-        self.bottomView.transform = .init(translationX: 0, y: -self.bottomView.frame.minY + self.scrollView.frame.maxY)
-        self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height / 2 )
-        
+    switch sender.state {
+    case .began: break
+    case .changed:
+      if bottomView.frame.minY >= scrollView.frame.maxY && bottomView.frame.minY <= mapTest.frame.maxY{
+        let changedY = bottomView.center.y + transition.y
+        let changedTableY = tableView.center.y + transition.y
+        bottomView.center = CGPoint(x: self.view.center.x, y: changedY)
+        tableView.center = CGPoint(x: self.view.center.x, y: changedTableY)
+        sender.setTranslation(CGPoint.zero, in: bottomView)
+        sender.setTranslation(CGPoint.zero, in: tableView)
+      } else {
+
       }
+    case .ended:
+      print(bottomView.frame.minY)
+      if bottomView.frame.minY < 320 {
+        UIView.animate(withDuration: 0.5) {
+          self.bottomView.frame = CGRect(x: 0, y: self.scrollView.frame.maxY, width: self.view.frame.width, height: 60 )
+          self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height )
+        }
+      } else {
+        UIView.animate(withDuration: 0.5) {
+          self.bottomView.frame = CGRect(x: 0, y: self.mapTest.frame.maxY, width: self.view.frame.width, height: 60 )
+          self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height )
+        }
+      }
+    default:
+      break
     }
   }
   // MARK: - setupUI
