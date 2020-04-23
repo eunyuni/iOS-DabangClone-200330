@@ -6,6 +6,13 @@
 //
 
 import UIKit
+import Alamofire
+
+class BangData {
+  static let shared = BangData()
+  
+  var data: [DabangElement] = []
+}
 
 class HomeViewController: UIViewController {
   // MARK: - Property
@@ -21,6 +28,7 @@ class HomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .white
+    getTest()
     setupUI()
   }
   
@@ -97,6 +105,25 @@ extension HomeViewController: UITableViewDataSource {
         return cell
       }
     }
+  }
+  
+  private func getTest() {
+    
+    let url = URL(string: "https://moonpeter.com/posts/")
+    
+    
+    AF
+      .request(url!, method: .get, parameters: .none, encoding: URLEncoding.default, headers: .none, interceptor: .none)
+      .responseData(queue: .global(), completionHandler: { (response) in
+        print(response.data as Any)
+        
+        if let jsonObjects = try? JSONDecoder().decode([DabangElement].self, from: response.data!) {
+          BangData.shared.data = jsonObjects
+          print(BangData.shared.data[10].address)
+        } else {
+          print("fail")
+        }
+      })
   }
 }
 
