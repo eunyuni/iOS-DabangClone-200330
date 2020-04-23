@@ -34,7 +34,7 @@
 		15315A5F244857250033EA47 /* CompareDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A50244857250033EA47 /* CompareDetailView.swift */; };
 		15315A60244857250033EA47 /* CompareHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A51244857250033EA47 /* CompareHeaderView.swift */; };
 		15315A61244857250033EA47 /* CompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A52244857250033EA47 /* CompareView.swift */; };
-		15315A62244857250033EA47 /* BrokerInfoAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A53244857250033EA47 /* BrokerInfoAlertVC.swift */; };
+		15315A62244857250033EA47 /* BrokerInfoPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A53244857250033EA47 /* BrokerInfoPopUpVC.swift */; };
 		15315A63244857250033EA47 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A54244857250033EA47 /* EmptyStateView.swift */; };
 		15315A66244857680033EA47 /* BudongsanInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A64244857670033EA47 /* BudongsanInfoCell.swift */; };
 		15315A67244857680033EA47 /* RoomInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A65244857680033EA47 /* RoomInfoCell.swift */; };
@@ -268,7 +268,7 @@
 		15315A50244857250033EA47 /* CompareDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareDetailView.swift; sourceTree = "<group>"; };
 		15315A51244857250033EA47 /* CompareHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareHeaderView.swift; sourceTree = "<group>"; };
 		15315A52244857250033EA47 /* CompareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareView.swift; sourceTree = "<group>"; };
-		15315A53244857250033EA47 /* BrokerInfoAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerInfoAlertVC.swift; sourceTree = "<group>"; };
+		15315A53244857250033EA47 /* BrokerInfoPopUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerInfoPopUpVC.swift; sourceTree = "<group>"; };
 		15315A54244857250033EA47 /* EmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		15315A64244857670033EA47 /* BudongsanInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudongsanInfoCell.swift; sourceTree = "<group>"; };
 		15315A65244857680033EA47 /* RoomInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomInfoCell.swift; sourceTree = "<group>"; };
@@ -644,7 +644,7 @@
 			children = (
 				15315A4F244857250033EA47 /* CompareVC SubViews */,
 				15315A52244857250033EA47 /* CompareView.swift */,
-				15315A53244857250033EA47 /* BrokerInfoAlertVC.swift */,
+				15315A53244857250033EA47 /* BrokerInfoPopUpVC.swift */,
 				15315A54244857250033EA47 /* EmptyStateView.swift */,
 			);
 			path = Views;
@@ -1305,7 +1305,7 @@
 				E77D8C6F244348D500A263AE /* SaleDetailMainCell.swift in Sources */,
 				1516004D24285FCB0003DDCF /* SignUpViewController.swift in Sources */,
 				E7E60443243B1AC30050D540 /* FindBottomView.swift in Sources */,
-				15315A62244857250033EA47 /* BrokerInfoAlertVC.swift in Sources */,
+				15315A62244857250033EA47 /* BrokerInfoPopUpVC.swift in Sources */,
 				E7BB1C0A243208A300C66B48 /* CountfloorsViewController.swift in Sources */,
 				1516004F24287E450003DDCF /* HomeViewController.swift in Sources */,
 				15315A67244857680033EA47 /* RoomInfoCell.swift in Sources */,

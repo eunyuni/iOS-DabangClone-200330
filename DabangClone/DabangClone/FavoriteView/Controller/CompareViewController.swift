@@ -166,7 +166,7 @@ class CompareViewController: UIViewController {
     // MARK: - Action Handler
     
     @objc func didTapAskButton(_ sender: UIButton) {
-        let brokerInfoVC = BrokerInfoAlertVC()
+        let brokerInfoVC = BrokerInfoPopUpVC()
         brokerInfoVC.modalPresentationStyle = .overFullScreen
         brokerInfoVC.modalTransitionStyle = .crossDissolve
         present(brokerInfoVC, animated: true)
