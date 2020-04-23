@@ -97,8 +97,8 @@ class MapViewController: UIViewController{
     MapFilterButton(title: "추가필터 ⌄", tag: 6),
     MapFilterButton(title: "거래종류 ⌄", tag: 7),
   ]
-  private let filterImage = UIImageView().then {
-    $0.image = UIImage(named: "FilterImage")
+  private let filterButton = UIButton().then {
+    $0.setImage(UIImage(named: "FilterImage"), for: .normal)
   }
   private let bottomView = UIView().then {
     $0.backgroundColor = .white
@@ -123,7 +123,7 @@ class MapViewController: UIViewController{
     $0.titleLabel?.font = .systemFont(ofSize: 14)
   }
   private let tableView = UITableView().then {
-    $0.register(RoomInfoCell.self, forCellReuseIdentifier: RoomInfoCell.identifier)
+    $0.register(MapTableViewCell.self, forCellReuseIdentifier: MapTableViewCell.identifier)
   }
   var count = 0
   
@@ -193,6 +193,10 @@ class MapViewController: UIViewController{
     
   }
   // MARK: - Action
+  @objc private func didTapFilterButton(_ sender: UIButton) {
+    let vc = FilterViewController()
+    self.present(vc, animated: true, completion: nil)
+  }
   @objc private func didTapButton(_ sender: UIButton) {
     //    print("didTapButton")
     let location: CLLocation? = mapTest.myLocation
@@ -200,19 +204,27 @@ class MapViewController: UIViewController{
       mapTest.animate(toLocation: (location?.coordinate)!)
       mapTest.animate(toZoom: 15)
     }
-    
+    UIView.animate(withDuration: 0.1) {
+      self.bottomView.frame = CGRect(x: 0, y: self.mapTest.frame.maxY, width: self.view.frame.width, height: 60 )
+      self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height )
+    }
+
   }
   
   @objc private func didTapAllRoomButton(_ sender: UIButton) {
     print("didTapAllRoomButton")
+    
+    guard let tabbarframe = tabBarController?.tabBar.frame else { return }
+
     UIView.animate(withDuration: 0.5) {
-      self.bottomView.frame = CGRect(x: 0, y: 300, width: self.view.frame.width, height: 60 )
-      self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height )
+      self.bottomView.frame = CGRect(x: 0, y: 320, width: self.view.frame.width, height: 60 )
+      self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: tabbarframe.minY - 380 )
     }
   }
   
   @objc private func didPanGesture(_ sender: UIPanGestureRecognizer) {
     let transition = sender.translation(in: bottomView)
+    guard let tabbarframe = tabBarController?.tabBar.frame else { return }
     switch sender.state {
     case .began: break
     case .changed:
@@ -231,7 +243,7 @@ class MapViewController: UIViewController{
       if bottomView.frame.minY < 320 {
         UIView.animate(withDuration: 0.5) {
           self.bottomView.frame = CGRect(x: 0, y: self.scrollView.frame.maxY, width: self.view.frame.width, height: 60 )
-          self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height )
+          self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: tabbarframe.minY - self.scrollView.frame.maxY - 60 )
         }
       } else {
         UIView.animate(withDuration: 0.5) {
@@ -247,12 +259,13 @@ class MapViewController: UIViewController{
   private func setupUI() {
     mapTest.delegate = self
     self.myLocationButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
-    self.view.addSubviews([topView,scrollView, filterImage ,mapTest, myLocationButton,safeButton,siseButton,bottomView,tableView])
+    self.view.addSubviews([topView,scrollView, filterButton ,mapTest, myLocationButton,safeButton,siseButton,bottomView,tableView])
     self.topView.addSubviews([titleLabel, searchImage])
     self.bottomView.addSubviews([allRoomButton,apartButtun,officeButtom,bottomLineView])
     self.bottomView.addGestureRecognizer(panGesture)
     panGesture.addTarget(self, action: #selector(didPanGesture(_:)))
     allRoomButton.addTarget(self, action: #selector(didTapAllRoomButton(_:)), for: .touchUpInside)
+    filterButton.addTarget(self, action: #selector(didTapFilterButton(_:)), for: .touchUpInside)
     stackView = UIStackView(arrangedSubviews: selectButtons)
     stackView.axis = .horizontal
     stackView.distribution = .equalSpacing
@@ -281,10 +294,10 @@ class MapViewController: UIViewController{
     scrollView.snp.makeConstraints {
       $0.top.equalTo(topView.snp.bottom)
       $0.leading.equalToSuperview()
-      $0.trailing.equalTo(filterImage.snp.leading)
+      $0.trailing.equalTo(filterButton.snp.leading)
       $0.height.equalTo(47)
     }
-    filterImage.snp.makeConstraints {
+    filterButton.snp.makeConstraints {
       $0.trailing.equalToSuperview()
       $0.centerY.equalTo(scrollView.snp.centerY)
       $0.height.equalTo(scrollView.snp.height)
@@ -429,6 +442,18 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     } else {
       NSLog("Did tap a normal marker")
     }
+    // 테스트 필요
+    let newCamera = GMSCameraPosition.camera(withTarget: marker.position,
+      zoom: mapTest.camera.zoom)
+    let update = GMSCameraUpdate.setCamera(newCamera)
+    mapTest.moveCamera(update)
+    
+    if let tabbarframe = tabBarController?.tabBar.frame {
+      UIView.animate(withDuration: 0.5) {
+        self.bottomView.frame = CGRect(x: 0, y: 340, width: self.view.frame.width, height: 60 )
+        self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: tabbarframe.minY - 400 )
+      }
+    }
     
     guard let cluster = marker.userData as? GMUCluster else { return false }
     if pkArrInCluster.count != 0 {
@@ -443,6 +468,7 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     
     print("didTap CLUSTER")
     }
+    
     return true
   }
   // MARK: - GMUClusterManagerDelegate
