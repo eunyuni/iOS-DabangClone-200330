@@ -9,9 +9,13 @@
 import UIKit
 import SnapKit
 
-class BrokerInfoAlertVC: UIViewController {
+class BrokerInfoPopUpVC: UIViewController {
 
-    var brokerData: BudongsanInfo!
+    var brokerData: BudongsanInfo! {
+        didSet{
+            
+        }
+    }
     
     let containerView = UIView()
     let brokerOfficeNameLabel: UILabel = {
@@ -150,8 +154,8 @@ class BrokerInfoAlertVC: UIViewController {
         }
     }
     
-    func set(brokerData: Room) {
-        
+    func set(brokerData: BudongsanInfo) {
+        self.brokerData = brokerData
     }
     
     @objc private func handleButtons(_ sender: UIButton) {
