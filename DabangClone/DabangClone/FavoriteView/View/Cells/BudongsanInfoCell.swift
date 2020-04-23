@@ -76,7 +76,7 @@ class BudongsanInfoCell: UITableViewCell {
     }
     
     private func configure() {
-        backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        backgroundColor = UIColor(white: 0.95, alpha: 1)
         contentView.backgroundColor = .white
         let roomInfoView = roomInfoCell.overralContainerView
         

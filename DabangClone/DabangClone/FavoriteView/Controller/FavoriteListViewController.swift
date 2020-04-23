@@ -42,10 +42,10 @@ class FavoriteListViewController: UIViewController {
                 showCompareViewButton(isCompareMode: false)
             }
             
-            if currentTag == 1 || currentTag == 3 {
-                tableView.separatorStyle = .none
-            } else {
+            if currentTag == 0 || currentTag == 2 {
                 tableView.separatorStyle = .singleLine
+            } else {
+                tableView.separatorStyle = .none
             }
             
             if currentTag == 4 {
