@@ -20,6 +20,7 @@ class POIItem: NSObject, GMUClusterItem {
     self.name = name
   }
 }
+
 let kClusterItemCount = 10000
 let kCameraLatitude = 37.5666102
 let kCameraLongitude = 126.9783881
@@ -123,7 +124,7 @@ class MapViewController: UIViewController{
     $0.titleLabel?.font = .systemFont(ofSize: 14)
   }
   private let tableView = UITableView().then {
-    $0.register(RoomInfoCell.self, forCellReuseIdentifier: RoomInfoCell.identifier)
+    $0.register(MapTableViewCell.self, forCellReuseIdentifier: MapTableViewCell.identifier)
   }
   var count = 0
   
@@ -135,6 +136,7 @@ class MapViewController: UIViewController{
     super.viewDidLoad()
     self.view.backgroundColor = .white
     tableView.dataSource = self
+    tableView.delegate = self
     locationManager.delegate = self
     let coor = locationManager.location?.coordinate
     let latitude = coor?.latitude
@@ -425,14 +427,17 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
   // MARK: - GMUMapViewDelegate
   func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
     if let poiItem = marker.userData as? POIItem {
-      NSLog("Did tap marker for cluster item \(poiItem.name)")
+      pkArrInCluster.removeAll()
+      pkArrInCluster.append(poiItem.name)
+      tableView.reloadData()
     } else {
       NSLog("Did tap a normal marker")
-    }
+    
     
     guard let cluster = marker.userData as? GMUCluster else { return false }
     if pkArrInCluster.count != 0 {
       pkArrInCluster.removeAll()
+      tableView.reloadData()
     } else {
     cluster.items.forEach {
       guard let a = $0 as? POIItem else {return}
@@ -443,6 +448,7 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     
     print("didTap CLUSTER")
     }
+      }
     return true
   }
   // MARK: - GMUClusterManagerDelegate
@@ -487,6 +493,18 @@ extension MapViewController: UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: MapTableViewCell.identifier, for: indexPath) as! MapTableViewCell
     cell.configure(pk: Int(pkArrInCluster[indexPath.row]) ?? 0)
     return cell
+  }
+}
+
+extension MapViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let selectedCell = tableView.cellForRow(at: indexPath) as! MapTableViewCell
+    print(selectedCell.roomPK)
+    let vc = NewMainRoomViewController() as NewMainRoomViewController
+    vc.pk = selectedCell.roomPK
+    vc.setTableViewReload()
+    vc.modalPresentationStyle = .fullScreen
+    navigationController?.pushViewController(vc, animated: true)
   }
 }
 

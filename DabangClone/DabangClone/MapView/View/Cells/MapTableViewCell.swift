@@ -12,6 +12,8 @@ class MapTableViewCell: UITableViewCell {
     static let identifier = "MapTableViewCell"
 
     // MARK: - Properties
+  
+  var roomPK: Int = 0
 
     let checkButtonToCompare = UIButton()
     
@@ -71,6 +73,7 @@ class MapTableViewCell: UITableViewCell {
       $0.pk == pk
     }
     roomPkData[0].address.loadAddress
+    roomPK = pk
     setUIFromData(data: roomPkData[0])
   }
   
