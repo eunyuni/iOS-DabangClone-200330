@@ -26,6 +26,10 @@ class InquiryViewController: UIViewController {
     setupUI()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    self.navigationController?.navigationBar.isHidden = false
+  }
+  
   // MARK: -Action
   
   

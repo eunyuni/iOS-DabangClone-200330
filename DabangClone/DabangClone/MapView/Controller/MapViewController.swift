@@ -119,7 +119,6 @@ class MapViewController: UIViewController{
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    "⌄⌃"
     locationManager.delegate = self
     let coor = locationManager.location?.coordinate
     let latitude = coor?.latitude
