@@ -14,6 +14,8 @@ class MainRoomSecondTableViewCell: UITableViewCell {
   
   let roomData = findRoomDataFromRoomID(rooms, roomID: 1)
   
+  let bangData = BangData.shared.data[7]
+  
   private let layout = UICollectionViewFlowLayout().then {
     $0.scrollDirection = .vertical
   }
@@ -122,18 +124,21 @@ class MainRoomSecondTableViewCell: UITableViewCell {
 
 extension MainRoomSecondTableViewCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return roomData.addInfo.option.count
+    return bangData.optionSet.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainRoomSecondCollectionViewCell.identifier, for: indexPath) as! MainRoomSecondCollectionViewCell
-    let imageURL = URL(string: roomData.addInfo.option[indexPath.row].imageName())
+    let imageURL = URL(string: bangData.optionSet[indexPath.row].imageName())
+    print("--------------------Second CollectionView ----------------")
+//    let imageURL = URL(string: roomData.addInfo.option[indexPath.row].imageName())
+    print(bangData.optionSet[indexPath.row].imageName())
       let image = UIView(SVGURL: imageURL!)
         image.frame = cell.imageView.frame
         image.center = cell.imageView.center
         cell.imageView.addSubview(image)
         cell.imageView.contentMode = .scaleAspectFit
-    cell.optionLabel.text = roomData.addInfo.option[indexPath.row].rawValue
+    cell.optionLabel.text = bangData.optionSet[indexPath.row].rawValue
     return cell
   }
 }
@@ -145,7 +150,7 @@ extension MainRoomSecondTableViewCell: UICollectionViewDelegate {
 extension MainRoomSecondTableViewCell: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    if roomData.addInfo.option.count <= 5 {
+    if bangData.optionSet.count <= 5 {
       return CGSize(width: collectionView.frame.width/5 - 4, height: collectionView.frame.height)
     } else {
       return CGSize(width: collectionView.frame.width/5 - 4, height: collectionView.frame.height/2)

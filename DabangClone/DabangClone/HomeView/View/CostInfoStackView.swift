@@ -135,7 +135,9 @@ class CostInfoStackView: UIStackView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func configure(titles: [String]) {
+  func configure(salesFormType: String, titles: [String]) {
+    costCellTitleLabel.text = salesFormType
+    
     if titles.count == 6 {
     titles.enumerated().forEach { (idx, ele) in
        if idx == 5 {

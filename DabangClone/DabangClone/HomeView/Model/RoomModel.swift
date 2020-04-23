@@ -65,40 +65,40 @@ enum Options: String {
 }
 
 extension Options {
-  func imageName() -> String {
-    var imageName = ""
-    switch self {
-    case .에어컨:
-      imageName = "https://www.dabangapp.com/static/media/aircondition.44b18cc8.svg"
-    case .세탁기:
-      imageName = "https://www.dabangapp.com/static/media/laundry.0a16ead7.svg"
-    case .책상:
-      imageName = "https://www.dabangapp.com/static/media/desk.748a98e2.svg"
-    case .신발장:
-      imageName = "https://www.dabangapp.com/static/media/shoes.bb4d329a.svg"
-    case .인덕션:
-      imageName = "https://www.dabangapp.com/static/media/induction.5e864e8c.svg"
-    case .전자도어락:
-      imageName = "https://www.dabangapp.com/static/media/doorlock.7232c733.svg"
-    case .냉장고:
-      imageName = "https://www.dabangapp.com/static/media/refrigerator.e02bcaa9.svg"
-    case .전자레인지:
-      imageName = "https://www.dabangapp.com/static/media/microoven.8ea02a25.svg"
-    case .가스레인지:
-      imageName = "https://www.dabangapp.com/static/media/gas.fbf3fa6e.svg"
-    case .침대:
-      imageName = "https://www.dabangapp.com/static/media/bed.df0ca1a5.svg"
-    case .TV:
-      imageName = "https://www.dabangapp.com/static/media/tv.476aa44b.svg"
-    case .옷장:
-      imageName = "https://www.dabangapp.com/static/media/closet.c5f64c5d.svg"
-    case .비데:
-      imageName = "https://www.dabangapp.com/static/media/bidet.3bc9f2e6.svg"
-    default:
-      break
-    }
-    return imageName
+func imageName() -> String {
+  var imageName = ""
+  switch self {
+  case .에어컨:
+    imageName = "https://www.dabangapp.com/static/media/aircondition.44b18cc8.svg"
+  case .세탁기:
+    imageName = "https://www.dabangapp.com/static/media/laundry.0a16ead7.svg"
+  case .책상:
+    imageName = "https://www.dabangapp.com/static/media/desk.748a98e2.svg"
+  case .신발장:
+    imageName = "https://www.dabangapp.com/static/media/shoes.bb4d329a.svg"
+  case .인덕션:
+    imageName = "https://www.dabangapp.com/static/media/induction.5e864e8c.svg"
+  case .전자도어락:
+    imageName = "https://www.dabangapp.com/static/media/doorlock.7232c733.svg"
+  case .냉장고:
+    imageName = "https://www.dabangapp.com/static/media/refrigerator.e02bcaa9.svg"
+  case .전자레인지:
+    imageName = "https://www.dabangapp.com/static/media/microoven.8ea02a25.svg"
+  case .가스레인지:
+    imageName = "https://www.dabangapp.com/static/media/gas.fbf3fa6e.svg"
+  case .침대:
+    imageName = "https://www.dabangapp.com/static/media/bed.df0ca1a5.svg"
+  case .TV:
+    imageName = "https://www.dabangapp.com/static/media/tv.476aa44b.svg"
+  case .옷장:
+    imageName = "https://www.dabangapp.com/static/media/closet.c5f64c5d.svg"
+  case .비데:
+    imageName = "https://www.dabangapp.com/static/media/bidet.3bc9f2e6.svg"
+  default:
+    break
   }
+  return imageName
+}
 }
 
 
