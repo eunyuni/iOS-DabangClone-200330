@@ -33,23 +33,34 @@ class MoreViewController: UIViewController {
   let userEmail = "user@user.com"
   
   
-  
+  let testTextField = UITextField().then {
+    $0.backgroundColor = .gray
+  }
   
   //MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-//    getTest()
-    let moreView = MoreView(frame: view.safeAreaLayoutGuide.layoutFrame)
+    
+    let moreView = MoreView(frame: self.view.safeAreaLayoutGuide.layoutFrame)
     moreView.delegate = self
-    view.backgroundColor = .white
+    self.view.backgroundColor = .white
     //      navigationController?.pushViewController(LoginViewController(), animated: true)
     
-    setupUI(vc: moreView)
+    self.setupUI(vc: moreView)
+    self.getTest()
+    
+    //      DispatchQueue.global(qos: .background).async {
+    //        print("async start")
+    //        self.getTest()
+    //        print("async end")
+    //      }
+    
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.navigationController?.navigationBar.isHidden = true
+    self.tabBarController?.tabBar.isHidden = false
   }
   
   //MARK: - SetupUI & Constraints
@@ -113,8 +124,7 @@ class MoreViewController: UIViewController {
       let vc = FrequentlyViewController()
       vc.modalPresentationStyle = .fullScreen
       self.navigationController?.pushViewController(vc, animated: true)
-    default:
-      break
+    default:      break
     }
     
   }
@@ -126,21 +136,21 @@ class MoreViewController: UIViewController {
     
     let url = URL(string: "https://moonpeter.com/posts/")
     
-    AF.request(url!, method: .get, parameters: param, encoding: URLEncoding.default, headers: .none, interceptor: .none).responseString { response in
-      
-      guard let jsonObject = try? JSONSerialization.jsonObject(with: response.data!) as? [String: Any] else { return }
-      
-        print(jsonObject)
-     
-      
-    }
- }
+    
+    AF
+      .request(url!, method: .get, parameters: param, encoding: URLEncoding.default, headers: .none, interceptor: .none)
+      .responseString(queue: .global(), encoding: nil, completionHandler: { (response) in
+        if let jsonObjects = try? JSONDecoder().decode([DabangAPI].self, from: response.data!) {
+          print(jsonObjects)
+//          print(jsonObjects)
+        }
+      })
+  }
 }
+
 
 extension MoreViewController: MoreViewDelegate {
   func didTapSellMyRoomButton(_ sender: MoreViewButtons) {
     presentView(sender)
   }
-  
-  
 }

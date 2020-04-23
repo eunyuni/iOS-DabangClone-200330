@@ -24,7 +24,22 @@ class HomeViewController: UIViewController {
     setupUI()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+   super.viewDidAppear(animated)
+    
+    let udDay = (UserDefaults.standard.value(forKey: "TodayPopUp") as? Int) ?? 0
+    if udDay != checkToday() {
+      doFirstViewAlert()
+    }
+  }
+  
+  
   // MARK: - Action
+  private func doFirstViewAlert() {
+   let AlertVC = HomeAlertViewController()
+   AlertVC.modalPresentationStyle = .overFullScreen
+   present(AlertVC, animated: false)
+  }
   
   // MARK: - setupUI
   private func setupUI() {
@@ -43,6 +58,14 @@ class HomeViewController: UIViewController {
     tableView.snp.makeConstraints {
       $0.top.leading.trailing.bottom.equalTo(guide)
     }
+  }
+  
+  private func checkToday() -> Int {
+     let now = Date()
+       let date = DateFormatter()
+       date.locale = Locale(identifier: "ko_kr")
+       date.dateFormat = "dd"
+       return Int(date.string(from: now)) ?? 0
   }
 }
 
