@@ -219,8 +219,8 @@ class MapViewController: UIViewController{
     guard let tabbarframe = tabBarController?.tabBar.frame else { return }
 
     UIView.animate(withDuration: 0.5) {
-      self.bottomView.frame = CGRect(x: 0, y: 320, width: self.view.frame.width, height: 60 )
-      self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: tabbarframe.minY - 380 )
+      self.bottomView.frame = CGRect(x: 0, y: 360, width: self.view.frame.width, height: 60 )
+      self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: tabbarframe.minY - 420 )
     }
   }
   
@@ -445,23 +445,34 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
       tableView.reloadData()
     } else {
       NSLog("Did tap a normal marker")
-    
-    
-    guard let cluster = marker.userData as? GMUCluster else { return false }
-    if pkArrInCluster.count != 0 {
-      pkArrInCluster.removeAll()
-      tableView.reloadData()
-    } else {
-    cluster.items.forEach {
-      guard let a = $0 as? POIItem else {return}
-      pkArrInCluster.append(a.name)
-    }
-      tableView.reloadData()
-    print(pkArrInCluster)
-    
-    print("didTap CLUSTER")
-    }
+      
+      
+      guard let cluster = marker.userData as? GMUCluster else { return false }
+      if pkArrInCluster.count != 0 {
+        pkArrInCluster.removeAll()
+        tableView.reloadData()
+      } else {
+        cluster.items.forEach {
+          guard let a = $0 as? POIItem else {return}
+          pkArrInCluster.append(a.name)
+        }
+        tableView.reloadData()
+        print(pkArrInCluster)
+        
+        print("didTap CLUSTER")
       }
+    }
+    
+    let tabbarframe = tabBarController?.tabBar.frame
+
+    UIView.animate(withDuration: 0.5) {
+      let newCamera = GMSCameraPosition.camera(withTarget: marker.position,
+                                               zoom: self.mapTest.camera.zoom)
+      let update = GMSCameraUpdate.setCamera(newCamera)
+      self.mapTest.moveCamera(update)
+      self.bottomView.frame = CGRect(x: 0, y: 360, width: self.view.frame.width, height: 60 )
+      self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: tabbarframe!.minY - 420 )
+    }
     return true
   }
   // MARK: - GMUClusterManagerDelegate
