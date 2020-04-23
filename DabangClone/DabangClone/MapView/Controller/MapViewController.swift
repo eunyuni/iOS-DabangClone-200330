@@ -450,6 +450,10 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
       guard let cluster = marker.userData as? GMUCluster else { return false }
       if pkArrInCluster.count != 0 {
         pkArrInCluster.removeAll()
+        cluster.items.forEach {
+          guard let a = $0 as? POIItem else {return}
+          pkArrInCluster.append(a.name)
+        }
         tableView.reloadData()
       } else {
         cluster.items.forEach {
