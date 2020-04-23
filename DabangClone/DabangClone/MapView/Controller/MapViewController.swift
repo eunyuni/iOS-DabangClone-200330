@@ -144,16 +144,35 @@ class MapViewController: UIViewController{
     let renderer = GMUDefaultClusterRenderer(mapView: mapTest, clusterIconGenerator: iconGenerator)
     clusterManager = GMUClusterManager(map: mapTest, algorithm: algorithm, renderer: renderer)
     // Generate and add random items to the cluster manager.
-    generateClusterItems()
-    // Call cluster() after items have been added to perform the clustering and rendering on map.
-    clusterManager.cluster()
-    // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
-    clusterManager.setDelegate(self, mapDelegate: self)
-    setupUI()
+//    generateClusterItems()
+    
+    DispatchQueue.main.async {
+       self.mapGoogleGeocoder()
+      
+      DispatchQueue.main.async {
+        self.clusterManager.cluster()
+        
+        DispatchQueue.main.async {
+                self.clusterManager.setDelegate(self, mapDelegate: self)
+
+          DispatchQueue.main.async {
+            self.setupUI()
+          }
+        }
+      }
+    }
+     
+      // Call cluster() after items have been added to perform the clustering and rendering on map.
+      
+      // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
+      
+      
+      
+    
   }
   // MARK: - Action
   @objc private func didTapButton(_ sender: UIButton) {
-    print("didTapButton")
+//    print("didTapButton")
     let location: CLLocation? = mapTest.myLocation
     if location != nil {
       mapTest.animate(toLocation: (location?.coordinate)!)
@@ -259,7 +278,7 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     print("didTapAt")
   }
   func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-    print("didChange")
+//    print("didChange")
   }
   func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
     let findLocation = mapView.camera.target
@@ -267,13 +286,13 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     let duck = GMSGeocoder()
     duck.reverseGeocodeCoordinate(findLocation) { (respone, error) in
       if let address = respone?.firstResult() {
-        print(address.country)
-        print(address.subLocality)
-        print(address.thoroughfare)
-        print(address.postalCode)
-        print(address.lines)
-        print(address.locality)
-        print(address.administrativeArea)
+//        print(address.country)
+//        print(address.subLocality)
+//        print(address.thoroughfare)
+//        print(address.postalCode)
+//        print(address.lines)
+//        print(address.locality)
+//        print(address.administrativeArea)
         self.titleString = ""
         address.lines?[0].forEach({
           if self.count == 3 {
@@ -289,8 +308,42 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
 //    let marker = CustomMarker(labelText: "25")
 //    marker.position = mapView.camera.target
 //    marker.map = mapView //your mapView object
-    print("mapViewDidFinishTileRendering")
+//    print("mapViewDidFinishTileRendering")
   }
+  
+  
+  func mapGoogleGeocoder() {
+    var items: [GMUClusterItem] = []
+    DispatchQueue.global().async {
+      for i in 100...200 {
+      let address = BangData.shared.data[i].address.loadAddress
+      let geoCoder = CLGeocoder()
+      geoCoder.geocodeAddressString(address) { (placemarks, error) in
+          guard
+              let placemarks = placemarks,
+              let location = placemarks.first?.location
+            
+          else {
+              // handle no location found
+              return
+          }
+        let name = "\(BangData.shared.data[i].pk)"
+        let item = POIItem(position: CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude), name: name)
+//        items.append(item)
+        DispatchQueue.main.async {
+                    self.clusterManager.add(item)
+          self.clusterManager.add(items)
+
+        }
+        
+        print("mapGoogleGeocoder : ", location.coordinate)
+          // Use your location
+        }
+      }
+    }
+    
+  }
+  
   // MARK: - GMUMapViewDelegate
   func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
     if let poiItem = marker.userData as? POIItem {

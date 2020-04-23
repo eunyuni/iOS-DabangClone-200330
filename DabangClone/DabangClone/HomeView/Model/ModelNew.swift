@@ -7,6 +7,7 @@ import Foundation
 
 // MARK: - DabangElement
 struct DabangElement: Codable {
+    let pk: Int
     let broker: Broker
     let type: DabangType
     let dabangDescription: String
@@ -34,7 +35,7 @@ struct DabangElement: Codable {
     let postimage: [String]
 
     enum CodingKeys: String, CodingKey {
-        case broker, type
+        case pk, broker, type
         case dabangDescription = "description"
         case address, salesForm, floor, totalFloor, areaChar, supplyAreaInt, supplyAreaChar, shortRent
         case managementSet = "management_set"
