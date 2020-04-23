@@ -165,3 +165,15 @@ extension UISegmentedControl{
         self.setTitleTextAttributes([.foregroundColor: color], for: .normal)
     }
 }
+
+extension UIView {
+  var viewController: UIViewController? {
+    if let vc = self.next as? UIViewController {
+      return vc
+    } else if let superView = self.superview {
+      return superview?.viewController
+    } else {
+      return nil
+    }
+  }
+}
