@@ -49,7 +49,7 @@ class CompareHeaderView: UIView {
         addSubviews([imageView, roomStyleLabel, costLabel, underSeparatorLine, rightSeparatorLine])
         imageView.addSubview(roomIDLabel)
         
-        roomIDLabel.backgroundColor = UIColor(white: 0.2, alpha: 0.8)
+        roomIDLabel.backgroundColor = UIColor(white: 0.2, alpha: 0.7)
         roomIDLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         roomIDLabel.textAlignment = .center
         roomIDLabel.textColor = .white

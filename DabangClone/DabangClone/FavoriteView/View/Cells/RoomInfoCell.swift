@@ -77,6 +77,7 @@ class RoomInfoCell: UITableViewCell {
     var etceteraArray = [String]()
     
     let roomImageView = UIImageView()
+    
     let smallConfiguration = UIImage.SymbolConfiguration(scale: .large)
     lazy var heartButton: UIButton = {
        let btn = UIButton()
@@ -257,7 +258,13 @@ class RoomInfoCell: UITableViewCell {
     }
     
     @objc private func didTapCheckButton(_ sender: UIButton) {
-        isCheckButtonSelected.toggle()
+        if FavoriteListViewController.compareCount < 3 {
+            isCheckButtonSelected.toggle()
+        } else if FavoriteListViewController.compareCount == 3 && isCheckButtonSelected {
+            isCheckButtonSelected.toggle()
+        } else if FavoriteListViewController.compareCount == 3 && !isCheckButtonSelected {
+            return
+        }
         sender.isSelected = isCheckButtonSelected
     }
 }

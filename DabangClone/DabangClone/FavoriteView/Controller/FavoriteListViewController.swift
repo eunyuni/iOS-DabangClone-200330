@@ -14,7 +14,7 @@ import RxCocoa
 class FavoriteListViewController: UIViewController {
     
     // MARK: - Properties
-    
+
     let scrollView = UIScrollView()
     let tableView = UITableView()
     lazy var selectButtons = [recentlyCheckedRoom, recentlyCheckedDanzi, markedRoom, markedDanzi,contactedBudongsan]
@@ -64,6 +64,7 @@ class FavoriteListViewController: UIViewController {
             } else {
                 moveToCompareVCButton.backgroundColor = #colorLiteral(red: 0.6666144729, green: 0.6666962504, blue: 0.6665866375, alpha: 1)
             }
+            FavoriteListViewController.compareCount = roomsToCompare.count
         }
     }
     
@@ -325,20 +326,25 @@ extension FavoriteListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let roomCell = tableView.cellForRow(at: indexPath) as? RoomInfoCell {
             if isCompareMode {
-                roomCell.isCheckButtonSelected.toggle()
-                print("tapaa")
+                if roomsToCompare.count < 3 {
+                    roomCell.isCheckButtonSelected.toggle()
+                } else if roomsToCompare.count == 3 && roomCell.isCheckButtonSelected {
+                    roomCell.isCheckButtonSelected.toggle()
+                } else if roomsToCompare.count == 3 && !roomCell.isCheckButtonSelected {
+                    return
+                }
             } else {
                 // Present Room Detail VC
             }
         }
 //        if let danziCell = tableView.cellForRow(at: indexPath) as? DanziInfoCell {
-//           let budongsanVC =
-//           navigationController.push(budongsanVC)
+//           let danziVC =
+//           navigationController.push(danziVC)
 //        }
     }
 }
 
-    // MARK: - Custom Delegate
+    // MARK: - Custom Delegates
 
 extension FavoriteListViewController: FavoSelectButtonDelegate {
     private func controlAtrributes(_ tag: Int) {
@@ -409,4 +415,5 @@ extension FavoriteListViewController: RoomInfoCellDelegate {
 extension FavoriteListViewController {
     static let compareModeOn = Notification.Name(rawValue: "On")
     static let compareModeOff = Notification.Name(rawValue: "Off")
+    static var compareCount = 0
 }
