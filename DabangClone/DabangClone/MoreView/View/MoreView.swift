@@ -21,7 +21,7 @@ class MoreView: UIView {
   let contentView = UIView()
   
   var delegate: MoreViewDelegate?
-
+  
   //MARK: - 프로퍼티
   let userName = "PandaMan"
   let userEmail = "user@user.com"
@@ -159,7 +159,7 @@ class MoreView: UIView {
     $0.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .bold)
     $0.setTitleColor(.gray, for: .normal)
     $0.tag = 10
-
+    
   }
   
   let graybezelThree = UIView().then {
@@ -173,17 +173,18 @@ class MoreView: UIView {
     $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
   }
   
-  let dabangProImageButton = UIButton().then {
+  lazy var dabangProImageButton = UIButton().then {
     $0.setImage(UIImage(named: "dabangProImage"), for: .normal)
     $0.tag = 11
+    $0.addTarget(self, action: #selector(openDabangPro), for: .touchUpInside)
   }
   
-  let dabangProLabelButton = UIButton().then {
+  lazy var dabangProLabelButton = UIButton().then {
     $0.setTitle("다방프로", for: .normal)
     $0.titleLabel?.font = UIFont.systemFont(ofSize: 13.5, weight: .light)
     $0.setTitleColor(.gray, for: .normal)
     $0.tag = 11
-
+    $0.addTarget(self, action: #selector(openDabangPro), for: .touchUpInside)
   }
   
   let dabangSnsLabel = UILabel().then {
@@ -214,7 +215,7 @@ class MoreView: UIView {
     $0.setTitleColor(.gray, for: .normal)
     $0.titleLabel?.font = UIFont.systemFont(ofSize: 13.5, weight: .light)
     $0.tag = 13
-
+    
   }
   
   let lowerGrayView = UIView().then {
@@ -225,11 +226,11 @@ class MoreView: UIView {
     $0.attributedText = NSMutableAttributedString().normal("고객센터 ", fontSize: 14).medium("02-1899-6840", fontSize: 14)
     $0.textColor = .gray
   }
-//  let csNumberLabel = UILabel().then {
-//    $0.text = "02-1899-6840"
-//    $0.textColor = .gray
-//    $0.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-//  }
+  //  let csNumberLabel = UILabel().then {
+  //    $0.text = "02-1899-6840"
+  //    $0.textColor = .gray
+  //    $0.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+  //  }
   
   let lowerLabelsView = UIView()
   
@@ -468,7 +469,7 @@ class MoreView: UIView {
     
   }
   //MARK: Action
-
+  
   @objc private func didTapPresentingButton(_ sender: UIButton) {
     print("didtap")
     switch sender.tag {
@@ -488,19 +489,19 @@ class MoreView: UIView {
     case 6:
       delegate?.didTapSellMyRoomButton(MoreViewButtons.이벤트)
       print("이벤트 tap")
-      case 7:
+    case 7:
       delegate?.didTapSellMyRoomButton(MoreViewButtons.공지사항)
-      case 8:
+    case 8:
       delegate?.didTapSellMyRoomButton(MoreViewButtons.일대일문의)
     case 9:
       delegate?.didTapSellMyRoomButton(MoreViewButtons.이용약관)
-      case 10:
+    case 10:
       delegate?.didTapSellMyRoomButton(MoreViewButtons.개인정보처리방침)
     case 11:
       delegate?.didTapSellMyRoomButton(MoreViewButtons.다방프로)
-      case 12:
+    case 12:
       delegate?.didTapSellMyRoomButton(MoreViewButtons.페이스북)
-      case 13:
+    case 13:
       delegate?.didTapSellMyRoomButton(MoreViewButtons.네이버포스트)
       
     default:
@@ -510,7 +511,21 @@ class MoreView: UIView {
     
   }
   
-  
+  @objc private func openDabangPro() {
+    guard let url = URL(string: "https://apps.apple.com/kr/app/%EB%8B%A4%EB%B0%A9%ED%94%84%EB%A1%9C-%EB%B6%80%EB%8F%99%EC%82%B0-%EA%B4%80%EB%A6%AC-%EC%8B%9C%EC%8A%A4%ED%85%9C/id1215588806") else {return}
+    if (UIApplication.shared.canOpenURL(url)) {
+      UIApplication.shared.open(url, options: [:]) { (success) in
+        if success {
+          //success
+        } else {
+          let alert = UIAlertController(title: "다방 프로", message: "잘못된 접근입니다.", preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+          self.viewController!.present(alert, animated: true, completion: nil)
+        }
+      }
+    }
+  }
 }
+
 
 

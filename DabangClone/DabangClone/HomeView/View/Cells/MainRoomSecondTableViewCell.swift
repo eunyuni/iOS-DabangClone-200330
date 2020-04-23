@@ -14,6 +14,8 @@ class MainRoomSecondTableViewCell: UITableViewCell {
   
   let roomData = findRoomDataFromRoomID(rooms, roomID: 1)
   
+  var bangData = BangData.shared.data[7]
+  
   private let layout = UICollectionViewFlowLayout().then {
     $0.scrollDirection = .vertical
   }
@@ -85,7 +87,7 @@ class MainRoomSecondTableViewCell: UITableViewCell {
       $0.top.equalToSuperview().offset(25)
       $0.leading.equalToSuperview().offset(20)
     }
-    if roomData.addInfo.option.count <= 5 {
+    if bangData.optionSet.count <= 5 {
       collectionView.snp.makeConstraints {
         $0.top.equalTo(optionLabelView.snp.bottom)
         $0.leading.trailing.equalToSuperview()
@@ -118,22 +120,34 @@ class MainRoomSecondTableViewCell: UITableViewCell {
     contentView.clipsToBounds = false
   }
   
+  func reloadCollectionView(pk: Int) {
+    let bangDataArr = BangData.shared.data.filter {
+      $0.pk == pk
+    }
+    bangData = bangDataArr[0]
+    
+    
+  }
+  
 }
 
 extension MainRoomSecondTableViewCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return roomData.addInfo.option.count
+    return bangData.optionSet.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainRoomSecondCollectionViewCell.identifier, for: indexPath) as! MainRoomSecondCollectionViewCell
-    let imageURL = URL(string: roomData.addInfo.option[indexPath.row].imageName())
+    let imageURL = URL(string: bangData.optionSet[indexPath.row].imageName())
+    print("--------------------Second CollectionView ----------------")
+//    let imageURL = URL(string: roomData.addInfo.option[indexPath.row].imageName())
+    print(bangData.optionSet[indexPath.row].imageName())
       let image = UIView(SVGURL: imageURL!)
         image.frame = cell.imageView.frame
         image.center = cell.imageView.center
         cell.imageView.addSubview(image)
         cell.imageView.contentMode = .scaleAspectFit
-    cell.optionLabel.text = roomData.addInfo.option[indexPath.row].rawValue
+    cell.optionLabel.text = bangData.optionSet[indexPath.row].rawValue
     return cell
   }
 }
@@ -145,7 +159,7 @@ extension MainRoomSecondTableViewCell: UICollectionViewDelegate {
 extension MainRoomSecondTableViewCell: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    if roomData.addInfo.option.count <= 5 {
+    if bangData.optionSet.count <= 5 {
       return CGSize(width: collectionView.frame.width/5 - 4, height: collectionView.frame.height)
     } else {
       return CGSize(width: collectionView.frame.width/5 - 4, height: collectionView.frame.height/2)

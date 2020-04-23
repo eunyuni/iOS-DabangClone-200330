@@ -95,7 +95,12 @@ class RoomInfoCell: UITableViewCell {
             delegate?.didTapCheckButton(cell: self, isChecked: isCheckButtonSelected)
         }
     }
-    
+  func configue(pk: Int) {
+    let roomPkData = BangData.shared.data.filter {
+      $0.pk == pk
+    }
+    roomPkData[0].address.loadAddress
+  }
     // MARK: - Life Cycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

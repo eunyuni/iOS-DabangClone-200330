@@ -44,7 +44,7 @@ class AddressSearchViewController: UIViewController , WKScriptMessageHandler {
     }
     print(postCode)
     print(address)
-    self.dismiss(animated: true, completion: nil)
+    self.navigationController?.popViewController(animated: true)
   }
 
 }
