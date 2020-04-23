@@ -137,6 +137,7 @@ class MapViewController: UIViewController{
     super.viewDidLoad()
     self.view.backgroundColor = .white
     tableView.dataSource = self
+    tableView.delegate = self
     locationManager.delegate = self
     let coor = locationManager.location?.coordinate
     let latitude = coor?.latitude
@@ -487,6 +488,10 @@ extension MapViewController: UITableViewDataSource {
     cell.configure(pk: Int(pkArrInCluster[indexPath.row]) ?? 0)
     return cell
   }
+}
+
+extension MapViewController: UITableViewDelegate {
+  
 }
 
 extension MapViewController: GMUClusterRendererDelegate {
