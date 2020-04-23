@@ -79,16 +79,16 @@ class MapViewController: UIViewController{
   private var stackView: UIStackView!
   
   private let selectButtons = [
-    MapFilterButton(title: "전체뉴스", tag: 0).then{
+    MapFilterButton(title: "원룸", tag: 0).then{
       $0.setTitleColor(.black, for: .normal)
     },
-    MapFilterButton(title: "정책", tag: 1),
-    MapFilterButton(title: "분양", tag: 2),
-    MapFilterButton(title: "동향", tag: 3),
-    MapFilterButton(title: "황정덕", tag: 4),
-    MapFilterButton(title: "김은영", tag: 5),
-    MapFilterButton(title: "정의석", tag: 6),
-    MapFilterButton(title: "임성준", tag: 7),
+    MapFilterButton(title: "가격 ⌄", tag: 1),
+    MapFilterButton(title: "관리비 ⌄", tag: 2),
+    MapFilterButton(title: "방 크기 ⌄", tag: 3),
+    MapFilterButton(title: "층 수 ⌄", tag: 4),
+    MapFilterButton(title: "방구조 ⌄", tag: 5),
+    MapFilterButton(title: "추가필터 ⌄", tag: 6),
+    MapFilterButton(title: "거래종류 ⌄", tag: 7),
   ]
   private let filterImage = UIImageView().then {
     $0.image = UIImage(named: "FilterImage")
@@ -270,6 +270,9 @@ extension MapViewController: GMSMapViewDelegate {
         self.count = 0
       }
     }
+    let marker = CustomMarker(labelText: "25")
+    marker.position = mapView.camera.target
+    marker.map = mapView //your mapView object
     print("mapViewDidFinishTileRendering")
   }
   func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
