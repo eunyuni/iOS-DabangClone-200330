@@ -147,6 +147,7 @@
 		15D9B35B2431C2BB00A38A76 /* MaintenanceCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D9B3592431C2BB00A38A76 /* MaintenanceCostViewController.swift */; };
 		15D9B35C2431C2BB00A38A76 /* ExplainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D9B35A2431C2BB00A38A76 /* ExplainViewController.swift */; };
 		15EEBE4324446DF80049952E /* CostInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEBE4224446DF80049952E /* CostInfoTableViewCell.swift */; };
+		4FEF15D724531E0700100EAB /* ModelDabang424.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEF15D624531E0700100EAB /* ModelDabang424.swift */; };
 		6F389E34244849B000A440A4 /* AddressApartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E33244849B000A440A4 /* AddressApartViewController.swift */; };
 		6F389E36244849FD00A440A4 /* AddressApartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E35244849FD00A440A4 /* AddressApartView.swift */; };
 		6F389E3824484A7600A440A4 /* AddressSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F389E3724484A7600A440A4 /* AddressSelectViewController.swift */; };
@@ -457,6 +458,7 @@
 		15D9B35A2431C2BB00A38A76 /* ExplainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplainViewController.swift; sourceTree = "<group>"; };
 		15EEBE4224446DF80049952E /* CostInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostInfoTableViewCell.swift; sourceTree = "<group>"; };
 		3AEABCBF869ADF9D5DC4566F /* Pods-DabangClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DabangClone.release.xcconfig"; path = "Target Support Files/Pods-DabangClone/Pods-DabangClone.release.xcconfig"; sourceTree = "<group>"; };
+		4FEF15D624531E0700100EAB /* ModelDabang424.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDabang424.swift; sourceTree = "<group>"; };
 		6F389E33244849B000A440A4 /* AddressApartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressApartViewController.swift; sourceTree = "<group>"; };
 		6F389E35244849FD00A440A4 /* AddressApartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressApartView.swift; sourceTree = "<group>"; };
 		6F389E3724484A7600A440A4 /* AddressSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSelectViewController.swift; sourceTree = "<group>"; };
@@ -916,6 +918,7 @@
 				15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */,
 				6F389E5B2448505500A440A4 /* HomeModel.swift */,
 				1529B01E244EC6D500B80F33 /* ModelNew.swift */,
+				4FEF15D624531E0700100EAB /* ModelDabang424.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1634,6 +1637,7 @@
 				E7E60445243B21570050D540 /* FindTitleCell.swift in Sources */,
 				15315A56244857250033EA47 /* FavoriteViewModel.swift in Sources */,
 				15D9B32A242CA42F00A38A76 /* SellMyRoomViewController.swift in Sources */,
+				4FEF15D724531E0700100EAB /* ModelDabang424.swift in Sources */,
 				E7BB1C002431DC8200C66B48 /* SaveView.swift in Sources */,
 				159121AD2452295D00DA05D8 /* MapTableViewCell.swift in Sources */,
 				15315A5F244857250033EA47 /* CompareDetailView.swift in Sources */,

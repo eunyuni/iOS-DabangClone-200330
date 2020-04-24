@@ -109,7 +109,7 @@ extension HomeViewController: UITableViewDataSource {
   
   private func getTest() {
     
-    let url = URL(string: "https://moonpeter.com/posts/")
+    let url = URL(string: "https://moonpeter.com/posts/list/")
     
     
     AF
@@ -119,7 +119,7 @@ extension HomeViewController: UITableViewDataSource {
         
         if let jsonObjects = try? JSONDecoder().decode([DabangElement].self, from: response.data!) {
           BangData.shared.data = jsonObjects
-          print(BangData.shared.data[10].address)
+            print(BangData.shared.data[10])
         } else {
           print("fail")
         }
