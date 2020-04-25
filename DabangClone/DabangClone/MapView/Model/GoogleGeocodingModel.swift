@@ -9,12 +9,13 @@ import Foundation
 
 // MARK: - Geocode
 struct Geocode: Codable {
-    let results: [Result]
+    let results: [GeoResult]
     let status: String
+
 }
 
 // MARK: - Result
-struct Result: Codable {
+struct GeoResult: Codable {
     let addressComponents: [AddressComponent]
     let formattedAddress: String
     let geometry: Geometry
@@ -76,3 +77,5 @@ struct PlusCode: Codable {
         case globalCode = "global_code"
     }
 }
+
+typealias GeocodingResult = Result
