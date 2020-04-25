@@ -429,7 +429,7 @@ extension MainRoomTableViewCell: UICollectionViewDataSource {
         $0.textColor = .gray
         $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
       }
-      print(bangData.optionSet[indexPath.row].rawValue)
+      print(bangData.optionSet[indexPath.row])
       cell.contentView.addSubview(label)
       label.snp.makeConstraints {
         $0.center.equalToSuperview()
