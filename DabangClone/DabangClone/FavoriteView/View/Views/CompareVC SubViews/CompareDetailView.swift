@@ -40,7 +40,7 @@ class CompareDetailView: UIView {
         let floor = CompareCellInsideStack(title: "해당", detail: data.floor)
         let totalFloor = CompareCellInsideStack(title: "건물", detail: data.totalFloor)
         let manageCost = CompareCellInsideStack(title: "관리", detail: data.livingExpenses ?? "없음")
-        let parking = CompareCellInsideStack(title: "주차", detail: data.parkingTF ? "가능(\(data.parkingDetail))" : "불가")
+        let parking = CompareCellInsideStack(title: "주차", detail: data.parkingtf ? "가능(\(data.parkingDetail))" : "불가")
         let shortTermContract = CompareCellInsideStack(title: "단기", detail: data.shortRent ? "가능" : "불가능")
         let option = CompareCellInsideStack(title: "옵션", detail: "에어컨,신발장,옷장,전자도어락,가스레인지")
         let security = CompareCellInsideStack(title: "보안", detail: "비디오폰,공동현관,CCTV,인터폰")
