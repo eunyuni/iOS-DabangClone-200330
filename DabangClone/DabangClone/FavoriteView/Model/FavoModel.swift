@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 enum FavoriteData {
-    case checkedRoomInfo([Room])
+    case checkedRoomInfo([DabangElement])
     case checkedDanziInfo([DanziInfo])
-    case markedRoomInfo([Room])
+    case markedRoomInfo([DabangElement])
     case markedDanziInfo([DanziInfo])
     case budongsanInfo([BudongsanInfo])
 }

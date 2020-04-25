@@ -16,9 +16,14 @@ class CompareViewController: UIViewController {
     let noticeView = UIView()
     let noticeLabel = UILabel()
     
-    var roomsToCompare: [Int : Room]!
+    var roomsToCompare: [Int : DabangElement]! {
+        didSet{
+            makeCompareValuesArrayUsingDictValues()
+            noticeLabel.text = "\(self.roomsToCompare.count)개의 방을 비교한 후, 원하는 방을 문의하세요."
+        }
+    }
     
-    var compareValues = [Room]()
+    var compareValues = [DabangElement]()
     lazy var compareValuesCount = self.compareValues.count
     
     let overralScrollView = UIScrollView()
@@ -34,7 +39,7 @@ class CompareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
-        makeCompareValuesArrayUsingDictValues()
+//        makeCompareValuesArrayUsingDictValues()
         configureNoticePart()
         configureScrollView()
         configureHeaders()
@@ -59,7 +64,7 @@ class CompareViewController: UIViewController {
         noticeView.backgroundColor = #colorLiteral(red: 0.9646322131, green: 0.9647476077, blue: 0.9645928741, alpha: 1)
         noticeLabel.textColor = .lightGray
         noticeLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        noticeLabel.text = "\(self.roomsToCompare.count)개의 방을 비교한 후, 원하는 방을 문의하세요."
+//        noticeLabel.text = "\(self.roomsToCompare.count)개의 방을 비교한 후, 원하는 방을 문의하세요."
         
         noticeView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -84,14 +89,13 @@ class CompareViewController: UIViewController {
         overralScrollView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(noticeView.snp.bottom)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
         overralScrollView.addSubview(detailScrollView)
         detailScrollView.snp.makeConstraints {
             $0.top.equalTo(overralScrollView.snp.top).offset(190)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
         }
     }
 
@@ -124,7 +128,7 @@ class CompareViewController: UIViewController {
                         detailScrollView.addSubview($0)
                         $0.snp.makeConstraints {
                             $0.top.equalToSuperview()
-                            $0.bottom.equalToSuperview().inset(230)
+                            $0.bottom.equalToSuperview().inset(250)
                             $0.width.equalTo(view.frame.width / 2)
                             $0.height.equalTo(detailScrollView)
                             if counter == 0 {
