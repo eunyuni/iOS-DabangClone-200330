@@ -33,6 +33,7 @@ class FavoriteViewModel {
     
     init() {
         fetchCheckedRoomData()
+        fetchMarkedRoomData()
         checkedDanziData = [dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
         markedDanziData = [dummyDanzi, dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
         contactBudongsanData = [dummyBudongsan,dummyBudongsan2]
@@ -43,7 +44,7 @@ class FavoriteViewModel {
                     switch result {
                     case .success(let rooms):
                         self.checkedRoomData = rooms
-                        print("success")
+                        print("checkedRoom success")
                         self.delegate?.reloadTableView()
                     case .failure(let error):
                         print(error)
@@ -51,6 +52,18 @@ class FavoriteViewModel {
                 }
     }
     
+    func fetchMarkedRoomData() {
+        APIManager.shared.getEntireRoomData { (result) in
+                    switch result {
+                    case .success(let rooms):
+                        self.markedRoomData = rooms
+                        print("markeRoom success")
+                        self.delegate?.reloadTableView()
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+    }
     lazy var activeData = FavoriteData.checkedRoomInfo(checkedRoomData)
     
     lazy var data: [FavoriteData] = [
