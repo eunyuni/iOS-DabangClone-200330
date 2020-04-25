@@ -197,3 +197,9 @@ class JSONNull: Codable, Hashable {
         try container.encodeNil()
     }
 }
+
+
+struct CoordinateFromAddress {
+  var pk: Int?
+  var coordinate: CLLocationCoordinate2D?
+}
