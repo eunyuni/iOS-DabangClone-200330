@@ -155,29 +155,29 @@ class MapViewController: UIViewController{
     clusterManager = GMUClusterManager(map: mapTest, algorithm: algorithm, renderer: renderer)
     
     // Generate and add random items to the cluster manager.
-//    generateClusterItems()
+    //    generateClusterItems()
     DispatchQueue.main.async {
-       self.mapGoogleGeocoder()
+      self.mapGoogleGeocoder()
       
       DispatchQueue.main.async {
         self.clusterManager.cluster()
         
         DispatchQueue.main.async {
-                self.clusterManager.setDelegate(self, mapDelegate: self)
-
+          self.clusterManager.setDelegate(self, mapDelegate: self)
+          
           DispatchQueue.main.async {
             self.setupUI()
           }
         }
       }
     }
-     
-      // Call cluster() after items have been added to perform the clustering and rendering on map.
-      
-      // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
-      
-      
-      
+    
+    // Call cluster() after items have been added to perform the clustering and rendering on map.
+    
+    // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
+    
+    
+    
     
     //    self.mapGoogleGeocoder()
     //
@@ -213,14 +213,14 @@ class MapViewController: UIViewController{
       self.bottomView.frame = CGRect(x: 0, y: self.mapTest.frame.maxY, width: self.view.frame.width, height: 60 )
       self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height )
     }
-
+    
   }
   
   @objc private func didTapAllRoomButton(_ sender: UIButton) {
     print("didTapAllRoomButton")
     
     guard let tabbarframe = tabBarController?.tabBar.frame else { return }
-
+    
     UIView.animate(withDuration: 0.5) {
       self.bottomView.frame = CGRect(x: 0, y: 360, width: self.view.frame.width, height: 60 )
       self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: tabbarframe.minY - 420 )
@@ -241,7 +241,7 @@ class MapViewController: UIViewController{
         sender.setTranslation(CGPoint.zero, in: bottomView)
         sender.setTranslation(CGPoint.zero, in: tableView)
       } else {
-
+        
       }
     case .ended:
       print(bottomView.frame.minY)
@@ -362,7 +362,7 @@ class MapViewController: UIViewController{
     //    }
   }
   
-
+  
 }
 
 extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
@@ -381,7 +381,7 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     }
   }
   func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-//    print("didChange")
+    //    print("didChange")
   }
   func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
     let findLocation = mapView.camera.target
@@ -408,42 +408,40 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
   
   
   func mapGoogleGeocoder() {
-//    var items: [GMUClusterItem] = []
     DispatchQueue.global().async {
       for i in 0...BangData.shared.data.count-1 {
-      let address = BangData.shared.data[i].address.loadAddress
-      let geoCoder = CLGeocoder()
-      geoCoder.geocodeAddressString(address) { (placemarks, error) in
-          guard
-              let placemarks = placemarks,
-              let location = placemarks.first?.location
-            
-          else {
-              // handle no location found
-            print("실패주소 :", address)
-              return
-          }
-        print("성공주소 :", address)
-        let name = "\(BangData.shared.data[i].pk)"
-        let item = POIItem(position: CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude), name: name)
-//        items.append(item)
-        DispatchQueue.main.async {
-                    self.clusterManager.add(item)
-//          self.clusterManager.add(items)
-
-        }
+        let address = BangData.shared.data[i].address.loadAddress
         
-        print("mapGoogleGeocoder : ", location.coordinate)
-          // Use your location
+        let url = URL(string: "https://maps.googleapis.com/maps/api/geocode/json?")
+        
+        let parameters: Parameters = [
+          "address": address,
+          "key": "AIzaSyDY0ppRrZhsxpXVHhJ4qZRWLMcpEhCjDgY"
+        ]
+        
+        AF.request(url!, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: .none, interceptor: .none)
+          .responseJSON { (response) in
+            
+              if let geocodeObjects = try? JSONDecoder().decode(Geocode.self, from: response.data!) {
+                guard let location = geocodeObjects.results.first?.geometry.location else {return}
+                let name = "\(BangData.shared.data[i].pk)"
+                let item = POIItem(position: CLLocationCoordinate2DMake(location.lat, location.lng), name: name)
+                DispatchQueue.main.async {
+                  self.clusterManager.add(item)
+                }
+                print(geocodeObjects.results[0].addressComponents[0].longName)
+              }
+              
+            if response.error != nil {
+              print(response.error?.errorDescription)
+            }
         }
       }
     }
-    
   }
   
-  
   // MARK: - 클러스터에 포함된 마커들의 name(pk) 값 얻기
-  // Renderer delegate 설정 -> 뭉텅이 POIItem을 GMUCluster 형식으로 형변환.(그래야 내부의 마커들을 forEach로 쪼갤 수 있음. -> forEach 사용하여 각각의 cluster item들을 다시 POIItem으로 형변환 -> 그 다음 각각의 POIItem의 name 값 추출.
+  // Renderer delegate 설정 -> 뭉텅이 POIItem을 GMUCluster 형식으로 형변환.(그래야 내부의 마커들을 forEach로! 쪼갤 수 있음. -> forEach 사용하여 각각의 cluster item들을 다시 POIItem으로 형변환 -> 그 다음 각각의 POIItem의 name 값 추출.
   // MARK: - GMUMapViewDelegate
   func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
     if let poiItem = marker.userData as? POIItem {
@@ -475,7 +473,7 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     }
     
     let tabbarframe = tabBarController?.tabBar.frame
-
+    
     UIView.animate(withDuration: 0.5) {
       let newCamera = GMSCameraPosition.camera(withTarget: marker.position,
                                                zoom: self.mapTest.camera.zoom)
@@ -489,7 +487,7 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
   // MARK: - GMUClusterManagerDelegate
   func clusterManager(_ clusterManager: GMUClusterManager, didTap cluster: GMUCluster) -> Bool {
     let newCamera = GMSCameraPosition.camera(withTarget: cluster.position,
-      zoom: mapTest.camera.zoom + 1)
+                                             zoom: mapTest.camera.zoom + 1)
     let update = GMSCameraUpdate.setCamera(newCamera)
     mapTest.moveCamera(update)
     
@@ -498,6 +496,7 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     
     return false
   }
+  
   /// cluster manager.
   private func generateClusterItems() {
     let extent = 0.2
