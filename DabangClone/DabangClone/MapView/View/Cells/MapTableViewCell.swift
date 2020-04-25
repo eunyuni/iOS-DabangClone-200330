@@ -89,7 +89,7 @@ class MapTableViewCell: UITableViewCell {
     let range = start..<end
     let mySubstring = data.areaChar[range]
     
-    self.infoLabel.text = data.type.rawValue + "|\(data.floor)|\(String(mySubstring))m²"
+    self.infoLabel.text = data.type.rawValue + " | \(data.floor) | \(String(mySubstring))m²"
     
     self.detailLabel.text = data.dabangDescription
     etceteraArray = data.optionSet.map({$0.rawValue})
@@ -129,11 +129,8 @@ class MapTableViewCell: UITableViewCell {
     
     private func configureEtcStackView() {
         etceteraStackView.axis = .horizontal
-        etceteraStackView.distribution = .equalSpacing
+        etceteraStackView.spacing = 3
         etceteraStackView.alignment = .center
-        etceteraStackView.snp.makeConstraints {
-            $0.width.equalTo(200)
-        }
     }
     
     private func putLabelInStackView() {
@@ -156,6 +153,7 @@ class MapTableViewCell: UITableViewCell {
             } else {
                 totalWidthOfEtc += labelWidth + 3
             }
+            label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
             return label
         }.forEach{ etceteraStackView.addArrangedSubview($0) }
     }
@@ -165,7 +163,7 @@ class MapTableViewCell: UITableViewCell {
         infoStackView.axis = .vertical
         infoStackView.setCustomSpacing(15, after: priceLabel)
         infoStackView.spacing = 5
-        infoStackView.alignment = .fill
+        infoStackView.alignment = .leading
         infoStackView.snp.makeConstraints {
             $0.width.equalTo(200)
         }
