@@ -208,6 +208,7 @@
 		6FAA9EA12449A3A30005F2B2 /* HomeSaleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAA9EA02449A3A30005F2B2 /* HomeSaleCollectionViewCell.swift */; };
 		6FAA9EA32449A3B70005F2B2 /* HomeRecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAA9EA22449A3B70005F2B2 /* HomeRecommendedCollectionViewCell.swift */; };
 		AAD0A9599381D7CA708D6E31 /* Pods_DabangClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90B70ED9EB0B15C4D6FEDE4D /* Pods_DabangClone.framework */; };
+		CEC7B71D245296450089E267 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC7B71C245296450089E267 /* APIManager.swift */; };
 		E77D8C5B243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C5A243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift */; };
 		E77D8C5D243DD87000A263AE /* BrokerageSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C5C243DD87000A263AE /* BrokerageSectionView.swift */; };
 		E77D8C5F243DF52B00A263AE /* BrokerageHomeInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C5E243DF52B00A263AE /* BrokerageHomeInfoCell.swift */; };
@@ -521,6 +522,7 @@
 		6FAA9EA22449A3B70005F2B2 /* HomeRecommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRecommendedCollectionViewCell.swift; sourceTree = "<group>"; };
 		90B70ED9EB0B15C4D6FEDE4D /* Pods_DabangClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DabangClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4C5C9223C55AA5442630D52 /* Pods-DabangClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DabangClone.debug.xcconfig"; path = "Target Support Files/Pods-DabangClone/Pods-DabangClone.debug.xcconfig"; sourceTree = "<group>"; };
+		CEC7B71C245296450089E267 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		DF6E307BB0DBA8293AA6779F /* Pods-DabangClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DabangClone.debug.xcconfig"; path = "Target Support Files/Pods-DabangClone/Pods-DabangClone.debug.xcconfig"; sourceTree = "<group>"; };
 		E77D8C5A243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageOfficeSectionCell.swift; path = DabangClone/HomeView/Controller/BrokerageOfficeSectionCell.swift; sourceTree = SOURCE_ROOT; };
 		E77D8C5C243DD87000A263AE /* BrokerageSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageSectionView.swift; path = DabangClone/HomeView/Controller/BrokerageSectionView.swift; sourceTree = SOURCE_ROOT; };
@@ -656,6 +658,7 @@
 		1516002D24247BA20003DDCF /* DabangClone */ = {
 			isa = PBXGroup;
 			children = (
+				CEC7B71B2452955E0089E267 /* API Manager */,
 				15D9B324242BA12000A38A76 /* Utils */,
 				15D9B318242B9FB300A38A76 /* MapView */,
 				15315A3C244857250033EA47 /* FavoriteView */,
@@ -1292,6 +1295,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CEC7B71B2452955E0089E267 /* API Manager */ = {
+			isa = PBXGroup;
+			children = (
+				CEC7B71C245296450089E267 /* APIManager.swift */,
+			);
+			path = "API Manager";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1437,6 +1448,7 @@
 				15D9B3482430A89900A38A76 /* EventViewController.swift in Sources */,
 				6FAA9EA12449A3A30005F2B2 /* HomeSaleCollectionViewCell.swift in Sources */,
 				159121A62451CCCA00DA05D8 /* GMULineString.m in Sources */,
+				CEC7B71D245296450089E267 /* APIManager.swift in Sources */,
 				E7DA1634245034B60053E455 /* HomeAlertViewController.swift in Sources */,
 				E78AD9612437119C0098BE6E /* FilterRoomTypeCell.swift in Sources */,
 				E77D8C69243FBD7600A263AE /* BrokerageReviewBodyCell.swift in Sources */,
