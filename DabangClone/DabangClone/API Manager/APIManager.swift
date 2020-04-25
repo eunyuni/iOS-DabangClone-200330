@@ -13,11 +13,11 @@ class APIManager {
     
     static let shared = APIManager()
     
-    let accessToken = ""
-    let networkAccessManager = NetworkReachabilityManager(host: "https://moonpeter.com")
+    private let accessToken = ""
+    private let networkAccessManager = NetworkReachabilityManager(host: "https://moonpeter.com")
     private init() { monitorNetworkAccessStatus() }
     
-    let baseURL = "https://moonpeter.com"
+    private let baseURL = "https://moonpeter.com"
     
     private func monitorNetworkAccessStatus() {
         networkAccessManager?.startListening(onQueue: .init(label: "networkQueue"), onUpdatePerforming: { (status) in
@@ -28,6 +28,9 @@ class APIManager {
     // MARK: - [ API CRUD ]
     
     // MARK: - GET
+    
+    //GET: 유저 로그인
+    
     
     //GET: 방 전체 리스트
     func getEntireRoomData(completion: @escaping (Result<[DabangElement], Error>) -> Void) {
