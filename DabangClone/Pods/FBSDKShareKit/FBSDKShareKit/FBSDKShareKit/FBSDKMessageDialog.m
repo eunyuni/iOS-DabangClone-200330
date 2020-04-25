@@ -127,7 +127,9 @@
 - (BOOL)validateWithError:(NSError *__autoreleasing *)errorRef
 {
   if (self.shareContent) {
-    if ([self.shareContent isKindOfClass:[FBSDKShareLinkContent class]]) {
+    if ([self.shareContent isKindOfClass:[FBSDKShareLinkContent class]] ||
+        [self.shareContent isKindOfClass:[FBSDKSharePhotoContent class]] ||
+        [self.shareContent isKindOfClass:[FBSDKShareVideoContent class]]) {
     } else {
       if (errorRef != NULL) {
         NSString *message = [NSString stringWithFormat:@"Message dialog does not support %@.",

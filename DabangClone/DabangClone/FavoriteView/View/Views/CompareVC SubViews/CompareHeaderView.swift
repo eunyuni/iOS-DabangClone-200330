@@ -19,7 +19,7 @@ class CompareHeaderView: UIView {
     let rightSeparatorLine = UIView()
     let underSeparatorLine = UIView()
     
-    var data: Room!
+    var data: DabangElement!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,17 +27,21 @@ class CompareHeaderView: UIView {
         setConstraints()
     }
     
-    convenience init(data: Room) {
+    convenience init(data: DabangElement) {
         self.init(frame: .zero)
         self.data = data
         setViewData()
     }
     
     private func setViewData() {
-        roomIDLabel.text = "매물번호 \(data.roomID)"
-        imageView.image = data.images.first?.imageStringToImage()
-        roomStyleLabel.text = data.baseInfo.roomStyle.rawValue
-        costLabel.text = "\(data.baseInfo.roomStyle.rawValue)" + " " + data.baseInfo.cost
+        roomIDLabel.text = "매물번호 \(data.pk)"
+        if !data.postimage.isEmpty {
+            let url = URL(string: "https://wpsdabangapi.s3.amazonaws.com/\(data.postimage[0])")
+            self.imageView.kf.setImage(with: url)
+            self.imageView.contentMode = .scaleAspectFill
+        }
+        roomStyleLabel.text = data.salesForm.type.rawValue
+        costLabel.text = data.salesForm.type == .전세 ? data.salesForm.depositChar : data.salesForm.monthlyChar
     }
     
     required init?(coder: NSCoder) {

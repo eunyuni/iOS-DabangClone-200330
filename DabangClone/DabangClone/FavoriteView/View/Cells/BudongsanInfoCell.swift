@@ -65,7 +65,7 @@ class BudongsanInfoCell: UITableViewCell {
     }
     
     func set(info: BudongsanInfo) {
-        roomInfoCell.data = dummyRoom2
+//        roomInfoCell.data = dummyRoom2
         self.data = info
     }
     

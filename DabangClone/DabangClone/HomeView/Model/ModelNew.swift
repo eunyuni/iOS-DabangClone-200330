@@ -8,7 +8,7 @@ import Foundation
 // MARK: - DabangElement
 struct DabangElement: Codable {
     let pk: Int
-    let broker: Broker
+    let broker: Broker?
     let type: DabangType
     let dabangDescription: String
     let address: Address

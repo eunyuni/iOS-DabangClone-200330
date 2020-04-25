@@ -57,7 +57,7 @@ class FavoriteListViewController: UIViewController {
     }
     
     
-    var roomsToCompare = [Int : Room]() {
+    var roomsToCompare = [Int : DabangElement]() {
         didSet{
             if roomsToCompare.count > 1 {
                 moveToCompareVCButton.backgroundColor = #colorLiteral(red: 0.2596234679, green: 0.5155771971, blue: 0.9926976562, alpha: 1)
@@ -83,6 +83,7 @@ class FavoriteListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         setNavigationBar()
         setupUI()
         configureUpsideUI()
@@ -270,6 +271,7 @@ class FavoriteListViewController: UIViewController {
     
     @objc private func reloadData(){
         tableView.refreshControl?.endRefreshing()
+//        checkActiveDataIfEmpty(currentTag)
         tableView.reloadData()
     }
     
@@ -409,6 +411,12 @@ extension FavoriteListViewController: RoomInfoCellDelegate {
     }
 }
 
+extension FavoriteListViewController: FavoriteViewModelDelegate {
+    func reloadTableView() {
+        checkActiveDataIfEmpty(currentTag)
+        tableView.reloadData()
+    }
+}
 
     // MARK: - Static Properties
 

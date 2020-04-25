@@ -246,7 +246,7 @@ class MapTableViewCell: UITableViewCell {
                                                  }
     }
     
-    func set(roomInfo: Room) {
+    func set(roomInfo: DabangElement) {
 //        self.data = roomInfo
     }
     

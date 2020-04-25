@@ -11,11 +11,17 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol FavoriteViewModelDelegate: class {
+    func reloadTableView()
+}
+
 class FavoriteViewModel {
     
-    private var checkedRoomData = [Room]()
+    weak var delegate: FavoriteViewModelDelegate?
+    
+    private var checkedRoomData = [DabangElement]()
     private var checkedDanziData = [DanziInfo]()
-    private var markedRoomData = [Room]()
+    private var markedRoomData = [DabangElement]()
     private var markedDanziData = [DanziInfo]()
     private var contactBudongsanData = [BudongsanInfo]()
     
@@ -26,13 +32,23 @@ class FavoriteViewModel {
     }
     
     init() {
-        //API 사용 CurrentUser 데이터 불러와서 초기화
-//        checkedRoomData = [dummyRoom, dummyRoom2, dummyRoom, dummyRoom2]
-        checkedRoomData = [dummyRoom2,dummyRoom]
-        markedRoomData = [dummyRoom2, dummyRoom, dummyRoom2, dummyRoom]
+        fetchCheckedRoomData()
         checkedDanziData = [dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
         markedDanziData = [dummyDanzi, dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
         contactBudongsanData = [dummyBudongsan,dummyBudongsan2]
+    }
+    
+    func fetchCheckedRoomData() {
+        APIManager.shared.getEntireRoomData { (result) in
+                    switch result {
+                    case .success(let rooms):
+                        self.checkedRoomData = rooms
+                        print("success")
+                        self.delegate?.reloadTableView()
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
     }
     
     lazy var activeData = FavoriteData.checkedRoomInfo(checkedRoomData)
@@ -52,6 +68,7 @@ class FavoriteViewModel {
     func checkActiveDataCount() -> Int {
         switch activeData {
         case .checkedRoomInfo(let rooms):
+            print("check data count:", rooms.count)
             return rooms.count
         case .checkedDanziInfo(let danzis):
             return danzis.count

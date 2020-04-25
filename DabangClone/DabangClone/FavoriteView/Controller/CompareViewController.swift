@@ -16,14 +16,14 @@ class CompareViewController: UIViewController {
     let noticeView = UIView()
     let noticeLabel = UILabel()
     
-    var roomsToCompare: [Int : Room]! {
+    var roomsToCompare: [Int : DabangElement]! {
         didSet{
             makeCompareValuesArrayUsingDictValues()
             noticeLabel.text = "\(self.roomsToCompare.count)개의 방을 비교한 후, 원하는 방을 문의하세요."
         }
     }
     
-    var compareValues = [Room]()
+    var compareValues = [DabangElement]()
     lazy var compareValuesCount = self.compareValues.count
     
     let overralScrollView = UIScrollView()
