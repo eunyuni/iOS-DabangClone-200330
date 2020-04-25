@@ -25,6 +25,8 @@ class APIManager {
         })
     }
     
+    // MARK: - [ API CRUD ]
+    
     // MARK: - GET
     
     //GET: 방 전체 리스트
