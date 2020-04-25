@@ -11,6 +11,8 @@ import Alamofire
 import GoogleMaps
 import GooglePlaces
 
+//CoordinateFromAddress
+
 public let DEFAULT_CAMERA_POSITION = GMSCameraPosition(latitude: 37.5666102, longitude: 126.9783881, zoom: 18)
 class POIItem: NSObject, GMUClusterItem {
   var position: CLLocationCoordinate2D
@@ -24,6 +26,7 @@ class POIItem: NSObject, GMUClusterItem {
 let kClusterItemCount = 10000
 let kCameraLatitude = 37.5666102
 let kCameraLongitude = 126.9783881
+
 class MapViewController: UIViewController{
   var pkArrInCluster: [String] = []
   // MARK: - Property
@@ -358,6 +361,8 @@ class MapViewController: UIViewController{
     //      $0.height.equalTo(500)
     //    }
   }
+  
+
 }
 
 extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
@@ -435,6 +440,8 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     }
     
   }
+  
+  
   // MARK: - 클러스터에 포함된 마커들의 name(pk) 값 얻기
   // Renderer delegate 설정 -> 뭉텅이 POIItem을 GMUCluster 형식으로 형변환.(그래야 내부의 마커들을 forEach로 쪼갤 수 있음. -> forEach 사용하여 각각의 cluster item들을 다시 POIItem으로 형변환 -> 그 다음 각각의 POIItem의 name 값 추출.
   // MARK: - GMUMapViewDelegate
