@@ -406,12 +406,18 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     }
   }
   
+  struct SameAddress {
+    var loadAddress: String
+    var lat: Double
+    var lng: Double
+  }
   
   func mapGoogleGeocoder() {
     DispatchQueue.global().async {
+      var count = 0
+      if BangData.shared.data.isEmpty { print("dataEmpty"); return }
       for i in 0...BangData.shared.data.count-1 {
         let address = BangData.shared.data[i].address.loadAddress
-        
         let url = URL(string: "https://maps.googleapis.com/maps/api/geocode/json?")
         
         let parameters: Parameters = [
@@ -421,24 +427,28 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
         
         AF.request(url!, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: .none, interceptor: .none)
           .responseJSON { (response) in
-            
+            switch response.result {
+            case .success(_):
               if let geocodeObjects = try? JSONDecoder().decode(Geocode.self, from: response.data!) {
                 guard let location = geocodeObjects.results.first?.geometry.location else {return}
                 let name = "\(BangData.shared.data[i].pk)"
                 let item = POIItem(position: CLLocationCoordinate2DMake(location.lat, location.lng), name: name)
+
                 DispatchQueue.main.async {
                   self.clusterManager.add(item)
                 }
                 print(geocodeObjects.results[0].addressComponents[0].longName)
+                count += 1
+                print("------성공횟수---------:", count)
               }
-              
-            if response.error != nil {
-              print(response.error?.errorDescription)
+            case .failure(_):
+              print("Error")
             }
-        }
-      }
-    }
-  }
+        }//AF scope Endpoint
+      } //for문 scope Endpoint
+    }//DispatchQueue.global().async scope End
+  } //mapGoogleGeocoder() scope End
+  
   
   // MARK: - 클러스터에 포함된 마커들의 name(pk) 값 얻기
   // Renderer delegate 설정 -> 뭉텅이 POIItem을 GMUCluster 형식으로 형변환.(그래야 내부의 마커들을 forEach로! 쪼갤 수 있음. -> forEach 사용하여 각각의 cluster item들을 다시 POIItem으로 형변환 -> 그 다음 각각의 POIItem의 name 값 추출.
