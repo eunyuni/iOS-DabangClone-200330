@@ -15,6 +15,7 @@ PODS:
     - FBSDKShareKit/Share (= 6.5.1)
   - FBSDKShareKit/Share (6.5.1):
     - FBSDKCoreKit (~> 6.5.1)
+  - KeychainSwift (19.0.0)
   - Kingfisher (5.13.4):
     - Kingfisher/Core (= 5.13.4)
   - Kingfisher/Core (5.13.4)
@@ -36,6 +37,7 @@ PODS:
   - SnapKit (5.0.1)
   - SweeterSwift (1.1.3)
   - SwiftSVG (2.3.2)
+  - SwiftyJSON (5.0.0)
   - Then (2.6.0)
 
 DEPENDENCIES:
@@ -43,6 +45,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - KeychainSwift
   - Kingfisher (~> 5.0)
   - MultiSlider
   - RxCocoa
@@ -51,6 +54,7 @@ DEPENDENCIES:
   - SDWebImage (~> 4.4.2)
   - SnapKit
   - SwiftSVG (~> 2.0)
+  - SwiftyJSON
   - Then
 
 SPEC REPOS:
@@ -60,6 +64,7 @@ SPEC REPOS:
     - FBSDKCoreKit
     - FBSDKLoginKit
     - FBSDKShareKit
+    - KeychainSwift
     - Kingfisher
     - MultiSlider
     - RxCocoa
@@ -70,6 +75,7 @@ SPEC REPOS:
     - SnapKit
     - SweeterSwift
     - SwiftSVG
+    - SwiftyJSON
     - Then
 
 SPEC CHECKSUMS:
@@ -78,6 +84,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 3ecb604427e115bd90ff7fc62ee1e30ebd12285b
   FBSDKLoginKit: 8b2bc5fa30ea269e9d7208a1165c0a668c0ae826
   FBSDKShareKit: 9ad7b8d097fc568e911452feb8112ad7f04bb8a2
+  KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
   MultiSlider: 5b0a78da0b4fd4bbc53c9c2bf917e0de0ebcbb04
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
@@ -88,8 +95,9 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SweeterSwift: d909211f6833405628c8c7c6bf9f8f2e8a0e9df9
   SwiftSVG: ca7f64e403b8ea7ea8eba8c823b83ba4a059834c
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
-PODFILE CHECKSUM: 791f3189ba1dee909a9f4204232216777e370d76
+PODFILE CHECKSUM: 29e093731ad1a036110577d24e51a899077fd21e
 
 COCOAPODS: 1.8.4

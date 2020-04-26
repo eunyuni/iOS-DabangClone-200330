@@ -15,7 +15,7 @@ protocol FavoriteViewModelDelegate: class {
     func reloadTableView()
 }
 
-class FavoriteViewModel {
+final class FavoriteViewModel {
     
     weak var delegate: FavoriteViewModelDelegate?
     
@@ -30,6 +30,16 @@ class FavoriteViewModel {
             setActiveData(dataIndex)
         }
     }
+    
+    lazy var activeData = FavoriteData.checkedRoomInfo(checkedRoomData)
+    
+    lazy var data: [FavoriteData] = [
+        .checkedRoomInfo(checkedRoomData),
+        .checkedDanziInfo(checkedDanziData),
+        .markedRoomInfo(markedRoomData),
+        .markedDanziInfo(markedDanziData),
+        .budongsanInfo(contactBudongsanData)
+    ]
     
     init() {
         fetchCheckedRoomData()
@@ -64,16 +74,7 @@ class FavoriteViewModel {
                     }
                 }
     }
-    lazy var activeData = FavoriteData.checkedRoomInfo(checkedRoomData)
-    
-    lazy var data: [FavoriteData] = [
-        .checkedRoomInfo(checkedRoomData),
-        .checkedDanziInfo(checkedDanziData),
-        .markedRoomInfo(markedRoomData),
-        .markedDanziInfo(markedDanziData),
-        .budongsanInfo(contactBudongsanData)
-    ]
-    
+
     func setActiveData(_ dataIndex: Int) {
         activeData = data[dataIndex]
     }

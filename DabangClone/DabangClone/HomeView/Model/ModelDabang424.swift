@@ -203,3 +203,19 @@ struct CoordinateFromAddress {
   var pk: Int?
   var coordinate: CLLocationCoordinate2D?
 }
+
+
+// MARK: - User Model
+struct User: Codable {
+    let pk: Int
+    let phone: String?
+    let profileImage: String?
+    let recentlyCheckedRooms: [DabangElement]?
+    let markedRooms: [DabangElement]?
+    
+    enum CodingKeys: String, CodingKey {
+        case pk, phone, profileImage
+        case recentlyCheckedRooms = "posts"
+        case markedRooms = "markedRooms"
+    }
+}
