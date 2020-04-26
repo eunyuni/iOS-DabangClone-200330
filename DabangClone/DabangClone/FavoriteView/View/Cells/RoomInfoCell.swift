@@ -18,16 +18,26 @@ class RoomInfoCell: UITableViewCell {
 
     // MARK: - Properties
     
-    var data: Room! {
+    var data: DabangElement! {
         didSet{
-            self.nameLabel.text = data.roomID == 1 ? "" : "서초푸르지오써밋"
-            self.priceLabel.text = "\(data.baseInfo.roomStyle.rawValue)" + " " + data.baseInfo.cost
-            self.infoLabel.text = self.data?.detailExplain ?? ""
-            self.detailLabel.text = data.location
-            etceteraArray = data.addInfo.option.map({$0.rawValue})
+            self.nameLabel.text = ""
+            self.priceLabel.text = "\(data.salesForm.type.rawValue)" + " " + data.salesForm.depositChar
+            let start = data.areaChar.index(data.areaChar.startIndex, offsetBy: 0)
+            let end = data.areaChar.index(data.areaChar.firstIndex(of: " ") ?? data.areaChar.endIndex, offsetBy: 0)
+            let range = start..<end
+            let mySubstring = data.areaChar[range]
+            
+            self.infoLabel.text = data.type.rawValue + " | \(data.floor) | \(String(mySubstring))m²"
+            
+            self.detailLabel.text = data.dabangDescription
+            etceteraArray = data.optionSet.map({$0.rawValue})
             etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
             putLabelInStackView()
-            self.roomImageView.image = data.images.first?.imageStringToImage()
+            if !data.postimage.isEmpty {
+            let url = URL(string: "https://wpsdabangapi.s3.amazonaws.com/\(data.postimage[0])")
+            self.roomImageView.kf.setImage(with: url)
+            self.roomImageView.contentMode = .scaleAspectFill
+            }
             if self.nameLabel.text == "" {
                 infoStackView.removeArrangedSubview(nameLabel)
             }
@@ -77,6 +87,7 @@ class RoomInfoCell: UITableViewCell {
     var etceteraArray = [String]()
     
     let roomImageView = UIImageView()
+    
     let smallConfiguration = UIImage.SymbolConfiguration(scale: .large)
     lazy var heartButton: UIButton = {
        let btn = UIButton()
@@ -94,7 +105,12 @@ class RoomInfoCell: UITableViewCell {
             delegate?.didTapCheckButton(cell: self, isChecked: isCheckButtonSelected)
         }
     }
-    
+  func configue(pk: Int) {
+    let roomPkData = BangData.shared.data.filter {
+      $0.pk == pk
+    }
+    roomPkData[0].address.loadAddress
+  }
     // MARK: - Life Cycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -120,11 +136,8 @@ class RoomInfoCell: UITableViewCell {
     
     private func configureEtcStackView() {
         etceteraStackView.axis = .horizontal
-        etceteraStackView.distribution = .equalSpacing
+        etceteraStackView.spacing = 3
         etceteraStackView.alignment = .center
-        etceteraStackView.snp.makeConstraints {
-            $0.width.equalTo(200)
-        }
     }
     
     private func putLabelInStackView() {
@@ -147,6 +160,7 @@ class RoomInfoCell: UITableViewCell {
             } else {
                 totalWidthOfEtc += labelWidth + 3
             }
+            label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
             return label
         }.forEach{ etceteraStackView.addArrangedSubview($0) }
     }
@@ -156,7 +170,7 @@ class RoomInfoCell: UITableViewCell {
         infoStackView.axis = .vertical
         infoStackView.setCustomSpacing(15, after: priceLabel)
         infoStackView.spacing = 5
-        infoStackView.alignment = .fill
+        infoStackView.alignment = .leading
         infoStackView.snp.makeConstraints {
             $0.width.equalTo(200)
         }
@@ -239,7 +253,7 @@ class RoomInfoCell: UITableViewCell {
                                                  }
     }
     
-    func set(roomInfo: Room) {
+    func set(roomInfo: DabangElement) {
         self.data = roomInfo
     }
     
@@ -257,7 +271,13 @@ class RoomInfoCell: UITableViewCell {
     }
     
     @objc private func didTapCheckButton(_ sender: UIButton) {
-        isCheckButtonSelected.toggle()
+        if FavoriteListViewController.compareCount < 3 {
+            isCheckButtonSelected.toggle()
+        } else if FavoriteListViewController.compareCount == 3 && isCheckButtonSelected {
+            isCheckButtonSelected.toggle()
+        } else if FavoriteListViewController.compareCount == 3 && !isCheckButtonSelected {
+            return
+        }
         sender.isSelected = isCheckButtonSelected
     }
 }

@@ -55,12 +55,6 @@ class BudongsanInfoCell: UITableViewCell {
         return view
     }()
     
-//    let overralContainer: UIView = {
-//       let view = UIView()
-//        view.backgroundColor = .white
-//        return view
-//    }()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configure()
@@ -71,7 +65,7 @@ class BudongsanInfoCell: UITableViewCell {
     }
     
     func set(info: BudongsanInfo) {
-        roomInfoCell.data = dummyRoom2
+//        roomInfoCell.data = dummyRoom2
         self.data = info
     }
     
@@ -104,7 +98,6 @@ class BudongsanInfoCell: UITableViewCell {
         roomInfoView.snp.makeConstraints {
             $0.top.equalTo(separatorLine.snp.bottom)
             $0.bottom.leading.trailing.equalToSuperview()
-//            $0.height.equalTo(150)
         }
         
     }

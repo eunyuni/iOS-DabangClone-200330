@@ -14,6 +14,8 @@ class NewMainRoomViewController: UIViewController {
   //MARK: - Property
   let tableView = UITableView()
   
+  var pk: Int?
+  
   //MARK: - Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -34,6 +36,10 @@ class NewMainRoomViewController: UIViewController {
     setupConstraints()
   }
   
+  func setTableViewReload() {
+    tableView.reloadData()
+  }
+  
   private func setupConstraints() {
     tableView.snp.makeConstraints {
       $0.edges.equalToSuperview()
@@ -52,9 +58,11 @@ extension NewMainRoomViewController: UITableViewDataSource {
     
     if indexPath.row == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainRoomTableViewCell.identifier, for: indexPath) as! MainRoomTableViewCell
+      cell.setupUI(pk: self.pk!)
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainRoomSecondTableViewCell.identifier, for: indexPath) as! MainRoomSecondTableViewCell
+      cell.reloadCollectionView(pk: self.pk!)
       return cell
     }
   }

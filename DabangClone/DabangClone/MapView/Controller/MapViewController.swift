@@ -11,6 +11,8 @@ import Alamofire
 import GoogleMaps
 import GooglePlaces
 
+//CoordinateFromAddress
+
 public let DEFAULT_CAMERA_POSITION = GMSCameraPosition(latitude: 37.5666102, longitude: 126.9783881, zoom: 18)
 class POIItem: NSObject, GMUClusterItem {
   var position: CLLocationCoordinate2D
@@ -20,10 +22,13 @@ class POIItem: NSObject, GMUClusterItem {
     self.name = name
   }
 }
+
 let kClusterItemCount = 10000
 let kCameraLatitude = 37.5666102
 let kCameraLongitude = 126.9783881
+
 class MapViewController: UIViewController{
+  var pkArrInCluster: [String] = []
   // MARK: - Property
   private let data = BangData.shared.data
   private var clusterManager: GMUClusterManager!
@@ -52,7 +57,6 @@ class MapViewController: UIViewController{
   var currentPlace = CLLocationCoordinate2D()
   private let myLocationButton = UIButton().then {
     $0.setImage(UIImage(named: "MyLocationImage"), for: .normal)
-    $0.backgroundColor = .red
     $0.layer.cornerRadius = 4
     $0.clipsToBounds = true
   }
@@ -97,8 +101,8 @@ class MapViewController: UIViewController{
     MapFilterButton(title: "추가필터 ⌄", tag: 6),
     MapFilterButton(title: "거래종류 ⌄", tag: 7),
   ]
-  private let filterImage = UIImageView().then {
-    $0.image = UIImage(named: "FilterImage")
+  private let filterButton = UIButton().then {
+    $0.setImage(UIImage(named: "FilterImage"), for: .normal)
   }
   private let bottomView = UIView().then {
     $0.backgroundColor = .white
@@ -123,14 +127,19 @@ class MapViewController: UIViewController{
     $0.titleLabel?.font = .systemFont(ofSize: 14)
   }
   private let tableView = UITableView().then {
-    $0.register(RoomInfoCell.self, forCellReuseIdentifier: RoomInfoCell.identifier)
+    $0.register(MapTableViewCell.self, forCellReuseIdentifier: MapTableViewCell.identifier)
   }
   var count = 0
+  
+  // MARK: - Gesture
+  let panGesture = UIPanGestureRecognizer()
+  
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .white
     tableView.dataSource = self
+    tableView.delegate = self
     locationManager.delegate = self
     let coor = locationManager.location?.coordinate
     let latitude = coor?.latitude
@@ -138,35 +147,130 @@ class MapViewController: UIViewController{
     mapTest.camera = GMSCameraPosition.camera(withLatitude: latitude!,
                                               longitude: longtitude!,
                                               zoom: 15)
-//    print(data[10].address.loadAddress)
+    //    print(data[10].address.loadAddress)
     let iconGenerator = GMUDefaultClusterIconGenerator()
     let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
     let renderer = GMUDefaultClusterRenderer(mapView: mapTest, clusterIconGenerator: iconGenerator)
+    renderer.delegate = self
     clusterManager = GMUClusterManager(map: mapTest, algorithm: algorithm, renderer: renderer)
+    
     // Generate and add random items to the cluster manager.
-    generateClusterItems()
+    //    generateClusterItems()
+    DispatchQueue.main.async {
+      self.mapGoogleGeocoder()
+      
+      DispatchQueue.main.async {
+        self.clusterManager.cluster()
+        
+        DispatchQueue.main.async {
+          self.clusterManager.setDelegate(self, mapDelegate: self)
+          
+          DispatchQueue.main.async {
+            self.setupUI()
+          }
+        }
+      }
+    }
+    
     // Call cluster() after items have been added to perform the clustering and rendering on map.
-    clusterManager.cluster()
+    
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
-    clusterManager.setDelegate(self, mapDelegate: self)
-    setupUI()
+    
+    
+    
+    
+    //    self.mapGoogleGeocoder()
+    //
+    //
+    //    self.clusterManager.cluster()
+    //    self.clusterManager.setDelegate(self, mapDelegate: self)
+    
+    self.setupUI()
+    
+    
+    
+    // Call cluster() after items have been added to perform the clustering and rendering on map.
+    
+    // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
+    
+    
+    
+    
   }
   // MARK: - Action
+  @objc private func didTapFilterButton(_ sender: UIButton) {
+    let vc = FilterViewController()
+    self.present(vc, animated: true, completion: nil)
+  }
   @objc private func didTapButton(_ sender: UIButton) {
-    print("didTapButton")
+    //    print("didTapButton")
     let location: CLLocation? = mapTest.myLocation
     if location != nil {
       mapTest.animate(toLocation: (location?.coordinate)!)
       mapTest.animate(toZoom: 15)
+    }
+    UIView.animate(withDuration: 0.1) {
+      self.bottomView.frame = CGRect(x: 0, y: self.mapTest.frame.maxY, width: self.view.frame.width, height: 60 )
+      self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height )
+    }
+    
+  }
+  
+  @objc private func didTapAllRoomButton(_ sender: UIButton) {
+    print("didTapAllRoomButton")
+    
+    guard let tabbarframe = tabBarController?.tabBar.frame else { return }
+    
+    UIView.animate(withDuration: 0.5) {
+      self.bottomView.frame = CGRect(x: 0, y: 360, width: self.view.frame.width, height: 60 )
+      self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: tabbarframe.minY - 420 )
+    }
+  }
+  
+  @objc private func didPanGesture(_ sender: UIPanGestureRecognizer) {
+    let transition = sender.translation(in: bottomView)
+    guard let tabbarframe = tabBarController?.tabBar.frame else { return }
+    switch sender.state {
+    case .began: break
+    case .changed:
+      if bottomView.frame.minY >= scrollView.frame.maxY && bottomView.frame.minY <= mapTest.frame.maxY{
+        let changedY = bottomView.center.y + transition.y
+        let changedTableY = tableView.center.y + transition.y
+        bottomView.center = CGPoint(x: self.view.center.x, y: changedY)
+        tableView.center = CGPoint(x: self.view.center.x, y: changedTableY)
+        sender.setTranslation(CGPoint.zero, in: bottomView)
+        sender.setTranslation(CGPoint.zero, in: tableView)
+      } else {
+        
+      }
+    case .ended:
+      print(bottomView.frame.minY)
+      if bottomView.frame.minY < 320 {
+        UIView.animate(withDuration: 0.5) {
+          self.bottomView.frame = CGRect(x: 0, y: self.scrollView.frame.maxY, width: self.view.frame.width, height: 60 )
+          self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: tabbarframe.minY - self.scrollView.frame.maxY - 60 )
+        }
+      } else {
+        UIView.animate(withDuration: 0.5) {
+          self.bottomView.frame = CGRect(x: 0, y: self.mapTest.frame.maxY, width: self.view.frame.width, height: 60 )
+          self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height )
+        }
+      }
+    default:
+      break
     }
   }
   // MARK: - setupUI
   private func setupUI() {
     mapTest.delegate = self
     self.myLocationButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
-    self.view.addSubviews([topView,bottomView,scrollView, filterImage ,mapTest, myLocationButton,safeButton,siseButton])
+    self.view.addSubviews([topView,scrollView, filterButton ,mapTest, myLocationButton,safeButton,siseButton,bottomView,tableView])
     self.topView.addSubviews([titleLabel, searchImage])
     self.bottomView.addSubviews([allRoomButton,apartButtun,officeButtom,bottomLineView])
+    self.bottomView.addGestureRecognizer(panGesture)
+    panGesture.addTarget(self, action: #selector(didPanGesture(_:)))
+    allRoomButton.addTarget(self, action: #selector(didTapAllRoomButton(_:)), for: .touchUpInside)
+    filterButton.addTarget(self, action: #selector(didTapFilterButton(_:)), for: .touchUpInside)
     stackView = UIStackView(arrangedSubviews: selectButtons)
     stackView.axis = .horizontal
     stackView.distribution = .equalSpacing
@@ -177,6 +281,9 @@ class MapViewController: UIViewController{
   // MARK: - setupConstraint
   private func setupConstraint() {
     let guide = self.view.safeAreaLayoutGuide
+    let tabbarframe = tabBarController?.tabBar.frame
+    bottomView.frame = CGRect(x: 0, y: tabbarframe!.minY - 60, width: self.view.frame.width, height: 60)
+    tableView.frame = CGRect(x: 0, y: tabbarframe!.minY, width: self.view.frame.width, height: self.view.frame.height)
     topView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
       $0.height.equalToSuperview().multipliedBy(0.115)
@@ -192,10 +299,10 @@ class MapViewController: UIViewController{
     scrollView.snp.makeConstraints {
       $0.top.equalTo(topView.snp.bottom)
       $0.leading.equalToSuperview()
-      $0.trailing.equalTo(filterImage.snp.leading)
+      $0.trailing.equalTo(filterButton.snp.leading)
       $0.height.equalTo(47)
     }
-    filterImage.snp.makeConstraints {
+    filterButton.snp.makeConstraints {
       $0.trailing.equalToSuperview()
       $0.centerY.equalTo(scrollView.snp.centerY)
       $0.height.equalTo(scrollView.snp.height)
@@ -209,7 +316,7 @@ class MapViewController: UIViewController{
     mapTest.snp.makeConstraints {
       $0.top.equalTo(scrollView.snp.bottom)
       $0.leading.trailing.equalToSuperview()
-      $0.bottom.equalTo(bottomView.snp.top)
+      $0.bottom.equalTo(guide.snp.bottom).inset(60)
     }
     myLocationButton.snp.makeConstraints {
       $0.top.equalTo(mapTest.snp.top).inset(15)
@@ -226,10 +333,10 @@ class MapViewController: UIViewController{
       $0.leading.equalTo(mapTest.snp.leading).offset(10)
       $0.height.width.equalTo(36)
     }
-    bottomView.snp.makeConstraints {
-      $0.leading.trailing.bottom.equalTo(guide)
-      $0.height.equalTo(60)
-    }
+    //    bottomView.snp.makeConstraints {
+    //      $0.leading.trailing.bottom.equalTo(guide)
+    //      $0.height.equalTo(60)
+    //    }
     bottomLineView.snp.makeConstraints {
       $0.height.equalTo(5)
       $0.width.equalTo(50)
@@ -248,7 +355,14 @@ class MapViewController: UIViewController{
       $0.centerX.equalToSuperview().multipliedBy(1.7)
       $0.bottom.equalTo(allRoomButton.snp.bottom)
     }
+    //    tableView.snp.makeConstraints {
+    //      $0.leading.trailing.bottom.equalTo(guide)
+    //      $0.top.equalTo(bottomView.snp.bottom)
+    //      $0.height.equalTo(500)
+    //    }
   }
+  
+  
 }
 
 extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
@@ -256,24 +370,28 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     print("didLongPressAt")
   }
   func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-    print("didTapAt")
+    //    print("didTapAt")
+    if self.bottomView.transform != .identity {
+      UIView.animate(withDuration: 1) {
+        self.bottomView.transform = .identity
+        self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height / 2 )
+      }
+    } else {
+      print("bottomview's transform is identity")
+    }
   }
   func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-    print("didChange")
+    //    print("didChange")
   }
   func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
     let findLocation = mapView.camera.target
-    guard let text = mapView.myLocation?.coordinate else { return }
-    let duck = GMSGeocoder()
-    duck.reverseGeocodeCoordinate(findLocation) { (respone, error) in
+    reverseGeocode(location: findLocation)
+  }
+  // [ 위경도 -> 주소 ]
+  func reverseGeocode(location: CLLocationCoordinate2D) {
+    let geocoder = GMSGeocoder()
+    geocoder.reverseGeocodeCoordinate(location) { (respone, error) in
       if let address = respone?.firstResult() {
-        print(address.country)
-        print(address.subLocality)
-        print(address.thoroughfare)
-        print(address.postalCode)
-        print(address.lines)
-        print(address.locality)
-        print(address.administrativeArea)
         self.titleString = ""
         address.lines?[0].forEach({
           if self.count == 3 {
@@ -286,28 +404,109 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
         self.count = 0
       }
     }
-//    let marker = CustomMarker(labelText: "25")
-//    marker.position = mapView.camera.target
-//    marker.map = mapView //your mapView object
-    print("mapViewDidFinishTileRendering")
   }
+  
+  struct SameAddress {
+    var loadAddress: String
+    var lat: Double
+    var lng: Double
+  }
+  
+  func mapGoogleGeocoder() {
+    DispatchQueue.global().async {
+      var count = 0
+      if BangData.shared.data.isEmpty { print("dataEmpty"); return }
+      for i in 0...BangData.shared.data.count-1 {
+        let address = BangData.shared.data[i].address.loadAddress
+        let url = URL(string: "https://maps.googleapis.com/maps/api/geocode/json?")
+        
+        let parameters: Parameters = [
+          "address": address,
+          "key": "AIzaSyDY0ppRrZhsxpXVHhJ4qZRWLMcpEhCjDgY"
+        ]
+        
+        AF.request(url!, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: .none, interceptor: .none)
+          .responseJSON { (response) in
+            switch response.result {
+            case .success(_):
+              if let geocodeObjects = try? JSONDecoder().decode(Geocode.self, from: response.data!) {
+                guard let location = geocodeObjects.results.first?.geometry.location else {return}
+                let name = "\(BangData.shared.data[i].pk)"
+                let item = POIItem(position: CLLocationCoordinate2DMake(location.lat, location.lng), name: name)
+
+                DispatchQueue.main.async {
+                  self.clusterManager.add(item)
+                }
+                print(geocodeObjects.results[0].addressComponents[0].longName)
+                count += 1
+                print("------성공횟수---------:", count)
+              }
+            case .failure(_):
+              print("Error")
+            }
+        }//AF scope Endpoint
+      } //for문 scope Endpoint
+    }//DispatchQueue.global().async scope End
+  } //mapGoogleGeocoder() scope End
+  
+  
+  // MARK: - 클러스터에 포함된 마커들의 name(pk) 값 얻기
+  // Renderer delegate 설정 -> 뭉텅이 POIItem을 GMUCluster 형식으로 형변환.(그래야 내부의 마커들을 forEach로! 쪼갤 수 있음. -> forEach 사용하여 각각의 cluster item들을 다시 POIItem으로 형변환 -> 그 다음 각각의 POIItem의 name 값 추출.
   // MARK: - GMUMapViewDelegate
   func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
     if let poiItem = marker.userData as? POIItem {
-      NSLog("Did tap marker for cluster item \(poiItem.name)")
+      pkArrInCluster.removeAll()
+      pkArrInCluster.append(poiItem.name)
+      tableView.reloadData()
     } else {
       NSLog("Did tap a normal marker")
+      
+      
+      guard let cluster = marker.userData as? GMUCluster else { return false }
+      if pkArrInCluster.count != 0 {
+        pkArrInCluster.removeAll()
+        cluster.items.forEach {
+          guard let a = $0 as? POIItem else {return}
+          pkArrInCluster.append(a.name)
+        }
+        tableView.reloadData()
+      } else {
+        cluster.items.forEach {
+          guard let a = $0 as? POIItem else {return}
+          pkArrInCluster.append(a.name)
+        }
+        tableView.reloadData()
+        print(pkArrInCluster)
+        
+        print("didTap CLUSTER")
+      }
     }
-    return false
+    
+    let tabbarframe = tabBarController?.tabBar.frame
+    
+    UIView.animate(withDuration: 0.5) {
+      let newCamera = GMSCameraPosition.camera(withTarget: marker.position,
+                                               zoom: self.mapTest.camera.zoom)
+      let update = GMSCameraUpdate.setCamera(newCamera)
+      self.mapTest.moveCamera(update)
+      self.bottomView.frame = CGRect(x: 0, y: 360, width: self.view.frame.width, height: 60 )
+      self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: tabbarframe!.minY - 420 )
+    }
+    return true
   }
   // MARK: - GMUClusterManagerDelegate
   func clusterManager(_ clusterManager: GMUClusterManager, didTap cluster: GMUCluster) -> Bool {
     let newCamera = GMSCameraPosition.camera(withTarget: cluster.position,
-      zoom: mapTest.camera.zoom + 1)
+                                             zoom: mapTest.camera.zoom + 1)
     let update = GMSCameraUpdate.setCamera(newCamera)
     mapTest.moveCamera(update)
+    
+    print(cluster.items.count)
+    print(cluster.items)
+    
     return false
   }
+  
   /// cluster manager.
   private func generateClusterItems() {
     let extent = 0.2
@@ -329,14 +528,30 @@ extension MapViewController: CLLocationManagerDelegate {
     print("locationManagerDidPauseLocationUpdates")
   }
 }
-  // MARK: - TableViewDataSource
+// MARK: - TableViewDataSource
 extension MapViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    0
+    pkArrInCluster.count
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: RoomInfoCell.identifier, for: indexPath) as! RoomInfoCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: MapTableViewCell.identifier, for: indexPath) as! MapTableViewCell
+    cell.configure(pk: Int(pkArrInCluster[indexPath.row]) ?? 0)
     return cell
   }
 }
 
+extension MapViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let selectedCell = tableView.cellForRow(at: indexPath) as! MapTableViewCell
+    print(selectedCell.roomPK)
+    let vc = NewMainRoomViewController() as NewMainRoomViewController
+    vc.pk = selectedCell.roomPK
+    vc.setTableViewReload()
+    vc.modalPresentationStyle = .fullScreen
+    navigationController?.pushViewController(vc, animated: true)
+  }
+}
+
+extension MapViewController: GMUClusterRendererDelegate {
+  
+}
