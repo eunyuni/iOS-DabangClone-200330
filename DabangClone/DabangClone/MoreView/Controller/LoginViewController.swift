@@ -95,19 +95,24 @@ class LoginViewController: UIViewController {
     $0.textAlignment = .center
   }
   
+  lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureAction(_:)))
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
-    self.navigationController?.navigationBar.isHidden = true
+    pwTextField.delegate = self
+    emailTextField.delegate = self
     // Do any additional setup after loading the view.
-    
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     setupUI()
     
   }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.navigationController?.navigationBar.isHidden = true
+    self.tabBarController?.tabBar.isHidden = true
   }
   
   
@@ -147,7 +152,7 @@ class LoginViewController: UIViewController {
   //MARK: - SetupUI
   private func setupUI() {
     
-    
+    view.addGestureRecognizer(tapGesture)
     view.addSubviews([
       dabangLogoImage,
       emailTextField,
@@ -369,4 +374,34 @@ class LoginViewController: UIViewController {
     })
   }
   
+    
+    
+
+  @objc func keyboardWillShowNotification(_ noti: Notification) {
+    guard let userInfo = noti.userInfo,
+      let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect, //frame의 최종 위치
+      let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
+      else { return }
+    
+    if frame.origin.y >= UIScreen.main.bounds.height {
+      //내려갔을 때
+        self.view.transform = .identity
+    } else {
+    
+    UIView.animate(withDuration: duration) {
+      self.view.transform = .init(translationX: 0, y: -frame.height)
+    }
+    }
+  }
+  
+  @objc private func tapGestureAction(_ gesture: UITapGestureRecognizer) {
+    if pwTextField.isEditing {
+      pwTextField.endEditing(true)
+    } else if emailTextField.isEditing {
+      emailTextField.endEditing(true)
+    }
+  }
+}
+
+extension LoginViewController: UITextFieldDelegate {
 }
