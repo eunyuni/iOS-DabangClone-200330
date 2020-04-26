@@ -157,8 +157,8 @@ class MapViewController: UIViewController{
     // Generate and add random items to the cluster manager.
     //    generateClusterItems()
     DispatchQueue.main.async {
-      self.mapGoogleGeocoder()
-      
+//      self.mapGoogleGeocoder()
+      self.addClusterToMap()
       DispatchQueue.main.async {
         self.clusterManager.cluster()
         
@@ -176,26 +176,10 @@ class MapViewController: UIViewController{
     
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
     
-    
-    
-    
-    //    self.mapGoogleGeocoder()
-    //
-    //
-    //    self.clusterManager.cluster()
-    //    self.clusterManager.setDelegate(self, mapDelegate: self)
-    
     self.setupUI()
-    
-    
-    
     // Call cluster() after items have been added to perform the clustering and rendering on map.
     
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
-    
-    
-    
-    
   }
   // MARK: - Action
   @objc private func didTapFilterButton(_ sender: UIButton) {
@@ -448,6 +432,17 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
       } //for문 scope Endpoint
     }//DispatchQueue.global().async scope End
   } //mapGoogleGeocoder() scope End
+  
+  func addClusterToMap() {
+    if BangData.shared.data.isEmpty { print("dataEmpty"); return }
+    for i in 0...BangData.shared.data.count-1 {
+      let name = "\(BangData.shared.data[i].pk)"
+      let item = POIItem(position: CLLocationCoordinate2DMake(BangData.shared.data[i].lng , BangData.shared.data[i].lat), name: name)
+      DispatchQueue.main.async {
+        self.clusterManager.add(item)
+      }
+    }
+  }
   
   
   // MARK: - 클러스터에 포함된 마커들의 name(pk) 값 얻기
