@@ -13,6 +13,7 @@ import Then
 import Alamofire
 import FBSDKLoginKit
 import FBSDKShareKit
+import AuthenticationServices
 //import Kingfisher
 //import Facebook
 //import RxSwift
@@ -31,14 +32,19 @@ class LoginViewController: UIViewController {
   //MARK: 카카오 로그인 버튼
   let kakaoLoginButton = UIButton().then {
     $0.addTarget(self, action: #selector(touchUpLoginButton(_:)), for: .touchUpInside)
-    $0.setBackgroundImage(UIImage(named: "KakaoButtonImage"), for: .normal)
+    $0.setBackgroundImage(UIImage(named: "KakaoLoginNew"), for: .normal)
   }
-  
   
   //MARK: 페이스북 로그인 버튼
   let facebookLoginButton = UIButton().then {
     $0.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-    $0.setBackgroundImage(UIImage(named: "FacebookButtonImage"), for: .normal)
+    $0.setBackgroundImage(UIImage(named: "FacebookLoginNew"), for: .normal)
+  }
+  
+  let appleLoginButton = ASAuthorizationAppleIDButton(type: .signIn, style: .whiteOutline)
+  
+  let appleLoginButtonView = UIView().then {
+    $0.backgroundColor = .white
   }
   
   let emailTextField = UITextField().then {
@@ -151,7 +157,7 @@ class LoginViewController: UIViewController {
   
   //MARK: - SetupUI
   private func setupUI() {
-    
+    addAppleLoginButton()
     view.addGestureRecognizer(tapGesture)
     view.addSubviews([
       dabangLogoImage,
@@ -163,6 +169,7 @@ class LoginViewController: UIViewController {
       kakaoLoginButton,
       facebookLoginButton,
       bottomGrayView,
+      appleLoginButtonView
     ])
     
     bottomGrayView.addSubview(bottomCallNumLabel)
@@ -178,7 +185,8 @@ class LoginViewController: UIViewController {
     }
     
     emailTextField.snp.makeConstraints {
-      $0.center.equalToSuperview()
+      $0.centerY.equalToSuperview().offset(-100)
+      $0.centerX.equalToSuperview()
       $0.width.equalToSuperview().multipliedBy(0.9)
       $0.height.equalToSuperview().multipliedBy(0.06)
     }
@@ -206,23 +214,31 @@ class LoginViewController: UIViewController {
       $0.top.equalTo(pureLoginButton.snp.bottom).offset(15)
     }
     
+    appleLoginButtonView.snp.makeConstraints {
+      $0.leading.equalTo(emailTextField)
+      $0.top.equalTo(findPwButton.snp.bottom).offset(30)
+      $0.trailing.equalTo(emailTextField)
+      $0.height.equalTo(emailTextField)
+    }
+    
     kakaoLoginButton.snp.makeConstraints {
       $0.leading.equalTo(emailTextField)
-      $0.top.equalTo(findPwButton.snp.bottom).offset(25)
-      $0.trailing.equalTo(view.snp.centerX).offset(-5)
+      $0.top.equalTo(appleLoginButtonView.snp.bottom).offset(15)
+      $0.trailing.equalTo(emailTextField)
       $0.height.equalTo(emailTextField)
     }
     
     facebookLoginButton.snp.makeConstraints {
+      $0.leading.equalTo(emailTextField)
+      $0.top.equalTo(kakaoLoginButton.snp.bottom).offset(15)
       $0.trailing.equalTo(emailTextField)
-      $0.top.equalTo(findPwButton.snp.bottom).offset(25)
-      $0.leading.equalTo(view.snp.centerX).offset(5)
       $0.height.equalTo(emailTextField)
     }
     
+    
     bottomGrayView.snp.makeConstraints {
       $0.bottom.leading.trailing.equalToSuperview()
-      $0.top.equalTo(kakaoLoginButton.snp.bottom).offset(70)
+        $0.top.equalTo(kakaoLoginButton.snp.bottom).offset(170)
     }
     
     bottomCallNumLabel.snp.makeConstraints {
@@ -251,6 +267,29 @@ class LoginViewController: UIViewController {
   
   @objc private func didTapSignUpUseEmailButton() {
     self.navigationController?.pushViewController(SignUpViewController(), animated: true)
+  }
+  
+  //MARK: - APPLE Login
+  func addAppleLoginButton() {
+    appleLoginButtonView.addSubview(appleLoginButton)
+    appleLoginButton.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
+    appleLoginButton.addTarget(self, action: #selector(handleAppleSignInbutton(_:)), for: .touchUpInside)
+    print("addtarget")
+    
+  }
+  
+  @objc private func handleAppleSignInbutton(_ sender: UIButton) {
+    print("Apple login")
+    let request = ASAuthorizationAppleIDProvider().createRequest()
+    request.requestedScopes = [.email, .fullName]
+    
+    let controller = ASAuthorizationController(authorizationRequests: [request])
+    controller.delegate = self
+    controller.presentationContextProvider = self
+    controller.performRequests()
+    
   }
   
   //MARK: - KAKAO Login
@@ -404,4 +443,23 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: UITextFieldDelegate {
+}
+
+
+extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+  func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+    return self.view.window!
+  }
+  
+  func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
+      let user = credential.user
+      print("Apple User: \(user)")
+      guard let email = credential.email else {return}
+      print("Email: \(email)")
+    }
+  }
+  func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    print("AppleLogin Error :", error.localizedDescription)
+  }
 }
