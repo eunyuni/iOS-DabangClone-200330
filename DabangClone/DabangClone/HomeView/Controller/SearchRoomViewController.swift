@@ -35,6 +35,7 @@ class SearchRoomViewController: UIViewController {
   }
   private let tableView = UITableView().then {
     $0.allowsSelection = true
+    $0.allowsMultipleSelection = false
     $0.register(EasySearchTableViewCell.self, forCellReuseIdentifier: EasySearchTableViewCell.identifier)
     $0.register(UniversityTableViewCell.self, forCellReuseIdentifier: UniversityTableViewCell.identifier)
     $0.register(SubwayTableViewCell.self, forCellReuseIdentifier: SubwayTableViewCell.identifier)
@@ -158,22 +159,28 @@ extension SearchRoomViewController : UITableViewDataSource {
       switch indexPath.row {
       case 0:
         let cell = tableView.dequeueReusableCell(withIdentifier: EasySearchTableViewCell.identifier, for: indexPath) as! EasySearchTableViewCell
+        cell.selectionStyle = .none
         return cell
       case 1:
         let cell = tableView.dequeueReusableCell(withIdentifier: UniversityTableViewCell.identifier, for: indexPath) as! UniversityTableViewCell
+        cell.selectionStyle = .none
         return cell
       case 2:
         let cell = tableView.dequeueReusableCell(withIdentifier: SubwayTableViewCell.identifier, for: indexPath) as! SubwayTableViewCell
+        cell.selectionStyle = .none
         return cell
       case 3:
         let cell = tableView.dequeueReusableCell(withIdentifier: ApartmentTableViewCell.identifier, for: indexPath) as! ApartmentTableViewCell
+        cell.selectionStyle = .none
         return cell
       case 4:
         let cell = tableView.dequeueReusableCell(withIdentifier: OfficetelTableViewCell.identifier, for: indexPath) as! OfficetelTableViewCell
+        cell.selectionStyle = .none
         return cell
       case 5:
         let cell = tableView.dequeueReusableCell(withIdentifier: AreaTableViewCell.identifier, for: indexPath) as! AreaTableViewCell
-        cell.titleLabel.text = "서울시 성동구 성수동1가"
+        cell.selectionStyle = .none
+        cell.titleLabel.text = "서울특별시 성동구 성수동1가"
         return cell
       default:
         return UITableViewCell()
@@ -190,18 +197,29 @@ extension SearchRoomViewController : UITableViewDataSource {
 //MARK: - 검색결과 클릭시 맵뷰컨트롤러로 이동
 extension SearchRoomViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let cell = tableView.cellForRow(at: indexPath) as! AreaTableViewCell
-    let vc = self.presentingViewController as! MainTabBarViewController
-    let vcVC = vc.viewControllers![2] as! UINavigationController
-    let mapVC = vcVC.viewControllers[0] as! MapViewController
-    mapVC.pkArrInCluster.removeAll()
-    BangData.shared.data.filter{ $0.address.loadAddress == cell.titleLabel.text }.forEach {
-      mapVC.pkArrInCluster.append(String($0.pk))
-      print($0.pk)
+    if let cell = tableView.cellForRow(at: indexPath) as? AreaTableViewCell {
+      let vc = self.presentingViewController as! MainTabBarViewController
+      let vcVC = vc.viewControllers![2] as! UINavigationController
+      let mapVC = vcVC.viewControllers[0] as! MapViewController
+      mapVC.pkArrInCluster.removeAll()
+      mapVC.searchLoad = true
+      print(cell.titleLabel.text)
+      BangData.shared.data.filter{ $0.address.loadAddress == cell.titleLabel.text }.forEach {
+        mapVC.pkArrInCluster.append(String($0.pk))
+        print($0.pk)
+      }
+      mapVC.tabBarController?.selectedIndex = 2
+      self.dismiss(animated: true, completion: nil )
     }
-    mapVC.tableView.reloadData()
-    mapVC.tabBarController?.selectedIndex = 2
-    self.dismiss(animated: true, completion: nil )
+    print((tableView.cellForRow(at: indexPath) as? EasySearchTableViewCell) != nil)
+    if (tableView.cellForRow(at: indexPath) as? EasySearchTableViewCell) != nil {
+      print("check")
+      let vc = FindEasyRoomViewController()
+//      vc.modalPresentationStyle = .fullScree0n
+//      navigationController?.pushViewController(vc, animated: true)
+      present(vc, animated: true, completion: nil)
+    }
+    
   }
 }
 
