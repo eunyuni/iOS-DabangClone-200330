@@ -12,6 +12,7 @@ import UIKit
 class FilterViewController: UIViewController {
   
   // MARK: -Property
+  private let topView = FilterTopView()
   private let tableView = UITableView().then {
     $0.allowsSelection = false
     $0.separatorStyle = .none
@@ -31,8 +32,9 @@ class FilterViewController: UIViewController {
   
   // MARK: -setupUI
   private func setupUI() {
-    
+    topView.delegate = self
     view.addSubviews([
+      topView,
       tableView,
       button
     ])
@@ -46,13 +48,18 @@ class FilterViewController: UIViewController {
     tableView.register(FileteAddCell.self, forCellReuseIdentifier: FileteAddCell.identifier)
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     tableView.dataSource = self
+//    topView.delegate = self
     setupConstraint()
   }
   
   // MARK: -setupConstraint
   
   private func setupConstraint() {
-    
+    topView.snp.makeConstraints {
+      $0.top.equalTo(view.snp.top)
+      $0.leading.trailing.equalToSuperview()
+      $0.height.equalTo(88)
+    }
     button.snp.makeConstraints {
       $0.height.equalTo(70)
       $0.leading.equalToSuperview()
@@ -61,7 +68,8 @@ class FilterViewController: UIViewController {
     }
     tableView.snp.makeConstraints {
       $0.bottom.equalTo(button.snp.top)
-      $0.top.leading.trailing.equalToSuperview()
+      $0.top.equalTo(topView.snp.bottom)
+      $0.leading.trailing.equalToSuperview()
     }
   }
   
@@ -109,4 +117,13 @@ extension FilterViewController: UITableViewDataSource {
     
     
   }
+}
+
+
+extension FilterViewController: FilterTopViewDelegate {
+  func didTapButton() {
+    dismiss(animated: true)
+  }
+  
+  
 }

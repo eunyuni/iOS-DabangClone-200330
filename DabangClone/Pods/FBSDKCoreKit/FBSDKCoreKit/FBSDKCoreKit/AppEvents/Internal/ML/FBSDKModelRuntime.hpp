@@ -30,6 +30,8 @@
 #include "FBSDKStandaloneModel.hpp"
 
 #define SEQ_LEN 128
+#define ALPHABET_SIZE 256
+#define EMBEDDING_SIZE 64
 #define DENSE_FEATURE_LEN 30
 
 const int CONV_BLOCKS[3][3] = {{32, 2, SEQ_LEN - 1}, {32, 3, SEQ_LEN - 2}, {32, 5, SEQ_LEN - 4}};
@@ -210,20 +212,20 @@ namespace mat1 {
         return a;
     }
 
-static MTensor getDenseTensor(const float *df) {
-  MTensor dense_tensor({1, DENSE_FEATURE_LEN});
-  if (df) {
-    memcpy(dense_tensor.mutable_data(), df, DENSE_FEATURE_LEN * sizeof(float));
-  } else {
-    memset(dense_tensor.mutable_data(), 0, DENSE_FEATURE_LEN * sizeof(float));
-  }
-  return dense_tensor;
-}
-
-static MTensor predictOnMTML(const std::string task, const char *texts, const std::unordered_map<std::string, MTensor>& weights, const float *df) {
-  MTensor dense_tensor = getDenseTensor(df);
-  std::string final_layer_weight_key = task + ".weight";
-  std::string final_layer_bias_key = task + ".bias";
+    static float* predict(std::string task, const char *texts, std::unordered_map<std::string, mat::MTensor>& weights, float *df) {
+        int *x;
+        float *embed_x;
+        float *c1;
+        float *c2;
+        float *c3;
+        float *ca;
+        float *cb;
+        float *cc;
+        float *dense1_x;
+        float *dense2_x;
+        float *final_layer_dense_x;
+        std::string final_layer_weight_key = task + ".weight";
+        std::string final_layer_bias_key = task + ".bias";
 
         mat::MTensor& embed_t = weights.at("embed.weight");
         mat::MTensor& conv1w_t = weights.at("convs.0.weight"); // (32, 64, 2)

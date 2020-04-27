@@ -209,6 +209,7 @@ class MapViewController: UIViewController{
   }
   @objc private func didTapFilterButton(_ sender: UIButton) {
     let vc = FilterViewController()
+    vc.modalPresentationStyle = .fullScreen
     self.present(vc, animated: true, completion: nil)
   }
   @objc private func didTapButton(_ sender: UIButton) {
