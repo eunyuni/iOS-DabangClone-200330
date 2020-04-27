@@ -35,7 +35,6 @@ class SearchRoomViewController: UIViewController {
   }
   private let tableView = UITableView().then {
     $0.allowsSelection = true
-    
     $0.register(EasySearchTableViewCell.self, forCellReuseIdentifier: EasySearchTableViewCell.identifier)
     $0.register(UniversityTableViewCell.self, forCellReuseIdentifier: UniversityTableViewCell.identifier)
     $0.register(SubwayTableViewCell.self, forCellReuseIdentifier: SubwayTableViewCell.identifier)
@@ -47,6 +46,7 @@ class SearchRoomViewController: UIViewController {
   private let eventImageView = UIImageView().then {
     $0.image = UIImage(named: "eventImage")
   }
+  
   private var isPresenting = false
   // MARK: - AppLifeCycle
   init() {
@@ -58,6 +58,7 @@ class SearchRoomViewController: UIViewController {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
@@ -186,6 +187,7 @@ extension SearchRoomViewController : UITableViewDataSource {
   }
 }
 
+//MARK: - 검색결과 클릭시 맵뷰컨트롤러로 이동
 extension SearchRoomViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let cell = tableView.cellForRow(at: indexPath) as! AreaTableViewCell
