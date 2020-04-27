@@ -33,9 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
 {
 <<<<<<< Updated upstream
   std::unordered_map<std::string, fbsdk::MTensor> weights;
-=======
-  unordered_map<string,  MTensor> weights;
->>>>>>> Stashed changes
 
   const void *data = weightsData.bytes;
   NSUInteger totalLength =  weightsData.length;

@@ -30,10 +30,7 @@
 
 #import "FBSDKCoreKit+Internal.h"
 #import "FBSDKEventInferencer.h"
-<<<<<<< Updated upstream
 #import "FBSDKMLMacros.h"
-=======
->>>>>>> Stashed changes
 
 NSString * const OptInEvents = @"production_events";
 NSString * const UnconfirmedEvents = @"eligible_for_prediction_events";
@@ -218,7 +215,6 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
     viewTree[VIEW_HIERARCHY_SCREEN_NAME_KEY] = screenName ?: @"";
 
     fb_dispatch_on_default_thread(^{
-<<<<<<< Updated upstream
       NSDictionary<NSString *, NSString *> *result = [FBSDKEventInferencer predict:text viewTree:[viewTree mutableCopy]];
       NSString *event = result[SUGGEST_EVENT_KEY];
       if (!event || [event isEqualToString:SUGGESTED_EVENT_OTHER]) {

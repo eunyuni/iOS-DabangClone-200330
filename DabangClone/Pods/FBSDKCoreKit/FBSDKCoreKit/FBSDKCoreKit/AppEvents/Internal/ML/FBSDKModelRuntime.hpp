@@ -31,12 +31,8 @@
 
 #define SEQ_LEN 128
 #define ALPHABET_SIZE 256
-<<<<<<< Updated upstream
 #define MTML_EMBEDDING_SIZE 32
 #define NON_MTML_EMBEDDING_SIZE 64
-=======
-#define EMBEDDING_SIZE 64
->>>>>>> Stashed changes
 #define DENSE_FEATURE_LEN 30
 
 const int CONV_BLOCKS[3][3] = {{32, 2, SEQ_LEN - 1}, {32, 3, SEQ_LEN - 2}, {32, 5, SEQ_LEN - 4}};
@@ -217,7 +213,6 @@ namespace mat1 {
         return a;
     }
 
-<<<<<<< Updated upstream
 static MTensor predictOnMTML(const std::string task, const char *texts, const std::unordered_map<std::string, MTensor>& weights, const float *df) {
   MTensor dense_tensor({1, DENSE_FEATURE_LEN});
   memcpy(dense_tensor.mutable_data(), df, DENSE_FEATURE_LEN * sizeof(float));
