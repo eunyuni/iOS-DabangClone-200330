@@ -41,11 +41,6 @@ class HomeAlertViewController: UIViewController {
   
   
   // MARK: - Lift cycle
-//  init() {
-//    super.init(nibName: nil, bundle: nil)
-//    modalPresentationStyle = .custom
-//    transitioningDelegate = self
-//  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -54,6 +49,7 @@ class HomeAlertViewController: UIViewController {
     cancelButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
     setupUI()
   }
+  
   // MARK: - Action
   @objc private func didTapGesture(_ sender: UITapGestureRecognizer) {
     dismiss(animated: true, completion: nil)
@@ -62,10 +58,10 @@ class HomeAlertViewController: UIViewController {
     dismiss(animated: true, completion: nil)
   }
   @objc private func didTapleftButton(_ sender: UIButton) {
-//    _ = UserDefaults.standard.integer(forKey: "TodayPopUp")
     UserDefaults.standard.set(checkToday(), forKey: "TodayPopUp")
     self.dismiss(animated: true, completion: nil)
   }
+  
   // MARK: - setupUI
   private func setupUI() {
     
@@ -98,7 +94,6 @@ class HomeAlertViewController: UIViewController {
       $0.bottom.equalTo(firsAlertView.snp.top).offset(-2)
     }
     cancelButton.snp.makeConstraints {
-//      $0.bottom.equalTo(leftButton)
       $0.centerY.equalTo(leftButton)
       $0.trailing.equalTo(firsAlertView)
     }
@@ -106,8 +101,6 @@ class HomeAlertViewController: UIViewController {
       $0.top.equalTo(mascotImage.snp.bottom)
       $0.leading.trailing.bottom.equalToSuperview()
     }
-    
-    
   }
   
   private func checkToday() -> Int {
@@ -117,7 +110,6 @@ class HomeAlertViewController: UIViewController {
        date.dateFormat = "dd"
        return Int(date.string(from: now)) ?? 0
   }
-
   
 }
   //extension HomeAlertViewController: UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {

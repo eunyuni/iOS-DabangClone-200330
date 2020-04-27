@@ -167,7 +167,7 @@ static dispatch_queue_t serialQueue;
   NSMutableArray<NSString *> *labels = [[NSMutableArray alloc] init];
 
   NSString *placeholder = [self normalizeField:[FBSDKViewHierarchy getHint:view]];
-  if (placeholder.length > 0) {
+  if (placeholder) {
     [labels addObject:placeholder];
   }
 
@@ -175,7 +175,7 @@ static dispatch_queue_t serialQueue;
   for (id sibling in siblingViews) {
     if ([sibling isKindOfClass:[UILabel class]]) {
       NSString *text = [self normalizeField:[FBSDKViewHierarchy getText:sibling]];
-      if (text.length > 0) {
+      if (text) {
         [labels addObject:text];
       }
     }
@@ -302,8 +302,8 @@ static dispatch_queue_t serialQueue;
 
 + (NSString *)normalizeField:(NSString *)field
 {
-  if (field.length == 0) {
-    return @"";
+  if (!field) {
+    return nil;
   }
   NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[_-]|\\s"
                                                                          options:NSRegularExpressionCaseInsensitive
@@ -316,8 +316,8 @@ static dispatch_queue_t serialQueue;
 
 + (NSString *)normalizeValue:(NSString *)value
 {
-  if (value.length == 0) {
-    return @"";
+  if (!value) {
+    return nil;
   }
   return [value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].lowercaseString;
 }

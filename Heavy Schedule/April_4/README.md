@@ -21,3 +21,12 @@
 * Post page 일괄 검색 
 
 
+
+## 20.04.23
+
+* GoogleMap / 정덕
+- 현재위치, 이동 
+* DataTable / 의석
+* Dabang PopUp / 은영
+* FavoriteView 코드수정 / 성준
+
