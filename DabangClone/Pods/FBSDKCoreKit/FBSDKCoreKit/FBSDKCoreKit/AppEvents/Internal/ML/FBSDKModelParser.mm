@@ -31,8 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (unordered_map<string, MTensor>)parseWeightsData:(NSData *)weightsData
 {
-<<<<<<< Updated upstream
-  std::unordered_map<std::string, fbsdk::MTensor> weights;
+  unordered_map<string,  MTensor> weights;
 
   const void *data = weightsData.bytes;
   NSUInteger totalLength =  weightsData.length;

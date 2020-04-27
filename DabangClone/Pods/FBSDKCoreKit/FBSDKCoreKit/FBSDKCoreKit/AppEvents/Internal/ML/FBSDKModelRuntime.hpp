@@ -31,8 +31,7 @@
 
 #define SEQ_LEN 128
 #define ALPHABET_SIZE 256
-#define MTML_EMBEDDING_SIZE 32
-#define NON_MTML_EMBEDDING_SIZE 64
+#define EMBEDDING_SIZE 64
 #define DENSE_FEATURE_LEN 30
 
 const int CONV_BLOCKS[3][3] = {{32, 2, SEQ_LEN - 1}, {32, 3, SEQ_LEN - 2}, {32, 5, SEQ_LEN - 4}};
@@ -213,74 +212,6 @@ namespace mat1 {
         return a;
     }
 
-static MTensor predictOnMTML(const std::string task, const char *texts, const std::unordered_map<std::string, MTensor>& weights, const float *df) {
-  MTensor dense_tensor({1, DENSE_FEATURE_LEN});
-  memcpy(dense_tensor.mutable_data(), df, DENSE_FEATURE_LEN * sizeof(float));
-  std::string final_layer_weight_key = task + ".weight";
-  std::string final_layer_bias_key = task + ".bias";
-
-  const MTensor& embed_t = weights.at("embed.weight");
-  const MTensor& conv0w_t = weights.at("convs.0.weight");
-  const MTensor& conv1w_t = weights.at("convs.1.weight");
-  const MTensor& conv2w_t = weights.at("convs.2.weight");
-  const MTensor& conv0b_t = weights.at("convs.0.bias");
-  const MTensor& conv1b_t = weights.at("convs.1.bias");
-  const MTensor& conv2b_t = weights.at("convs.2.bias");
-  const MTensor& fc1w_t = weights.at("fc1.weight"); // (128, 190)
-  const MTensor& fc1b_t = weights.at("fc1.bias"); // 128
-  const MTensor& fc2w_t = weights.at("fc2.weight"); // (64, 128)
-  const MTensor& fc2b_t = weights.at("fc2.bias"); // 64
-  const MTensor& final_layer_weight_t = weights.at(final_layer_weight_key); // (2, 64) or (5, 64)
-  const MTensor& final_layer_bias_t = weights.at(final_layer_bias_key); // 2 or 5
-
-  const MTensor& convs_0_weight = transpose3D(conv0w_t);
-  const MTensor& convs_1_weight = transpose3D(conv1w_t);
-  const MTensor& convs_2_weight = transpose3D(conv2w_t);
-  const MTensor& fc1_weight = transpose2D(fc1w_t);
-  const MTensor& fc2_weight = transpose2D(fc2w_t);
-  const MTensor& final_layer_weight = transpose2D(final_layer_weight_t);
-
-  // embedding
-  const MTensor& embed_x = embedding(texts, SEQ_LEN, embed_t);
-
-  // conv0
-  MTensor c0 = conv1D(embed_x, convs_0_weight); // (1, 126, 32)
-  addmv(c0, conv0b_t);
-  relu(c0);
-
-  // conv1
-  MTensor c1 = conv1D(c0, convs_1_weight); // (1, 124, 64)
-  addmv(c1, conv1b_t);
-  relu(c1);
-  c1 = maxPool1D(c1, 2); // (1, 123, 64)
-
-  // conv2
-  MTensor c2 = conv1D(c1, convs_2_weight); // (1, 121, 64)
-  addmv(c2, conv2b_t);
-  relu(c2);
-
-  // max pooling
-  MTensor ca = maxPool1D(c0, c0.size(1));
-  MTensor cb = maxPool1D(c1, c1.size(1));
-  MTensor cc = maxPool1D(c2, c2.size(1));
-
-  // concatenate
-  flatten(ca, 1);
-  flatten(cb, 1);
-  flatten(cc, 1);
-  std::vector<MTensor *> concat_tensors { &ca, &cb, &cc, &dense_tensor };
-  const MTensor& concat = concatenate(concat_tensors);
-
-  // dense + relu
-  MTensor dense1_x = dense(concat, fc1_weight, fc1b_t);
-  relu(dense1_x);
-  MTensor dense2_x = dense(dense1_x, fc2_weight, fc2b_t);
-  relu(dense2_x);
-  MTensor final_layer_dense_x = dense(dense2_x, final_layer_weight, final_layer_bias_t);
-  softmax(final_layer_dense_x);
-  return final_layer_dense_x;
-}
-=======
     static float* predict(std::string task, const char *texts, std::unordered_map<std::string, mat::MTensor>& weights, float *df) {
         int *x;
         float *embed_x;
@@ -392,7 +323,6 @@ static MTensor predictOnMTML(const std::string task, const char *texts, const st
         }
         return predict("fc3", texts, weights, df);
     }
->>>>>>> Stashed changes
 }
 
 #endif

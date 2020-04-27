@@ -577,7 +577,6 @@
 		E7BB1C152433670600C66B48 /* ParkingFeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingFeeViewController.swift; sourceTree = "<group>"; };
 		E7BB1C172434801300C66B48 /* InquiryBodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryBodyTableViewCell.swift; sourceTree = "<group>"; };
 		E7DA1633245034B60053E455 /* HomeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAlertViewController.swift; sourceTree = "<group>"; };
-		E7DA16382451A0A70053E455 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		E7E6043E243B14DB0050D540 /* FindEasyRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEasyRoomViewController.swift; sourceTree = "<group>"; };
 		E7E60440243B154E0050D540 /* FindHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindHeaderView.swift; path = DabangClone/HomeView/Controller/FindHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		E7E60442243B1AC30050D540 /* FindBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindBottomView.swift; path = DabangClone/HomeView/Controller/FindBottomView.swift; sourceTree = SOURCE_ROOT; };
@@ -666,8 +665,8 @@
 				1516005A242B2C1D0003DDCF /* MoreView */,
 				1516002E24247BA20003DDCF /* AppDelegate.swift */,
 				15160048242483730003DDCF /* MainTabBarViewController.swift */,
-				1516003724247BA20003DDCF /* Assets.xcassets */,
 				1516003C24247BA20003DDCF /* Info.plist */,
+				1516003724247BA20003DDCF /* Assets.xcassets */,
 			);
 			path = DabangClone;
 			sourceTree = "<group>";
