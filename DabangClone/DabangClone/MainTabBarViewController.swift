@@ -21,15 +21,15 @@ class MainTabBarViewController: UITabBarController {
     super.viewDidLoad()
     
     homeVC.navigationBar.isHidden = true
-    homeVC.tabBarItem = UITabBarItem(title: "홈", image: nil, tag: 0)
+    homeVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "HomeIcon"), tag: 0)
     favoriteVC.navigationBar.isHidden = false
-    favoriteVC.tabBarItem = UITabBarItem(title: "관심목록", image: nil, tag: 1)
+    favoriteVC.tabBarItem = UITabBarItem(title: "관심목록", image: UIImage(named: "HeartIcon"), tag: 1)
     mapVC.navigationBar.isHidden = true
-    mapVC.tabBarItem = UITabBarItem(title: "지도", image: nil, tag: 2)
+    mapVC.tabBarItem = UITabBarItem(title: "지도", image: UIImage(named: "MapIcon"), tag: 2)
     saleVC.navigationBar.isHidden = false
-    saleVC.tabBarItem = UITabBarItem(title: "분양", image: nil, tag: 3)
+    saleVC.tabBarItem = UITabBarItem(title: "분양", image: UIImage(named: "SaleIcon"), tag: 3)
     moreVC.navigationBar.isHidden = true
-    moreVC.tabBarItem = UITabBarItem(title: "더보기", image: nil, tag: 4)
+    moreVC.tabBarItem = UITabBarItem(title: "더보기", image: UIImage(named: "MoreIcon"), tag: 4)
     
     
 

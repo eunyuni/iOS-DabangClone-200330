@@ -320,6 +320,7 @@
 		156B616D24346CEA00054FE9 /* ThreeSegmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeSegmentTableViewCell.swift; sourceTree = "<group>"; };
 		156B616F24346CF900054FE9 /* CheckBoxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxCell.swift; sourceTree = "<group>"; };
 		156B61712434748000054FE9 /* IsThereCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsThereCell.swift; sourceTree = "<group>"; };
+		1575BED92456C18700CF611D /* DabangClone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DabangClone.entitlements; sourceTree = "<group>"; };
 		157C4E702437142E008559FD /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		157C4E7224371F60008559FD /* RoomSellScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomSellScrollViewController.swift; sourceTree = "<group>"; };
 		157C4E7424386A63008559FD /* CustomSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentView.swift; sourceTree = "<group>"; };
@@ -656,6 +657,7 @@
 		1516002D24247BA20003DDCF /* DabangClone */ = {
 			isa = PBXGroup;
 			children = (
+				1575BED92456C18700CF611D /* DabangClone.entitlements */,
 				CEC7B71B2452955E0089E267 /* API Manager */,
 				15D9B324242BA12000A38A76 /* Utils */,
 				15D9B318242B9FB300A38A76 /* MapView */,
@@ -665,8 +667,8 @@
 				1516005A242B2C1D0003DDCF /* MoreView */,
 				1516002E24247BA20003DDCF /* AppDelegate.swift */,
 				15160048242483730003DDCF /* MainTabBarViewController.swift */,
-				1516003724247BA20003DDCF /* Assets.xcassets */,
 				1516003C24247BA20003DDCF /* Info.plist */,
+				1516003724247BA20003DDCF /* Assets.xcassets */,
 			);
 			path = DabangClone;
 			sourceTree = "<group>";
@@ -1778,8 +1780,9 @@
 			baseConfigurationReference = DF6E307BB0DBA8293AA6779F /* Pods-DabangClone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DabangClone/DabangClone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4MM77V7NH;
+				DEVELOPMENT_TEAM = S3QQ63V4S9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1796,7 +1799,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				OTHER_LIBTOOLFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.iospanda.DabangClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.iospanda.DabangCloneMaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/GMUClusterHeader.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
@@ -1810,8 +1813,9 @@
 			baseConfigurationReference = 3AEABCBF869ADF9D5DC4566F /* Pods-DabangClone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DabangClone/DabangClone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4MM77V7NH;
+				DEVELOPMENT_TEAM = S3QQ63V4S9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1828,7 +1832,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				OTHER_LIBTOOLFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.iospanda.DabangClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.iospanda.DabangCloneMaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/GMUClusterHeader.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
