@@ -12,14 +12,16 @@ struct DabangElement: Codable {
     let type: DabangType
     let dabangDescription: String
     let address: Address
+  let lng: Double
+  let lat: Double
     let salesForm: SalesForm
     let floor, totalFloor, areaChar: String
     let supplyAreaInt: Int
     let supplyAreaChar: String
     let shortRent: Bool
-    let managementSet: [String]
+    let managementSet: [ManagementSet]
     let parkingDetail: ParkingDetail
-    let parkingTF: Bool
+    let parkingtf: Bool
     let livingExpenses: String?
     let livingExpensesDetail: LivingExpensesDetail?
     let moveInChar: MoveInChar
@@ -31,14 +33,16 @@ struct DabangElement: Codable {
     let totalCitizen: String?
     let totalPark: TotalPark?
     let complete: String?
-    let securitySafetySet, postimage: [String]
+    let securitySafetySet: [SecuritySafetySet]
+    let postimage: [String]
 
     enum CodingKeys: String, CodingKey {
         case pk, broker, type
         case dabangDescription = "description"
-        case address, salesForm, floor, totalFloor, areaChar, supplyAreaInt, supplyAreaChar, shortRent
+        case address, salesForm, floor, totalFloor, areaChar, supplyAreaInt, supplyAreaChar, shortRent, lng, lat
         case managementSet = "management_set"
-        case parkingDetail, parkingTF
+        case parkingDetail
+        case parkingtf = "parkingTF"
         case livingExpenses = "living_expenses"
         case livingExpensesDetail = "living_expenses_detail"
         case moveInChar, moveInDate
@@ -57,6 +61,8 @@ struct Address: Codable {
 
 enum HeatingType: String, Codable {
     case 개별난방 = "개별난방"
+    case 중앙난방 = "중앙난방"
+    case 지역난방 = "지역난방"
 }
 
 enum LivingExpensesDetail: String, Codable {
@@ -67,6 +73,18 @@ enum LivingExpensesDetail: String, Codable {
     case 월세관리비 = "(월세 + 관리비)"
     case 월세관리비주차비 = "(월세 + 관리비 + 주차비)"
     case 월세주차비 = "(월세 + 주차비)"
+    case 주차비 = "(주차비)"
+}
+
+enum ManagementSet: String, Codable {
+    case 기타 = "기타"
+    case 도시가스 = "도시가스"
+    case 수도세 = "수도세"
+    case 유선Tv = "유선TV"
+    case 인터넷 = "인터넷"
+    case 전기세 = "전기세"
+    case 청소비 = "청소비"
+    case 협의가능 = "협의가능"
 }
 
 enum MoveInChar: String, Codable {
@@ -74,9 +92,26 @@ enum MoveInChar: String, Codable {
     case 즉시입주 = "즉시 입주"
 }
 
+enum OptionSet: String, Codable {
+    case tv = "TV"
+    case 가스레인지 = "가스레인지"
+    case 냉장고 = "냉장고"
+    case 비데 = "비데"
+    case 세탁기 = "세탁기"
+    case 신발장 = "신발장"
+    case 에어컨 = "에어컨"
+    case 옷장 = "옷장"
+    case 인덕션 = "인덕션"
+    case 전자도어락 = "전자도어락"
+    case 전자레인지 = "전자레인지"
+    case 책상 = "책상"
+    case 침대 = "침대"
+}
+
 enum ParkingDetail: String, Codable {
     case 가능무료 = "가능(무료)"
     case 문의 = "문의"
+    case 불가 = "불가"
 }
 
 // MARK: - SalesForm
@@ -90,6 +125,16 @@ enum SalesFormType: String, Codable {
     case 매매 = "매매"
     case 월세 = "월세"
     case 전세 = "전세"
+}
+
+enum SecuritySafetySet: String, Codable {
+    case cctv = "CCTV"
+    case 경비원 = "경비원"
+    case 공동현관 = "공동현관"
+    case 방범창 = "방범창"
+    case 비디오폰 = "비디오폰"
+    case 인터폰 = "인터폰"
+    case 카드키 = "카드키"
 }
 
 enum TotalPark: String, Codable {
@@ -111,25 +156,11 @@ enum DabangType: String, Codable {
     case 쓰리룸 = "쓰리룸"
     case 아파트 = "아파트"
     case 오피스텔 = "오피스텔"
+    case 오피스텔복층 = "오피스텔(복층)"
     case 원룸 = "원룸"
+    case 원룸복층 = "원룸(복층)"
     case 원룸주방분리형15룸 = "원룸(주방 분리형(1.5룸))"
     case 투룸 = "투룸"
-}
-
-enum OptionSet: String, Codable {
-    case tv = "TV"
-    case 가스레인지 = "가스레인지"
-    case 냉장고 = "냉장고"
-    case 비데 = "비데"
-    case 세탁기 = "세탁기"
-    case 신발장 = "신발장"
-    case 에어컨 = "에어컨"
-    case 옷장 = "옷장"
-    case 인덕션 = "인덕션"
-    case 전자도어락 = "전자도어락"
-    case 전자레인지 = "전자레인지"
-    case 책상 = "책상"
-    case 침대 = "침대"
 }
 
 extension OptionSet {

@@ -19,7 +19,6 @@
 		1516005524287ED40003DDCF /* SaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1516005424287ED40003DDCF /* SaleViewController.swift */; };
 		1516005724287EDC0003DDCF /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1516005624287EDC0003DDCF /* MoreViewController.swift */; };
 		151600592429E0260003DDCF /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151600582429E0260003DDCF /* MoreView.swift */; };
-		1529B01F244EC6D500B80F33 /* ModelNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1529B01E244EC6D500B80F33 /* ModelNew.swift */; };
 		152DD9B2242B3E2400C80E10 /* FrequentlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B1242B3E2400C80E10 /* FrequentlyViewController.swift */; };
 		152DD9B6242B3EEA00C80E10 /* FrequentlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B5242B3EEA00C80E10 /* FrequentlyTableViewCell.swift */; };
 		152DD9B8242B4D3400C80E10 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152DD9B7242B4D3400C80E10 /* Model.swift */; };
@@ -55,8 +54,7 @@
 		157C4E712437142E008559FD /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C4E702437142E008559FD /* AddressViewController.swift */; };
 		157C4E7324371F60008559FD /* RoomSellScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C4E7224371F60008559FD /* RoomSellScrollViewController.swift */; };
 		157C4E7524386A63008559FD /* CustomSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C4E7424386A63008559FD /* CustomSegmentView.swift */; };
-		157C4E77243A0566008559FD /* MainRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C4E76243A0566008559FD /* MainRoomViewController.swift */; };
-		157C4E79243A060D008559FD /* RoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C4E78243A060D008559FD /* RoomModel.swift */; };
+		157C4E79243A060D008559FD /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C4E78243A060D008559FD /* DummyModel.swift */; };
 		157C4E7B243B5C5B008559FD /* NewMainRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C4E7A243B5C5B008559FD /* NewMainRoomViewController.swift */; };
 		157C4E7D243C49F9008559FD /* MainRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C4E7C243C49F9008559FD /* MainRoomTableViewCell.swift */; };
 		157C4E81243C5778008559FD /* MainRoomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C4E80243C5778008559FD /* MainRoomCollectionViewCell.swift */; };
@@ -204,6 +202,7 @@
 		6F7C080F2450DE470081EF77 /* MapScrollButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C080E2450DE470081EF77 /* MapScrollButton.swift */; };
 		6F7C08112450DFF80081EF77 /* MapFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C08102450DFF80081EF77 /* MapFilterButton.swift */; };
 		6F7C08132451BF1C0081EF77 /* CustomMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C08122451BF1C0081EF77 /* CustomMarker.swift */; };
+		6F7C0815245275090081EF77 /* OfficeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C0814245275090081EF77 /* OfficeTableViewCell.swift */; };
 		6FAA9E9F2449A3920005F2B2 /* HomeInterestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAA9E9E2449A3920005F2B2 /* HomeInterestCollectionViewCell.swift */; };
 		6FAA9EA12449A3A30005F2B2 /* HomeSaleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAA9EA02449A3A30005F2B2 /* HomeSaleCollectionViewCell.swift */; };
 		6FAA9EA32449A3B70005F2B2 /* HomeRecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAA9EA22449A3B70005F2B2 /* HomeRecommendedCollectionViewCell.swift */; };
@@ -289,7 +288,6 @@
 		1516005424287ED40003DDCF /* SaleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleViewController.swift; sourceTree = "<group>"; };
 		1516005624287EDC0003DDCF /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		151600582429E0260003DDCF /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
-		1529B01E244EC6D500B80F33 /* ModelNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelNew.swift; sourceTree = "<group>"; };
 		152DD9B1242B3E2400C80E10 /* FrequentlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyViewController.swift; sourceTree = "<group>"; };
 		152DD9B5242B3EEA00C80E10 /* FrequentlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyTableViewCell.swift; sourceTree = "<group>"; };
 		152DD9B7242B4D3400C80E10 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -322,11 +320,11 @@
 		156B616D24346CEA00054FE9 /* ThreeSegmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeSegmentTableViewCell.swift; sourceTree = "<group>"; };
 		156B616F24346CF900054FE9 /* CheckBoxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxCell.swift; sourceTree = "<group>"; };
 		156B61712434748000054FE9 /* IsThereCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsThereCell.swift; sourceTree = "<group>"; };
+		1575BED92456C18700CF611D /* DabangClone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DabangClone.entitlements; sourceTree = "<group>"; };
 		157C4E702437142E008559FD /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		157C4E7224371F60008559FD /* RoomSellScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomSellScrollViewController.swift; sourceTree = "<group>"; };
 		157C4E7424386A63008559FD /* CustomSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentView.swift; sourceTree = "<group>"; };
-		157C4E76243A0566008559FD /* MainRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoomViewController.swift; sourceTree = "<group>"; };
-		157C4E78243A060D008559FD /* RoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomModel.swift; sourceTree = "<group>"; };
+		157C4E78243A060D008559FD /* DummyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
 		157C4E7A243B5C5B008559FD /* NewMainRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMainRoomViewController.swift; sourceTree = "<group>"; };
 		157C4E7C243C49F9008559FD /* MainRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoomTableViewCell.swift; sourceTree = "<group>"; };
 		157C4E80243C5778008559FD /* MainRoomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoomCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -517,6 +515,7 @@
 		6F7C080E2450DE470081EF77 /* MapScrollButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapScrollButton.swift; path = DabangClone/MapView/Controller/MapScrollButton.swift; sourceTree = SOURCE_ROOT; };
 		6F7C08102450DFF80081EF77 /* MapFilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterButton.swift; sourceTree = "<group>"; };
 		6F7C08122451BF1C0081EF77 /* CustomMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarker.swift; sourceTree = "<group>"; };
+		6F7C0814245275090081EF77 /* OfficeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeTableViewCell.swift; sourceTree = "<group>"; };
 		6FAA9E9E2449A3920005F2B2 /* HomeInterestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInterestCollectionViewCell.swift; sourceTree = "<group>"; };
 		6FAA9EA02449A3A30005F2B2 /* HomeSaleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSaleCollectionViewCell.swift; sourceTree = "<group>"; };
 		6FAA9EA22449A3B70005F2B2 /* HomeRecommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRecommendedCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -658,6 +657,7 @@
 		1516002D24247BA20003DDCF /* DabangClone */ = {
 			isa = PBXGroup;
 			children = (
+				1575BED92456C18700CF611D /* DabangClone.entitlements */,
 				CEC7B71B2452955E0089E267 /* API Manager */,
 				15D9B324242BA12000A38A76 /* Utils */,
 				15D9B318242B9FB300A38A76 /* MapView */,
@@ -667,8 +667,8 @@
 				1516005A242B2C1D0003DDCF /* MoreView */,
 				1516002E24247BA20003DDCF /* AppDelegate.swift */,
 				15160048242483730003DDCF /* MainTabBarViewController.swift */,
-				1516003724247BA20003DDCF /* Assets.xcassets */,
 				1516003C24247BA20003DDCF /* Info.plist */,
+				1516003724247BA20003DDCF /* Assets.xcassets */,
 			);
 			path = DabangClone;
 			sourceTree = "<group>";
@@ -919,10 +919,9 @@
 		15D9B311242B9F3D00A38A76 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				157C4E78243A060D008559FD /* RoomModel.swift */,
+				157C4E78243A060D008559FD /* DummyModel.swift */,
 				15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */,
 				6F389E5B2448505500A440A4 /* HomeModel.swift */,
-				1529B01E244EC6D500B80F33 /* ModelNew.swift */,
 				4FEF15D624531E0700100EAB /* ModelDabang424.swift */,
 			);
 			path = Model;
@@ -948,7 +947,6 @@
 			children = (
 				1516004E24287E450003DDCF /* HomeViewController.swift */,
 				E7DA1633245034B60053E455 /* HomeAlertViewController.swift */,
-				157C4E76243A0566008559FD /* MainRoomViewController.swift */,
 				157C4E7A243B5C5B008559FD /* NewMainRoomViewController.swift */,
 				E7E6043E243B14DB0050D540 /* FindEasyRoomViewController.swift */,
 				E7E6044A243B42BF0050D540 /* BrokerageOfficeViewController.swift */,
@@ -1188,6 +1186,7 @@
 				E78AD9642437186B0098BE6E /* GrayLineViewCell.swift */,
 				6F49EEA024506B5700D952F8 /* MultiSliderTableViewCell.swift */,
 				159121AC2452295D00DA05D8 /* MapTableViewCell.swift */,
+				6F7C0814245275090081EF77 /* OfficeTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1455,7 +1454,6 @@
 				6F389E862448587500A440A4 /* SaleScheduleTableViewCell.swift in Sources */,
 				1516003324247BA20003DDCF /* LoginViewController.swift in Sources */,
 				6F41B40B242A383000CACDCE /* MarketingImfomationViewController.swift in Sources */,
-				1529B01F244EC6D500B80F33 /* ModelNew.swift in Sources */,
 				158473EB243602DB00C49FC1 /* ApartmentAddInfoViewController.swift in Sources */,
 				15D9B3582431C2B600A38A76 /* ExplainView.swift in Sources */,
 				155B8558244C7EEC009AC6AF /* OneRoomTableViewCell.swift in Sources */,
@@ -1556,7 +1554,6 @@
 				6F389E7C2448574200A440A4 /* SaleAreaViewController.swift in Sources */,
 				6F49EEA124506B5700D952F8 /* MultiSliderTableViewCell.swift in Sources */,
 				15D9B342242E230800A38A76 /* AddRoomCollectionViewCell.swift in Sources */,
-				157C4E77243A0566008559FD /* MainRoomViewController.swift in Sources */,
 				E7BB1C042431E5F600C66B48 /* PriceTopTableViewCell.swift in Sources */,
 				E78AD96B243729BB0098BE6E /* FilterFloorCountCell.swift in Sources */,
 				15D9B33D242E22EB00A38A76 /* TermsAndConditionsViewController.swift in Sources */,
@@ -1573,7 +1570,7 @@
 				158473E32435E8BF00C49FC1 /* TitleTableViewCell.swift in Sources */,
 				E77D8C6D2443466D00A263AE /* SaleDetailViewController.swift in Sources */,
 				152DD9B6242B3EEA00C80E10 /* FrequentlyTableViewCell.swift in Sources */,
-				157C4E79243A060D008559FD /* RoomModel.swift in Sources */,
+				157C4E79243A060D008559FD /* DummyModel.swift in Sources */,
 				1516005724287EDC0003DDCF /* MoreViewController.swift in Sources */,
 				159121A72451CCCA00DA05D8 /* GMUGeoJSONParser.m in Sources */,
 				E79D81842429E8E50006029E /* RGTopTableViewCell.swift in Sources */,
@@ -1609,6 +1606,7 @@
 				6F4DECE02429EC69008D77E5 /* NoticeTopView.swift in Sources */,
 				E77D8C6B243FBF2600A263AE /* BrokerageReviewBottomCell.swift in Sources */,
 				6F389E4E24484F1100A440A4 /* EasySearchTableViewCell.swift in Sources */,
+				6F7C0815245275090081EF77 /* OfficeTableViewCell.swift in Sources */,
 				6F41B40D242A389800CACDCE /* MarketingImfomationTableViewCell.swift in Sources */,
 				158473E92436020D00C49FC1 /* OfficetelAdditionalInfoViewController.swift in Sources */,
 				158473E72436006800C49FC1 /* TwoAndThreeRoomAdditionalInfoViewController.swift in Sources */,
@@ -1782,8 +1780,9 @@
 			baseConfigurationReference = DF6E307BB0DBA8293AA6779F /* Pods-DabangClone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DabangClone/DabangClone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4MM77V7NH;
+				DEVELOPMENT_TEAM = S3QQ63V4S9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1800,7 +1799,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				OTHER_LIBTOOLFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.iospanda.DabangClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.iospanda.DabangCloneMaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/GMUClusterHeader.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
@@ -1814,8 +1813,9 @@
 			baseConfigurationReference = 3AEABCBF869ADF9D5DC4566F /* Pods-DabangClone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DabangClone/DabangClone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4MM77V7NH;
+				DEVELOPMENT_TEAM = S3QQ63V4S9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1832,7 +1832,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				OTHER_LIBTOOLFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.iospanda.DabangClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.iospanda.DabangCloneMaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/GMUClusterHeader.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";

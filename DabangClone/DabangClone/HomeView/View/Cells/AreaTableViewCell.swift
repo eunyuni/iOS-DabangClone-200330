@@ -16,7 +16,7 @@ class AreaTableViewCell: UITableViewCell {
   // MARK: - Identifier
   static let identifier = "AreaTableViewCell"
   // MARK: - Property
-  private let titleLabel = UILabel().then {
+  let titleLabel = UILabel().then {
     $0.font = .systemFont(ofSize: 14)
     $0.text = "서울특별시 광진구 화양동"
   }
@@ -53,4 +53,5 @@ class AreaTableViewCell: UITableViewCell {
       $0.centerY.equalTo(logoImageView.snp.centerY)
     }
   }
+  
 }

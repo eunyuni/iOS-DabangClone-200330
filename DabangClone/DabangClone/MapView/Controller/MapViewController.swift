@@ -130,10 +130,10 @@ class MapViewController: UIViewController{
     $0.register(MapTableViewCell.self, forCellReuseIdentifier: MapTableViewCell.identifier)
   }
   var count = 0
-  
+  var searchLoad = false
   // MARK: - Gesture
   let panGesture = UIPanGestureRecognizer()
-  
+  let tapGesture = UITapGestureRecognizer()
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -157,8 +157,8 @@ class MapViewController: UIViewController{
     // Generate and add random items to the cluster manager.
     //    generateClusterItems()
     DispatchQueue.main.async {
-      self.mapGoogleGeocoder()
-      
+//      self.mapGoogleGeocoder()
+      self.addClusterToMap()
       DispatchQueue.main.async {
         self.clusterManager.cluster()
         
@@ -173,31 +173,40 @@ class MapViewController: UIViewController{
     }
     
     // Call cluster() after items have been added to perform the clustering and rendering on map.
-    
+     
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
     
-    
-    
-    
-    //    self.mapGoogleGeocoder()
-    //
-    //
-    //    self.clusterManager.cluster()
-    //    self.clusterManager.setDelegate(self, mapDelegate: self)
-    
     self.setupUI()
-    
-    
-    
     // Call cluster() after items have been added to perform the clustering and rendering on map.
     
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
-    
-    
-    
-    
   }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    if self.searchLoad {
+      affterSearch()
+      self.searchLoad.toggle()
+    }
+  }
+  
+  
   // MARK: - Action
+  func affterSearch() {
+    
+    guard let tabbarframe = tabBarController?.tabBar.frame else { return }
+    
+    tableView.reloadData()
+    let lat = BangData.shared.data[Int(pkArrInCluster[0])!].lng
+    let lng =  BangData.shared.data[Int(pkArrInCluster[0])!].lat
+    let cLLocation: CLLocation = CLLocation(latitude: lat, longitude: lng)
+    mapTest.animate(toLocation: cLLocation.coordinate)
+    mapTest.animate(toZoom: 15)
+    print("check")
+    self.bottomView.frame = CGRect(x: 0, y: 360, width: self.view.frame.width, height: 60 )
+    self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: tabbarframe.minY - 420 )
+   
+  }
   @objc private func didTapFilterButton(_ sender: UIButton) {
     let vc = FilterViewController()
     self.present(vc, animated: true, completion: nil)
@@ -260,6 +269,13 @@ class MapViewController: UIViewController{
       break
     }
   }
+  
+  @objc private func didTapGesture(_ sender: UITapGestureRecognizer) {
+    let vc = SearchRoomViewController()
+    vc.modalPresentationStyle = .custom
+    
+    present(vc,animated: true,completion: nil)
+  }
   // MARK: - setupUI
   private func setupUI() {
     mapTest.delegate = self
@@ -268,7 +284,9 @@ class MapViewController: UIViewController{
     self.topView.addSubviews([titleLabel, searchImage])
     self.bottomView.addSubviews([allRoomButton,apartButtun,officeButtom,bottomLineView])
     self.bottomView.addGestureRecognizer(panGesture)
+    self.topView.addGestureRecognizer(tapGesture)
     panGesture.addTarget(self, action: #selector(didPanGesture(_:)))
+    tapGesture.addTarget(self, action: #selector(didTapGesture(_:)))
     allRoomButton.addTarget(self, action: #selector(didTapAllRoomButton(_:)), for: .touchUpInside)
     filterButton.addTarget(self, action: #selector(didTapFilterButton(_:)), for: .touchUpInside)
     stackView = UIStackView(arrangedSubviews: selectButtons)
@@ -406,12 +424,18 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     }
   }
   
+  struct SameAddress {
+    var loadAddress: String
+    var lat: Double
+    var lng: Double
+  }
   
   func mapGoogleGeocoder() {
     DispatchQueue.global().async {
+      var count = 0
+      if BangData.shared.data.isEmpty { print("dataEmpty"); return }
       for i in 0...BangData.shared.data.count-1 {
         let address = BangData.shared.data[i].address.loadAddress
-        
         let url = URL(string: "https://maps.googleapis.com/maps/api/geocode/json?")
         
         let parameters: Parameters = [
@@ -421,21 +445,35 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
         
         AF.request(url!, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: .none, interceptor: .none)
           .responseJSON { (response) in
-            
+            switch response.result {
+            case .success(_):
               if let geocodeObjects = try? JSONDecoder().decode(Geocode.self, from: response.data!) {
                 guard let location = geocodeObjects.results.first?.geometry.location else {return}
                 let name = "\(BangData.shared.data[i].pk)"
                 let item = POIItem(position: CLLocationCoordinate2DMake(location.lat, location.lng), name: name)
+
                 DispatchQueue.main.async {
                   self.clusterManager.add(item)
                 }
                 print(geocodeObjects.results[0].addressComponents[0].longName)
+                count += 1
+                print("------성공횟수---------:", count)
               }
-              
-            if response.error != nil {
-              print(response.error?.errorDescription)
+            case .failure(_):
+              print("Error")
             }
-        }
+        }//AF scope Endpoint
+      } //for문 scope Endpoint
+    }//DispatchQueue.global().async scope End
+  } //mapGoogleGeocoder() scope End
+  
+  func addClusterToMap() {
+    if BangData.shared.data.isEmpty { print("dataEmpty"); return }
+    for i in 0...BangData.shared.data.count-1 {
+      let name = "\(BangData.shared.data[i].pk)"
+      let item = POIItem(position: CLLocationCoordinate2DMake(BangData.shared.data[i].lng , BangData.shared.data[i].lat), name: name)
+      DispatchQueue.main.async {
+        self.clusterManager.add(item)
       }
     }
   }

@@ -16,9 +16,11 @@ class SaleDetailViewController: UIViewController {
     .then {
       $0.allowsSelection = false
       $0.separatorStyle = .none
-      //    $0.backgroundColor = UIColor(named: "TextFieldColor")
   }
   private let bottomButton = SaleDetailBottomView()
+  private let navigationView = UIView().then {
+    $0.backgroundColor = .clear
+  }
   
   // MARK: -Lift cycle
   
@@ -35,14 +37,14 @@ class SaleDetailViewController: UIViewController {
   private func setupUI() {
     view.addSubviews([
       tableView,
-      bottomButton
+      bottomButton,
+      navigationView,
     ])
     tableView.backgroundColor = .white
     tableView.contentInsetAdjustmentBehavior = .never
-//    navigationController?.navigationBar.barTintColor = UIColor.white.withAlphaComponent(0)
-    navigationController?.navigationBar.barTintColor = .red
-    navigationController?.navigationBar.shadowImage = UIImage()
+    //    navigationController?.navigationBar.shadowImage = UIImage()
     navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    navigationController?.navigationBar.barStyle = .black
     
     tableView.register(SaleDetailMainCell.self, forCellReuseIdentifier: SaleDetailMainCell.identifier)
     tableView.register(SaleDetailSectionCell.self, forCellReuseIdentifier: SaleDetailSectionCell.identifier)
@@ -53,11 +55,6 @@ class SaleDetailViewController: UIViewController {
     tableView.register(SaleDetailScheduleCell.self, forCellReuseIdentifier: SaleDetailScheduleCell.identifier)
     tableView.register(SaleDetailNearMapCell.self, forCellReuseIdentifier: SaleDetailNearMapCell.identifier)
     tableView.register(SaleDetailRecommendCell.self, forCellReuseIdentifier: SaleDetailRecommendCell.identifier)
-    //    tableView.register(BrokerageReviewBottomCell.self, forCellReuseIdentifier: BrokerageReviewBottomCell.identifier)
-    //    tableView.register(BrokerageReviewBottomCell.self, forCellReuseIdentifier: BrokerageReviewBottomCell.identifier)
-    //    tableView.register(BrokerageReviewBottomCell.self, forCellReuseIdentifier: BrokerageReviewBottomCell.identifier)
-    //    tableView.register(BrokerageReviewBottomCell.self, forCellReuseIdentifier: BrokerageReviewBottomCell.identifier)
-    
     
     tableView.dataSource = self
     tableView.delegate = self
@@ -67,7 +64,6 @@ class SaleDetailViewController: UIViewController {
   // MARK: -setupConstraint
   
   private func setupConstraint() {
-    let guide = view.safeAreaLayoutGuide
     bottomButton.snp.makeConstraints {
       $0.leading.trailing.bottom.equalToSuperview()
       $0.height.equalTo(70)
@@ -77,9 +73,12 @@ class SaleDetailViewController: UIViewController {
       $0.leading.trailing.equalToSuperview()
       $0.bottom.equalTo(bottomButton.snp.top)
     }
-    
+    navigationView.snp.makeConstraints {
+      $0.top.equalTo(view.snp.top)
+      $0.leading.trailing.equalToSuperview()
+      $0.height.equalTo(88)
+    }
   }
-  
 }
 
 
@@ -124,9 +123,6 @@ extension SaleDetailViewController: UITableViewDataSource {
     case 10:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailRecommendCell.identifier, for: indexPath) as! SaleDetailRecommendCell
       return cell
-      //      case 3, 5:
-      //      let cell = tableView.dequeueReusableCell(withIdentifier: GrayLineViewCell.identifier, for: indexPath) as! GrayLineViewCell
-    //      return cell
     default:
       return UITableViewCell()
     }
@@ -147,12 +143,15 @@ extension SaleDetailViewController: SaleDetailScheduleCellDelegate {
   }
 }
 
-
 extension SaleDetailViewController {
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    print(scrollView.contentOffset.y)
-    if scrollView.contentOffset.y == 0.0 {
-      navigationController?.navigationBar.backgroundColor = .clear
+    if scrollView.contentOffset.y < 192.0 {
+      self.navigationView.backgroundColor? = UIColor.white.withAlphaComponent(scrollView.contentOffset.y / 192)
+    }
+    if scrollView.contentOffset.y < 132.0 {
+    navigationController?.navigationBar.barStyle = .black
+    }else {
+      navigationController?.navigationBar.barStyle = .default
     }
   }
 }

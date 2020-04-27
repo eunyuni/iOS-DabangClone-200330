@@ -98,14 +98,13 @@ NS_ASSUME_NONNULL_BEGIN
     case FBSDKFeatureAAM: featureName = @"AAM"; break;
     case FBSDKFeaturePrivacyProtection: featureName = @"PrivacyProtection"; break;
     case FBSDKFeatureSuggestedEvents: featureName = @"SuggestedEvents"; break;
-    case FBSDKFeatureIntelligentIntegrity: featureName = @"IntelligentIntegrity"; break;
-    case FBSDKFeatureModelRequest: featureName = @"ModelRequest"; break;
+    case FBSDKFeaturePIIFiltering: featureName = @"PIIFiltering"; break;
+    case FBSDKFeatureMTML: featureName = @"MTML"; break;
     case FBSDKFeatureEventDeactivation: featureName = @"EventDeactivation"; break;
     case FBSDKFeatureInstrument: featureName = @"Instrument"; break;
     case FBSDKFeatureCrashReport: featureName = @"CrashReport"; break;
     case FBSDKFeatureCrashShield: featureName = @"CrashShield"; break;
     case FBSDKFeatureErrorReport: featureName = @"ErrorReport"; break;
-    case FBSDKFeatureMonitoring: featureName = @"Monitoring"; break;
 
     case FBSDKFeatureLogin: featureName = @"LoginKit"; break;
 
@@ -129,9 +128,8 @@ NS_ASSUME_NONNULL_BEGIN
     case FBSDKFeatureAAM:
     case FBSDKFeaturePrivacyProtection:
     case FBSDKFeatureSuggestedEvents:
-    case FBSDKFeatureIntelligentIntegrity:
-    case FBSDKFeatureModelRequest:
-    case FBSDKFeatureMonitoring:
+    case FBSDKFeaturePIIFiltering:
+    case FBSDKFeatureMTML:
       return NO;
     case FBSDKFeatureLogin:
     case FBDSDKFeatureShare:
