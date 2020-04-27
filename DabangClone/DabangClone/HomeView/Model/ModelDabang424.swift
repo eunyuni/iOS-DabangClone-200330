@@ -12,6 +12,8 @@ struct DabangElement: Codable {
     let type: DabangType
     let dabangDescription: String
     let address: Address
+  let lng: Double
+  let lat: Double
     let salesForm: SalesForm
     let floor, totalFloor, areaChar: String
     let supplyAreaInt: Int
@@ -37,7 +39,7 @@ struct DabangElement: Codable {
     enum CodingKeys: String, CodingKey {
         case pk, broker, type
         case dabangDescription = "description"
-        case address, salesForm, floor, totalFloor, areaChar, supplyAreaInt, supplyAreaChar, shortRent
+        case address, salesForm, floor, totalFloor, areaChar, supplyAreaInt, supplyAreaChar, shortRent, lng, lat
         case managementSet = "management_set"
         case parkingDetail
         case parkingtf = "parkingTF"

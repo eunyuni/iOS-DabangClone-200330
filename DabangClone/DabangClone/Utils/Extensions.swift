@@ -42,7 +42,6 @@ extension UITextView {
 }
 
 extension String {
-  
   public func validateEmail() -> Bool {
       let emailRegEx = "^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$"
       
@@ -56,8 +55,6 @@ extension String {
       let predicate = NSPredicate(format:"SELF MATCHES %@", passwordRegEx)
       return predicate.evaluate(with: self)
   }
-  
- 
   
   //MARK: usage
   /*
@@ -76,7 +73,6 @@ extension String {
 }
 
 extension UILabel {
-  
   func addCharacterSpacing(kernValue: Double = -1) {
     if let labelText = text, labelText.count > 0 {
       let attributedString = NSMutableAttributedString(string: labelText)
@@ -86,8 +82,8 @@ extension UILabel {
   }
 }
 
+
 extension UIButton {
-  
   func addCharacterSpacing(kernValue: Double = -1) {
     if let labelText = self.titleLabel?.text, labelText.count > 0 {
       let attributedString = NSMutableAttributedString(string: labelText)
@@ -109,7 +105,6 @@ extension NSMutableAttributedString {
       let attrs: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: fontSize)]
         self.append(NSMutableAttributedString(string: text, attributes: attrs))
         return self
-
     }
   
   func semiBold(_ text: String, fontSize: CGFloat) -> NSMutableAttributedString {
@@ -123,7 +118,6 @@ extension NSMutableAttributedString {
       self.append(NSMutableAttributedString(string: text, attributes: attrs))
       return self
   }
-
 }
 
 
@@ -166,6 +160,7 @@ extension UISegmentedControl{
     }
 }
 
+//상위 뷰컨 찾기
 extension UIView {
   var viewController: UIViewController? {
     if let vc = self.next as? UIViewController {

@@ -126,7 +126,7 @@ class MapViewController: UIViewController{
     $0.setTitleColor(#colorLiteral(red: 0.4619160891, green: 0.4667593241, blue: 0.4709950089, alpha: 1), for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14)
   }
-  private let tableView = UITableView().then {
+  public let tableView = UITableView().then {
     $0.register(MapTableViewCell.self, forCellReuseIdentifier: MapTableViewCell.identifier)
   }
   var count = 0
@@ -157,8 +157,8 @@ class MapViewController: UIViewController{
     // Generate and add random items to the cluster manager.
     //    generateClusterItems()
     DispatchQueue.main.async {
-      self.mapGoogleGeocoder()
-      
+//      self.mapGoogleGeocoder()
+      self.addClusterToMap()
       DispatchQueue.main.async {
         self.clusterManager.cluster()
         
@@ -176,26 +176,10 @@ class MapViewController: UIViewController{
     
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
     
-    
-    
-    
-    //    self.mapGoogleGeocoder()
-    //
-    //
-    //    self.clusterManager.cluster()
-    //    self.clusterManager.setDelegate(self, mapDelegate: self)
-    
     self.setupUI()
-    
-    
-    
     // Call cluster() after items have been added to perform the clustering and rendering on map.
     
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
-    
-    
-    
-    
   }
   // MARK: - Action
   @objc private func didTapFilterButton(_ sender: UIButton) {
@@ -449,6 +433,16 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     }//DispatchQueue.global().async scope End
   } //mapGoogleGeocoder() scope End
   
+  func addClusterToMap() {
+    if BangData.shared.data.isEmpty { print("dataEmpty"); return }
+    for i in 0...BangData.shared.data.count-1 {
+      let name = "\(BangData.shared.data[i].pk)"
+      let item = POIItem(position: CLLocationCoordinate2DMake(BangData.shared.data[i].lng , BangData.shared.data[i].lat), name: name)
+      DispatchQueue.main.async {
+        self.clusterManager.add(item)
+      }
+    }
+  }
   
   // MARK: - 클러스터에 포함된 마커들의 name(pk) 값 얻기
   // Renderer delegate 설정 -> 뭉텅이 POIItem을 GMUCluster 형식으로 형변환.(그래야 내부의 마커들을 forEach로! 쪼갤 수 있음. -> forEach 사용하여 각각의 cluster item들을 다시 POIItem으로 형변환 -> 그 다음 각각의 POIItem의 name 값 추출.
