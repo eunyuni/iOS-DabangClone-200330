@@ -126,14 +126,14 @@ class MapViewController: UIViewController{
     $0.setTitleColor(#colorLiteral(red: 0.4619160891, green: 0.4667593241, blue: 0.4709950089, alpha: 1), for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14)
   }
-  public let tableView = UITableView().then {
+  private let tableView = UITableView().then {
     $0.register(MapTableViewCell.self, forCellReuseIdentifier: MapTableViewCell.identifier)
   }
   var count = 0
-  
+  var searchLoad = false
   // MARK: - Gesture
   let panGesture = UIPanGestureRecognizer()
-  
+  let tapGesture = UITapGestureRecognizer()
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -173,7 +173,7 @@ class MapViewController: UIViewController{
     }
     
     // Call cluster() after items have been added to perform the clustering and rendering on map.
-    
+     
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
     
     self.setupUI()
@@ -181,7 +181,32 @@ class MapViewController: UIViewController{
     
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
   }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    if self.searchLoad {
+      affterSearch()
+      self.searchLoad.toggle()
+    }
+  }
+  
+  
   // MARK: - Action
+  func affterSearch() {
+    
+    guard let tabbarframe = tabBarController?.tabBar.frame else { return }
+    
+    tableView.reloadData()
+    let lat = BangData.shared.data[Int(pkArrInCluster[0])!].lng
+    let lng =  BangData.shared.data[Int(pkArrInCluster[0])!].lat
+    let cLLocation: CLLocation = CLLocation(latitude: lat, longitude: lng)
+    mapTest.animate(toLocation: cLLocation.coordinate)
+    mapTest.animate(toZoom: 15)
+    print("check")
+    self.bottomView.frame = CGRect(x: 0, y: 360, width: self.view.frame.width, height: 60 )
+    self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: tabbarframe.minY - 420 )
+   
+  }
   @objc private func didTapFilterButton(_ sender: UIButton) {
     let vc = FilterViewController()
     self.present(vc, animated: true, completion: nil)
@@ -244,6 +269,13 @@ class MapViewController: UIViewController{
       break
     }
   }
+  
+  @objc private func didTapGesture(_ sender: UITapGestureRecognizer) {
+    let vc = SearchRoomViewController()
+    vc.modalPresentationStyle = .custom
+    
+    present(vc,animated: true,completion: nil)
+  }
   // MARK: - setupUI
   private func setupUI() {
     mapTest.delegate = self
@@ -252,7 +284,9 @@ class MapViewController: UIViewController{
     self.topView.addSubviews([titleLabel, searchImage])
     self.bottomView.addSubviews([allRoomButton,apartButtun,officeButtom,bottomLineView])
     self.bottomView.addGestureRecognizer(panGesture)
+    self.topView.addGestureRecognizer(tapGesture)
     panGesture.addTarget(self, action: #selector(didPanGesture(_:)))
+    tapGesture.addTarget(self, action: #selector(didTapGesture(_:)))
     allRoomButton.addTarget(self, action: #selector(didTapAllRoomButton(_:)), for: .touchUpInside)
     filterButton.addTarget(self, action: #selector(didTapFilterButton(_:)), for: .touchUpInside)
     stackView = UIStackView(arrangedSubviews: selectButtons)
