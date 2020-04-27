@@ -216,6 +216,6 @@ struct User: Codable {
     enum CodingKeys: String, CodingKey {
         case pk, phone, profileImage
         case recentlyCheckedRooms = "posts"
-        case markedRooms = "markedRooms"
+        case markedRooms
     }
 }

@@ -42,8 +42,9 @@ final class FavoriteViewModel {
     ]
     
     init() {
-        fetchCheckedRoomData()
-        fetchMarkedRoomData()
+        APIManager.shared.checkJWTExpiration()
+//        fetchCheckedRoomData()
+//        fetchMarkedRoomData()
         checkedDanziData = [dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
         markedDanziData = [dummyDanzi, dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
         contactBudongsanData = [dummyBudongsan,dummyBudongsan2]
@@ -55,10 +56,10 @@ final class FavoriteViewModel {
                     case .success(let rooms):
                         self.checkedRoomData = rooms
                         print("checkedRoom success")
-                        self.delegate?.reloadTableView()
                     case .failure(let error):
                         print(error)
                     }
+                    self.delegate?.reloadTableView()
                 }
     }
     
@@ -68,10 +69,10 @@ final class FavoriteViewModel {
                     case .success(let rooms):
                         self.markedRoomData = rooms
                         print("markeRoom success")
-                        self.delegate?.reloadTableView()
                     case .failure(let error):
                         print(error)
                     }
+                    self.delegate?.reloadTableView()
                 }
     }
 

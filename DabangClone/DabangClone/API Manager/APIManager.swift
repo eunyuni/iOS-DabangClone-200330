@@ -38,17 +38,36 @@ final class APIManager {
         return accessToken
     }
     
-    func setAccessTokenIntoKetChain(token: String, key: Int) -> Bool {
+    func setAccessTokenIntoKeyChain(token: String, key: Int) -> Bool {
         return keyChain.set(token, forKey: "\(key)", withAccess: .accessibleAfterFirstUnlock)
     }
     
+    func checkJWTExpiration() {
+        let jwt = getAccessTokenFromKeyChain()
+        var payload64 = jwt.components(separatedBy: ".")[1]
+        while payload64.count % 4 != 0 {
+            payload64 += "="
+        }
+        
+        let payloadData = Data(base64Encoded: payload64, options: .ignoreUnknownCharacters)!
+//        let payload = String(data: payloadData, encoding: .utf8)!
+        guard let json = try? JSONSerialization.jsonObject(with: payloadData) as? [String:Any] else { return }
+        let exp = json["exp"] as! Int
+        let expDate = Date(timeIntervalSince1970: TimeInterval(exp))
+        if expDate <= Date() {
+            refreshJWT()
+        }
+    }
     
+    func refreshJWT() {
+        
+    }
     
     // MARK: - [ API CRUD ]
 
     // MARK: - GET
     
-    //GET: 유저 프로필
+    //GET: 유저 정보
     func getUserProfile(completion: @escaping (Result<User, Error>) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
         AF.request( baseURL + "/members/\(userPk)/", headers: header)
@@ -131,7 +150,7 @@ final class APIManager {
                     let json = JSON(value)
                     let accessToken = json["jwt"].stringValue
                     self.userPk = json["user"]["pk"].intValue
-                    let result = self.setAccessTokenIntoKetChain(token: accessToken, key: self.userPk)
+                    let result = self.setAccessTokenIntoKeyChain(token: accessToken, key: self.userPk)
                     completion(.success(result))
                 case .failure(let error):
                     completion(.failure(error))
@@ -153,9 +172,17 @@ final class APIManager {
     }
     
     //POST: 최근 본 방
-    func postRecentlyCheckedRoom(pk: Int, completion: @escaping (Result<String,Error>) -> Void) {
-        
+    func postRecentlyCheckedRoom(pk: Int, completion: @escaping (String) -> Void) {
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
+        let parameter = ["post" : pk]
+        AF.request( baseURL + "/members/recently/", method: .post, parameters: parameter, headers: header )
+            .responseData { (response) in
+                guard let json = try? JSONSerialization.jsonObject(with: response.data ?? Data()) as? [String : Any] else { return }
+                guard let message = json["message"] as? String else { return }
+                completion(message)
+            }
     }
+    
     
     //POST: 찜한 방
     
