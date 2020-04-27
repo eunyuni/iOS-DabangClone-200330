@@ -34,7 +34,6 @@ class HomeViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
    super.viewDidAppear(animated)
-    
     let udDay = (UserDefaults.standard.value(forKey: "TodayPopUp") as? Int) ?? 0
     if udDay != checkToday() {
       doFirstViewAlert()
