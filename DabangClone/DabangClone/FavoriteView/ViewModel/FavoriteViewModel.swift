@@ -42,9 +42,9 @@ final class FavoriteViewModel {
     ]
     
     init() {
-        APIManager.shared.checkJWTExpiration()
-//        fetchCheckedRoomData()
-//        fetchMarkedRoomData()
+//        APIManager.shared.checkJWTExpiration()
+        fetchCheckedRoomData()
+        fetchMarkedRoomData()
         checkedDanziData = [dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
         markedDanziData = [dummyDanzi, dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
         contactBudongsanData = [dummyBudongsan,dummyBudongsan2]
