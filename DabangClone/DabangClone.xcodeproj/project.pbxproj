@@ -268,7 +268,6 @@
 		E7DA1634245034B60053E455 /* HomeAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA1633245034B60053E455 /* HomeAlertViewController.swift */; };
 		E7DA163A2456F6470053E455 /* FilterTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA16392456F6470053E455 /* FilterTopView.swift */; };
 		E7DA164E245891370053E455 /* ComplexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA164D245891370053E455 /* ComplexViewController.swift */; };
-		E7DA1650245891910053E455 /* NewComplexModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA164F245891910053E455 /* NewComplexModel.swift */; };
 		E7DA1655245891F00053E455 /* ComplexCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA1651245891F00053E455 /* ComplexCollectionViewCell.swift */; };
 		E7DA1656245891F00053E455 /* ComplexRecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA1652245891F00053E455 /* ComplexRecommendTableViewCell.swift */; };
 		E7DA1657245891F00053E455 /* ComplexRecommendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA1653245891F00053E455 /* ComplexRecommendCollectionViewCell.swift */; };
@@ -593,7 +592,6 @@
 		E7DA1633245034B60053E455 /* HomeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAlertViewController.swift; sourceTree = "<group>"; };
 		E7DA16392456F6470053E455 /* FilterTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTopView.swift; sourceTree = "<group>"; };
 		E7DA164D245891370053E455 /* ComplexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexViewController.swift; sourceTree = "<group>"; };
-		E7DA164F245891910053E455 /* NewComplexModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewComplexModel.swift; sourceTree = "<group>"; };
 		E7DA1651245891F00053E455 /* ComplexCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexCollectionViewCell.swift; sourceTree = "<group>"; };
 		E7DA1652245891F00053E455 /* ComplexRecommendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexRecommendTableViewCell.swift; sourceTree = "<group>"; };
 		E7DA1653245891F00053E455 /* ComplexRecommendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexRecommendCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -993,7 +991,6 @@
 			children = (
 				E78AD968243727130098BE6E /* Padding.swift */,
 				159121AE24544C3300DA05D8 /* GoogleGeocodingModel.swift */,
-				E7DA164F245891910053E455 /* NewComplexModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1610,7 +1607,6 @@
 				159121A72451CCCA00DA05D8 /* GMUGeoJSONParser.m in Sources */,
 				E79D81842429E8E50006029E /* RGTopTableViewCell.swift in Sources */,
 				15315A61244857250033EA47 /* CompareView.swift in Sources */,
-				E7DA1650245891910053E455 /* NewComplexModel.swift in Sources */,
 				E79D81892429EA830006029E /* RGBottomTableViewCell.swift in Sources */,
 				1591219F2451CCCA00DA05D8 /* GMUPolygon.m in Sources */,
 				E78AD96724371BBE0098BE6E /* FilterSaleTypeCell.swift in Sources */,

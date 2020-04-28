@@ -177,7 +177,7 @@ struct DabangElement: Codable {
           case 인터폰 = "인터폰"
           case 카드키 = "카드키"
       }
-  
+
     enum OptionSet: String, Codable {
         case tv = "TV"
         case 가스레인지 = "가스레인지"
@@ -289,5 +289,5 @@ class UserData {
     static let shared = UserData()
     var user: User!
     private init() {}
-    
+
 }
