@@ -315,7 +315,7 @@ class LoginViewController: UIViewController {
     @objc private func handleAppleSignInbutton(_ sender: UIButton) {
         print("Apple login")
         let request = ASAuthorizationAppleIDProvider().createRequest()
-        request.requestedScopes = [.email, .fullName]
+      request.requestedScopes = [.email, .fullName, ]
         
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = self
@@ -357,6 +357,7 @@ class LoginViewController: UIViewController {
     }
     
     func postKakaoToken(Token: String) {
+      print("kakao Login")
         let kakaoToken = Token
         let param: Parameters = [
             "accessToken" : kakaoToken

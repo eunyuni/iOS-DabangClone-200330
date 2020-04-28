@@ -31,12 +31,14 @@ class MoreView: UIView {
     $0.textAlignment = .left
     $0.text = "Pandaman"
   }
+  
   let userEmailLabel = UILabel().then {
     $0.font = UIFont.systemFont(ofSize: 14, weight: .light)
     $0.textAlignment = .left
     $0.text = "user@user.com"
     $0.textColor = .gray
   }
+  
   let fixInfoButton = UIButton().then {
     $0.layer.borderColor = UIColor(named: "DabangLightBlue")?.cgColor
     $0.layer.borderWidth = 1

@@ -8,8 +8,14 @@
 
 import UIKit
 import SnapKit
-class AddRoomViewController: UIViewController {
+
+class AddRoomSingleton {
+  static let shared = AddRoomSingleton()
   
+  var roomDataForMake: DabangElement = DabangElement(pk: 0, broker: .none, type: .원룸, dabangDescription: "", address: Address(loadAddress: "", detailAddress: .none), lng: 0, lat: 0, salesForm: SalesForm(type: .매매, depositChar: "", monthlyChar: "", depositInt: 0, monthlyInt: 0), floor: "", totalFloor: "", areaChar: "", supplyAreaInt: 0, supplyAreaChar: "", shortRent: false, managementSet: [ManagementSet.기타], parkingDetail: .가능무료, parkingtf: false, livingExpenses: "", livingExpensesDetail: LivingExpensesDetail(rawValue: ""), moveInChar: MoveInChar.날짜협의, moveInDate: "", optionSet: [OptionSet.tv], heatingType: .개별난방, pet: false, elevator: false, builtIn: false, veranda: false, depositLoan: false, totalCitizen: "", totalPark: .empty, complete: "", securitySafetySet: [SecuritySafetySet.경비원], postimage: [""])
+}
+class AddRoomViewController: UIViewController {
+
   
   // MARK: - Property
     private let potoView = UIImageView().then {
