@@ -141,7 +141,18 @@ final class APIManager {
         
     }
     
-    
+    //GET: 전체 단지 정보 리스트
+    func getComplexInfoList(completion: @escaping (Result<[Complex], Error>) -> Void) {
+        AF.request( baseURL + "/posts/complex/", method: .get)
+            .responseDecodable(of: [Complex].self) { (response) in
+                switch response.result {
+                case .success(let complex):
+                    completion(.success(complex))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+        }
+    }
     
     // MARK: - POST
     
