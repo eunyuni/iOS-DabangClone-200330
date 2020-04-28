@@ -1786,7 +1786,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DabangClone/DabangClone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S3QQ63V4S9;
+				DEVELOPMENT_TEAM = ADHC8G6NHC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1803,7 +1803,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				OTHER_LIBTOOLFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.iospanda.DabangCloneMaster;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SeongjunIm.www.DabangCloneMaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/GMUClusterHeader.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
@@ -1819,7 +1819,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DabangClone/DabangClone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S3QQ63V4S9;
+				DEVELOPMENT_TEAM = ADHC8G6NHC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -1836,7 +1836,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				OTHER_LIBTOOLFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tistory.iospanda.DabangCloneMaster;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SeongjunIm.www.DabangCloneMaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/GMUClusterHeader.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";

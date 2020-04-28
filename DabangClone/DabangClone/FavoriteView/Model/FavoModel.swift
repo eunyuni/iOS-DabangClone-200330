@@ -14,7 +14,7 @@ enum FavoriteData {
     case checkedDanziInfo([DanziInfo])
     case markedRoomInfo([DabangElement])
     case markedDanziInfo([DanziInfo])
-    case budongsanInfo([BudongsanInfo])
+    case budongsanInfo([Broker])
 }
 
 
@@ -23,18 +23,18 @@ enum FavoriteData {
 //    var image: UIImage
 //}
 // UserInfo 필요함.
-struct UserInfo {
-    let userID: String
-    let userName: String
-    var phoneNumber: String
-    var profileImage: UIImage
-    var myRoomsToOffer: [RoomInfo]
-    var checkedRoomData: [RoomInfo]
-    var checkedDanziData: [DanziInfo]
-    var markedRoomData: [RoomInfo]
-    var markedDanziData: [DanziInfo]
-    var contactBudongsanData: [BudongsanInfo]
-}
+//struct UserInfo {
+//    let userID: String
+//    let userName: String
+//    var phoneNumber: String
+//    var profileImage: UIImage
+//    var myRoomsToOffer: [RoomInfo]
+//    var checkedRoomData: [RoomInfo]
+//    var checkedDanziData: [DanziInfo]
+//    var markedRoomData: [RoomInfo]
+//    var markedDanziData: [DanziInfo]
+//    var contactBudongsanData: [BudongsanInfo]
+//}
 
 struct DanziInfo {
     var name: String
@@ -54,39 +54,4 @@ struct BudongsanInfo {
 
 let dummyBudongsan = BudongsanInfo(name: "다방공인중개사무소", relatedRoomNumber: 2039)
 let dummyBudongsan2 = BudongsanInfo(name: "다방공인중개사무소", relatedRoomNumber: 2031)
-// MARK: - Room
-struct RoomInfo: Codable {
-    let broker, type, roomDescription, address: String
-    let salesForm, floor, totalFloor, areaChar: String
-    let supplyAreaInt: Int
-    let supplyAreaChar: String
-    let shortRent: Bool
-    let management: [String]
-    let parkingDetail: String
-    let parkingTF: Bool
-    let livingExpenses, livingExpensesDetail, moveInChar: String
-    let moveInDate: Date?
-    let option: [String]
-    let heatingType: String
-    let pet, elevator, builtIn, veranda: Bool
-    let depositLoan: Bool
-    let totalCitizen, totalPark, complete: String
-    let securitySafety: [String]
 
-    enum CodingKeys: String, CodingKey {
-        case broker, type
-        case roomDescription = "description"
-        case address, salesForm, floor, totalFloor, areaChar, supplyAreaInt, supplyAreaChar, shortRent, management, parkingDetail, parkingTF
-        case livingExpenses = "living_expenses"
-        case livingExpensesDetail = "living_expenses_detail"
-        case moveInChar = "MoveInChar"
-        case moveInDate, option, heatingType, pet, elevator, builtIn, veranda, depositLoan, totalCitizen, totalPark, complete, securitySafety
-    }
-}
-
-// MARK: - Address
-struct AddressSungJun: Codable {
-    let id: Int
-    let loadAddress: String
-    let detailAddress: String
-}

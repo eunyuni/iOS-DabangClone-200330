@@ -19,5 +19,7 @@ target 'DabangClone' do
   pod 'SwiftSVG', '~> 2.0'
   pod 'SDWebImage','~>4.4.2’
   pod 'MultiSlider'
+  pod 'SwiftyJSON'
+  pod 'KeychainSwift'
   pod 'DKImagePickerController'
 end
