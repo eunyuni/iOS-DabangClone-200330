@@ -221,6 +221,21 @@ final class APIManager {
     
     //POST: 찜한 방
     
+  //POST: 찜한 방
+  func postPoto(image: UIImage, imageName : String, completion: @escaping (String) -> Void) {
+    let imageData = image.jpegData(compressionQuality: 0.50)
+    print(image, imageData!)
+    let test = baseURL + "/posts/imageupload/"
+    AF.upload(multipartFormData: { (multipartFormData) in
+      multipartFormData.append(imageData!, withName: "image", fileName: imageName + ".png", mimeType: "image/png")
+    }, to: test).responseJSON { response in
+      guard let json = try? JSONSerialization.jsonObject(with: response.data ?? Data()) as? [String : Any] else { return }
+      guard let message = json["image"] as? String else { return }
+      completion(message)
+    }
+  }
+    
+
     
     
     // MARK: - PATCH

@@ -60,7 +60,15 @@ class AddRoomViewController: UIViewController {
   private let emptyView = UIView().then {
     $0.backgroundColor = #colorLiteral(red: 0.9254193306, green: 0.9255301356, blue: 0.9253814816, alpha: 1)
   }
-  private let uiImages: [UIImage] = []
+  private let imageView = UIImageView().then {
+    $0.image = UIImage(named: "potoAdd")
+  }
+  private let potoLabel = UILabel().then {
+    $0.text = "사진추가"
+    $0.textColor = #colorLiteral(red: 0.4352585971, green: 0.4353140593, blue: 0.4352396429, alpha: 1)
+    $0.font = .systemFont(ofSize: 13)
+  }
+  private var uiImages: [UIImage] = []
   private let addressTapGesture = UITapGestureRecognizer()
   private let basicInfoTapGesture = UITapGestureRecognizer()
   private let additionalTapGesture = UITapGestureRecognizer()
@@ -118,6 +126,7 @@ class AddRoomViewController: UIViewController {
   }
   @objc private func didTapEmptyGesture(_ sender: UITapGestureRecognizer) {
     let vc = AddPotoViewController()
+    vc.delegate = self
     vc.modalPresentationStyle = .fullScreen
     navigationController?.pushViewController(vc, animated: true)
   }
@@ -139,17 +148,21 @@ class AddRoomViewController: UIViewController {
     self.linViews.forEach {
       self.view.addSubview($0)
     }
+    emptyView.addSubviews([potoLabel,imageView])
     setupConstraints()
   }
   
   // MARK: - Layout
   private func setupConstraints() {
+    let guide = self.view.safeAreaLayoutGuide
     potoCollectionView.snp.makeConstraints {
-      $0.top.leading.trailing.equalToSuperview()
+      $0.top.equalTo(guide.snp.top)
+      $0.leading.trailing.equalToSuperview()
       $0.height.equalTo(self.view.snp.height).multipliedBy(0.367)
     }
     emptyView.snp.makeConstraints {
-      $0.top.leading.trailing.equalToSuperview()
+      $0.top.equalTo(guide.snp.top)
+      $0.leading.trailing.equalToSuperview()
       $0.height.equalTo(self.view.snp.height).multipliedBy(0.367)
     }
     addressView.snp.makeConstraints {
@@ -200,6 +213,17 @@ class AddRoomViewController: UIViewController {
       $0.leading.bottom.trailing.equalToSuperview()
       $0.height.equalTo(self.view.snp.height).multipliedBy(0.0733)
     }
+    
+    imageView.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.bottom.equalTo(emptyView.snp.centerY)
+      $0.width.height.equalTo(30)
+    }
+    
+    potoLabel.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.top.equalTo(emptyView.snp.centerY)
+    }
   }
   
 }
@@ -240,4 +264,13 @@ extension AddRoomViewController: UICollectionViewDelegateFlowLayout {
     let margin: CGFloat = 0
     return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
   }
+}
+
+
+extension AddRoomViewController: AddPotoViewControllerDelegate {
+  func getImage(images: [UIImage]) {
+    self.uiImages = images
+  }
+  
+  
 }
