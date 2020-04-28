@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 // 방내놓기 - 기본정보 - 가격
 class PriceViewController: UIViewController {
@@ -35,7 +37,6 @@ class PriceViewController: UIViewController {
     view.addSubviews([
       tableView,
       saveButton,
-      
     ])
     
     tableView.register(PriceTopTableViewCell.self, forCellReuseIdentifier: PriceTopTableViewCell.identifier)

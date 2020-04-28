@@ -27,10 +27,17 @@ class HomeViewController: UIViewController {
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    checkAuth()
     self.view.backgroundColor = .white
     getTest()
     setupUI()
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.tabBarController?.tabBar.isHidden = false
+  }
+  
   
   override func viewDidAppear(_ animated: Bool) {
    super.viewDidAppear(animated)
@@ -116,13 +123,21 @@ extension HomeViewController: UITableViewDataSource {
       .responseData(queue: .global(), completionHandler: { (response) in
         print(response.data as Any)
         
-        if let jsonObjects = try? JSONDecoder().decode([DabangElement].self, from: response.data!) {
+        if let jsonObjects = try? JSONDecoder().decode([DabangElement].self, from: response.data ?? Data()) {
           BangData.shared.data = jsonObjects
             print(BangData.shared.data[10])
         } else {
           print("fail")
         }
       })
+  }
+  
+  private func checkAuth() {
+    print("----------- CheckAuth : ", APIManager.shared.getAccessTokenFromKeyChain())
+    if APIManager.shared.getAccessTokenFromKeyChain() == "" {
+      let vc = LoginViewController()
+      self.navigationController?.pushViewController(vc, animated: true)
+    }
   }
 }
 

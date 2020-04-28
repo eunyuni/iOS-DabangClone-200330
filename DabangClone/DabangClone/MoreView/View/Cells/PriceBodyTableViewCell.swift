@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import RxSwift
 
 class PriceBodyTableViewCell: UITableViewCell {
-  
+  //노티 뿌릴곳
   // MARK: -Identifier
   static let identifier = "PriceBodyTableViewCell"
   
@@ -28,7 +29,7 @@ class PriceBodyTableViewCell: UITableViewCell {
     $0.font = .systemFont(ofSize: 12, weight: .regular)
     $0.textColor = UIColor(named: "DabangLightBlue")
   }
-  private let textField = UITextField().then {
+  let textField = UITextField().then {
     $0.layer.borderWidth = 0.6
     $0.layer.borderColor = UIColor.lightGray.cgColor
     $0.layer.cornerRadius = 4
