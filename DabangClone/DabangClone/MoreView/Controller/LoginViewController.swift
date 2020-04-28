@@ -238,7 +238,7 @@ class LoginViewController: UIViewController {
     
     bottomGrayView.snp.makeConstraints {
       $0.bottom.leading.trailing.equalToSuperview()
-        $0.top.equalTo(kakaoLoginButton.snp.bottom).offset(170)
+      $0.top.equalTo(kakaoLoginButton.snp.bottom).offset(170)
     }
     
     bottomCallNumLabel.snp.makeConstraints {
@@ -275,7 +275,7 @@ class LoginViewController: UIViewController {
     appleLoginButton.snp.makeConstraints {
       $0.edges.equalToSuperview()
     }
-    appleLoginButton.addTarget(self, action: #selector(handleAppleSignInbutton(_:)), for: .touchUpInside)
+    appleLoginButton.addTarget(self, action: #selector(handleAppleSignInbutton(_:)), for: .touchDown)
     print("addtarget")
     
   }
@@ -327,9 +327,9 @@ class LoginViewController: UIViewController {
   func postKakaoToken(Token: String) {
     let kakaoToken = Token
     let param: Parameters = [
-                  "access_token" : kakaoToken
-//      "username" : "admin",
-//      "password" : "admin123"
+      "access_token" : kakaoToken
+      //      "username" : "admin",
+      //      "password" : "admin123"
     ]
     
     //        let url = URL(string: "https://moonpeter.com/members/kakaoToken/")
@@ -338,7 +338,7 @@ class LoginViewController: UIViewController {
     AF.request(url!, method: .post, parameters: param, encoding: URLEncoding.httpBody, headers: .none, interceptor: .none).responseString { response in
       print("성공? :", response.result)
       //            let resultString =  response.result
-//      self.navigationController?.popViewController(animated: true)//
+      //      self.navigationController?.popViewController(animated: true)//
     }
     
     
@@ -368,7 +368,7 @@ class LoginViewController: UIViewController {
         self.returnUserData()
         self.postFacebookToken(Token: token.tokenString)
         
-//        self.navigationController?.popViewController(animated: true)
+        //        self.navigationController?.popViewController(animated: true)
         //        print(token.appID, token.graphDomain, token.tokenString)
       }
     }
@@ -413,9 +413,9 @@ class LoginViewController: UIViewController {
     })
   }
   
-    
-    
-
+  
+  
+  
   @objc func keyboardWillShowNotification(_ noti: Notification) {
     guard let userInfo = noti.userInfo,
       let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect, //frame의 최종 위치
@@ -424,12 +424,12 @@ class LoginViewController: UIViewController {
     
     if frame.origin.y >= UIScreen.main.bounds.height {
       //내려갔을 때
-        self.view.transform = .identity
+      self.view.transform = .identity
     } else {
-    
-    UIView.animate(withDuration: duration) {
-      self.view.transform = .init(translationX: 0, y: -frame.height)
-    }
+      
+      UIView.animate(withDuration: duration) {
+        self.view.transform = .init(translationX: 0, y: -frame.height)
+      }
     }
   }
   
@@ -452,12 +452,40 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
   }
   
   func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-    if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
-      let user = credential.user
-      print("Apple User: \(user)")
-      guard let email = credential.email else {return}
-      print("Email: \(email)")
+    if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+      // Create an account in your system.
+      let userIdentifier = appleIDCredential.user
+      let userFirstName = appleIDCredential.fullName?.givenName
+      let userLastName = appleIDCredential.fullName?.familyName
+      let userEmail = appleIDCredential.email
+      print(userEmail, userFirstName, userLastName)
+      
+      let appleIDProvider = ASAuthorizationAppleIDProvider()
+      appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
+        switch credentialState {
+        case .authorized:
+          break
+        case .revoked:
+          // The Apple ID credential is revoked. Show SignIn UI Here.
+          break
+        case .notFound:
+          // No credential was found. Show SignIn UI Here.
+          break
+        default:
+          break
+        }
+      }
+      
+      //Navigate to other view controller
+    } else if let passwordCredential = authorization.credential as? ASPasswordCredential {
+      // Sign in using an existing iCloud Keychain credential.
+      let username = passwordCredential.user
+      let password = passwordCredential.password
+      
+      //Navigate to other view controller
     }
+    
+    
   }
   func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
     print("AppleLogin Error :", error.localizedDescription)
