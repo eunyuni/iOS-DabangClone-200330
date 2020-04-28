@@ -89,7 +89,8 @@ class SellMyRoomViewController: UIViewController, DidSelectRoomTypeDelegate {
   
   @objc private func didTapNextButton() {
     if SelectedRoomSingleton.shared.selectedRoom != nil {
-    let vc = RoomSellScrollViewController()
+//    let vc = RoomSellScrollViewController()
+      let vc = AddRoomViewController()
     vc.modalPresentationStyle = .fullScreen
     navigationController?.pushViewController(vc, animated: true)
     }

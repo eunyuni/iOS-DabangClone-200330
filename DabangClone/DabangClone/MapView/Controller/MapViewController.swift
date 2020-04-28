@@ -173,12 +173,9 @@ class MapViewController: UIViewController{
     }
     
     // Call cluster() after items have been added to perform the clustering and rendering on map.
-     
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
-    
     self.setupUI()
     // Call cluster() after items have been added to perform the clustering and rendering on map.
-    
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
   }
   
@@ -582,5 +579,4 @@ extension MapViewController: UITableViewDelegate {
 }
 
 extension MapViewController: GMUClusterRendererDelegate {
-  
 }

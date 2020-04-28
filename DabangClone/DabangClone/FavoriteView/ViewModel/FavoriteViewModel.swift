@@ -15,7 +15,7 @@ protocol FavoriteViewModelDelegate: class {
     func reloadTableView()
 }
 
-class FavoriteViewModel {
+final class FavoriteViewModel {
     
     weak var delegate: FavoriteViewModelDelegate?
     
@@ -23,7 +23,7 @@ class FavoriteViewModel {
     private var checkedDanziData = [DanziInfo]()
     private var markedRoomData = [DabangElement]()
     private var markedDanziData = [DanziInfo]()
-    private var contactBudongsanData = [BudongsanInfo]()
+    private var contactBudongsanData = [Broker]()
     
     var dataIndex = 0 {
         didSet {
@@ -31,12 +31,24 @@ class FavoriteViewModel {
         }
     }
     
+    lazy var activeData = FavoriteData.checkedRoomInfo(checkedRoomData)
+    
+    lazy var data: [FavoriteData] = [
+        .checkedRoomInfo(checkedRoomData),
+        .checkedDanziInfo(checkedDanziData),
+        .markedRoomInfo(markedRoomData),
+        .markedDanziInfo(markedDanziData),
+        .budongsanInfo(contactBudongsanData)
+    ]
+    
     init() {
+//        APIManager.shared.checkJWTExpiration()
         fetchCheckedRoomData()
         fetchMarkedRoomData()
+        fetchContactedBrokersData()
         checkedDanziData = [dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
         markedDanziData = [dummyDanzi, dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
-        contactBudongsanData = [dummyBudongsan,dummyBudongsan2]
+//        contactBudongsanData = [dummyBudongsan,dummyBudongsan2]
     }
     
     func fetchCheckedRoomData() {
@@ -49,6 +61,7 @@ class FavoriteViewModel {
                     case .failure(let error):
                         print(error)
                     }
+                    
                 }
     }
     
@@ -62,17 +75,21 @@ class FavoriteViewModel {
                     case .failure(let error):
                         print(error)
                     }
+                    
                 }
     }
-    lazy var activeData = FavoriteData.checkedRoomInfo(checkedRoomData)
-    
-    lazy var data: [FavoriteData] = [
-        .checkedRoomInfo(checkedRoomData),
-        .checkedDanziInfo(checkedDanziData),
-        .markedRoomInfo(markedRoomData),
-        .markedDanziInfo(markedDanziData),
-        .budongsanInfo(contactBudongsanData)
-    ]
+
+    func fetchContactedBrokersData() {
+        APIManager.shared.getUserProfile { (result) in
+            switch result {
+            case .success(let user):
+                self.contactBudongsanData = user.contactedBrokers ?? []
+            case .failure(let error):
+                print(error)
+            }
+            self.delegate?.reloadTableView()
+        }
+    }
     
     func setActiveData(_ dataIndex: Int) {
         activeData = data[dataIndex]
