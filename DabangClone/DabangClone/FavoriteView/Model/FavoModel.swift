@@ -14,7 +14,7 @@ enum FavoriteData {
     case checkedDanziInfo([DanziInfo])
     case markedRoomInfo([DabangElement])
     case markedDanziInfo([DanziInfo])
-    case budongsanInfo([BudongsanInfo])
+    case budongsanInfo([Broker])
 }
 
 

@@ -23,7 +23,7 @@ final class FavoriteViewModel {
     private var checkedDanziData = [DanziInfo]()
     private var markedRoomData = [DabangElement]()
     private var markedDanziData = [DanziInfo]()
-    private var contactBudongsanData = [BudongsanInfo]()
+    private var contactBudongsanData = [Broker]()
     
     var dataIndex = 0 {
         didSet {
@@ -45,9 +45,10 @@ final class FavoriteViewModel {
 //        APIManager.shared.checkJWTExpiration()
         fetchCheckedRoomData()
         fetchMarkedRoomData()
+        fetchContactedBrokersData()
         checkedDanziData = [dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
         markedDanziData = [dummyDanzi, dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
-        contactBudongsanData = [dummyBudongsan,dummyBudongsan2]
+//        contactBudongsanData = [dummyBudongsan,dummyBudongsan2]
     }
     
     func fetchCheckedRoomData() {
@@ -56,10 +57,11 @@ final class FavoriteViewModel {
                     case .success(let rooms):
                         self.checkedRoomData = rooms
                         print("checkedRoom success")
+                        self.delegate?.reloadTableView()
                     case .failure(let error):
                         print(error)
                     }
-                    self.delegate?.reloadTableView()
+                    
                 }
     }
     
@@ -69,13 +71,26 @@ final class FavoriteViewModel {
                     case .success(let rooms):
                         self.markedRoomData = rooms
                         print("markeRoom success")
+                        self.delegate?.reloadTableView()
                     case .failure(let error):
                         print(error)
                     }
-                    self.delegate?.reloadTableView()
+                    
                 }
     }
 
+    func fetchContactedBrokersData() {
+        APIManager.shared.getUserProfile { (result) in
+            switch result {
+            case .success(let user):
+                self.contactBudongsanData = user.contactedBrokers ?? []
+            case .failure(let error):
+                print(error)
+            }
+            self.delegate?.reloadTableView()
+        }
+    }
+    
     func setActiveData(_ dataIndex: Int) {
         activeData = data[dataIndex]
     }

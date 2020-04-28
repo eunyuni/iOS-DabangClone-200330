@@ -255,11 +255,20 @@ struct User: Codable {
     let phone: String?
     let profileImage: String?
     let recentlyCheckedRooms: [DabangElement]?
-    let markedRooms: [DabangElement]?
-    
+//    let markedRooms: [DabangElement]?
+    let contactedBrokers: [Broker]?
     enum CodingKeys: String, CodingKey {
         case pk, phone, profileImage
         case recentlyCheckedRooms = "posts"
-        case markedRooms
+//        case markedRooms
+        case contactedBrokers = "brokers"
     }
+}
+
+
+class UserData {
+    static let shared = UserData()
+    var user: User!
+    private init() {}
+    
 }

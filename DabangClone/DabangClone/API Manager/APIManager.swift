@@ -11,15 +11,24 @@ import Alamofire
 import SwiftyJSON
 import KeychainSwift
 
+enum LoginWays {
+    case local
+    case apple
+    case kakao
+    case facebook
+}
+
 final class APIManager {
     
     // MARK: - Properties
     static let shared = APIManager()
     
     private let keyChain = KeychainSwift(keyPrefix: "DabangCloneUser_")
-    private var userPk = 0
+    var userPk = 0
     private let networkAccessManager = NetworkReachabilityManager(host: "https://moonpeter.com")
     private let baseURL = "https://moonpeter.com"
+    
+    var loginWay: LoginWays?
     
     private init() { monitorNetworkAccessStatus() }
     
@@ -39,18 +48,18 @@ final class APIManager {
     }
     
     func setAccessTokenIntoKeyChain(token: String, key: Int) -> Bool {
-        return keyChain.set(token, forKey: "\(key)", withAccess: .accessibleAfterFirstUnlock)
+        return keyChain.set(token, forKey: "\(key)", withAccess: .accessibleWhenUnlocked)
     }
     
     func checkJWTExpiration() {
         let jwt = getAccessTokenFromKeyChain()
-        var payload64 = jwt.components(separatedBy: ".")[1]
-        while payload64.count % 4 != 0 {
-            payload64 += "="
+        var payloadString = jwt.components(separatedBy: ".")[1]
+        while payloadString.count % 4 != 0 {
+            payloadString += "="
         }
         
-        let payloadData = Data(base64Encoded: payload64, options: .ignoreUnknownCharacters)!
-//        let payload = String(data: payloadData, encoding: .utf8)!
+        let payloadData = Data(base64Encoded: payloadString, options: .ignoreUnknownCharacters)!
+
         guard let json = try? JSONSerialization.jsonObject(with: payloadData) as? [String:Any] else { return }
         let exp = json["exp"] as! Int
         let expDate = Date(timeIntervalSince1970: TimeInterval(exp))
@@ -109,8 +118,17 @@ final class APIManager {
     }
     
     //GET: 최근 본 방 리스트
-    func getRecentlyCheckedRooms(completion: @escaping (Result<[DabangElement], Error>) -> Void) {
-        
+    func getRecentlyCheckedRooms(userPK: Int, completion: @escaping (Result<[DabangElement], Error>) -> Void) {
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
+        AF.request( baseURL + "/members/\(userPK)/", method: .get, headers: header)
+          .responseDecodable(of: User.self) { (response) in
+                switch response.result {
+                case .success(let user):
+                    completion(.success(user.recentlyCheckedRooms ?? []))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+        }
     }
     
     
@@ -172,9 +190,9 @@ final class APIManager {
     }
     
     //POST: 최근 본 방
-    func postRecentlyCheckedRoom(pk: Int, completion: @escaping (String) -> Void) {
+    func postRecentlyCheckedRoom(roomPk: Int, completion: @escaping (String) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
-        let parameter = ["post" : pk]
+        let parameter = ["post" : roomPk]
         AF.request( baseURL + "/members/recently/", method: .post, parameters: parameter, headers: header )
             .responseData { (response) in
                 guard let json = try? JSONSerialization.jsonObject(with: response.data ?? Data()) as? [String : Any] else { return }
