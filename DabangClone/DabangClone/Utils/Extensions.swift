@@ -171,4 +171,16 @@ extension UIView {
       return nil
     }
   }
+  func potoEmpty() {
+    let label = UILabel().then {
+      $0.text = "최소 3장 이상 드록하세요"
+      $0.font = .systemFont(ofSize: 14)
+      $0.textColor = #colorLiteral(red: 0.5638702512, green: 0.5687246323, blue: 0.5729450583, alpha: 1)
+    }
+    self.backgroundColor = #colorLiteral(red: 0.9207085967, green: 0.9256023169, blue: 0.9297692776, alpha: 1)
+    self.addSubview(label)
+    label.snp.makeConstraints {
+      $0.center.equalToSuperview()
+    }
+  }
 }
