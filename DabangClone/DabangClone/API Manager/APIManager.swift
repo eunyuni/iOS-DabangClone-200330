@@ -175,6 +175,7 @@ final class APIManager {
                 }
         }
     }
+  
     
     //POST: 방 내놓기
     func postRoomForSale(room: DabangElement, completion: @escaping (Result<DabangElement, Error>) -> Void) {
