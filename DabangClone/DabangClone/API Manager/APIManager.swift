@@ -141,7 +141,18 @@ final class APIManager {
         
     }
     
-    
+    //GET: 전체 단지 정보 리스트
+    func getComplexInfoList(completion: @escaping (Result<[Complex], Error>) -> Void) {
+        AF.request( baseURL + "/posts/complex/", method: .get)
+            .responseDecodable(of: [Complex].self) { (response) in
+                switch response.result {
+                case .success(let complex):
+                    completion(.success(complex))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+        }
+    }
     
     // MARK: - POST
     
@@ -210,6 +221,21 @@ final class APIManager {
     
     //POST: 찜한 방
     
+  //POST: 찜한 방
+  func postPoto(image: UIImage, imageName : String, completion: @escaping (String) -> Void) {
+    let imageData = image.jpegData(compressionQuality: 0.50)
+    print(image, imageData!)
+    let test = baseURL + "/posts/imageupload/"
+    AF.upload(multipartFormData: { (multipartFormData) in
+      multipartFormData.append(imageData!, withName: "image", fileName: imageName + ".png", mimeType: "image/png")
+    }, to: test).responseJSON { response in
+      guard let json = try? JSONSerialization.jsonObject(with: response.data ?? Data()) as? [String : Any] else { return }
+      guard let message = json["image"] as? String else { return }
+      completion(message)
+    }
+  }
+    
+
     
     
     // MARK: - PATCH
