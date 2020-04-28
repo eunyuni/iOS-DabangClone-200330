@@ -93,6 +93,7 @@ class DanziInfoCell: UITableViewCell {
     
     private func setUI() {
         backgroundColor = .white
+        selectedBackgroundView?.isHidden = true
         contentView.layer.cornerRadius = 5
         contentView.layer.borderWidth = 0.5
         contentView.layer.borderColor = UIColor.lightGray.cgColor
