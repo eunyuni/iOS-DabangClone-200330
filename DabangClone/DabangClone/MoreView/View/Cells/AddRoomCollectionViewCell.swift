@@ -10,7 +10,7 @@ import UIKit
 
 class AddRoomCollectionViewCell: UICollectionViewCell {
    
-  // MARK: -Identifier
+  // MARK: -IdentifuiImagesier
     static let identifier = "AddRoomCollectionViewCell"
   //MARK: - Property
 
@@ -25,7 +25,9 @@ class AddRoomCollectionViewCell: UICollectionViewCell {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+  func configue(image: UIImage) {
+    self.imageView.image = image
+  }
   // MARK: -setupUI
   
   private func setupUI() {
