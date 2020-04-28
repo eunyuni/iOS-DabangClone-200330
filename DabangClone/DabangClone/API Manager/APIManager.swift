@@ -18,6 +18,10 @@ enum LoginWays {
     case facebook
 }
 
+enum Key {
+    static let keyChain = "keyChain"
+}
+
 final class APIManager {
     
     // MARK: - Properties
@@ -43,12 +47,12 @@ final class APIManager {
     
     // MARK: - [ Manage JWT ]
     func getAccessTokenFromKeyChain() -> String {
-        let accessToken = keyChain.get("\(userPk)") ?? ""
+        let accessToken = keyChain.get(Key.keyChain) ?? ""
         return accessToken
     }
     
-    func setAccessTokenIntoKeyChain(token: String, key: Int) -> Bool {
-        return keyChain.set(token, forKey: "\(key)", withAccess: .accessibleWhenUnlocked)
+    func setAccessTokenIntoKeyChain(token: String, key: String) -> Bool {
+        return keyChain.set(token, forKey: key, withAccess: .accessibleWhenUnlocked)
     }
     
     func checkJWTExpiration() {
@@ -57,7 +61,7 @@ final class APIManager {
         while payloadString.count % 4 != 0 {
             payloadString += "="
         }
-        
+
         let payloadData = Data(base64Encoded: payloadString, options: .ignoreUnknownCharacters)!
 
         guard let json = try? JSONSerialization.jsonObject(with: payloadData) as? [String:Any] else { return }
@@ -67,9 +71,9 @@ final class APIManager {
             refreshJWT()
         }
     }
-    
+
     func refreshJWT() {
-        
+
     }
     
     // MARK: - [ API CRUD ]
@@ -137,8 +141,18 @@ final class APIManager {
         
     }
     
-    
-    
+    //GET: 전체 단지 정보 리스트
+    func getComplexInfoList(completion: @escaping (Result<[Complex], Error>) -> Void) {
+        AF.request( baseURL + "/posts/complex/", method: .get)
+            .responseDecodable(of: [Complex].self) { (response) in
+                switch response.result {
+                case .success(let complex):
+                    completion(.success(complex))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+        }
+    }
     
     // MARK: - POST
     
@@ -148,9 +162,11 @@ final class APIManager {
         AF.request( baseURL + "/members/", method: .post, parameters: userData)
             .responseJSON { (response) in
                 switch response.result {
-                case .success(_):
-                    let succecc = "아이디가 성공적으로 생성되었습니다."
-                    completion(succecc, true)
+                case .success(let value):
+                    let json = JSON(value)
+                    let pk = json["pk"]
+//                    let succecc = "아이디가 성공적으로 생성되었습니다."
+                    completion("pkNumber: \(pk)", true)
                 case .failure(_):
                     let fail = "해당 사용자 이름은 이미 존재합니다."
                     completion(fail, false)
@@ -166,9 +182,9 @@ final class APIManager {
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
-                    let accessToken = json["jwt"].stringValue
+                    let accessToken = json["token"].stringValue
                     self.userPk = json["user"]["pk"].intValue
-                    let result = self.setAccessTokenIntoKeyChain(token: accessToken, key: self.userPk)
+                    let result = self.setAccessTokenIntoKeyChain(token: accessToken, key: Key.keyChain)
                     completion(.success(result))
                 case .failure(let error):
                     completion(.failure(error))
@@ -179,7 +195,7 @@ final class APIManager {
     
     //POST: 방 내놓기
     func postRoomForSale(room: DabangElement, completion: @escaping (Result<DabangElement, Error>) -> Void) {
-        AF.request( baseURL + "/posts/list", method: .post, parameters: room, encoder: JSONParameterEncoder.default)
+        AF.request( baseURL + "/posts/", method: .post, parameters: room, encoder: JSONParameterEncoder.default)
             .responseDecodable(of: DabangElement.self) { (response) in
                 switch response.result {
                 case .success(let room):
@@ -234,6 +250,7 @@ final class APIManager {
                 case .success(let user):
                     completion(.success(user))
                 case .failure(let error):
+                    print(error)
                     completion(.failure(error))
                 }
         }

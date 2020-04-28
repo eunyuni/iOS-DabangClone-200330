@@ -32,13 +32,7 @@ class SaleDetailNearMapCell: UITableViewCell {
     $0.layer.borderColor = UIColor.gray.cgColor
     $0.layer.borderWidth = 0.6
   }
-  private let mapLabel = UILabel().then {
-    $0.font = .systemFont(ofSize: 16, weight: .bold)
-    $0.textColor = .black
-    $0.text = "구글지도를 넣을예정임🤪"
-    $0.layer.borderWidth = 1
-    $0.textAlignment = .center
-  }
+  private let googleMap = GMSMapView()
   private let nearLabel = UILabel().then {
     $0.font = .systemFont(ofSize: 16, weight: .bold)
     $0.textColor = .black
@@ -150,7 +144,7 @@ class SaleDetailNearMapCell: UITableViewCell {
       titleLabel,
       addressLabel,
       addressButton,
-      mapLabel,
+      googleMap,
       nearLabel,
       martImage,
       hospitalImage,
@@ -191,13 +185,13 @@ class SaleDetailNearMapCell: UITableViewCell {
       $0.trailing.equalToSuperview().inset(26)
       $0.width.equalTo(50)
     }
-    mapLabel.snp.makeConstraints {
+    googleMap.snp.makeConstraints {
       $0.top.equalTo(addressLabel.snp.bottom).offset(18)
       $0.width.equalToSuperview()
       $0.height.equalTo(280)
     }
     nearLabel.snp.makeConstraints {
-      $0.top.equalTo(mapLabel.snp.bottom).offset(20)
+      $0.top.equalTo(googleMap.snp.bottom).offset(20)
       $0.leading.equalTo(titleLabel)
     }
     martImage.snp.makeConstraints {

@@ -152,6 +152,7 @@ class FavoriteListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = true
+        
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.register(RoomInfoCell.self, forCellReuseIdentifier: RoomInfoCell.identifier)
