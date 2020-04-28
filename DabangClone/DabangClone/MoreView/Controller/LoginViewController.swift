@@ -374,7 +374,7 @@ class LoginViewController: UIViewController {
                     let json = JSON(value)
                     let accessToken = json["token"].stringValue
                     APIManager.shared.userPk = json["user"]["pk"].intValue
-                    let result = APIManager.shared.setAccessTokenIntoKeyChain(token: accessToken, key: APIManager.shared.userPk)
+                    let result = APIManager.shared.setAccessTokenIntoKeyChain(token: accessToken, key: Key.keyChain)
                     APIManager.shared.loginWay = .kakao
                     print(result ? "카카오 로그인 성공 -> 토큰저장 성공" : "카카오 로그인 성공 -> 토큰저장 실패")
                 case .failure(_):
@@ -437,7 +437,7 @@ class LoginViewController: UIViewController {
                 let json = JSON(value)
                 let accessToken = json["token"].stringValue
                 APIManager.shared.userPk = json["user"]["pk"].intValue
-                let result = APIManager.shared.setAccessTokenIntoKeyChain(token: accessToken, key: APIManager.shared.userPk)
+                let result = APIManager.shared.setAccessTokenIntoKeyChain(token: accessToken, key: Key.keyChain)
                 APIManager.shared.loginWay = .facebook
                 print(result ? "페이스북 로그인 성공 -> 토큰저장 성공" : "페이스북 로그인 성공 -> 토큰저장 실패")
             case .failure(_):
