@@ -569,7 +569,7 @@ extension MapViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let selectedCell = tableView.cellForRow(at: indexPath) as! MapTableViewCell
     print(selectedCell.roomPK)
-    let vc = NewMainRoomViewController() as NewMainRoomViewController
+    let vc = NewMainRoomViewController()
     vc.pk = selectedCell.roomPK
     vc.setTableViewReload()
     vc.modalPresentationStyle = .fullScreen

@@ -13,7 +13,7 @@ class MainTabBarViewController: UITabBarController {
   private let homeVC = UINavigationController(rootViewController: HomeViewController())
   private let favoriteVC = UINavigationController(rootViewController: FavoriteListViewController())
   private let mapVC = UINavigationController(rootViewController: MapViewController())
-  private let saleVC = UINavigationController(rootViewController: LoginViewController())
+  private let saleVC = UINavigationController(rootViewController: SaleViewController())
   private let moreVC = UINavigationController(rootViewController: MoreViewController())
 
     
