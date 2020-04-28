@@ -21,4 +21,5 @@ target 'DabangClone' do
   pod 'MultiSlider'
   pod 'SwiftyJSON'
   pod 'KeychainSwift'
+  pod 'DKImagePickerController'
 end

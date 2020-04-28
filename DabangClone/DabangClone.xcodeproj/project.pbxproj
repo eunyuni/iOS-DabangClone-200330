@@ -199,6 +199,7 @@
 		6F4DECE72429F78E008D77E5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DECE62429F78E008D77E5 /* SettingViewController.swift */; };
 		6F4DECEC242A1585008D77E5 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DECEB242A1585008D77E5 /* SettingTableViewCell.swift */; };
 		6F4DECEE242A19A6008D77E5 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DECED242A19A6008D77E5 /* SettingModel.swift */; };
+		6F57FA002457DF8D00438CBE /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F57F9FF2457DF8C00438CBE /* ImageCollectionViewCell.swift */; };
 		6F7C080F2450DE470081EF77 /* MapScrollButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C080E2450DE470081EF77 /* MapScrollButton.swift */; };
 		6F7C08112450DFF80081EF77 /* MapFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C08102450DFF80081EF77 /* MapFilterButton.swift */; };
 		6F7C08132451BF1C0081EF77 /* CustomMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C08122451BF1C0081EF77 /* CustomMarker.swift */; };
@@ -512,6 +513,7 @@
 		6F4DECE62429F78E008D77E5 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		6F4DECEB242A1585008D77E5 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		6F4DECED242A19A6008D77E5 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
+		6F57F9FF2457DF8C00438CBE /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		6F7C080E2450DE470081EF77 /* MapScrollButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapScrollButton.swift; path = DabangClone/MapView/Controller/MapScrollButton.swift; sourceTree = SOURCE_ROOT; };
 		6F7C08102450DFF80081EF77 /* MapFilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterButton.swift; sourceTree = "<group>"; };
 		6F7C08122451BF1C0081EF77 /* CustomMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarker.swift; sourceTree = "<group>"; };
@@ -1162,6 +1164,7 @@
 				E78AD93A2435E2E30098BE6E /* InquiryBottomTableViewCell.swift */,
 				6F389E3B24484B2A00A440A4 /* TextCollectionViewCell.swift */,
 				6F389E4124484C2F00A440A4 /* OptionCollectionViewCell.swift */,
+				6F57F9FF2457DF8C00438CBE /* ImageCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1625,6 +1628,7 @@
 				6F389E4A24484DC400A440A4 /* HomeBottomTableViewCell.swift in Sources */,
 				E7BB1BEA242B58A000C66B48 /* PMBodyTableViewCell.swift in Sources */,
 				6F7C080F2450DE470081EF77 /* MapScrollButton.swift in Sources */,
+				6F57FA002457DF8D00438CBE /* ImageCollectionViewCell.swift in Sources */,
 				E7E60447243B28460050D540 /* FindAreaTypeCell.swift in Sources */,
 				15D9B331242E220700A38A76 /* WithdrawalViewController.swift in Sources */,
 				6F389E36244849FD00A440A4 /* AddressApartView.swift in Sources */,
