@@ -39,7 +39,6 @@ class CompareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
-//        makeCompareValuesArrayUsingDictValues()
         configureNoticePart()
         configureScrollView()
         configureHeaders()
@@ -64,7 +63,6 @@ class CompareViewController: UIViewController {
         noticeView.backgroundColor = #colorLiteral(red: 0.9646322131, green: 0.9647476077, blue: 0.9645928741, alpha: 1)
         noticeLabel.textColor = .lightGray
         noticeLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-//        noticeLabel.text = "\(self.roomsToCompare.count)개의 방을 비교한 후, 원하는 방을 문의하세요."
         
         noticeView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -178,6 +176,5 @@ class CompareViewController: UIViewController {
     
     @objc func didTapCloseButton() {
         dismiss(animated: true)
-//        navigationController?.popViewController(animated: true)
     }
 }
