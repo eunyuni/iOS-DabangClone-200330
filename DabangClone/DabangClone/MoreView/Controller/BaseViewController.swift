@@ -29,7 +29,12 @@ class BaseViewController: UIViewController, InfoCellDelegate {
       view.backgroundColor = .white
       setupUI()
     }
- 
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    tableView.reloadData()
+    print("BaseViewController viewwillappear")
+  }
   
   //MARK: - setupUI & SetupConstraints
   
@@ -100,6 +105,7 @@ extension BaseViewController: UITableViewDataSource {
       return cell
     case 1:
       let cell = setTableViewCell(tableView: tableView, indexPath: indexPath, title: BaseInfo.가격, CellType: .Input) as! InputCell
+      //노티 받아서 처리할 곳
       cell.delegate = self
       return cell
     case 2: 
