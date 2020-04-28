@@ -197,7 +197,7 @@ class MainRoomTableViewCell: UITableViewCell {
     var charterLoan = ""
     if bangData.depositLoan { charterLoan = "가능" } else { charterLoan = "불가능" }
     detailInfoView.addSubviews([detailInfoLabel,detailInfoImageView, detailInfoStackView])
-    detailInfoStackView.configure(titles: ["\(bangData.type)", bangData.floor + "/ \(bangData.totalFloor)", "\(bangData.areaChar)", bangData.heatingType.rawValue, builtIn, elevator, pet, balcony, charterLoan, bangData.moveInChar.rawValue])
+    detailInfoStackView.configure(titles: ["\(bangData.type)", bangData.floor + "/ \(bangData.totalFloor)", "\(bangData.areaChar)", bangData.heatingType.rawValue, builtIn, elevator, pet, balcony, charterLoan, bangData.moveInChar])
     
     
     setupConstraints()

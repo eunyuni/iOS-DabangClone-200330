@@ -7,104 +7,237 @@ import Foundation
 
 // MARK: - DabangElement
 struct DabangElement: Codable {
-        let pk: Int
-        let broker: Broker?
-        let type: DabangType
-        let dabangDescription: String
-        let address: Address
-        let lng, lat: Double
-        let salesForm: SalesForm
-        let floor, totalFloor, areaChar: String
-        let supplyAreaInt: Int
-        let supplyAreaChar: String
-        let shortRent: Bool
-        let managementSet: [ManagementSet]
-        let parkingDetail: ParkingDetail
-        let parkingtf: Bool
-        let livingExpenses: String?
-        let livingExpensesDetail: LivingExpensesDetail?
-        let moveInChar: MoveInChar
-        let moveInDate: String?
-        let optionSet: [OptionSet]
-        let heatingType: HeatingType
-        let pet, elevator, builtIn, veranda: Bool
-        let depositLoan: Bool
-        let totalCitizen: String?
-        let totalPark: TotalPark?
-        let complete: String?
-        let securitySafetySet: [SecuritySafetySet]
-        let postimage: [String]
+      let pk: Int
+      let broker: Broker
+      let type: BuildingTypeEnum
+      let dabangDescription: String
+      let address: Address
+      let lng, lat: Double
+      let salesForm: SalesForm
+      let floor, totalFloor, areaChar: String
+      let supplyAreaInt: Int
+      let supplyAreaChar: String
+      let shortRent: Bool
+      let managementSet: [String]
+      let parkingDetail: String
+      let parkingtf: Bool
+      let livingExpenses, livingExpensesDetail: String?
+      let moveInChar: String
+      let moveInDate: String?
+      let optionSet: [OptionSet]
+      let heatingType: Heating
+      let pet, elevator, builtIn, veranda: Bool
+      let depositLoan: Bool
+      let totalCitizen, totalPark, complete: String?
+      let securitySafetySet: [SecuritySafetySet]
+      let postimage: [String]
+      let complex: Complex?
 
-        enum CodingKeys: String, CodingKey {
-            case pk, broker, type
-            case dabangDescription = "description"
-            case address, lng, lat, salesForm, floor, totalFloor, areaChar, supplyAreaInt, supplyAreaChar, shortRent
-            case managementSet = "management_set"
-            case parkingDetail
-            case parkingtf = "parkingTF"
-            case livingExpenses = "living_expenses"
-            case livingExpensesDetail = "living_expenses_detail"
-            case moveInChar, moveInDate
-            case optionSet = "option_set"
-            case heatingType, pet, elevator, builtIn, veranda, depositLoan, totalCitizen, totalPark, complete
-            case securitySafetySet = "securitySafety_set"
-            case postimage
-        }
-    }
+      enum CodingKeys: String, CodingKey {
+          case pk, broker, type
+          case dabangDescription = "description"
+          case address, lng, lat, salesForm, floor, totalFloor, areaChar, supplyAreaInt, supplyAreaChar, shortRent
+          case managementSet = "management_set"
+          case parkingDetail
+          case parkingtf = "parkingTF"
+          case livingExpenses = "living_expenses"
+          case livingExpensesDetail = "living_expenses_detail"
+          case moveInChar, moveInDate
+          case optionSet = "option_set"
+          case heatingType, pet, elevator, builtIn, veranda, depositLoan, totalCitizen, totalPark, complete
+          case securitySafetySet = "securitySafety_set"
+          case postimage, complex
+      }
+  }
 
-    // MARK: - Address
-    struct Address: Codable {
-        let loadAddress: String
-        let detailAddress: JSONNull?
-    }
+  // MARK: - Address
+  struct Address: Codable {
+      let loadAddress: String
+      let detailAddress: String?
+  }
 
-    // MARK: - Broker
-    struct Broker: Codable {
-        let pk: Int
-        let companyName, address: String?
-        let managerName, tel: String
-        let image: String?
-        let companyNumber, brokerage, dabangCreatedAt, successCount: String?
+  // MARK: - Broker
+  struct Broker: Codable {
+      let pk: Int
+      let companyName, address, managerName, tel: String
+      let image: String
+      let companyNumber: String
+      let brokerage: Brokerage
+      let dabangCreatedAt, successCount: String
 
-        enum CodingKeys: String, CodingKey {
-            case pk, companyName, address, managerName, tel, image, companyNumber, brokerage
-            case dabangCreatedAt = "dabangCreated_at"
-            case successCount
-        }
-    }
+      enum CodingKeys: String, CodingKey {
+          case pk, companyName, address, managerName, tel, image, companyNumber, brokerage
+          case dabangCreatedAt = "dabangCreated_at"
+          case successCount
+      }
+  }
 
-    enum HeatingType: String, Codable {
-        case 개별난방 = "개별난방"
-        case 지역난방 = "지역난방"
-    }
+  enum Brokerage: String, Codable {
+      case empty = "-"
+      case the11200201800221 = "11200201800221"
+      case the11200201900121 = "11200-2019-00121"
+      case the11680201900396 = "11680201900396"
+      case the92262605 = "9226-2605"
+      case 제11680201900149 = "제11680-2019-00149"
+  }
 
-    enum LivingExpensesDetail: String, Codable {
-        case empty = "(-)"
-        case 관리비 = "(관리비)"
-        case 관리비주차비 = "(관리비 + 주차비)"
-        case 월세 = "(월세)"
-        case 월세관리비 = "(월세 + 관리비)"
-        case 월세관리비주차비 = "(월세 + 관리비 + 주차비)"
-        case 월세주차비 = "(월세 + 주차비)"
-        case 주차비 = "(주차비)"
-    }
+  // MARK: - Complex
+  struct Complex: Codable {
+      let pk: Int
+      let complexName: ComplexName
+      let buildDate: String
+      let totalCitizen: TotalCitizen
+      let personalPark: PersonalPark
+      let totalNumber: TotalNumber
+      let heatingSystem: Heating
+      let minMaxFloor: MinMaxFloor
+      let buildingType: BuildingTypeEnum
+      let constructionCompany: ConstructionCompany
+      let fuel: Fuel
+      let complexType: ComplexType
+      let floorAreaRatio: FloorAreaRatio
+      let dryWasteRate: DryWasteRate
+      let complexSale: ComplexSale
+      let complexPrice: ComplexPrice
+      let areaSale: AreaSale
+      let areaPrice: AreaPrice
+      let image: [String]
+      let list: [Int]
+      let countPost: Int
+  }
 
-    enum ManagementSet: String, Codable {
-        case 기타 = "기타"
-        case 도시가스 = "도시가스"
-        case 수도세 = "수도세"
-        case 유선Tv = "유선TV"
-        case 인터넷 = "인터넷"
-        case 전기세 = "전기세"
-        case 청소비 = "청소비"
-        case 협의가능 = "협의가능"
-    }
+  enum AreaPrice: String, Codable {
+      case the1602만33M당 = "1602만/3.3m²당"
+  }
 
-    enum MoveInChar: String, Codable {
-        case 날짜협의 = "날짜 협의"
-        case 즉시입주 = "즉시 입주"
-    }
+  enum AreaSale: String, Codable {
+      case the2745만33M당 = "2745만/3.3m²당"
+  }
 
+  enum BuildingTypeEnum: String, Codable {
+      case 쓰리룸 = "쓰리룸"
+      case 아파트 = "아파트"
+      case 원룸 = "원룸"
+      case 원룸주방분리형15룸 = "원룸(주방 분리형(1.5룸))"
+      case 투룸 = "투룸"
+  }
+
+  enum ComplexName: String, Codable {
+      case 강변건영 = "강변건영"
+      case 갤러리아포레 = "갤러리아포레"
+      case 대림로즈빌 = "대림로즈빌"
+      case 동아 = "동아"
+      case 성수동아그린 = "성수동아그린"
+      case 트리마제 = "트리마제"
+  }
+
+  enum ComplexPrice: String, Codable {
+      case empty = "-"
+      case the1115만33M당 = "1115만/3.3m²당"
+      case the1289만33M당 = "1289만/3.3m²당"
+      case the3776만33M당 = "3776만/3.3m²당"
+  }
+
+  enum ComplexSale: String, Codable {
+      case empty = "-"
+      case the4502만33M당 = "4502만/3.3m²당"
+  }
+
+  enum ComplexType: String, Codable {
+      case 계단식 = "계단식"
+      case 복합식 = "복합식"
+  }
+
+  enum ConstructionCompany: String, Codable {
+      case 대림산업주식회사 = "대림산업주식회사"
+      case 동아건설주 = "동아건설(주)"
+      case 두산중공업주 = "두산중공업(주)"
+      case 주건영 = "(주)건영"
+      case 주한화건설 = "(주)한화건설"
+  }
+
+  enum DryWasteRate: String, Codable {
+      case empty = "-"
+      case the16 = "16%"
+      case the20 = "20%"
+      case the27 = "27%"
+      case the41 = "41%"
+  }
+
+  enum FloorAreaRatio: String, Codable {
+      case empty = "-"
+      case the279 = "279%"
+      case the281 = "281%"
+      case the301 = "301%"
+      case the319 = "319%"
+      case the399 = "399%"
+  }
+
+  enum Fuel: String, Codable {
+      case 도시가스 = "도시가스"
+  }
+
+  enum Heating: String, Codable {
+      case 개별난방 = "개별난방"
+      case 중앙 = "중앙"
+  }
+
+  enum MinMaxFloor: String, Codable {
+      case the1010층 = "10-10층"
+      case the2847층 = "28-47층"
+      case the645층 = "6-45층"
+      case the815층 = "8-15층"
+      case the825층 = "8-25층"
+      case the918층 = "9-18층"
+  }
+
+  enum PersonalPark: String, Codable {
+      case the11대 = "1.1대"
+      case the16대 = "1.6대"
+      case the1대 = "1대"
+      case the65대 = "6.5대"
+  }
+
+  enum TotalCitizen: String, Codable {
+      case the230세대 = "230세대"
+      case the331세대 = "331세대"
+      case the372세대 = "372세대"
+      case the390세대 = "390세대"
+      case the580세대 = "580세대"
+      case the688세대 = "688세대"
+  }
+
+  enum TotalNumber: String, Codable {
+      case the2동 = "2동"
+      case the3동 = "3동"
+      case the4동 = "4동"
+      case the6동 = "6동"
+  }
+
+  // MARK: - SalesForm
+  struct SalesForm: Codable {
+      let type: SalesFormType
+      let depositChar, monthlyChar: String
+      let depositInt, monthlyInt: Int
+  }
+
+  enum SalesFormType: String, Codable {
+      case 매매 = "매매"
+      case 아파트 = "아파트"
+      case 월세 = "월세"
+      case 전세 = "전세"
+  }
+
+  enum SecuritySafetySet: String, Codable {
+      case cctv = "CCTV"
+      case 경비원 = "경비원"
+      case 공동현관 = "공동현관"
+      case 방범창 = "방범창"
+      case 비디오폰 = "비디오폰"
+      case 인터폰 = "인터폰"
+      case 카드키 = "카드키"
+  }
+  
     enum OptionSet: String, Codable {
         case tv = "TV"
         case 가스레인지 = "가스레인지"
@@ -121,60 +254,6 @@ struct DabangElement: Codable {
         case 침대 = "침대"
     }
 
-    enum ParkingDetail: String, Codable {
-        case 가능무료 = "가능(무료)"
-        case 문의 = "문의"
-        case 불가 = "불가"
-    }
-
-    // MARK: - SalesForm
-    struct SalesForm: Codable {
-        let type: SalesFormType
-        let depositChar, monthlyChar: String
-        let depositInt, monthlyInt: Int
-    }
-
-    enum SalesFormType: String, Codable {
-        case 매매 = "매매"
-        case 월세 = "월세"
-        case 전세 = "전세"
-    }
-
-    enum SecuritySafetySet: String, Codable {
-        case cctv = "CCTV"
-        case 경비원 = "경비원"
-        case 공동현관 = "공동현관"
-        case 방범창 = "방범창"
-        case 비디오폰 = "비디오폰"
-        case 인터폰 = "인터폰"
-        case 카드키 = "카드키"
-    }
-
-    enum TotalPark: String, Codable {
-        case empty = "-"
-        case the07대 = "0.7대"
-        case the08대 = "0.8대"
-        case the11대 = "1.1대"
-        case the12대 = "1.2대"
-        case the13대 = "1.3대"
-        case the15대 = "1.5대"
-        case the16대 = "1.6대"
-        case the17대 = "1.7대"
-        case the18대 = "1.8대"
-        case the1대 = "1대"
-        case the65대 = "6.5대"
-    }
-
-    enum DabangType: String, Codable {
-        case 쓰리룸 = "쓰리룸"
-        case 아파트 = "아파트"
-        case 오피스텔 = "오피스텔"
-        case 오피스텔주방분리형15룸복층 = "오피스텔(주방 분리형(1.5룸),복층)"
-        case 원룸 = "원룸"
-        case 원룸복층 = "원룸(복층)"
-        case 원룸주방분리형15룸 = "원룸(주방 분리형(1.5룸))"
-        case 투룸 = "투룸"
-    }
 
 extension OptionSet {
 func imageName() -> String {

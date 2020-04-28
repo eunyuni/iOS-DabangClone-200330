@@ -12,11 +12,11 @@ import SnapKit
 class AddRoomSingleton {
   static let shared = AddRoomSingleton()
   
-  var roomDataForMake: DabangElement = DabangElement(pk: 0, broker: .none, type: .원룸, dabangDescription: "", address: Address(loadAddress: "", detailAddress: .none), lng: 0, lat: 0, salesForm: SalesForm(type: .매매, depositChar: "", monthlyChar: "", depositInt: 0, monthlyInt: 0), floor: "", totalFloor: "", areaChar: "", supplyAreaInt: 0, supplyAreaChar: "", shortRent: false, managementSet: [ManagementSet.기타], parkingDetail: .가능무료, parkingtf: false, livingExpenses: "", livingExpensesDetail: LivingExpensesDetail(rawValue: ""), moveInChar: MoveInChar.날짜협의, moveInDate: "", optionSet: [OptionSet.tv], heatingType: .개별난방, pet: false, elevator: false, builtIn: false, veranda: false, depositLoan: false, totalCitizen: "", totalPark: .empty, complete: "", securitySafetySet: [SecuritySafetySet.경비원], postimage: [""])
+//  var roomDataForMake: DabangElement = DabangElement(pk: 0, broker: Broker(pk: 0, companyName: "", address: "", managerName: "", tel: "", image: "", companyNumber: "", brokerage: Brokerage.제11680201900149, dabangCreatedAt: "", successCount: ""), type: BuildingTypeEnum.쓰리룸, dabangDescription: "", address: Address(loadAddress: "", detailAddress: .none), lng: 0, lat: 0, salesForm: SalesForm(type: SalesFormType.월세, depositChar: "", monthlyChar: "", depositInt: 0, monthlyInt: 0), floor: "", totalFloor: "", areaChar: "", supplyAreaInt: 0, supplyAreaChar: "", shortRent: false, managementSet: [""], parkingDetail: ParkingDetail.가능무료, parkingtf: false, livingExpenses: "", livingExpensesDetail: "", moveInChar: MoveInChar.날짜협의, moveInDate: .none, optionSet: [.가스레인지], heatingType: .개별난방, pet: false, elevator: true, builtIn: false, veranda: false, depositLoan: false, totalCitizen: "", totalPark: .none, complete: .none, securitySafetySet: [SecuritySafetySet.cctv], postimage: [""], complex: nil)
 }
 class AddRoomViewController: UIViewController {
 
-  
+  let vc = RoomSellScrollViewController()
   // MARK: - Property
   private let potoView = UIImageView().then {
     $0.backgroundColor = .red
@@ -103,18 +103,27 @@ class AddRoomViewController: UIViewController {
 
   // MARK: - Action
   @objc private func didTapCompletionButton(_ sender: UIButton) {
+    
   }
   @objc private func didTapAddressGesture(_ sender: UITapGestureRecognizer) {
-    
+    vc.pageNum = 0
+    navigationController?.pushViewController(vc, animated: true)
+    print("didTap")
   }
   @objc private func didTapBasicInfoGesture(_ sender: UITapGestureRecognizer) {
-    
+    vc.pageNum = 1
+    navigationController?.pushViewController(vc, animated: true)
+    print("didTap")
   }
   @objc private func didTapAdditionalGesture(_ sender: UITapGestureRecognizer) {
-    
+    vc.pageNum = 2
+    navigationController?.pushViewController(vc, animated: true)
+    print("didTap")
   }
   @objc private func didTapExplanationGesture(_ sender: UITapGestureRecognizer) {
-    
+    vc.pageNum = 3
+    navigationController?.pushViewController(vc, animated: true)
+    print("didTap")
   }
   @objc private func didTapEmptyGesture(_ sender: UITapGestureRecognizer) {
     let vc = AddPotoViewController()
@@ -132,7 +141,7 @@ class AddRoomViewController: UIViewController {
     emptyViewTapGesture.addTarget(self, action: #selector(didTapEmptyGesture(_:)))
     addressView.addGestureRecognizer(addressTapGesture)
     basicInfomationView.addGestureRecognizer(basicInfoTapGesture)
-    additionalView.addGestureRecognizer(addressTapGesture)
+    additionalView.addGestureRecognizer(additionalTapGesture)
     explanationView.addGestureRecognizer(explanationTapGesture)
     emptyView.addGestureRecognizer(emptyViewTapGesture)
     self.view.addSubviews([addressView, basicInfomationView, additionalView, explanationView, completionButton, potoCollectionView, emptyView])

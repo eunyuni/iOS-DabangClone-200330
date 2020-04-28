@@ -372,7 +372,7 @@ class LoginViewController: UIViewController {
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
-                    let accessToken = json["jwt"].stringValue
+                    let accessToken = json["token"].stringValue
                     APIManager.shared.userPk = json["user"]["pk"].intValue
                     let result = APIManager.shared.setAccessTokenIntoKeyChain(token: accessToken, key: APIManager.shared.userPk)
                     APIManager.shared.loginWay = .kakao
@@ -435,7 +435,7 @@ class LoginViewController: UIViewController {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let accessToken = json["jwt"].stringValue
+                let accessToken = json["token"].stringValue
                 APIManager.shared.userPk = json["user"]["pk"].intValue
                 let result = APIManager.shared.setAccessTokenIntoKeyChain(token: accessToken, key: APIManager.shared.userPk)
                 APIManager.shared.loginWay = .facebook
