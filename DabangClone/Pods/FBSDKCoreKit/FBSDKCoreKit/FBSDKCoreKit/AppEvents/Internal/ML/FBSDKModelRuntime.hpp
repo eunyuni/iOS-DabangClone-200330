@@ -255,6 +255,15 @@ static void addmv(MTensor& y, const MTensor& x) {
   }
 }
 
+static MTensor getDenseTensor(const float *df) {
+  MTensor dense_tensor({1, DENSE_FEATURE_LEN});
+  if (df) {
+    memcpy(dense_tensor.mutable_data(), df, DENSE_FEATURE_LEN * sizeof(float));
+  } else {
+    memset(dense_tensor.mutable_data(), 0, DENSE_FEATURE_LEN * sizeof(float));
+  }
+}
+
 static MTensor predictOnMTML(const std::string task, const char *texts, const std::unordered_map<std::string, MTensor>& weights, const float *df) {
   MTensor dense_tensor({1, DENSE_FEATURE_LEN});
   memcpy(dense_tensor.mutable_data(), df, DENSE_FEATURE_LEN * sizeof(float));
