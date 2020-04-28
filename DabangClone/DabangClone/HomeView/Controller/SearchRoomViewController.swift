@@ -64,6 +64,10 @@ class SearchRoomViewController: UIViewController {
     super.viewDidLoad()
     setupUI()
   }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.textField.becomeFirstResponder()
+  }
   //  university, subway, apartment, officetel , area
   // MARK: - Action
   @objc private func didTapCancelButton(_ sender: UIButton) {

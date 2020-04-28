@@ -8,14 +8,17 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
 
 class BudongsanInfoCell: UITableViewCell {
 
     static let identifier = "BudongsanInfoCell"
    
-    var data: BudongsanInfo! {
+    var data: Broker! {
         didSet{
-            nameLabel.text = data.name
+            nameLabel.text = data.companyName ?? "N/A"
+            let url = URL(string: data.image ?? "")
+            profileImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "MartIcon"), options: .continueInBackground)
         }
     }
     
@@ -42,7 +45,7 @@ class BudongsanInfoCell: UITableViewCell {
     
     let profileImageView: UIImageView = {
        let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "brokerProfileImage")
+        iv.image = #imageLiteral(resourceName: "MartIcon")
         iv.clipsToBounds = true
         iv.layer.cornerRadius = iv.frame.width / 2
         iv.contentMode = .scaleAspectFill
@@ -64,7 +67,7 @@ class BudongsanInfoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(info: BudongsanInfo) {
+    func set(info: Broker) {
 //        roomInfoCell.data = dummyRoom2
         self.data = info
     }
