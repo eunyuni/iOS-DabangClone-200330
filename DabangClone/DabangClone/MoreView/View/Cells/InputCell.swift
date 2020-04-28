@@ -23,10 +23,12 @@ class InputCell: UITableViewCell {
     $0.text = ""
   }
   let rightButton = UIButton(type: .custom).then {
-    $0.setTitle("입력하세요", for: .normal)
+    
     $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
     $0.setTitleColor(.gray, for: .normal)
-  }
+      $0.setTitle("입력하세요", for: .normal)
+      print("defalut")
+    }
   let rightChevronButton = UIButton(type: .custom).then {
     $0.setImage(UIImage(systemName: "chevron.right"), for: .normal)
     $0.tintColor = .black
