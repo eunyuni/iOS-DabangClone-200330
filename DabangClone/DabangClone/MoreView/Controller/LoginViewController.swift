@@ -366,7 +366,8 @@ class LoginViewController: UIViewController {
         ]
         
         //        let url = URL(string: "https://moonpeter.com/members/kakaoToken/")
-        let url = URL(string: "https://moonpeter.com/members/kakaoToken/")
+        let url = URL(string: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com/members/kakaoToken/")
+//      let url = URL(string: "https://moonpeter.com/members/kakaoToken/")
         AF.request(url!, method: .post, parameters: param, encoding: URLEncoding.httpBody)
             .responseJSON { (response) in
                 switch response.result {
@@ -428,8 +429,8 @@ class LoginViewController: UIViewController {
 //            "username" : "admin",
 //            "password" : "admin123"
         ]
-        let url = URL(string: "https://moonpeter.com/members/facebookToken/")
-//        let url = URL(string: "https://moonpeter.com/api/token/")
+        let url = URL(string: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com/members/facebookToken/")
+//        let url = URL(string: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com/api/token/")
         AF.request(url!, method: .post, parameters: param, encoding: URLEncoding.httpBody)
         .responseJSON { (response) in
             switch response.result {

@@ -134,7 +134,7 @@ class MoreViewController: UIViewController {
       ["" : "4/"]
     let pk = 4
     
-    let url = URL(string: "https://moonpeter.com/posts/")
+    let url = URL(string: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com/posts/")
     
     
     AF
