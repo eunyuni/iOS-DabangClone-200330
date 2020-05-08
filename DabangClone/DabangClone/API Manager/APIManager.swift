@@ -29,8 +29,8 @@ final class APIManager {
     
     private let keyChain = KeychainSwift(keyPrefix: "DabangCloneUser_")
     var userPk = 0
-    private let networkAccessManager = NetworkReachabilityManager(host: "https://moonpeter.com")
-    private let baseURL = "https://moonpeter.com"
+    private let networkAccessManager = NetworkReachabilityManager(host: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com")
+    private let baseURL = "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com"
     
     var loginWay: LoginWays?
     
@@ -205,6 +205,24 @@ final class APIManager {
                 }
         }
     }
+  func postMyRoomForSale(room: Testt, completion: @escaping ([String:Any]) -> Void) {
+    let parameters = ["type":"투룸", "description":"원룸"]
+    
+    AF.upload(multipartFormData: { (multipartFormData) in
+      for (key, value) in parameters {
+        multipartFormData.append(value.data(using: .utf8)!, withName: key)
+      }
+    }, to: baseURL + "/posts/create/").responseJSON { response in
+      guard let json = try? JSONSerialization.jsonObject(with: response.data ?? Data()) as? [String : Any] else { return }
+//      guard let message = json["image"] as? String else { return }
+      completion(json)
+    }
+//    AF.upload(multipartFormData: { (multipartFormData) in
+//      <#code#>
+//    }, to: baseURL, method: .post, headers: ["":""], requestModifier: <#T##Session.RequestModifier?##Session.RequestModifier?##(inout URLRequest) throws -> Void#>)
+//    
+  }
+  
     
     //POST: 최근 본 방
     func postRecentlyCheckedRoom(roomPk: Int, completion: @escaping (String) -> Void) {
@@ -221,7 +239,7 @@ final class APIManager {
     
     //POST: 찜한 방
     
-  //POST: 찜한 방
+  //POST: 사진 방
   func postPoto(image: UIImage, imageName : String, completion: @escaping (String) -> Void) {
     let imageData = image.jpegData(compressionQuality: 0.50)
     print(image, imageData!)

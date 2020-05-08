@@ -117,3 +117,46 @@ struct RoomMenu {
   ]
 
 
+struct Testt: Codable {
+    let broker: Int
+    let postType, welcomeDescription, loadAddress: String
+    let detailAddress: String
+    let lng, lat: Double
+    let salesFormType, depositChar, monthlyChar: String
+    let depositInt, monthlyInt: Int
+    let floor, totalFloor, areaChar: String
+    let supplyAreaInt: Int
+    let supplyAreaChar: String
+    let shortRent: Bool
+    let managementSet: [String]
+    let parkingDetail: String
+    let parkingTF: Bool
+    let livingExpenses, livingExpensesDetail: String?
+    let moveInChar: String
+    let moveInDate: String?
+    let optionSet: [String]
+    let heatingType: String
+    let pet, elevator, builtIn, veranda: Bool
+    let depositLoan: Bool
+    let totalCitizen, totalPark, complete: String
+    let securitySafetySet: [String]
+    let postimage: [String]
+    let complex: Int
+
+    enum CodingKeys: String, CodingKey {
+        case broker, postType
+        case welcomeDescription = "description"
+        case loadAddress, detailAddress, lng, lat, salesFormType, depositChar, monthlyChar, depositInt, monthlyInt, floor, totalFloor, areaChar, supplyAreaInt, supplyAreaChar, shortRent
+        case managementSet = "management_set"
+        case parkingDetail, parkingTF
+        case livingExpenses = "living_expenses"
+        case livingExpensesDetail = "living_expenses_detail"
+        case moveInChar, moveInDate
+        case optionSet = "option_set"
+        case heatingType, pet, elevator, builtIn, veranda, depositLoan, totalCitizen, totalPark, complete
+        case securitySafetySet = "securitySafety_set"
+        case postimage, complex
+    }
+}
+
+let duckk = Testt(broker: 1, postType: "아파트", welcomeDescription: "한강조망. 집주인 거주로 컨디션 최고. 교통과 생활 편리. 입주 가능- 한강 조망, 단지 내 동형평수 최고라인- 집주인 ", loadAddress: "서울시 성동구 성수동2가 843", detailAddress: "서울시 성동구 성수동2가 843", lng: 37.5412343020006, lat: 127.052138909865, salesFormType: "매매", depositChar: "11억", monthlyChar: "중층", depositInt: 1100000000, monthlyInt: 0, floor: "중층 ", totalFloor: "29층", areaChar: "42.22 / 60.07㎡", supplyAreaInt: 18, supplyAreaChar: "13 / 18평", shortRent: false, managementSet: [], parkingDetail: "", parkingTF: false, livingExpenses: "", livingExpensesDetail: "", moveInChar: "", moveInDate: "", optionSet: [], heatingType: "개별남방", pet: false, elevator: false, builtIn: false, veranda: false, depositLoan: false, totalCitizen: "445세대", totalPark: "1.8대", complete: "2009.06 준공", securitySafetySet: [], postimage: [], complex: 3)
