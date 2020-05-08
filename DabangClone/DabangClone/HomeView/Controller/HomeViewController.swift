@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     checkAuth()
+    APIManager.shared.logout()
     self.view.backgroundColor = .white
     getTest()
     setupUI()
@@ -36,6 +37,9 @@ class HomeViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.tabBarController?.tabBar.isHidden = false
+    APIManager.shared.put() { data in
+      print(data)
+    }
   }
   
   
@@ -115,7 +119,7 @@ extension HomeViewController: UITableViewDataSource {
   
   private func getTest() {
     
-    let url = URL(string: "https://moonpeter.com/posts/list/")
+    let url = URL(string: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com/posts/list/")
     
     
     AF
