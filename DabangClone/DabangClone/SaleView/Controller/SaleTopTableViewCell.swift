@@ -24,7 +24,7 @@ class SaleTopTableViewCell: UITableViewCell {
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
     $0.dataSource = self
     $0.delegate = self
-    //    $0.isPagingEnabled = true
+    $0.isPagingEnabled = true
     //    $0.alwaysBounceHorizontal = false
     //    $0.scrollsToTop = false
     //    $0.bounces = false

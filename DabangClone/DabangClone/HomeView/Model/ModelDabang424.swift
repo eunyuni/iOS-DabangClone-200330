@@ -103,6 +103,50 @@ struct DabangElement: Codable {
           let countPost: Int
       }
 
+//struct Welcome: Codable {
+//    let id: Int
+//    let brand: Brand?
+//    let thema: Thema?
+//    let image: [JSONAny]
+//    let list: [Int]
+//    let status, term, name, place: String
+//    let salesType, salesPrice, totalCitizen, salesCitizen: String
+//    let minMaxFloor, complexScale, detailType, constraint: String
+//    let area, supplyType, constraintArea, recruit: String
+//    let builder, maxPrice, moveIn, developer: String
+//    let constraintTerm, detailPrice, pricePyeong, averPrice: String
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id, brand, thema, image, list, status, term, name, place
+//        case salesType = "sales_type"
+//        case salesPrice = "sales_price"
+//        case totalCitizen = "total_citizen"
+//        case salesCitizen = "sales_citizen"
+//        case minMaxFloor = "min_max_floor"
+//        case complexScale = "complex_scale"
+//        case detailType = "detail_type"
+//        case constraint, area
+//        case supplyType = "supply_type"
+//        case constraintArea = "constraint_area"
+//        case recruit, builder
+//        case maxPrice = "max_price"
+//        case moveIn, developer
+//        case constraintTerm = "constraint_term"
+//        case detailPrice = "detail_price"
+//        case pricePyeong = "price_pyeong"
+//        case averPrice = "aver_price"
+//    }
+//}
+//// MARK: - Thema
+//struct Thema: Codable {
+//    let name: String
+//}
+//
+//// MARK: - Brand
+//struct Brand: Codable {
+//    let name: String
+//}
+
       enum BuildingTypeEnum: String, Codable {
           case 쓰리룸 = "쓰리룸"
           case 아파트 = "아파트"
