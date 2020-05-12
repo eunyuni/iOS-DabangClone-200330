@@ -91,10 +91,9 @@ class RoomInfoCell: UITableViewCell {
     let smallConfiguration = UIImage.SymbolConfiguration(scale: .large)
     lazy var heartButton: UIButton = {
        let btn = UIButton()
-      btn.setImage(UIImage(systemName: "heart", withConfiguration: smallConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
-      btn.setImage(UIImage(systemName: "heart.fill", withConfiguration: smallConfiguration)?.withTintColor(.red, renderingMode: .alwaysOriginal), for: .selected)
+        btn.setImage(UIImage(systemName: "heart", withConfiguration: smallConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
+        btn.setImage(UIImage(systemName: "heart.fill", withConfiguration: smallConfiguration)?.withTintColor(.red, renderingMode: .alwaysOriginal), for: .selected)
         btn.addTarget(self, action: #selector(didTapHeartButton(_:)), for: .touchUpInside)
-//        btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         btn.imageView?.contentMode = .scaleAspectFill
         return btn
     }()
