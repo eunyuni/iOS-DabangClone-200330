@@ -88,6 +88,7 @@ class MapViewController: UIViewController{
     $0.backgroundColor = .white
     $0.showsHorizontalScrollIndicator = false
   }
+  
   private var stackView: UIStackView!
   private let selectButtons = [
     MapFilterButton(title: "원룸", tag: 0).then{
@@ -377,14 +378,18 @@ class MapViewController: UIViewController{
     //      $0.height.equalTo(500)
     //    }
   }
-  
-  
 }
 
 extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
+  
   func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
     print("didLongPressAt")
   }
+  
+  func mapView(_ mapView: GMSMapView, didEndDragging marker: GMSMarker) {
+    
+  }
+  
   func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
     //    print("didTapAt")
     if self.bottomView.transform != .identity {
@@ -396,8 +401,17 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
       print("bottomview's transform is identity")
     }
   }
-  func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-    //    print("didChange")
+  
+  func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+    print(position.target)
+    APIManager.shared.getItemsInCurrentMap(km: 1, current: position.target) { result  in
+      switch result {
+      case .success(let data):
+        print("success :", data)
+      case .failure(let error):
+        print("failure :", error)
+      }
+    }
   }
   func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
     let findLocation = mapView.camera.target
@@ -579,4 +593,5 @@ extension MapViewController: UITableViewDelegate {
 }
 
 extension MapViewController: GMUClusterRendererDelegate {
+
 }
