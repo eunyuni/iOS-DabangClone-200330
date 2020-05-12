@@ -124,6 +124,7 @@
 		15AB3126244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */; };
 		15D1284B2431D48B00E75AC8 /* BaseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D1284A2431D48B00E75AC8 /* BaseInfoViewController.swift */; };
 		15D1284D2431D4A100E75AC8 /* BaseInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D1284C2431D4A100E75AC8 /* BaseInfoView.swift */; };
+		15D7A92D246AAF0A00D7D7C1 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D7A92C246AAF0A00D7D7C1 /* MapModel.swift */; };
 		15D9B32A242CA42F00A38A76 /* SellMyRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D9B329242CA42F00A38A76 /* SellMyRoomViewController.swift */; };
 		15D9B32C242CA44500A38A76 /* SellMyRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D9B32B242CA44500A38A76 /* SellMyRoomTableViewCell.swift */; };
 		15D9B331242E220700A38A76 /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D9B32F242E220700A38A76 /* WithdrawalViewController.swift */; };
@@ -446,6 +447,7 @@
 		15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCenteredFlowLayout.swift; sourceTree = "<group>"; };
 		15D1284A2431D48B00E75AC8 /* BaseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInfoViewController.swift; sourceTree = "<group>"; };
 		15D1284C2431D4A100E75AC8 /* BaseInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInfoView.swift; sourceTree = "<group>"; };
+		15D7A92C246AAF0A00D7D7C1 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		15D9B329242CA42F00A38A76 /* SellMyRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellMyRoomViewController.swift; sourceTree = "<group>"; };
 		15D9B32B242CA44500A38A76 /* SellMyRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellMyRoomTableViewCell.swift; sourceTree = "<group>"; };
 		15D9B32F242E220700A38A76 /* WithdrawalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
@@ -993,6 +995,7 @@
 			children = (
 				E78AD968243727130098BE6E /* Padding.swift */,
 				159121AE24544C3300DA05D8 /* GoogleGeocodingModel.swift */,
+				15D7A92C246AAF0A00D7D7C1 /* MapModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1568,6 +1571,7 @@
 				6F4DECEC242A1585008D77E5 /* SettingTableViewCell.swift in Sources */,
 				1516005524287ED40003DDCF /* SaleViewController.swift in Sources */,
 				156B616224345DAD00054FE9 /* AdditionalViewController.swift in Sources */,
+				15D7A92D246AAF0A00D7D7C1 /* MapModel.swift in Sources */,
 				15315A63244857250033EA47 /* EmptyStateView.swift in Sources */,
 				E77D8C732443C15600A263AE /* SaleDetailSaleInfoCell.swift in Sources */,
 				6F389E602448531100A440A4 /* ThemeModel.swift in Sources */,

@@ -274,7 +274,7 @@ class LoginViewController: UIViewController {
     }
     
     func localLogin() {
-        APIManager.shared.postUserLogin(username: emailTextField.text!, password: pwTextField.text!) { (result) in
+        APIManager.shared.postUserLogin(email: emailTextField.text!, password: pwTextField.text!) { (result) in
             switch result {
             case .success(let isLoggedIn):
                 if isLoggedIn {
@@ -321,7 +321,6 @@ class LoginViewController: UIViewController {
         controller.delegate = self
         controller.presentationContextProvider = self
         controller.performRequests()
-        
     }
     
     //MARK: - KAKAO Login

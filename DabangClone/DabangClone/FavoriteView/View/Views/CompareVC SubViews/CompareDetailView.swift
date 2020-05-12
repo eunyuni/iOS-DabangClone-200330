@@ -34,7 +34,8 @@ class CompareDetailView: UIView {
         let address = CompareCellInsideStack(title: "주소", detail: data.address.loadAddress)
         let roomStyle = CompareCellInsideStack(title: "종류", detail: data.type.rawValue)
         let jeonSe = CompareCellInsideStack(title: "전세", detail: data.salesForm.type == .전세 ? data.salesForm.depositChar : "")
-        let monthlyRent = CompareCellInsideStack(title: "월세", detail: data.salesForm.type == .월세 ? data.salesForm.depositChar + "/" + data.salesForm.monthlyChar : "")
+        let monthlyRent = CompareCellInsideStack(title: "월세",
+                                                 detail: data.salesForm.type == .월세 ? data.salesForm.depositChar + "/" + data.salesForm.monthlyChar : "")
         let exclusiveArea = CompareCellInsideStack(title: "전용", detail: "62.81m(29P)")
         let suppliedArea = CompareCellInsideStack(title: "공급", detail: "62.81m(29P)")
         let floor = CompareCellInsideStack(title: "해당", detail: data.floor)

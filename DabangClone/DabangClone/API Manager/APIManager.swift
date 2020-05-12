@@ -29,8 +29,8 @@ final class APIManager {
     
     private let keyChain = KeychainSwift(keyPrefix: "DabangCloneUser_")
     var userPk = 0
-    private let networkAccessManager = NetworkReachabilityManager(host: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com")
-    private let baseURL = "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com"
+    private let networkAccessManager = NetworkReachabilityManager(host: "https://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com")
+    private let baseURL = "dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com"
     
     var loginWay: LoginWays?
     
@@ -77,7 +77,6 @@ final class APIManager {
     }
     
     // MARK: - [ API CRUD ]
-
     // MARK: - GET
     
     //GET: 유저 정보
@@ -91,6 +90,7 @@ final class APIManager {
                 case .failure(let error):
                     completion(.failure(error))
                 }
+                
         }
     }
     
@@ -109,8 +109,7 @@ final class APIManager {
     
     //GET: pk를 기준으로 특정 방 1개
     func getCertainRoomData(pk: Int, completion: @escaping (Result<DabangElement, Error>) -> Void) {
-        let parameter = ["pk" : pk]
-        AF.request( baseURL + "/posts/list/", parameters: parameter)
+        AF.request( baseURL + "/posts/\(pk)/" )
             .responseDecodable(of: DabangElement.self) { (response) in
                 switch response.result {
                 case .success(let room):
@@ -153,6 +152,29 @@ final class APIManager {
                 }
         }
     }
+  
+  func getItemsInCurrentMap(km: Double, current position: CLLocationCoordinate2D, completion: @escaping (Result<[BangInCurrentMapModel], Error>) -> Void) {
+    
+    var parameter: Parameters = [
+      "reqLng": position.longitude,
+      "reqLat": position.latitude,
+      "distance": km
+    ]
+    
+    AF.request(baseURL + "/posts/distance/", method: .get, parameters: parameter)
+      .responseDecodable(of: [BangInCurrentMapModel].self) { (response) in
+        switch response.result {
+        case .success(let data):
+          completion(.success(data))
+        case .failure(let error):
+          completion(.failure(error))
+        }
+        
+    }
+    
+  }
+    
+    
   
   //GET: 전체 분양 정보 리스트
   func getSaleInfoList(completion: @escaping (Result<SaleAll, Error>) -> Void) {
@@ -197,16 +219,29 @@ final class APIManager {
   
     
     //POST: 유저 생성
-    func postCreteUser(username: String, password: String, completion: @escaping (String,Bool) -> Void) {
-        let userData = ["username" : username, "password" : password]
+    func postCreteUser(username: String, password: String, email: String, profileImage: UIImage? = nil, completion: @escaping (String,Bool) -> Void) {
+//        let imageData = profileImage?.jpegData(compressionQuality: 0.7) ?? Data()
+        let userData: [String: Any] = ["username" : username, "password" : password, "email": email]
+//        let nameData = Data(username.utf8)
+//        let passwordData = Data(password.utf8)
+//        let emailData = Data(email.utf8)
+//
+//        AF.upload(multipartFormData: { (multipartFormData) in
+//            multipartFormData.append(nameData, withName: "username")
+//            multipartFormData.append(imageData, withName: "profileImage")
+//            multipartFormData.append(emailData, withName: "email")
+//            multipartFormData.append(passwordData, withName: "password")
+//        }, to: baseURL + "/members/")
+        
         AF.request( baseURL + "/members/", method: .post, parameters: userData)
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let pk = json["pk"]
+                    let email = json["email"]
 //                    let succecc = "아이디가 성공적으로 생성되었습니다."
-                    completion("pkNumber: \(pk)", true)
+                    completion("pkNumber: \(pk)\n email: \(email)", true)
                 case .failure(_):
                     let fail = "해당 사용자 이름은 이미 존재합니다."
                     completion(fail, false)
@@ -215,8 +250,8 @@ final class APIManager {
     }
     
     //POST: 자체 로그인
-    func postUserLogin(username: String, password: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let loginInfo = ["username" : username, "password" : password]
+    func postUserLogin(email: String, password: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let loginInfo = ["email" : email, "password" : password]
         AF.request( baseURL + "/members/jwt/", method: .post, parameters: loginInfo)
             .responseJSON { (response) in
                 switch response.result {
@@ -322,7 +357,17 @@ let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1
     }
     
     
-    //POST: 찜한 방
+    //POST: 최근 본 단지
+    func postRecentlyCheckedComplex(complexPk: Int, completion: @escaping (String) -> Void) {
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
+        let parameter = ["post" : complexPk]
+        AF.request( baseURL + "/members/recentlyComplex/", method: .post, parameters: parameter, headers: header )
+            .responseData { (response) in
+                guard let json = try? JSONSerialization.jsonObject(with: response.data ?? Data()) as? [String : Any] else { return }
+                guard let message = json["message"] as? String else { return }
+                completion(message)
+            }
+    }
     
   //POST: 찜한 방
   func postPoto(image: UIImage, imageName : String, completion: @escaping (String) -> Void) {
@@ -338,7 +383,52 @@ let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1
     }
   }
     
-
+    //POST: 방 찜하기
+    func postMarkRoom(roomPK: Int, completion: @escaping (Result<Void, Error>) -> Void) {
+        let endPoint = baseURL + "/posts/postLike/?post=\(roomPK)"
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
+        AF.request(endPoint, method: .post, headers: header)
+            .response { (response) in
+                switch response.result {
+                case .success(_):
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+        }
+    }
+    
+    
+    //POST: 연락한 부동산 추가
+    func postContactedBroker(brokerPK: Int, completion: @escaping (Result<String, Error>) -> Void) {
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
+        let parameter = ["broker": "\(brokerPK)"]
+        AF.request(baseURL + "/members/contactTo/", method: .post, parameters: parameter, headers: header)
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let message = json["message"].stringValue
+                    completion(.success(message))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+        }
+    }
+    
+    //POST: 이미지 업로드
+    func postPhoto(image: UIImage, imageName : String, completion: @escaping (String) -> Void) {
+        let imageData = image.jpegData(compressionQuality: 0.50)
+        print(image, imageData!)
+        let test = baseURL + "/posts/imageupload/"
+        AF.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(imageData!, withName: "image", fileName: imageName + ".png", mimeType: "image/png")
+        }, to: test).responseJSON { response in
+            guard let json = try? JSONSerialization.jsonObject(with: response.data ?? Data()) as? [String : Any] else { return }
+            guard let message = json["image"] as? String else { return }
+            completion(message)
+        }
+    }
     
     
     // MARK: - PATCH
@@ -365,6 +455,20 @@ let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1
     return keyChain.clear()
   }
     
+    //DELETE: 찜한 방 삭제
+    func deleteMarkedRoom(roomPK: Int, completion: @escaping (Result<Void, Error>) -> Void) {
+        let endPoint = baseURL + "/posts/postLike/?post=\(roomPK)"
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
+        AF.request(endPoint, method: .delete, headers: header)
+            .response { (response) in
+                switch response.result {
+                case .success(_):
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+        }
+    }
     
     
 }

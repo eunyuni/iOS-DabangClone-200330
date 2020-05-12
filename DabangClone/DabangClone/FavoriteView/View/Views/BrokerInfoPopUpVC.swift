@@ -11,7 +11,7 @@ import SnapKit
 
 class BrokerInfoPopUpVC: UIViewController {
 
-    var brokerData: BudongsanInfo! {
+    var brokerData: Broker! {
         didSet{
             
         }
@@ -154,7 +154,7 @@ class BrokerInfoPopUpVC: UIViewController {
         }
     }
     
-    func set(brokerData: BudongsanInfo) {
+    func set(brokerData: Broker) {
         self.brokerData = brokerData
     }
     
