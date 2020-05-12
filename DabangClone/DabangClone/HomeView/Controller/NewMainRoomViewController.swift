@@ -13,12 +13,21 @@ class NewMainRoomViewController: UIViewController {
   
   //MARK: - Property
   let tableView = UITableView()
-  
+    let navigationView = UIView().then {
+        $0.backgroundColor = .clear
+    }
   var pk: Int?
   
   //MARK: - Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+//    self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//    self.navigationController?.navigationBar.shadowImage = UIImage()
+//    self.navigationController?.navigationBar.isTranslucent = true
+//    self.navigationController?.view.backgroundColor = UIColor.clear
+    navigationController?.navigationBar.isHidden = true
+    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    navigationController?.navigationBar.barStyle = .black
     view.backgroundColor = .blue
     setupUI()
   }
@@ -69,5 +78,14 @@ extension NewMainRoomViewController: UITableViewDataSource {
 }
 
 extension NewMainRoomViewController: UITableViewDelegate {
-  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if scrollView.contentOffset.y < 192.0 {
+      self.navigationView.backgroundColor? = UIColor.white.withAlphaComponent(scrollView.contentOffset.y / 192)
+    }
+    if scrollView.contentOffset.y < 132.0 {
+    navigationController?.navigationBar.barStyle = .black
+    }else {
+      navigationController?.navigationBar.barStyle = .default
+    }
+  }
 }

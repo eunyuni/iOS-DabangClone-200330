@@ -2,7 +2,7 @@
 //  FavoriteListViewController.swift
 //  DabangClone
 //
-//  Created by 정의석 on 2020/03/23.
+//  Created by SEONGJUN on 2020/03/23.
 //  Copyright © 2020 pandaman. All rights reserved.
 //
 
@@ -84,6 +84,7 @@ class FavoriteListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
+        
         setNavigationBar()
         setupUI()
         configureUpsideUI()
@@ -92,6 +93,11 @@ class FavoriteListViewController: UIViewController {
         configureSwipeGesture()
         configureRefreshControl()
         configureShowCompareViewButton()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -334,10 +340,18 @@ extension FavoriteListViewController: UITableViewDelegate {
                 } else if roomsToCompare.count == 3 && roomCell.isCheckButtonSelected {
                     roomCell.isCheckButtonSelected.toggle()
                 } else if roomsToCompare.count == 3 && !roomCell.isCheckButtonSelected {
+                    print("비교는 3개까지만 가능합니다.")
                     return
                 }
             } else {
                 // Present Room Detail VC
+                let selectedCell = tableView.cellForRow(at: indexPath) as! RoomInfoCell
+                
+                let vc = NewMainRoomViewController()
+                vc.pk = selectedCell.data.pk
+                vc.setTableViewReload()
+                vc.modalPresentationStyle = .fullScreen
+                navigationController?.pushViewController(vc, animated: true)
             }
         }
 //        if let danziCell = tableView.cellForRow(at: indexPath) as? DanziInfoCell {
