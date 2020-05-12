@@ -51,6 +51,7 @@
 		156B616E24346CEA00054FE9 /* ThreeSegmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156B616D24346CEA00054FE9 /* ThreeSegmentTableViewCell.swift */; };
 		156B617024346CF900054FE9 /* CheckBoxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156B616F24346CF900054FE9 /* CheckBoxCell.swift */; };
 		156B61722434748000054FE9 /* IsThereCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156B61712434748000054FE9 /* IsThereCell.swift */; };
+		1575BEDB245898BA00CF611D /* RealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1575BEDA245898BA00CF611D /* RealModel.swift */; };
 		157C4E712437142E008559FD /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C4E702437142E008559FD /* AddressViewController.swift */; };
 		157C4E7324371F60008559FD /* RoomSellScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C4E7224371F60008559FD /* RoomSellScrollViewController.swift */; };
 		157C4E7524386A63008559FD /* CustomSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C4E7424386A63008559FD /* CustomSegmentView.swift */; };
@@ -200,6 +201,7 @@
 		6F4DECEC242A1585008D77E5 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DECEB242A1585008D77E5 /* SettingTableViewCell.swift */; };
 		6F4DECEE242A19A6008D77E5 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DECED242A19A6008D77E5 /* SettingModel.swift */; };
 		6F57FA002457DF8D00438CBE /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F57F9FF2457DF8C00438CBE /* ImageCollectionViewCell.swift */; };
+		6F57FA042458945300438CBE /* ContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F57FA032458945300438CBE /* ContentsViewController.swift */; };
 		6F7C080F2450DE470081EF77 /* MapScrollButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C080E2450DE470081EF77 /* MapScrollButton.swift */; };
 		6F7C08112450DFF80081EF77 /* MapFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C08102450DFF80081EF77 /* MapFilterButton.swift */; };
 		6F7C08132451BF1C0081EF77 /* CustomMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C08122451BF1C0081EF77 /* CustomMarker.swift */; };
@@ -264,6 +266,12 @@
 		E7BB1C162433670600C66B48 /* ParkingFeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C152433670600C66B48 /* ParkingFeeViewController.swift */; };
 		E7BB1C182434801300C66B48 /* InquiryBodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C172434801300C66B48 /* InquiryBodyTableViewCell.swift */; };
 		E7DA1634245034B60053E455 /* HomeAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA1633245034B60053E455 /* HomeAlertViewController.swift */; };
+		E7DA163A2456F6470053E455 /* FilterTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA16392456F6470053E455 /* FilterTopView.swift */; };
+		E7DA164E245891370053E455 /* ComplexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA164D245891370053E455 /* ComplexViewController.swift */; };
+		E7DA1655245891F00053E455 /* ComplexCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA1651245891F00053E455 /* ComplexCollectionViewCell.swift */; };
+		E7DA1656245891F00053E455 /* ComplexRecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA1652245891F00053E455 /* ComplexRecommendTableViewCell.swift */; };
+		E7DA1657245891F00053E455 /* ComplexRecommendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA1653245891F00053E455 /* ComplexRecommendCollectionViewCell.swift */; };
+		E7DA1658245891F00053E455 /* ComplexTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DA1654245891F00053E455 /* ComplexTableViewCell.swift */; };
 		E7E6043F243B14DB0050D540 /* FindEasyRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E6043E243B14DB0050D540 /* FindEasyRoomViewController.swift */; };
 		E7E60441243B154E0050D540 /* FindHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E60440243B154E0050D540 /* FindHeaderView.swift */; };
 		E7E60443243B1AC30050D540 /* FindBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E60442243B1AC30050D540 /* FindBottomView.swift */; };
@@ -322,6 +330,7 @@
 		156B616F24346CF900054FE9 /* CheckBoxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxCell.swift; sourceTree = "<group>"; };
 		156B61712434748000054FE9 /* IsThereCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsThereCell.swift; sourceTree = "<group>"; };
 		1575BED92456C18700CF611D /* DabangClone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DabangClone.entitlements; sourceTree = "<group>"; };
+		1575BEDA245898BA00CF611D /* RealModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealModel.swift; sourceTree = "<group>"; };
 		157C4E702437142E008559FD /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		157C4E7224371F60008559FD /* RoomSellScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomSellScrollViewController.swift; sourceTree = "<group>"; };
 		157C4E7424386A63008559FD /* CustomSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentView.swift; sourceTree = "<group>"; };
@@ -514,6 +523,7 @@
 		6F4DECEB242A1585008D77E5 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		6F4DECED242A19A6008D77E5 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		6F57F9FF2457DF8C00438CBE /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		6F57FA032458945300438CBE /* ContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsViewController.swift; sourceTree = "<group>"; };
 		6F7C080E2450DE470081EF77 /* MapScrollButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapScrollButton.swift; path = DabangClone/MapView/Controller/MapScrollButton.swift; sourceTree = SOURCE_ROOT; };
 		6F7C08102450DFF80081EF77 /* MapFilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterButton.swift; sourceTree = "<group>"; };
 		6F7C08122451BF1C0081EF77 /* CustomMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarker.swift; sourceTree = "<group>"; };
@@ -580,6 +590,12 @@
 		E7BB1C152433670600C66B48 /* ParkingFeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingFeeViewController.swift; sourceTree = "<group>"; };
 		E7BB1C172434801300C66B48 /* InquiryBodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryBodyTableViewCell.swift; sourceTree = "<group>"; };
 		E7DA1633245034B60053E455 /* HomeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAlertViewController.swift; sourceTree = "<group>"; };
+		E7DA16392456F6470053E455 /* FilterTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTopView.swift; sourceTree = "<group>"; };
+		E7DA164D245891370053E455 /* ComplexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexViewController.swift; sourceTree = "<group>"; };
+		E7DA1651245891F00053E455 /* ComplexCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexCollectionViewCell.swift; sourceTree = "<group>"; };
+		E7DA1652245891F00053E455 /* ComplexRecommendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexRecommendTableViewCell.swift; sourceTree = "<group>"; };
+		E7DA1653245891F00053E455 /* ComplexRecommendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexRecommendCollectionViewCell.swift; sourceTree = "<group>"; };
+		E7DA1654245891F00053E455 /* ComplexTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexTableViewCell.swift; sourceTree = "<group>"; };
 		E7E6043E243B14DB0050D540 /* FindEasyRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEasyRoomViewController.swift; sourceTree = "<group>"; };
 		E7E60440243B154E0050D540 /* FindHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindHeaderView.swift; path = DabangClone/HomeView/Controller/FindHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		E7E60442243B1AC30050D540 /* FindBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindBottomView.swift; path = DabangClone/HomeView/Controller/FindBottomView.swift; sourceTree = SOURCE_ROOT; };
@@ -925,6 +941,7 @@
 				15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */,
 				6F389E5B2448505500A440A4 /* HomeModel.swift */,
 				4FEF15D624531E0700100EAB /* ModelDabang424.swift */,
+				1575BEDA245898BA00CF611D /* RealModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -954,6 +971,7 @@
 				E7E6044A243B42BF0050D540 /* BrokerageOfficeViewController.swift */,
 				E77D8C64243FB65500A263AE /* BrokerageTestViewController.swift */,
 				6F389E4B24484E3600A440A4 /* SearchRoomViewController.swift */,
+				6F57FA032458945300438CBE /* ContentsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -981,6 +999,7 @@
 			isa = PBXGroup;
 			children = (
 				E78AD96E2438D0EC0098BE6E /* FilterTwoButtonView.swift */,
+				E7DA16392456F6470053E455 /* FilterTopView.swift */,
 				E78AD9742438E3F20098BE6E /* ButtonView.swift */,
 				15D9B325242BA21200A38A76 /* Cells */,
 				6F7C080E2450DE470081EF77 /* MapScrollButton.swift */,
@@ -995,6 +1014,7 @@
 			children = (
 				1516005224287E6F0003DDCF /* MapViewController.swift */,
 				E78AD962243711C80098BE6E /* FilterViewController.swift */,
+				E7DA164D245891370053E455 /* ComplexViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1190,6 +1210,10 @@
 				6F49EEA024506B5700D952F8 /* MultiSliderTableViewCell.swift */,
 				159121AC2452295D00DA05D8 /* MapTableViewCell.swift */,
 				6F7C0814245275090081EF77 /* OfficeTableViewCell.swift */,
+				E7DA1654245891F00053E455 /* ComplexTableViewCell.swift */,
+				E7DA1651245891F00053E455 /* ComplexCollectionViewCell.swift */,
+				E7DA1653245891F00053E455 /* ComplexRecommendCollectionViewCell.swift */,
+				E7DA1652245891F00053E455 /* ComplexRecommendTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1454,6 +1478,7 @@
 				E7DA1634245034B60053E455 /* HomeAlertViewController.swift in Sources */,
 				E78AD9612437119C0098BE6E /* FilterRoomTypeCell.swift in Sources */,
 				E77D8C69243FBD7600A263AE /* BrokerageReviewBodyCell.swift in Sources */,
+				E7DA1658245891F00053E455 /* ComplexTableViewCell.swift in Sources */,
 				6F389E862448587500A440A4 /* SaleScheduleTableViewCell.swift in Sources */,
 				1516003324247BA20003DDCF /* LoginViewController.swift in Sources */,
 				6F41B40B242A383000CACDCE /* MarketingImfomationViewController.swift in Sources */,
@@ -1509,6 +1534,7 @@
 				159121AA2451CCCA00DA05D8 /* GMUHeatmapTileLayer.m in Sources */,
 				6F389E3824484A7600A440A4 /* AddressSelectViewController.swift in Sources */,
 				6F389E4C24484E3600A440A4 /* SearchRoomViewController.swift in Sources */,
+				E7DA1655245891F00053E455 /* ComplexCollectionViewCell.swift in Sources */,
 				15D9B3562431C2A900A38A76 /* MCTopTableViewCell.swift in Sources */,
 				E78AD9752438E3F20098BE6E /* ButtonView.swift in Sources */,
 				6F7C08132451BF1C0081EF77 /* CustomMarker.swift in Sources */,
@@ -1534,6 +1560,7 @@
 				E77D8C792445C93900A263AE /* SaleDetailNearMapCell.swift in Sources */,
 				6F389E6E2448551700A440A4 /* SaleThemeCollectionViewCell.swift in Sources */,
 				E77D8C5F243DF52B00A263AE /* BrokerageHomeInfoCell.swift in Sources */,
+				E7DA1657245891F00053E455 /* ComplexRecommendCollectionViewCell.swift in Sources */,
 				6F4DECEC242A1585008D77E5 /* SettingTableViewCell.swift in Sources */,
 				1516005524287ED40003DDCF /* SaleViewController.swift in Sources */,
 				156B616224345DAD00054FE9 /* AdditionalViewController.swift in Sources */,
@@ -1553,6 +1580,7 @@
 				156B616624345E0100054FE9 /* BoxView.swift in Sources */,
 				6F389E34244849B000A440A4 /* AddressApartViewController.swift in Sources */,
 				159121A32451CCCA00DA05D8 /* GMUStyle.m in Sources */,
+				E7DA163A2456F6470053E455 /* FilterTopView.swift in Sources */,
 				155B8556244C7EEC009AC6AF /* OfficeTelTableViewCell.swift in Sources */,
 				6F389E7C2448574200A440A4 /* SaleAreaViewController.swift in Sources */,
 				6F49EEA124506B5700D952F8 /* MultiSliderTableViewCell.swift in Sources */,
@@ -1565,6 +1593,7 @@
 				6F389E702448555200A440A4 /* ImageViewCollectionViewCell.swift in Sources */,
 				1591219A2451CCCA00DA05D8 /* GQTPointQuadTreeChild.m in Sources */,
 				15315A58244857250033EA47 /* FavoriteListViewController.swift in Sources */,
+				E7DA1656245891F00053E455 /* ComplexRecommendTableViewCell.swift in Sources */,
 				156B61722434748000054FE9 /* IsThereCell.swift in Sources */,
 				6F389E7E2448575D00A440A4 /* SaleNewsViewController.swift in Sources */,
 				157C4E712437142E008559FD /* AddressViewController.swift in Sources */,
@@ -1584,6 +1613,7 @@
 				6F389E4024484BF900A440A4 /* OptionView.swift in Sources */,
 				15D9B3502431C25600A38A76 /* AddressSearchViewController.swift in Sources */,
 				15D9B35C2431C2BB00A38A76 /* ExplainViewController.swift in Sources */,
+				6F57FA042458945300438CBE /* ContentsViewController.swift in Sources */,
 				15D9B337242E226C00A38A76 /* WBottomTableViewCell.swift in Sources */,
 				6F389E84244857CC00A440A4 /* SaleNewsDetailTableViewCell.swift in Sources */,
 				15315A5E244857250033EA47 /* CompareCellInsideStack.swift in Sources */,
@@ -1611,6 +1641,7 @@
 				6F389E4E24484F1100A440A4 /* EasySearchTableViewCell.swift in Sources */,
 				6F7C0815245275090081EF77 /* OfficeTableViewCell.swift in Sources */,
 				6F41B40D242A389800CACDCE /* MarketingImfomationTableViewCell.swift in Sources */,
+				1575BEDB245898BA00CF611D /* RealModel.swift in Sources */,
 				158473E92436020D00C49FC1 /* OfficetelAdditionalInfoViewController.swift in Sources */,
 				158473E72436006800C49FC1 /* TwoAndThreeRoomAdditionalInfoViewController.swift in Sources */,
 				6F389E82244857A000A440A4 /* SaleInformationTableViewCell.swift in Sources */,
@@ -1650,6 +1681,7 @@
 				15315A57244857250033EA47 /* DanziInfoCell.swift in Sources */,
 				157C4E7524386A63008559FD /* CustomSegmentView.swift in Sources */,
 				E7E6044D243DAAAC0050D540 /* BrokerageOfficeTopCell.swift in Sources */,
+				E7DA164E245891370053E455 /* ComplexViewController.swift in Sources */,
 				6F389E66244853F700A440A4 /* SaleNewsTableViewCell.swift in Sources */,
 				E77D8C812447416100A263AE /* SaleDetailBottomView.swift in Sources */,
 				E7E60445243B21570050D540 /* FindTitleCell.swift in Sources */,

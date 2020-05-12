@@ -140,9 +140,22 @@ final class APIManager {
         
     }
     
-    
+    //GET: 전체 단지 정보 리스트
+    func getComplexInfoList(completion: @escaping (Result<[Complex], Error>) -> Void) {
+        AF.request( baseURL + "/posts/complex/", method: .get)
+            .responseDecodable(of: [Complex].self) { (response) in
+                switch response.result {
+                case .success(let complex):
+                    completion(.success(complex))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+        }
+    }
     
     // MARK: - POST
+  
+  
     
     //POST: 유저 생성
     func postCreteUser(username: String, password: String, email: String, profileImage: UIImage? = nil, completion: @escaping (String,Bool) -> Void) {
@@ -186,6 +199,7 @@ final class APIManager {
                     let accessToken = json["token"].stringValue
                     self.userPk = json["user"]["pk"].intValue
                     let result = self.setAccessTokenIntoKeyChain(token: accessToken, key: Key.keyChain)
+                
                     completion(.success(result))
                 case .failure(let error):
                     completion(.failure(error))
@@ -206,6 +220,68 @@ final class APIManager {
                 }
         }
     }
+  
+//  func postMyRoomForSale(room: DabangTinyElement, completion: @escaping ([String:Any]) -> Void) {
+//
+//    let encoder = JSONEncoder()
+//    let jsonData = try! encoder.encode(room)
+//
+//    let url = baseURL
+//
+//    AF.request(url, method: .post, parameters: jsonData, encoder: JSONParameterEncoder.default, headers: .none, interceptor: .none, requestModifier: <#T##Session.RequestModifier?##Session.RequestModifier?##(inout URLRequest) throws -> Void#>)
+//
+//      let parameters = ["type":"투룸", "description":"원룸"]
+//      AF.upload(multipartFormData: { (multipartFormData) in
+//        for (key, value) in parameters {
+//          multipartFormData.append(value.data(using: .utf8)!, withName: key)
+//        }
+//      }, to: baseURL + "/posts/create").responseJSON { response in
+//        guard let json = try? JSONSerialization.jsonObject(with: response.data ?? Data()) as? [String : Any] else { return }
+//  //      guard let message = json["image"] as? String else { return }
+//        completion(json)
+//      }
+//    }
+  
+  func put(completionHandler: @escaping ([String:Any]) -> Void) {
+    let userData = DabangTinyElement(pk: 50, type: .원룸, dabangTinyDescription: "테스트", address: Addresss(pk: 20, loadAddress: "", detailAddress: ""), lng: 0.00, lat: 0.00, salesForm: .none, pet: .none, elevator: false, veranda: false, depositLoan: false, postimage: [], complex: .none)
+    let parameter = ["elevator" : "true", "veranda" : "false" ]
+    
+    let testImgData = UIImage(named: "SaleMainImage")!.jpegData(compressionQuality: 0.1)!
+let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1)!
+    
+    AF.upload(multipartFormData: { (MultipartFormData) in
+      MultipartFormData.append(testImgData, withName: "image", fileName: "\(Array(1111...2222).randomElement()).jpeg", mimeType: "image/jpeg")
+      MultipartFormData.append(testImgData2, withName: "image", fileName: "\(Array(1111...2222).randomElement()).jpeg", mimeType: "image/jpeg")
+
+//      for (key, value) in parameter {
+//      MultipartFormData.append((UIImage(named: "SaleMainImage")?.jpegData(compressionQuality: 0.1))!, withName: "image")
+//      MultipartFormData.append((UIImage(named: "SaleMainImage")?.jpegData(compressionQuality: 0.1))!, withName: "image")
+//      MultipartFormData.append((UIImage(named: "SaleMainImage")?.jpegData(compressionQuality: 0.1))!, withName: "image")
+//      }
+    }, to: baseURL + "/posts/create/", method: .post).responseJSON { (response) in
+      switch response.result {
+      case .success(let data):
+        print("방생성 성공")
+        completionHandler(data as! [String : Any])
+      case .failure(let error):
+        print("방생성 실패")
+        
+      }
+      
+    }
+//    AF.request(baseURL + "/posts/create/", method: .put, parameters: userData, encoder: JSONParameterEncoder.default, headers: .none, interceptor: .none).responseJSON { (response) in
+//      switch response.result {
+//      case .success(let userData):
+//        print("방생성 성공")
+//      case .failure(let error):
+//        print("방생성 실패")
+//        print(response.error)
+//        completionHandler(.failure(error))
+//      }
+//    }
+  }
+
+  
     
     //POST: 최근 본 방
     func postRecentlyCheckedRoom(roomPk: Int, completion: @escaping (String) -> Void) {
@@ -232,6 +308,19 @@ final class APIManager {
             }
     }
     
+  //POST: 찜한 방
+  func postPoto(image: UIImage, imageName : String, completion: @escaping (String) -> Void) {
+    let imageData = image.jpegData(compressionQuality: 0.50)
+    print(image, imageData!)
+    let test = baseURL + "/posts/imageupload/"
+    AF.upload(multipartFormData: { (multipartFormData) in
+      multipartFormData.append(imageData!, withName: "image", fileName: imageName + ".png", mimeType: "image/png")
+    }, to: test).responseJSON { response in
+      guard let json = try? JSONSerialization.jsonObject(with: response.data ?? Data()) as? [String : Any] else { return }
+      guard let message = json["image"] as? String else { return }
+      completion(message)
+    }
+  }
     
     //POST: 방 찜하기
     func postMarkRoom(roomPK: Int, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -301,6 +390,9 @@ final class APIManager {
     
     
     // MARK: - DELETE
+  func logout() -> Bool {
+    return keyChain.clear()
+  }
     
     //DELETE: 찜한 방 삭제
     func deleteMarkedRoom(roomPK: Int, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -316,7 +408,6 @@ final class APIManager {
                 }
         }
     }
-    
     
     
 }

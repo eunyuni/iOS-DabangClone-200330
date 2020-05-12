@@ -115,7 +115,7 @@ class SearchRoomViewController: UIViewController {
       $0.edges.equalToSuperview()
     }
     topView.snp.makeConstraints {
-      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+      $0.top.equalTo(view.snp.top)
       $0.leading.trailing.equalToSuperview()
       $0.height.equalToSuperview().multipliedBy(0.13)
     }

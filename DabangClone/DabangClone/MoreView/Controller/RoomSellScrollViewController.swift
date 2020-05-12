@@ -10,7 +10,7 @@ import UIKit
 
 class RoomSellScrollViewController: UIViewController {
   //MARK: - Property
-  
+  var pageNum = 0
   let topSegmentView = UISegmentedControl(items: ["주소", "기본정보", "추가정보", "설명"]).then {
     $0.setTitleTextAttributes([
         NSAttributedString.Key.foregroundColor: UIColor(named: "SegmentSelected")!,
@@ -55,8 +55,24 @@ class RoomSellScrollViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
+    view.isHidden = false
     setupUI()
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    view.isHidden = false
+    moveToSegmentedControl(pageNum)
+    topSegmentView.selectedSegmentIndex = pageNum
+  }
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    view.isHidden = true
+  }
+  
   
   //MARK: - setupUI & setupConstraints
   
@@ -139,6 +155,22 @@ class RoomSellScrollViewController: UIViewController {
   @objc private func didTapSegmentedControl() {
     print("Did Tap SegmentedControl")
     switch topSegmentView.selectedSegmentIndex {
+    case 0:
+      scrollView.contentOffset.x = 0
+    case 1:
+      scrollView.contentOffset.x = scrollView.frame.size.width
+    case 2:
+      scrollView.contentOffset.x = scrollView.frame.size.width * 2
+    case 3:
+      scrollView.contentOffset.x = scrollView.frame.size.width * 3
+    default:
+      break
+    }
+  }
+  
+  func moveToSegmentedControl(_ pageNum: Int) {
+    print("Did Tap SegmentedControl")
+    switch pageNum {
     case 0:
       scrollView.contentOffset.x = 0
     case 1:

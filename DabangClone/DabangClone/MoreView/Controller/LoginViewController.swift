@@ -351,7 +351,7 @@ class LoginViewController: UIViewController {
                 print("email :", email, " nickname :", nickname)
                 let mainVC = HomeViewController()
                 
-                self.present(mainVC, animated: false, completion: nil)//
+              self.navigationController?.popViewController(animated: true)
             })
         }
     }
@@ -366,7 +366,8 @@ class LoginViewController: UIViewController {
         ]
         
         //        let url = URL(string: "https://moonpeter.com/members/kakaoToken/")
-        let url = URL(string: "https://moonpeter.com/members/kakaoToken/")
+        let url = URL(string: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com/members/kakaoToken/")
+//      let url = URL(string: "https://moonpeter.com/members/kakaoToken/")
         AF.request(url!, method: .post, parameters: param, encoding: URLEncoding.httpBody)
             .responseJSON { (response) in
                 switch response.result {
@@ -428,8 +429,8 @@ class LoginViewController: UIViewController {
 //            "username" : "admin",
 //            "password" : "admin123"
         ]
-        let url = URL(string: "https://moonpeter.com/members/facebookToken/")
-//        let url = URL(string: "https://moonpeter.com/api/token/")
+        let url = URL(string: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com/members/facebookToken/")
+//        let url = URL(string: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com/api/token/")
         AF.request(url!, method: .post, parameters: param, encoding: URLEncoding.httpBody)
         .responseJSON { (response) in
             switch response.result {
@@ -440,6 +441,8 @@ class LoginViewController: UIViewController {
                 let result = APIManager.shared.setAccessTokenIntoKeyChain(token: accessToken, key: Key.keyChain)
                 APIManager.shared.loginWay = .facebook
                 print(result ? "페이스북 로그인 성공 -> 토큰저장 성공" : "페이스북 로그인 성공 -> 토큰저장 실패")
+              self.navigationController?.popViewController(animated: true)
+
             case .failure(_):
                 print("페이스북 로그인 실패")
             }
@@ -524,7 +527,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
             appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
                 switch credentialState {
                 case .authorized:
-                    break
+                  self.navigationController?.popViewController(animated: true)
                 case .revoked:
                     // The Apple ID credential is revoked. Show SignIn UI Here.
                     break

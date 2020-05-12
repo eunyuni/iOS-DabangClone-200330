@@ -27,10 +27,21 @@ class HomeViewController: UIViewController {
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    checkAuth()
+    APIManager.shared.logout()
     self.view.backgroundColor = .white
     getTest()
     setupUI()
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.tabBarController?.tabBar.isHidden = false
+    APIManager.shared.put() { data in
+      print(data)
+    }
+  }
+  
   
   override func viewDidAppear(_ animated: Bool) {
    super.viewDidAppear(animated)
@@ -108,7 +119,7 @@ extension HomeViewController: UITableViewDataSource {
   
   private func getTest() {
     
-    let url = URL(string: "https://moonpeter.com/posts/list/")
+    let url = URL(string: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com/posts/list/")
     
     
     AF
@@ -116,13 +127,21 @@ extension HomeViewController: UITableViewDataSource {
       .responseData(queue: .global(), completionHandler: { (response) in
         print(response.data as Any)
         
-        if let jsonObjects = try? JSONDecoder().decode([DabangElement].self, from: response.data!) {
+        if let jsonObjects = try? JSONDecoder().decode([DabangElement].self, from: response.data ?? Data()) {
           BangData.shared.data = jsonObjects
             print(BangData.shared.data[10])
         } else {
           print("fail")
         }
       })
+  }
+  
+  private func checkAuth() {
+    print("----------- CheckAuth : ", APIManager.shared.getAccessTokenFromKeyChain())
+    if APIManager.shared.getAccessTokenFromKeyChain() == "" {
+      let vc = LoginViewController()
+      self.navigationController?.pushViewController(vc, animated: true)
+    }
   }
 }
 

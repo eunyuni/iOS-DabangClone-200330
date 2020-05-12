@@ -12,11 +12,11 @@ import SnapKit
 class AddRoomSingleton {
   static let shared = AddRoomSingleton()
   
-  var roomDataForMake: DabangElement = DabangElement(pk: 0, broker: .none, type: .원룸, dabangDescription: "", address: Address(loadAddress: "", detailAddress: .none), lng: 0, lat: 0, salesForm: SalesForm(type: .매매, depositChar: "", monthlyChar: "", depositInt: 0, monthlyInt: 0), floor: "", totalFloor: "", areaChar: "", supplyAreaInt: 0, supplyAreaChar: "", shortRent: false, managementSet: [ManagementSet.기타], parkingDetail: .가능무료, parkingtf: false, livingExpenses: "", livingExpensesDetail: LivingExpensesDetail(rawValue: ""), moveInChar: MoveInChar.날짜협의, moveInDate: "", optionSet: [OptionSet.tv], heatingType: .개별난방, pet: false, elevator: false, builtIn: false, veranda: false, depositLoan: false, totalCitizen: "", totalPark: .empty, complete: "", securitySafetySet: [SecuritySafetySet.경비원], postimage: [""])
+//  var roomDataForMake: DabangElement = DabangElement(pk: 0, broker: Broker(pk: 0, companyName: "", address: "", managerName: "", tel: "", image: "", companyNumber: "", brokerage: Brokerage.제11680201900149, dabangCreatedAt: "", successCount: ""), type: BuildingTypeEnum.쓰리룸, dabangDescription: "", address: Address(loadAddress: "", detailAddress: .none), lng: 0, lat: 0, salesForm: SalesForm(type: SalesFormType.월세, depositChar: "", monthlyChar: "", depositInt: 0, monthlyInt: 0), floor: "", totalFloor: "", areaChar: "", supplyAreaInt: 0, supplyAreaChar: "", shortRent: false, managementSet: [""], parkingDetail: ParkingDetail.가능무료, parkingtf: false, livingExpenses: "", livingExpensesDetail: "", moveInChar: MoveInChar.날짜협의, moveInDate: .none, optionSet: [.가스레인지], heatingType: .개별난방, pet: false, elevator: true, builtIn: false, veranda: false, depositLoan: false, totalCitizen: "", totalPark: .none, complete: .none, securitySafetySet: [SecuritySafetySet.cctv], postimage: [""], complex: nil)
 }
 class AddRoomViewController: UIViewController {
 
-  
+  let vc = RoomSellScrollViewController()
   // MARK: - Property
   private let potoView = UIImageView().then {
     $0.backgroundColor = .red
@@ -60,7 +60,15 @@ class AddRoomViewController: UIViewController {
   private let emptyView = UIView().then {
     $0.backgroundColor = #colorLiteral(red: 0.9254193306, green: 0.9255301356, blue: 0.9253814816, alpha: 1)
   }
-  private let uiImages: [UIImage] = []
+  private let imageView = UIImageView().then {
+    $0.image = UIImage(named: "potoAdd")
+  }
+  private let potoLabel = UILabel().then {
+    $0.text = "사진추가"
+    $0.textColor = #colorLiteral(red: 0.4352585971, green: 0.4353140593, blue: 0.4352396429, alpha: 1)
+    $0.font = .systemFont(ofSize: 13)
+  }
+  private var uiImages: [UIImage] = []
   private let addressTapGesture = UITapGestureRecognizer()
   private let basicInfoTapGesture = UITapGestureRecognizer()
   private let additionalTapGesture = UITapGestureRecognizer()
@@ -103,21 +111,31 @@ class AddRoomViewController: UIViewController {
 
   // MARK: - Action
   @objc private func didTapCompletionButton(_ sender: UIButton) {
+    
   }
   @objc private func didTapAddressGesture(_ sender: UITapGestureRecognizer) {
-    
+    vc.pageNum = 0
+    navigationController?.pushViewController(vc, animated: true)
+    print("didTap")
   }
   @objc private func didTapBasicInfoGesture(_ sender: UITapGestureRecognizer) {
-    
+    vc.pageNum = 1
+    navigationController?.pushViewController(vc, animated: true)
+    print("didTap")
   }
   @objc private func didTapAdditionalGesture(_ sender: UITapGestureRecognizer) {
-    
+    vc.pageNum = 2
+    navigationController?.pushViewController(vc, animated: true)
+    print("didTap")
   }
   @objc private func didTapExplanationGesture(_ sender: UITapGestureRecognizer) {
-    
+    vc.pageNum = 3
+    navigationController?.pushViewController(vc, animated: true)
+    print("didTap")
   }
   @objc private func didTapEmptyGesture(_ sender: UITapGestureRecognizer) {
     let vc = AddPotoViewController()
+    vc.delegate = self
     vc.modalPresentationStyle = .fullScreen
     navigationController?.pushViewController(vc, animated: true)
   }
@@ -132,24 +150,28 @@ class AddRoomViewController: UIViewController {
     emptyViewTapGesture.addTarget(self, action: #selector(didTapEmptyGesture(_:)))
     addressView.addGestureRecognizer(addressTapGesture)
     basicInfomationView.addGestureRecognizer(basicInfoTapGesture)
-    additionalView.addGestureRecognizer(addressTapGesture)
+    additionalView.addGestureRecognizer(additionalTapGesture)
     explanationView.addGestureRecognizer(explanationTapGesture)
     emptyView.addGestureRecognizer(emptyViewTapGesture)
     self.view.addSubviews([addressView, basicInfomationView, additionalView, explanationView, completionButton, potoCollectionView, emptyView])
     self.linViews.forEach {
       self.view.addSubview($0)
     }
+    emptyView.addSubviews([potoLabel,imageView])
     setupConstraints()
   }
   
   // MARK: - Layout
   private func setupConstraints() {
+    let guide = self.view.safeAreaLayoutGuide
     potoCollectionView.snp.makeConstraints {
-      $0.top.leading.trailing.equalToSuperview()
+      $0.top.equalTo(guide.snp.top)
+      $0.leading.trailing.equalToSuperview()
       $0.height.equalTo(self.view.snp.height).multipliedBy(0.367)
     }
     emptyView.snp.makeConstraints {
-      $0.top.leading.trailing.equalToSuperview()
+      $0.top.equalTo(guide.snp.top)
+      $0.leading.trailing.equalToSuperview()
       $0.height.equalTo(self.view.snp.height).multipliedBy(0.367)
     }
     addressView.snp.makeConstraints {
@@ -200,6 +222,17 @@ class AddRoomViewController: UIViewController {
       $0.leading.bottom.trailing.equalToSuperview()
       $0.height.equalTo(self.view.snp.height).multipliedBy(0.0733)
     }
+    
+    imageView.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.bottom.equalTo(emptyView.snp.centerY)
+      $0.width.height.equalTo(30)
+    }
+    
+    potoLabel.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.top.equalTo(emptyView.snp.centerY)
+    }
   }
   
 }
@@ -240,4 +273,13 @@ extension AddRoomViewController: UICollectionViewDelegateFlowLayout {
     let margin: CGFloat = 0
     return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
   }
+}
+
+
+extension AddRoomViewController: AddPotoViewControllerDelegate {
+  func getImage(images: [UIImage]) {
+    self.uiImages = images
+  }
+  
+  
 }
