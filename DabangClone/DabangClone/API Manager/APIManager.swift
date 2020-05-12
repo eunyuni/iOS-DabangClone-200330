@@ -153,6 +153,28 @@ final class APIManager {
                 }
         }
     }
+  
+  func getItemsInCurrentMap(km: Double, current position: CLLocationCoordinate2D, completion: @escaping (Result<[BangInCurrentMapModel], Error>) -> Void) {
+    
+    var parameter: Parameters = [
+      "reqLng": position.longitude,
+      "reqLat": position.latitude,
+      "distance": km
+    ]
+    
+    AF.request(baseURL + "/posts/distance/", method: .get, parameters: parameter)
+      .responseDecodable(of: [BangInCurrentMapModel].self) { (response) in
+        switch response.result {
+        case .success(let data):
+          completion(.success(data))
+        case .failure(let error):
+          completion(.failure(error))
+        }
+        
+    }
+    
+  }
+    
     
     // MARK: - POST
   

@@ -321,7 +321,6 @@ class LoginViewController: UIViewController {
         controller.delegate = self
         controller.presentationContextProvider = self
         controller.performRequests()
-        
     }
     
     //MARK: - KAKAO Login
