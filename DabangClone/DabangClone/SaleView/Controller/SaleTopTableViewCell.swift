@@ -35,9 +35,7 @@ class SaleTopTableViewCell: UITableViewCell {
     $0.titleLabel?.font = .systemFont(ofSize: 16)
     $0.setTitleColor(.black, for: .normal)
   }
-//  private let bottomView = UIView().then {
-//    $0.backgroundColor = .lightGray
-//  }
+
   // MARK: - Init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)

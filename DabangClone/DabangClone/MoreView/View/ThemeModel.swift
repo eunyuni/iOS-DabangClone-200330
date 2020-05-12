@@ -47,3 +47,10 @@ GTX권 단지 모음
 """, first: "약20분", second: "경기수도", third: "ABC노선"),
 ]
 
+
+
+//class SaleData {
+//  static let shared = SaleData()
+//  var data: [Sale] = []
+//}
+
