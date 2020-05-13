@@ -124,6 +124,7 @@
 		15AB3126244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */; };
 		15D1284B2431D48B00E75AC8 /* BaseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D1284A2431D48B00E75AC8 /* BaseInfoViewController.swift */; };
 		15D1284D2431D4A100E75AC8 /* BaseInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D1284C2431D4A100E75AC8 /* BaseInfoView.swift */; };
+		15D7A92D246AAF0A00D7D7C1 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D7A92C246AAF0A00D7D7C1 /* MapModel.swift */; };
 		15D9B32A242CA42F00A38A76 /* SellMyRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D9B329242CA42F00A38A76 /* SellMyRoomViewController.swift */; };
 		15D9B32C242CA44500A38A76 /* SellMyRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D9B32B242CA44500A38A76 /* SellMyRoomTableViewCell.swift */; };
 		15D9B331242E220700A38A76 /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D9B32F242E220700A38A76 /* WithdrawalViewController.swift */; };
@@ -211,6 +212,7 @@
 		6FAA9EA32449A3B70005F2B2 /* HomeRecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAA9EA22449A3B70005F2B2 /* HomeRecommendedCollectionViewCell.swift */; };
 		AAD0A9599381D7CA708D6E31 /* Pods_DabangClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90B70ED9EB0B15C4D6FEDE4D /* Pods_DabangClone.framework */; };
 		CEC7B71D245296450089E267 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC7B71C245296450089E267 /* APIManager.swift */; };
+		E75C5747246AA30000ED9306 /* SaleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75C5746246AA30000ED9306 /* SaleModel.swift */; };
 		E77D8C5B243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C5A243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift */; };
 		E77D8C5D243DD87000A263AE /* BrokerageSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C5C243DD87000A263AE /* BrokerageSectionView.swift */; };
 		E77D8C5F243DF52B00A263AE /* BrokerageHomeInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C5E243DF52B00A263AE /* BrokerageHomeInfoCell.swift */; };
@@ -445,6 +447,7 @@
 		15AB3125244704C8002AC5B8 /* CollectionViewCenteredFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCenteredFlowLayout.swift; sourceTree = "<group>"; };
 		15D1284A2431D48B00E75AC8 /* BaseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInfoViewController.swift; sourceTree = "<group>"; };
 		15D1284C2431D4A100E75AC8 /* BaseInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInfoView.swift; sourceTree = "<group>"; };
+		15D7A92C246AAF0A00D7D7C1 /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		15D9B329242CA42F00A38A76 /* SellMyRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellMyRoomViewController.swift; sourceTree = "<group>"; };
 		15D9B32B242CA44500A38A76 /* SellMyRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellMyRoomTableViewCell.swift; sourceTree = "<group>"; };
 		15D9B32F242E220700A38A76 /* WithdrawalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
@@ -535,6 +538,7 @@
 		A4C5C9223C55AA5442630D52 /* Pods-DabangClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DabangClone.debug.xcconfig"; path = "Target Support Files/Pods-DabangClone/Pods-DabangClone.debug.xcconfig"; sourceTree = "<group>"; };
 		CEC7B71C245296450089E267 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		DF6E307BB0DBA8293AA6779F /* Pods-DabangClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DabangClone.debug.xcconfig"; path = "Target Support Files/Pods-DabangClone/Pods-DabangClone.debug.xcconfig"; sourceTree = "<group>"; };
+		E75C5746246AA30000ED9306 /* SaleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleModel.swift; sourceTree = "<group>"; };
 		E77D8C5A243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageOfficeSectionCell.swift; path = DabangClone/HomeView/Controller/BrokerageOfficeSectionCell.swift; sourceTree = SOURCE_ROOT; };
 		E77D8C5C243DD87000A263AE /* BrokerageSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageSectionView.swift; path = DabangClone/HomeView/Controller/BrokerageSectionView.swift; sourceTree = SOURCE_ROOT; };
 		E77D8C5E243DF52B00A263AE /* BrokerageHomeInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageHomeInfoCell.swift; path = DabangClone/HomeView/Controller/BrokerageHomeInfoCell.swift; sourceTree = SOURCE_ROOT; };
@@ -991,6 +995,7 @@
 			children = (
 				E78AD968243727130098BE6E /* Padding.swift */,
 				159121AE24544C3300DA05D8 /* GoogleGeocodingModel.swift */,
+				15D7A92C246AAF0A00D7D7C1 /* MapModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1113,6 +1118,7 @@
 			isa = PBXGroup;
 			children = (
 				6F389E5F2448531100A440A4 /* ThemeModel.swift */,
+				E75C5746246AA30000ED9306 /* SaleModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1524,6 +1530,7 @@
 				E77D8C63243FA59600A263AE /* BrokerageReviewTapCell.swift in Sources */,
 				159121A92451CCCA00DA05D8 /* GMUGradient.m in Sources */,
 				E7BB1C12243350A300C66B48 /* RSTopTableViewCell.swift in Sources */,
+				E75C5747246AA30000ED9306 /* SaleModel.swift in Sources */,
 				6F389E622448537000A440A4 /* SaleMainViewController.swift in Sources */,
 				E7BB1C062431F4D000C66B48 /* PriceBodyTableViewCell.swift in Sources */,
 				159121A22451CCCA00DA05D8 /* GMUGroundOverlay.m in Sources */,
@@ -1564,6 +1571,7 @@
 				6F4DECEC242A1585008D77E5 /* SettingTableViewCell.swift in Sources */,
 				1516005524287ED40003DDCF /* SaleViewController.swift in Sources */,
 				156B616224345DAD00054FE9 /* AdditionalViewController.swift in Sources */,
+				15D7A92D246AAF0A00D7D7C1 /* MapModel.swift in Sources */,
 				15315A63244857250033EA47 /* EmptyStateView.swift in Sources */,
 				E77D8C732443C15600A263AE /* SaleDetailSaleInfoCell.swift in Sources */,
 				6F389E602448531100A440A4 /* ThemeModel.swift in Sources */,

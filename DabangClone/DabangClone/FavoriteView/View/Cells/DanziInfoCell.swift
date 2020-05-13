@@ -24,7 +24,6 @@ class DanziInfoCell: UITableViewCell {
     let overralContainerView: UIView = {
        let view = UIView()
         view.backgroundColor = .white
-        
         return view
     }()
     

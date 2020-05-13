@@ -17,25 +17,6 @@ enum FavoriteData {
     case budongsanInfo([Broker])
 }
 
-
-//struct Room: Hashable {
-//    var name: String?
-//    var image: UIImage
-//}
-// UserInfo 필요함.
-//struct UserInfo {
-//    let userID: String
-//    let userName: String
-//    var phoneNumber: String
-//    var profileImage: UIImage
-//    var myRoomsToOffer: [RoomInfo]
-//    var checkedRoomData: [RoomInfo]
-//    var checkedDanziData: [DanziInfo]
-//    var markedRoomData: [RoomInfo]
-//    var markedDanziData: [DanziInfo]
-//    var contactBudongsanData: [BudongsanInfo]
-//}
-
 struct DanziInfo {
     var name: String
     var availableRoomCount: Int
@@ -45,6 +26,7 @@ struct DanziInfo {
     let completeYear: String
     let address: String
 }
+
 let dummyDanzi = DanziInfo(name: "위브더스테이트2단지", availableRoomCount: 10, image: #imageLiteral(resourceName: "SampleImage"), type: "아파트", numberOfhouseholds: 71, completeYear: "2006.09", address: "경기도 부천시 중동")
 
 struct BudongsanInfo {
