@@ -25,15 +25,27 @@ class SaleInformationViewController: UIViewController {
   }
   private let tapGesture = UITapGestureRecognizer()
   
+  var saleData: [SaleInfo] = []
+  
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     tabBarController?.tabBar.isHidden = true
     self.view.backgroundColor = .white 
     setupUI()
+//    apiData()
   }
-  
   // MARK: - Action
+//  private func apiData() {
+//    APIManager.shared.getCertainSaleData(id: 88) { (result) in
+//      switch result {
+//      case .success(let sale):
+//        self.saleData = [sale]
+//      case .failure(let error):
+//        print(error)
+//      }
+//    }
+//  }
   @objc private func didTapGesture(_ sender: UITapGestureRecognizer){
     let vc = SaleAreaViewController()
     vc.modalPresentationStyle = .custom
@@ -72,12 +84,13 @@ class SaleInformationViewController: UIViewController {
 
 extension SaleInformationViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    4
+    saleData.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SaleInformationTableViewCell.identifier, for: indexPath) as! SaleInformationTableViewCell
     cell.configue()
+//    saleData[indexPath.row]
     cell.delegate = self
     return cell
   }

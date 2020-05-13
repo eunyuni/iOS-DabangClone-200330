@@ -175,6 +175,45 @@ final class APIManager {
   }
     
     
+  
+  //GET: 전체 분양 정보 리스트
+  func getSaleInfoList(completion: @escaping (Result<SaleAll, Error>) -> Void) {
+    AF.request( baseURL + "/presales/", method: .get)
+      .responseDecodable(of: SaleAll.self) { (response) in
+        switch response.result {
+        case .success(let complex):
+          completion(.success(complex))
+        case .failure(let error):
+          completion(.failure(error))
+        }
+    }
+  }
+  
+  //GET: id를 기준으로 특정 분양 1개
+  func getCertainSaleData(id: Int, completion: @escaping (Result<SaleInfo, Error>) -> Void) {
+    AF.request( baseURL + "/presales/" + "\(id)" + "/", method: .get).responseDecodable(of: SaleInfo.self) { (response) in
+      switch response.result {
+      case .success(let sale):
+        completion(.success(sale))
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    }
+  }
+  
+  //GET: theme를 기준으로 특정 분양정보 1개
+  func getCertainThemeData(pk: Int, completion: @escaping (Result<DabangElement, Error>) -> Void) {
+      let parameter = ["pk" : pk]
+      AF.request( baseURL + "/posts/list/", parameters: parameter)
+          .responseDecodable(of: DabangElement.self) { (response) in
+              switch response.result {
+              case .success(let room):
+                  completion(.success(room))
+              case .failure(let error):
+                  completion(.failure(error))
+              }
+      }
+  }
     // MARK: - POST
   
   

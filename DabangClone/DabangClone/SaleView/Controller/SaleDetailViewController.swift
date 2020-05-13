@@ -21,6 +21,7 @@ class SaleDetailViewController: UIViewController {
   private let navigationView = UIView().then {
     $0.backgroundColor = .clear
   }
+  private var saleDetail: SaleInfo!
   
   // MARK: -Lift cycle
   
@@ -28,10 +29,20 @@ class SaleDetailViewController: UIViewController {
     super.viewDidLoad()
     
     setupUI()
+    apiData()
   }
   
   // MARK: -Action
-  
+  private func apiData() {
+    APIManager.shared.getCertainSaleData(id: 88) { (result) in
+      switch result {
+      case .success(let sale):
+        self.saleDetail = sale
+      case .failure(let error):
+        print(error)
+      }
+    }
+  }
   
   // MARK: -setupUI
   private func setupUI() {

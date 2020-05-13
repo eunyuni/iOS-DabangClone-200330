@@ -13,7 +13,7 @@ class SaleTopCollectionViewCell: UICollectionViewCell {
     static let identifier = "SaleTopCollectionViewCell"
     // MARK: - Property
     private let imageView = UIImageView().then {
-      $0.image = UIImage(named: "sampleImage")
+      $0.image = UIImage(named: "SaleMainImage1")
 //      $0.layer.cornerRadius = 4
 //      $0.clipsToBounds = true
     }
