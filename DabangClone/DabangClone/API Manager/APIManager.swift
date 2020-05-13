@@ -303,6 +303,7 @@ final class APIManager {
 //      }
 //    }
   
+  
   func put(completionHandler: @escaping ([String:Any]) -> Void) {
     let userData = DabangTinyElement(pk: 50, type: .원룸, dabangTinyDescription: "테스트", address: Addresss(pk: 20, loadAddress: "", detailAddress: ""), lng: 0.00, lat: 0.00, salesForm: .none, pet: .none, elevator: false, veranda: false, depositLoan: false, postimage: [], complex: .none)
     let parameter = ["elevator" : "true", "veranda" : "false" ]
