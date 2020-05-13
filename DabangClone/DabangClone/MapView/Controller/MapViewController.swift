@@ -23,11 +23,19 @@ class POIItem: NSObject, GMUClusterItem {
   }
 }
 
+class BangDataMap {
+  static let shared = BangDataMap()
+  
+  var data: [BangInCurrentMapModel] = []
+  var dataOfClusteredRooms: [DabangElement] = []
+}
+
 let kClusterItemCount = 10000
 let kCameraLatitude = 37.5666102
 let kCameraLongitude = 126.9783881
 
 class MapViewController: UIViewController{
+  var arrShownClusterItemName: Set<String> = []
   var pkArrInCluster: [String] = []
   // MARK: - Property
   private let data = BangData.shared.data
@@ -157,21 +165,7 @@ class MapViewController: UIViewController{
     
     // Generate and add random items to the cluster manager.
     //    generateClusterItems()
-    DispatchQueue.main.async {
-//      self.mapGoogleGeocoder()
-      self.addClusterToMap()
-      DispatchQueue.main.async {
-        self.clusterManager.cluster()
-        
-        DispatchQueue.main.async {
-          self.clusterManager.setDelegate(self, mapDelegate: self)
-          
-          DispatchQueue.main.async {
-            self.setupUI()
-          }
-        }
-      }
-    }
+    
     
     // Call cluster() after items have been added to perform the clustering and rendering on map.
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
@@ -402,12 +396,28 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     }
   }
   
+  //MARK: - 맵에 보이는 지역 매물 요청
   func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
     print(position.target)
     APIManager.shared.getItemsInCurrentMap(km: 1, current: position.target) { result  in
       switch result {
       case .success(let data):
-        print("success :", data)
+
+        print("success :", data.isEmpty ? "empty" : data[0])
+        BangDataMap.shared.data = data
+        
+        DispatchQueue.main.async {
+        //      self.mapGoogleGeocoder()
+              self.addClusterToMap()
+              DispatchQueue.main.async {
+                self.clusterManager.cluster()
+                
+                DispatchQueue.main.async {
+                  self.clusterManager.setDelegate(self, mapDelegate: self)
+                }
+              }
+            }
+        
       case .failure(let error):
         print("failure :", error)
       }
@@ -479,13 +489,26 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     }//DispatchQueue.global().async scope End
   } //mapGoogleGeocoder() scope End
   
+  //MARK: - 맵에 클러스터 Item 추가
   func addClusterToMap() {
-    if BangData.shared.data.isEmpty { print("dataEmpty"); return }
-    for i in 0...BangData.shared.data.count-1 {
-      let name = "\(BangData.shared.data[i].pk)"
-      let item = POIItem(position: CLLocationCoordinate2DMake(BangData.shared.data[i].lng , BangData.shared.data[i].lat), name: name)
+    if BangDataMap.shared.data.isEmpty { print("dataEmpty"); return }
+    for i in 0...BangDataMap.shared.data.count-1 {
+      let name = "\(BangDataMap.shared.data[i].pk)"
+      
+      let item = POIItem(position: CLLocationCoordinate2DMake(BangDataMap.shared.data[i].lat , BangDataMap.shared.data[i].lng), name: name)
       DispatchQueue.main.async {
+        if !self.arrShownClusterItemName.contains(name) {
         self.clusterManager.add(item)
+          APIManager.shared.getCertainRoomData(pk: BangDataMap.shared.data[i].pk) { (result) in
+            switch result {
+            case .success(let eachData):
+              BangDataMap.shared.dataOfClusteredRooms.insert(eachData, at: 0)
+            case .failure(let error):
+              print(error)
+            }
+          }
+          self.arrShownClusterItemName.insert(name)
+        }
       }
     }
   }

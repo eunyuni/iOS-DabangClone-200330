@@ -30,7 +30,7 @@ final class APIManager {
     private let keyChain = KeychainSwift(keyPrefix: "DabangCloneUser_")
     var userPk = 0
     private let networkAccessManager = NetworkReachabilityManager(host: "https://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com")
-    private let baseURL = "dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com"
+    private let baseURL = "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com"
     
     var loginWay: LoginWays?
     
@@ -155,7 +155,7 @@ final class APIManager {
   
   func getItemsInCurrentMap(km: Double, current position: CLLocationCoordinate2D, completion: @escaping (Result<[BangInCurrentMapModel], Error>) -> Void) {
     
-    var parameter: Parameters = [
+    let parameter: Parameters = [
       "reqLng": position.longitude,
       "reqLat": position.latitude,
       "distance": km
@@ -169,7 +169,6 @@ final class APIManager {
         case .failure(let error):
           completion(.failure(error))
         }
-        
     }
     
   }

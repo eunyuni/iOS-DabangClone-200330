@@ -69,15 +69,14 @@ class MapTableViewCell: UITableViewCell {
         }
     }
   func configure(pk: Int) {
-    let roomPkData = BangData.shared.data.filter {
+    let roomPkData = BangDataMap.shared.data.filter {
       $0.pk == pk
     }
-    roomPkData[0].address.loadAddress
     roomPK = pk
     setUIFromData(data: roomPkData[0])
   }
   
-  func setUIFromData(data: DabangElement) {
+  func setUIFromData(data: BangInCurrentMapModel) {
     self.nameLabel.text = ""
     if data.salesForm.type == .월세 {
       self.priceLabel.text = "\(data.salesForm.type)" + " " + "\(data.salesForm.depositChar)" + "/" + "\(data.salesForm.monthlyChar)"
@@ -96,7 +95,7 @@ class MapTableViewCell: UITableViewCell {
     etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
     putLabelInStackView()
     if !data.postimage.isEmpty {
-    let url = URL(string: "https://wpsdabangapi.s3.amazonaws.com/\(data.postimage[0])")
+    let url = URL(string: "https://dabang.s3.amazonaws.com/\(data.postimage[0])")
     self.roomImageView.kf.setImage(with: url)
     self.roomImageView.contentMode = .scaleAspectFill
     }
