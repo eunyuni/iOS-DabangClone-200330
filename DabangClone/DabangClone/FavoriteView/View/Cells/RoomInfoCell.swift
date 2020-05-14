@@ -20,7 +20,7 @@ class RoomInfoCell: UITableViewCell {
     
     var data: DabangElement! {
         didSet{
-            self.nameLabel.text = ""
+            self.nameLabel.text = data.name
             self.priceLabel.text = "\(data.salesForm.type.rawValue)" + " " + data.salesForm.depositChar
             let start = data.areaChar.index(data.areaChar.startIndex, offsetBy: 0)
             let end = data.areaChar.index(data.areaChar.firstIndex(of: " ") ?? data.areaChar.endIndex, offsetBy: 0)
@@ -34,7 +34,7 @@ class RoomInfoCell: UITableViewCell {
             etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
             putLabelInStackView()
             if !data.postimage.isEmpty {
-            let url = URL(string: "https://wpsdabangapi.s3.amazonaws.com/\(data.postimage[0])")
+            let url = URL(string: "https://dabang.s3.amazonaws.com/\(data.postimage[0])")
             self.roomImageView.kf.setImage(with: url)
             self.roomImageView.contentMode = .scaleAspectFill
             }

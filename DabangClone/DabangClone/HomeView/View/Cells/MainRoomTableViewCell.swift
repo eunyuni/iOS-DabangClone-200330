@@ -116,7 +116,7 @@ class MainRoomTableViewCell: UITableViewCell {
   
   let detailInfoStackView = DetailInfoStackView()
   
-  var bangData = BangData.shared.data[7]
+  var bangData: DabangElement!
   
   override func awakeFromNib() {
     super.awakeFromNib()

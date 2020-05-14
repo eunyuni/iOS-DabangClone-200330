@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import SDWebImage
 
 class DanziInfoCell: UITableViewCell {
     static let identifier = "DanziInfoCell"
     
-    var data: DanziInfo! {
+    var data: Complex! {
         didSet {
-            nameLabel.text = data.name
-            infoLabel.text = data.type + ", " + "\(data.numberOfhouseholds)" + ", " + data.completeYear
-            addressLabel.text = data.address
-            danziImageView.image = data.image
-            availableRoomButton.setAttributedTitle(makeAttributeString(availableRoomCount: data.availableRoomCount), for: .normal)
+            nameLabel.text = data.complexName
+            infoLabel.text = data.buildingType + ", " + "\(data.countPost)" + ", " + data.buildDate
+            addressLabel.text = data.totalCitizen
+            danziImageView.sd_setImage(with: URL(string: "https://dabang.s3.amazonaws.com/" + (data.image.first ?? "")))
+            availableRoomButton.setAttributedTitle(makeAttributeString(availableRoomCount: data.countPost), for: .normal)
         }
     }
     
@@ -49,6 +50,7 @@ class DanziInfoCell: UITableViewCell {
     let danziImageView: UIImageView = {
        let iv = UIImageView()
         iv.layer.cornerRadius = 8
+        iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
     }()
@@ -104,12 +106,10 @@ class DanziInfoCell: UITableViewCell {
     }
     
     private func setConstraints() {
-        buttonSeparator.snp.makeConstraints {
-            $0.width.equalTo(0.5)
-        }
         overralContainerView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(verticalSeparator.snp.top)
+            $0.height.equalTo(130)
+//            $0.bottom.equalTo(verticalSeparator.snp.top)
         }
         nameLabel.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(10)
@@ -124,17 +124,18 @@ class DanziInfoCell: UITableViewCell {
         }
         buttonStackView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(45)
+            $0.top.equalTo(verticalSeparator.snp.bottom)
+            $0.height.equalTo(50)
         }
         danziImageView.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview().inset(10)
+            $0.top.trailing.bottom.equalToSuperview().inset(10)
             $0.width.equalToSuperview().multipliedBy(0.35)
-            $0.bottom.equalTo(verticalSeparator.snp.top).offset(-10)
+//            $0.height.equalTo(90)
             
         }
         verticalSeparator.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(buttonStackView.snp.top)
+            $0.top.equalTo(overralContainerView.snp.bottom)
             $0.height.equalTo(0.5)
         }
         buttonSeparator.snp.makeConstraints {
@@ -148,7 +149,7 @@ class DanziInfoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(danziInfo: DanziInfo) {
+    func set(danziInfo: Complex) {
         self.data = danziInfo
     }
     

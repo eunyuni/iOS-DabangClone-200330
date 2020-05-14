@@ -37,7 +37,7 @@ class CompareHeaderView: UIView {
     private func setViewData() {
         roomIDLabel.text = "매물번호 \(data.pk)"
         if !data.postimage.isEmpty {
-            let url = URL(string: "https://wpsdabangapi.s3.amazonaws.com/\(data.postimage[0])")
+            let url = URL(string: "https://dabang.s3.amazonaws.com/\(data.postimage[0])")
             self.imageView.kf.setImage(with: url)
             self.imageView.contentMode = .scaleAspectFill
         }

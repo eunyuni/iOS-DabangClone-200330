@@ -9,6 +9,7 @@ import Foundation
 struct DabangElement: Codable {
               let pk: Int
               let broker: Broker
+              let name: String?
               let type: BuildingTypeEnum
               let dabangDescription: String
               let address: Address
@@ -49,7 +50,7 @@ struct DabangElement: Codable {
                   case optionSet = "option_set"
                   case heatingType, pet, elevator, builtIn, veranda, depositLoan, totalCitizen, totalPark, complete
                   case securitySafetySet = "securitySafety_set"
-                  case postimage, complex
+                  case postimage, complex, name
               }
           }
 
@@ -68,11 +69,13 @@ struct DabangElement: Codable {
               let companyNumber: String?
               let brokerage: String?
               let dabangCreatedAt, successCount: String?
-
+              let pkList: [Int]?
+            
               enum CodingKeys: String, CodingKey {
                   case pk, companyName, address, managerName, tel, image, companyNumber, brokerage
                   case dabangCreatedAt = "dabangCreated_at"
                   case successCount
+                  case pkList
               }
           }
 
@@ -80,22 +83,10 @@ struct DabangElement: Codable {
           // MARK: - Complex
           struct Complex: Codable {
               let pk: Int
-              let complexName: String
-              let buildDate: String
-              let totalCitizen: String
-              let personalPark: String
-              let totalNumber: String
-              let heatingSystem: Heating
-              let minMaxFloor: MinMaxFloor
-              let buildingType: BuildingTypeEnum
-              let constructionCompany: String
-              let fuel: Fuel
-              let complexType: ComplexType
-              let floorAreaRatio: String
-              let dryWasteRate: String
-              let complexSale: String
-              let complexPrice: String
-              let areaSale: String
+              let complexName, buildDate, totalCitizen, personalPark: String
+              let totalNumber, heatingSystem, minMaxFloor, buildingType: String
+              let constructionCompany, fuel, complexType, floorAreaRatio: String
+              let dryWasteRate, complexSale, complexPrice, areaSale: String
               let areaPrice: String
               let image: [String]
               let list: [Int]
@@ -283,7 +274,7 @@ struct CoordinateFromAddress {
 
 // MARK: - User Model
 struct User: Codable {
-    let pk: Int
+    let pk: Int?
     let phone: String?
     let profileImage: String?
     let recentlyCheckedRooms: [DabangElement]?
@@ -299,9 +290,49 @@ struct User: Codable {
 }
 
 
+
 class UserData {
     static let shared = UserData()
     var user: User!
-    private init() {}
+    private init() { }
+}
 
+
+
+// MARK: - Data model only for Favorite Tab
+
+struct CheckedRoom: Codable {
+    let pk: Int
+    let posts: [DabangElement]?
+}
+
+struct MarkedRoom: Codable {
+    let pk: Int
+    let postLike: [PostLike]?
+}
+struct PostLike: Codable {
+    let post: DabangElement
+}
+
+struct CheckedComplex: Codable {
+    let pk: Int
+    let complexs: [Complex]?
+}
+
+struct MarkedComplex: Codable {
+    let pk: Int
+    let compLike: [CompLike]?
+}
+struct CompLike: Codable {
+    let complexs: Complex
+}
+
+//struct MarkedComplex: Codable {
+//    let pk: Int
+//    let compLike: [Complex]?
+//}
+
+struct ContactedBroker: Codable {
+    let pk: Int
+    let brokers: [Broker]?
 }

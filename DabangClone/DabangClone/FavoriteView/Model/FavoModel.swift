@@ -11,9 +11,9 @@ import UIKit
 
 enum FavoriteData {
     case checkedRoomInfo([DabangElement])
-    case checkedDanziInfo([DanziInfo])
+    case checkedDanziInfo([Complex])
     case markedRoomInfo([DabangElement])
-    case markedDanziInfo([DanziInfo])
+    case markedDanziInfo([Complex])
     case budongsanInfo([Broker])
 }
 

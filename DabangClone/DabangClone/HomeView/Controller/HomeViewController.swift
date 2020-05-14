@@ -27,8 +27,8 @@ class HomeViewController: UIViewController {
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    checkAuth()
-    APIManager.shared.logout()
+//    checkAuth()
+//    APIManager.shared.logout()
     self.view.backgroundColor = .white
     getTest()
     setupUI()

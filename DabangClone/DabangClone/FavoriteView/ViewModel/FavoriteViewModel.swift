@@ -20,9 +20,9 @@ final class FavoriteViewModel {
     weak var delegate: FavoriteViewModelDelegate?
     
     private var checkedRoomData = [DabangElement]()
-    private var checkedDanziData = [DanziInfo]()
+    private var checkedDanziData = [Complex]()
     private var markedRoomData = [DabangElement]()
-    private var markedDanziData = [DanziInfo]()
+    private var markedDanziData = [Complex]()
     private var contactBudongsanData = [Broker]()
     
     var dataIndex = 0 {
@@ -42,18 +42,24 @@ final class FavoriteViewModel {
     ]
     
     init() {
-//        APIManager.shared.checkJWTExpiration()
-//        tempLocalCreateUser()
-//        tempLocalLogin()
+        print("FavoViewModel init")
         
-//        fetchCheckedRoomData()
-//        fetchMarkedRoomData()
-//        fetchContactedBrokersData()
-        
-        checkedDanziData = [dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
-        markedDanziData = [dummyDanzi, dummyDanzi,dummyDanzi,dummyDanzi,dummyDanzi]
-//        contactBudongsanData = [dummyBudongsan,dummyBudongsan2]
+//        APIManager.shared.getUserProfile(userPK: 1) { (result) in
+//            switch result {
+//            case .success(let user):
+//                print(type(of: user))
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+        fetchRecentlyCheckedRooms()
+        fetchCheckedComplex()
+        fetchMarkedRooms()
+        fetchMarkedComplex()
+        fetchContactedBrokersData()
     }
+    
+    
     
     func fetchAllData() {
         APIManager.shared.getUserProfile { (result) in
@@ -67,101 +73,97 @@ final class FavoriteViewModel {
             }
         }
     }
-//    func tempLocalCreateUser() {
-//        APIManager.shared.postCreteUser(username: "testname", password: "123123", email: "testEmail@gmail.com") { (message, isSuccess) in
-//            if isSuccess {
-//                print(message)
+    func tempLocalCreateUser() {
+        APIManager.shared.postCreteUser(username: "testname123", password: "123123", email: "testEmail@gmail.com") { (message, isSuccess) in
+            if isSuccess {
+                print(message)
 //                self.tempLocalLogin()
-//            } else {
-//                print("실패")
-//            }
-//        }
-//    }
-//
-//    func tempLocalLogin() {
-//        APIManager.shared.postUserLogin(email:"temp4@gmail.com", password: "1231233") { (result) in
-//                        switch result {
-//                        case .success(_):
-//                            print("자체 로그인 성공")
-//                            let accessToken = APIManager.shared.getAccessTokenFromKeyChain()
-//                            print(accessToken)
-//                            self.tempGetUserInfo()
-//                        case .failure(let error):
-//                            print("자체 로그인 실패")
-//                            print(error)
-//                        }
-//            }
-//    }
-//
-//    func tempGetUserInfo() {
-//        APIManager.shared.getUserProfile { (result) in
-//            switch result {
-//            case .success(let user):
-//                print("유저 정보 로드 성공")
-//                UserData.shared.user = user
-//                self.checkedRoomData = UserData.shared.user.recentlyCheckedRooms ?? []
-//                //                        self.tempUserInfoUpdate()
-//                self.delegate?.reloadTableView()
-//            case .failure(let error):
-//                print("유저 정보 로드 실패")
-//                print(error)
-//            }
-//        }
-//    }
-//
-//    func tempUserInfoUpdate() {
-//        APIManager.shared.patchUpdateUserInfo(phone: "010-3333-7777", image: "imageURL") { (result) in
-//            switch result {
-//            case .success(let user):
-//                UserData.shared.user = user
-//                print("수정된 유저", UserData.shared.user.phone)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//    }
-//
-//    func fetchCheckedRoomData() {
-//        APIManager.shared.getEntireRoomData { (result) in
-//                    switch result {
-//                    case .success(let rooms):
-//                        self.checkedRoomData = rooms
-//                        print("checkedRoom success")
-//                        self.delegate?.reloadTableView()
-//                    case .failure(let error):
-//                        print(error)
-//                    }
-//
-//                }
-//    }
-//
-//    func fetchMarkedRoomData() {
-//        APIManager.shared.getEntireRoomData { (result) in
-//                    switch result {
-//                    case .success(let rooms):
-//                        self.markedRoomData = rooms
-//                        print("markeRoom success")
-//                        self.delegate?.reloadTableView()
-//                    case .failure(let error):
-//                        print(error)
-//                    }
-//
-//                }
-//    }
-
-    func fetchContactedBrokersData() {
-        APIManager.shared.getUserProfile { (result) in
-            switch result {
-            case .success(let user):
-                self.contactBudongsanData = user.contactedBrokers ?? []
-            case .failure(let error):
-                print(error)
+            } else {
+                print("실패")
             }
-            self.delegate?.reloadTableView()
+        }
+    }
+
+    func fetchMarkedComplex() {
+        APIManager.shared.getMarkedComplexList { (result) in
+            switch result {
+            case .success(let complexs):
+                self.markedDanziData = complexs
+                self.delegate?.reloadTableView()
+                print("fetchMarkedComplex")
+            case .failure(let error):
+                print("failed to fetch marked complex: ", error)
+            }
+        }
+    }
+    
+    func fetchCheckedComplex() {
+        APIManager.shared.getRecentlyCheckedComplexList { (result) in
+            switch result {
+            case .success(let complexs):
+                self.checkedDanziData = complexs
+                self.delegate?.reloadTableView()
+                print("fetchCheckedComplex")
+            case .failure(let error):
+                print("failed to fetch checked complex: ", error)
+            }
+        }
+    }
+    
+    func fetchMarkedRooms() {
+        APIManager.shared.getMarkedRooms { (result) in
+            switch result {
+            case .success(let rooms):
+                self.markedRoomData = rooms
+                self.delegate?.reloadTableView()
+                print("fetchMarkedRooms")
+            case .failure(let error):
+                print("failed to fetch marked rooms: ", error)
+            }
+        }
+    }
+    
+    func fetchRecentlyCheckedRooms() {
+        APIManager.shared.getRecentlyCheckedRooms { (result) in
+            switch result {
+            case .success(let rooms):
+                self.checkedRoomData = rooms
+                self.delegate?.reloadTableView()
+                print("fetchRecentlyCheckedRooms")
+            case .failure(let error):
+                print("failed to fetch recently checked rooms: ", error)
+            }
+        }
+    }
+    
+    func fetchContactedBrokersData() {
+        APIManager.shared.getContactedBrokerList { (result) in
+            switch result {
+            case .success(let brokers):
+                self.contactBudongsanData = brokers
+                self.delegate?.reloadTableView()
+                print("fetchContactedBrokersData")
+            case .failure(let error):
+                print("failed to fetch broker list: ", error)
+            }
         }
     }
     
     func setActiveData(_ dataIndex: Int) {
+//        switch dataIndex {
+//        case 0:
+//            fetchRecentlyCheckedRooms()
+//        case 1:
+//            fetchCheckedComplex()
+//        case 2:
+//            fetchMarkedRooms()
+//        case 3:
+//            fetchMarkedComplex()
+//        case 4:
+//            fetchContactedBrokersData()
+//        default:
+//            break
+//        }
         activeData = data[dataIndex]
     }
     
