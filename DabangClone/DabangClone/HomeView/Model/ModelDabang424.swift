@@ -291,18 +291,6 @@ struct User: Codable {
         case markedRooms = "postLike"
         case contactedBrokers = "brokers"
     }
-  let pk: Int
-  let phone: String?
-  let profileImage: String?
-  let recentlyCheckedRooms: [DabangElement]?
-  //    let markedRooms: [DabangElement]?
-  let contactedBrokers: [Broker]?
-  enum CodingKeys: String, CodingKey {
-    case pk, phone, profileImage
-    case recentlyCheckedRooms = "posts"
-    //        case markedRooms
-    case contactedBrokers = "brokers"
-  }
 }
 
 

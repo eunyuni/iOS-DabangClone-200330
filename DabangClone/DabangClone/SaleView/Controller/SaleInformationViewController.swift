@@ -25,7 +25,8 @@ class SaleInformationViewController: UIViewController {
   }
   private let tapGesture = UITapGestureRecognizer()
   
-  var saleData: [SaleInfo] = []
+//  var saleData: [SaleInfo] = []
+  var saleTiny: [SaleTiny] = []
   
   // MARK: - Lift cycle
   override func viewDidLoad() {
@@ -46,6 +47,9 @@ class SaleInformationViewController: UIViewController {
 //      }
 //    }
 //  }
+  func saleReload() {
+    tableView.reloadData()
+  }
   @objc private func didTapGesture(_ sender: UITapGestureRecognizer){
     let vc = SaleAreaViewController()
     vc.modalPresentationStyle = .custom
@@ -84,12 +88,12 @@ class SaleInformationViewController: UIViewController {
 
 extension SaleInformationViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    saleData.count
+    saleTiny.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SaleInformationTableViewCell.identifier, for: indexPath) as! SaleInformationTableViewCell
-    cell.configue()
+    cell.configue(saleTiny[indexPath.row])
 //    saleData[indexPath.row]
     cell.delegate = self
     return cell

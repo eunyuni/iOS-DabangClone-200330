@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 // 분양 셀
 protocol SaleInformationTableViewCellDelegate: class {
   func didTapSaleDetailCell()
@@ -21,15 +22,10 @@ class SaleInformationTableViewCell: UITableViewCell {
   private let saleTypeLabel = UILabel().then {
     $0.font = .boldSystemFont(ofSize: 11)
     $0.textColor = .white
-    $0.backgroundColor = #colorLiteral(red: 0.8276094794, green: 0, blue: 0.08192314953, alpha: 1)
     $0.layer.cornerRadius = 10
   }
   private let saleDateLabel = UILabel().then {
     $0.font = .systemFont(ofSize: 13)
-    $0.textColor = #colorLiteral(red: 0.2002735138, green: 0.3840204477, blue: 0.7746787071, alpha: 1)
-    $0.textColor = #colorLiteral(red: 0.1062248126, green: 0.3019269109, blue: 0.5715846419, alpha: 1)
-    $0.textColor = #colorLiteral(red: 0.8276094794, green: 0, blue: 0.08192314953, alpha: 1)
-    $0.textColor = #colorLiteral(red: 0.8276094794, green: 0, blue: 0.08192314953, alpha: 1)
     
   }
   private let saleTitleLabel = UILabel().then {
@@ -74,15 +70,31 @@ class SaleInformationTableViewCell: UITableViewCell {
   }
   
   // MARK: - Action
-  func configue() {
-    saleTypeLabel.text = " 분양예정 "
-    saleDateLabel.text = "20년 하반기 모집공고"
-    saleTitleLabel.text = "광주화정2 1"
-    priceLabel.text = "분양가 준비중"
-    locationLabel.text = "광주광역시 서구 화정동"
-    firstLabel.text = " 아파트 "
-    secondLabel.text = " 공공분양 "
-    saleImageView.image = UIImage(named: "saleEmptyImage")
+  func configue(_ sale: SaleTiny) {
+    switch sale.status {
+    case .분양중, .모집중:
+      self.saleTypeLabel.backgroundColor = #colorLiteral(red: 0.8276094794, green: 0, blue: 0.08192314953, alpha: 1)
+      self.saleDateLabel.textColor = #colorLiteral(red: 0.8276094794, green: 0, blue: 0.08192314953, alpha: 1)
+    case .분양예정:
+      self.saleTypeLabel.backgroundColor = #colorLiteral(red: 0.2002735138, green: 0.3840204477, blue: 0.7746787071, alpha: 1)
+      self.saleDateLabel.textColor = #colorLiteral(red: 0.2002735138, green: 0.3840204477, blue: 0.7746787071, alpha: 1)
+    }
+    
+    if sale.image.isEmpty {
+      saleImageView.image = UIImage(named: "saleEmptyImage")
+    } else {
+      let url = URL(string: "https://dabang.s3.amazonaws.com/" + sale.image[0])
+      saleImageView.kf.setImage(with: url)
+    }
+    
+    saleTypeLabel.text = " \(sale.status.rawValue) "
+    saleDateLabel.text = sale.term
+    saleTitleLabel.text = sale.name
+    priceLabel.text = sale.salesPrice
+    locationLabel.text = sale.place
+    firstLabel.text = sale.detailType.rawValue
+    secondLabel.text = " \(sale.supplyType.rawValue)"
+
   }
   
   @objc private func didTapGesture(_ sender: UITapGestureRecognizer){
