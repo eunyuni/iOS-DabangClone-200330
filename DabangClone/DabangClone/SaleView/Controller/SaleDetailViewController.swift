@@ -21,7 +21,8 @@ class SaleDetailViewController: UIViewController {
   private let navigationView = UIView().then {
     $0.backgroundColor = .clear
   }
-  private var saleDetail: SaleInfo!
+  var saleData: SaleInfo!
+  var pk: Int!
   
   // MARK: -Lift cycle
   
@@ -29,21 +30,22 @@ class SaleDetailViewController: UIViewController {
     super.viewDidLoad()
     
     setupUI()
-    apiData()
+//    self.title
+//    apiData()
   }
   
   // MARK: -Action
-  private func apiData() {
-    APIManager.shared.getCertainSaleData(id: 88) { (result) in
-      switch result {
-      case .success(let sale):
-        self.saleDetail = sale
-      case .failure(let error):
-        print(error)
-      }
-    }
-  }
-  
+//  private func apiData() {
+//    APIManager.shared.getCertainSaleData(id: pk) { (result) in
+//      switch result {
+//      case .success(let sale):
+//        self.saleData = sale
+//      case .failure(let error):
+//        print(error)
+//      }
+//    }
+//  }
+//  
   // MARK: -setupUI
   private func setupUI() {
     view.addSubviews([
@@ -105,15 +107,22 @@ extension SaleDetailViewController: UITableViewDataSource {
     switch indexPath.row {
     case 0:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailMainCell.identifier, for: indexPath) as! SaleDetailMainCell
-      cell.backgroundColor = .yellow
+      if saleData.image.isEmpty {
+//        let image = "saleEmptyImage"
+        print("이미지없엉..")
+      } else {
+        let url = URL(string: "https://dabang.s3.amazonaws.com/" + saleData.image[0])!
+        cell.configue(imgae: url)
+      }
+      cell.backgroundColor = .white
       return cell
     case 1:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailSectionCell.identifier, for: indexPath) as! SaleDetailSectionCell
-      cell.configue(parcelPrice: "3.3억~", parcelhousehold: "837세대", recruitmentNotice: "20.03.13", scheduledDate: "준비중")
+      cell.configue(parcelPrice: saleData.salesPrice, parcelhousehold: saleData.salesCitizen, recruitmentNotice: saleData.recruit, scheduledDate: saleData.recruit)
       return cell
     case 2:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailSaleInfoCell.identifier, for: indexPath) as! SaleDetailSaleInfoCell
-      cell.configue(buildingType: "아파트", supplyType: "민간분양", totalHouseholds: "총 1409 세대 / 분양 837 세대", sizeComplex: "총 9개동 / 지하 3층 ~ 지상 39층", exclusiveArea: "46m / 59m / 75m / 84m", constructionCompany: "현대건설(주)", pilotCompany: "백운2구역주택재개발정비사업조합", regulatoryPeriod: "입주자로 선정된 날부터 6개월", others: "전매제한, 분양가상한제 미적용")
+      cell.configue(buildingType: saleData.salesType.rawValue, supplyType: saleData.supplyType.rawValue, totalHouseholds: "총 \(saleData.totalCitizen) / 분양 \(saleData.salesCitizen)", sizeComplex: "\(saleData.complexScale) / \(saleData.minMaxFloor)", exclusiveArea: saleData.area, constructionCompany: saleData.builder, pilotCompany: saleData.developer, regulatoryPeriod: "입주자로 선정된 날부터 6개월", others: "전매제한, 분양가상한제 미적용")
       return cell
     case 3, 5, 7, 9:
       let cell = tableView.dequeueReusableCell(withIdentifier: GrayLineViewCell.identifier, for: indexPath) as! GrayLineViewCell

@@ -64,4 +64,12 @@ NewsTheme(typeLabel: "정책", titleLabel: "LH, 올해 첫 행복주택 입주�
 NewsTheme(typeLabel: "정책", titleLabel: "'시세의30~70%' 청년∙신혼부부 매입임대주택, 18일부터 입주자 모집", DetailLabel: "서울경제 | 2020.05.6", Image: UIImage(named: "newsDetailImage4")),
 ]
 
+struct MainImageTheme {
+  var image: UIImage?
+}
+
+let mainImageTheme: [MainImageTheme] = [
+MainImageTheme(image: UIImage(named: "SaleMainImage1")),
+MainImageTheme(image: UIImage(named: "SaleMainImage2")),
+]
 

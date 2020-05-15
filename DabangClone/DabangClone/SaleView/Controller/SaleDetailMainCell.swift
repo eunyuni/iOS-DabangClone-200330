@@ -15,12 +15,13 @@ class SaleDetailMainCell: UITableViewCell {
   static let identifier = "SaleDetailMainCell"
   
   // MARK: -Property
-  let mainView = UIImageView().then {
-    $0.image = UIImage(named: "SaleMainImage")
+  let mainView = UIImageView()
+//    .then {
+//    $0.image = UIImage(named: "SaleMainImage")
 //    $0.contentMode = .scaleToFill
 //    $0.clipsToBounds = false
 //    $0.backgroundColor = .gray
-  }
+//  }
   
   // MARK: -init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -36,8 +37,9 @@ class SaleDetailMainCell: UITableViewCell {
   
   // MARK: -Action
   
-  func configue() {
-    
+  func configue(imgae: URL) {
+//    mainView.image = UIImage(named: imgae)
+    mainView.kf.setImage(with: imgae)
   }
   
   // MARK: -setupUI

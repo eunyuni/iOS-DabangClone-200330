@@ -25,7 +25,7 @@ class SaleInformationViewController: UIViewController {
   }
   private let tapGesture = UITapGestureRecognizer()
   
-//  var saleData: [SaleInfo] = []
+  //  var saleData: [SaleInfo] = []
   var saleTiny: [SaleTiny] = []
   
   // MARK: - Lift cycle
@@ -34,19 +34,19 @@ class SaleInformationViewController: UIViewController {
     tabBarController?.tabBar.isHidden = true
     self.view.backgroundColor = .white 
     setupUI()
-//    apiData()
+    //    apiData()
   }
   // MARK: - Action
-//  private func apiData() {
-//    APIManager.shared.getCertainSaleData(id: 88) { (result) in
-//      switch result {
-//      case .success(let sale):
-//        self.saleData = [sale]
-//      case .failure(let error):
-//        print(error)
-//      }
-//    }
-//  }
+  //  private func apiData() {
+  //    APIManager.shared.getCertainSaleData(id: 88) { (result) in
+  //      switch result {
+  //      case .success(let sale):
+  //        self.saleData = [sale]
+  //      case .failure(let error):
+  //        print(error)
+  //      }
+  //    }
+  //  }
   func saleReload() {
     tableView.reloadData()
   }
@@ -94,7 +94,6 @@ extension SaleInformationViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SaleInformationTableViewCell.identifier, for: indexPath) as! SaleInformationTableViewCell
     cell.configue(saleTiny[indexPath.row])
-//    saleData[indexPath.row]
     cell.delegate = self
     return cell
   }
@@ -109,9 +108,18 @@ extension SaleInformationViewController: UITableViewDelegate {
 }
 
 extension SaleInformationViewController: SaleInformationTableViewCellDelegate {
-  func didTapSaleDetailCell() {
+  
+  func didTapSaleDetailCell(id: Int) {
     let vc = SaleDetailViewController()
-    navigationController?.pushViewController(vc, animated: true)
+    APIManager.shared.getCertainSaleData(id: id) { (response) in
+      switch response {
+      case .success(let saleInfo):
+        vc.saleData = saleInfo
+        print("getCertainSaleData❤️ id->\(id) ")
+        self.navigationController?.pushViewController(vc, animated: true)
+      case .failure(let error):
+        print("getCertainSaleData Error🤪\(error)")
+      }
+    }
   }
-
 }

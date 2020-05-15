@@ -79,12 +79,13 @@ class SaleTopTableViewCell: UITableViewCell {
 
 extension SaleTopTableViewCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    5
+    2
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SaleTopCollectionViewCell.identifier, for: indexPath ) as! SaleTopCollectionViewCell
     cell.backgroundColor = .red
+    cell.configue(mainImageTheme[indexPath.row])
     return cell
   }
 }

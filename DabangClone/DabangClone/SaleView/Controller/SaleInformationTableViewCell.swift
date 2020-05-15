@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 // 분양 셀
 protocol SaleInformationTableViewCellDelegate: class {
-  func didTapSaleDetailCell()
+  func didTapSaleDetailCell(id id: Int)
 }
 class SaleInformationTableViewCell: UITableViewCell {
 
@@ -60,6 +60,7 @@ class SaleInformationTableViewCell: UITableViewCell {
   private lazy var tapGesture = UITapGestureRecognizer().then {
     $0.addTarget(self, action: #selector(didTapGesture(_:)))
   }
+  var id: Int!
   // MARK: - Init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -94,11 +95,12 @@ class SaleInformationTableViewCell: UITableViewCell {
     locationLabel.text = sale.place
     firstLabel.text = sale.detailType.rawValue
     secondLabel.text = " \(sale.supplyType.rawValue)"
+    self.id = sale.id
 
   }
   
   @objc private func didTapGesture(_ sender: UITapGestureRecognizer){
-    delegate?.didTapSaleDetailCell()
+    delegate?.didTapSaleDetailCell(id: self.id)
   }
   // MARK: - setupUI
   private func setupUI() {

@@ -81,6 +81,7 @@ class SaleDetailSectionCell: UITableViewCell {
   
   func configue(parcelPrice: String, parcelhousehold:String, recruitmentNotice: String, scheduledDate: String) {
     self.parcelPriceLabel.text = parcelPrice
+//    self.parcelPriceLabel.text = "\(parcelPrice)"
     self.parcelhouseholdLabel.text = parcelhousehold
     self.recruitmentNoticeLabel.text = recruitmentNotice
     self.scheduledDateLabel.text = scheduledDate

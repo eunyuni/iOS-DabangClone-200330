@@ -181,9 +181,9 @@ final class APIManager {
   
   
   //GET: 전체 분양 전체 리스트
-  func getSaleAllList(completion: @escaping (Result<[SaleInfo], Error>) -> Void) {
+  func getSaleAllList(completion: @escaping (Result<SaleAll, Error>) -> Void) {
     AF.request( baseURL + "/presales/", method: .get)
-      .responseDecodable(of: [SaleInfo].self) { (response) in
+      .responseDecodable(of: SaleAll.self) { (response) in
         print("responseCode--->", response.response?.statusCode)
         guard let code =  response.response?.statusCode, code != 502 else {
           completion(.failure(SaleInfoError.badGatewa))
