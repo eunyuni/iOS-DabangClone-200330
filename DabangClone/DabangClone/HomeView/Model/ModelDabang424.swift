@@ -86,7 +86,7 @@ struct Complex: Codable {
   let personalPark: String
   let totalNumber: String
   let heatingSystem: Heating
-  let minMaxFloor: MinMaxFloor
+  let minMaxFloor: String
   let buildingType: BuildingTypeEnum
   let constructionCompany: String
   let fuel: Fuel
@@ -108,6 +108,7 @@ enum BuildingTypeEnum: String, Codable {
   case 오피스텔 = "오피스텔"
   case 원룸 = "원룸"
   case 원룸주방분리형15룸 = "원룸(주방 분리형(1.5룸))"
+  case 원룸복층 = "원룸(복층)"
   case 투룸 = "투룸"
 }
 
@@ -125,19 +126,7 @@ enum Fuel: String, Codable {
 enum Heating: String, Codable {
   case 개별난방 = "개별난방"
   case 지역난방 = "지역난방"
-}
-
-enum MinMaxFloor: String, Codable {
-  case the1010층 = "10-10층"
-  case the1119층 = "11-19층"
-  case the1923층 = "19-23층"
-  case the2847층 = "28-47층"
-  case the35층 = "3-5층"
-  case the645층 = "6-45층"
-  case the723층 = "7-23층"
-  case the815층 = "8-15층"
-  case the825층 = "8-25층"
-  case the917층 = "9-17층"
+  case 중앙난방 = "중앙난방"
 }
 
 
@@ -291,18 +280,6 @@ struct User: Codable {
         case markedRooms = "postLike"
         case contactedBrokers = "brokers"
     }
-  let pk: Int
-  let phone: String?
-  let profileImage: String?
-  let recentlyCheckedRooms: [DabangElement]?
-  //    let markedRooms: [DabangElement]?
-  let contactedBrokers: [Broker]?
-  enum CodingKeys: String, CodingKey {
-    case pk, phone, profileImage
-    case recentlyCheckedRooms = "posts"
-    //        case markedRooms
-    case contactedBrokers = "brokers"
-  }
 }
 
 

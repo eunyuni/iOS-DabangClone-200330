@@ -14,7 +14,7 @@ class MainRoomSecondTableViewCell: UITableViewCell {
   
   let roomData = findRoomDataFromRoomID(rooms, roomID: 1)
   
-  var bangData = BangData.shared.data[7]
+  var bangData = BangDataMap.shared.dataOfClusteredRooms[0]
   
   private let layout = UICollectionViewFlowLayout().then {
     $0.scrollDirection = .vertical
@@ -121,11 +121,21 @@ class MainRoomSecondTableViewCell: UITableViewCell {
   }
   
   func reloadCollectionView(pk: Int) {
-    let bangDataArr = BangData.shared.data.filter {
+    var bangDataArr = BangDataMap.shared.dataOfClusteredRooms.filter {
       $0.pk == pk
     }
-    bangData = bangDataArr[0]
-    
+    if bangDataArr.isEmpty {
+      APIManager.shared.getCertainRoomData(pk: pk) { (result) in
+      switch result {
+      case .success(let eachData):
+      bangDataArr.append(eachData)
+      case .failure(let error):
+        print(error)
+      }
+      }
+    } else {
+      bangData = bangDataArr[0]
+    }
     
   }
   

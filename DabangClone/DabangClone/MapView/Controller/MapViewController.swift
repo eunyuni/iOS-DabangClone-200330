@@ -23,12 +23,21 @@ class POIItem: NSObject, GMUClusterItem {
   }
 }
 
+class BangDataMap {
+  static let shared = BangDataMap()
+  
+  var data: [BangInCurrentMapModel] = []
+  var dataOfClusteredRooms: [DabangElement] = []
+}
+
 let kClusterItemCount = 10000
 let kCameraLatitude = 37.5666102
 let kCameraLongitude = 126.9783881
 
-class MapViewController: UIViewController{
+class MapViewController: UIViewController, FilterOverlayViewControllerDelegate {
+  var arrShownClusterItemName: Set<String> = []
   var pkArrInCluster: [String] = []
+  weak var delegate: FilterOverlayViewControllerDelegate?
   // MARK: - Property
   private let data = BangData.shared.data
   private var clusterManager: GMUClusterManager!
@@ -85,22 +94,45 @@ class MapViewController: UIViewController{
   }
   private let scrollView = UIScrollView().then {
     $0.alwaysBounceHorizontal = true
-    $0.backgroundColor = .white
+    $0.backgroundColor = UIColor(named: "FilterScrollViewGray")
     $0.showsHorizontalScrollIndicator = false
   }
   
   private var stackView: UIStackView!
-  private let selectButtons = [
-    MapFilterButton(title: "원룸", tag: 0).then{
+  private lazy var selectButtons = [
+    MapFilterButton(title: "원룸 ⌄", tag: 0).then{
       $0.setTitleColor(.black, for: .normal)
+      $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
+      
     },
-    MapFilterButton(title: "가격 ⌄", tag: 1),
-    MapFilterButton(title: "관리비 ⌄", tag: 2),
-    MapFilterButton(title: "방 크기 ⌄", tag: 3),
-    MapFilterButton(title: "층 수 ⌄", tag: 4),
-    MapFilterButton(title: "방구조 ⌄", tag: 5),
-    MapFilterButton(title: "추가필터 ⌄", tag: 6),
-    MapFilterButton(title: "거래종류 ⌄", tag: 7),
+    MapFilterButton(title: "가격 ⌄", tag: 1).then{
+      $0.setTitleColor(.black, for: .normal)
+      $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
+    },
+    MapFilterButton(title: "관리비 ⌄", tag: 2).then{
+      $0.setTitleColor(.black, for: .normal)
+      $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
+    },
+    MapFilterButton(title: "방 크기 ⌄", tag: 3).then{
+      $0.setTitleColor(.black, for: .normal)
+      $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
+    },
+    MapFilterButton(title: "층 수 ⌄", tag: 4).then{
+      $0.setTitleColor(.black, for: .normal)
+      $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
+    },
+    MapFilterButton(title: "방구조 ⌄", tag: 5).then{
+      $0.setTitleColor(.black, for: .normal)
+      $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
+    },
+    MapFilterButton(title: "추가필터 ⌄", tag: 6).then{
+      $0.setTitleColor(.black, for: .normal)
+      $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
+    },
+    MapFilterButton(title: "거래종류 ⌄", tag: 7).then{
+      $0.setTitleColor(.black, for: .normal)
+      $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
+    },
   ]
   private let filterButton = UIButton().then {
     $0.setImage(UIImage(named: "FilterImage"), for: .normal)
@@ -130,6 +162,7 @@ class MapViewController: UIViewController{
   private let tableView = UITableView().then {
     $0.register(MapTableViewCell.self, forCellReuseIdentifier: MapTableViewCell.identifier)
   }
+  
   var count = 0
   var searchLoad = false
   // MARK: - Gesture
@@ -138,6 +171,7 @@ class MapViewController: UIViewController{
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     self.view.backgroundColor = .white
     tableView.dataSource = self
     tableView.delegate = self
@@ -145,8 +179,11 @@ class MapViewController: UIViewController{
     let coor = locationManager.location?.coordinate
     let latitude = coor?.latitude
     let longtitude = coor?.longitude
-    mapTest.camera = GMSCameraPosition.camera(withLatitude: latitude!,
-                                              longitude: longtitude!,
+    //    mapTest.camera = GMSCameraPosition.camera(withLatitude: latitude!,
+    //                                              longitude: longtitude!,
+    //                                              zoom: 15)
+    mapTest.camera = GMSCameraPosition.camera(withLatitude: 37.54282971056128,
+                                              longitude: 127.05600935965776,
                                               zoom: 15)
     //    print(data[10].address.loadAddress)
     let iconGenerator = GMUDefaultClusterIconGenerator()
@@ -157,21 +194,7 @@ class MapViewController: UIViewController{
     
     // Generate and add random items to the cluster manager.
     //    generateClusterItems()
-    DispatchQueue.main.async {
-//      self.mapGoogleGeocoder()
-      self.addClusterToMap()
-      DispatchQueue.main.async {
-        self.clusterManager.cluster()
-        
-        DispatchQueue.main.async {
-          self.clusterManager.setDelegate(self, mapDelegate: self)
-          
-          DispatchQueue.main.async {
-            self.setupUI()
-          }
-        }
-      }
-    }
+    
     
     // Call cluster() after items have been added to perform the clustering and rendering on map.
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
@@ -190,6 +213,12 @@ class MapViewController: UIViewController{
   
   
   // MARK: - Action
+  
+  func shootSingletonToMapViewController() {
+    requestRoomWhichFiltered()
+    print("shootSingletonToMapViewController is run")
+  }
+  
   func affterSearch() {
     
     guard let tabbarframe = tabBarController?.tabBar.frame else { return }
@@ -203,7 +232,7 @@ class MapViewController: UIViewController{
     print("check")
     self.bottomView.frame = CGRect(x: 0, y: 360, width: self.view.frame.width, height: 60 )
     self.tableView.frame = CGRect(x: 0, y: self.bottomView.frame.maxY, width: self.view.frame.width, height: tabbarframe.minY - 420 )
-   
+    
   }
   @objc private func didTapFilterButton(_ sender: UIButton) {
     let vc = FilterViewController()
@@ -289,9 +318,11 @@ class MapViewController: UIViewController{
     allRoomButton.addTarget(self, action: #selector(didTapAllRoomButton(_:)), for: .touchUpInside)
     filterButton.addTarget(self, action: #selector(didTapFilterButton(_:)), for: .touchUpInside)
     stackView = UIStackView(arrangedSubviews: selectButtons)
+    stackView.backgroundColor = UIColor(named: "FilterScrollViewGray")
     stackView.axis = .horizontal
     stackView.distribution = .equalSpacing
     stackView.spacing = 30
+    
     scrollView.addSubview(stackView)
     setupConstraint()
   }
@@ -325,11 +356,24 @@ class MapViewController: UIViewController{
       $0.height.equalTo(scrollView.snp.height)
       $0.width.equalTo(51)
     }
+    //    stackView.arrangedSubviews.forEach {
+    //      let button = $0 as! MapFilterButton
+    //      button.frame.size = CGSize(width: (15 * button.titleLabel!.text!.count) + 25, height: 35)
+    //    }
+    
     stackView.snp.makeConstraints {
-      $0.top.bottom.equalToSuperview()
+      $0.centerY.equalToSuperview()
       $0.leading.equalToSuperview().inset(20)
       $0.trailing.equalToSuperview().inset(20)
     }
+    stackView.arrangedSubviews.forEach { v in
+      let button = v as! MapFilterButton
+      v.snp.makeConstraints { make in
+        make.width.equalTo(15 * button.titleLabel!.text!.count + 5)
+        make.height.equalTo(35)
+      }
+    }
+    
     mapTest.snp.makeConstraints {
       $0.top.equalTo(scrollView.snp.bottom)
       $0.leading.trailing.equalToSuperview()
@@ -377,10 +421,17 @@ class MapViewController: UIViewController{
     //      $0.top.equalTo(bottomView.snp.bottom)
     //      $0.height.equalTo(500)
     //    }
+    
+    
   }
+  
+  var currentCameraPosition: GMSCameraPosition?
 }
 
 extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
+  
+  
+  
   
   func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
     print("didLongPressAt")
@@ -402,21 +453,80 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     }
   }
   
+  @objc private func didTapDetailFilterButton(_ sender: UIButton) {
+    let overlayFilterVC = FilterOverlayViewController()
+    overlayFilterVC.filterTag = sender.tag
+    overlayFilterVC.modalPresentationStyle = .overCurrentContext
+    overlayFilterVC.modalTransitionStyle = .crossDissolve
+    overlayFilterVC.delegate = self
+    present(overlayFilterVC, animated: true) {
+      print("presentCase0")
+    }
+  }
+  
+  //MARK: - 맵에 보이는 지역 매물 요청
   func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
     print(position.target)
+    
+    currentCameraPosition = position
+    if FilterSingleton.shared.roomType == "" {
+      requestRoomInCurrentMapWithoutFiltered(position)
+    } else {
+      requestRoomWhichFiltered()
+    }
+    
+    
+  }
+  
+  func requestRoomInCurrentMapWithoutFiltered(_ position: GMSCameraPosition) {
     APIManager.shared.getItemsInCurrentMap(km: 1, current: position.target) { result  in
       switch result {
       case .success(let data):
-        print("success :", data)
+        
+        print("success :", data.isEmpty ? "empty" : data[0])
+        BangDataMap.shared.data = data
+        
+        DispatchQueue.main.async {
+          self.addClusterToMap()
+          DispatchQueue.main.async {
+            self.clusterManager.cluster()
+            DispatchQueue.main.async {
+              self.clusterManager.setDelegate(self, mapDelegate: self)
+            }
+          }
+        }
       case .failure(let error):
         print("failure :", error)
       }
     }
   }
+  
+  func requestRoomWhichFiltered() {
+    APIManager.shared.getFilteredItems(type: FilterSingleton.shared.roomType) { response in
+      switch response {
+      case .success(let data):
+        print("FiteringSuccess :", data.results.isEmpty ? "empty" : data.results[0])
+        BangDataMap.shared.data = data.results
+        DispatchQueue.main.async {
+          self.addClusterToMap()
+          DispatchQueue.main.async {
+            self.clusterManager.cluster()
+            DispatchQueue.main.async {
+              self.clusterManager.setDelegate(self, mapDelegate: self)
+            }
+          }
+        }
+      case .failure(let error):
+        print("filtering error" , error)
+      }
+    }
+  }
+  
   func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
     let findLocation = mapView.camera.target
     reverseGeocode(location: findLocation)
   }
+  
   // [ 위경도 -> 주소 ]
   func reverseGeocode(location: CLLocationCoordinate2D) {
     let geocoder = GMSGeocoder()
@@ -463,7 +573,7 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
                 guard let location = geocodeObjects.results.first?.geometry.location else {return}
                 let name = "\(BangData.shared.data[i].pk)"
                 let item = POIItem(position: CLLocationCoordinate2DMake(location.lat, location.lng), name: name)
-
+                
                 DispatchQueue.main.async {
                   self.clusterManager.add(item)
                 }
@@ -479,15 +589,59 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     }//DispatchQueue.global().async scope End
   } //mapGoogleGeocoder() scope End
   
+  //MARK: - 맵에 클러스터 Item 추가
   func addClusterToMap() {
-    if BangData.shared.data.isEmpty { print("dataEmpty"); return }
-    for i in 0...BangData.shared.data.count-1 {
-      let name = "\(BangData.shared.data[i].pk)"
-      let item = POIItem(position: CLLocationCoordinate2DMake(BangData.shared.data[i].lng , BangData.shared.data[i].lat), name: name)
+    self.clusterManager.clearItems()
+    if BangDataMap.shared.data.isEmpty { print("dataEmpty"); return }
+    for i in 0...BangDataMap.shared.data.count-1 {
+      let name = "\(BangDataMap.shared.data[i].pk)"
+      
+      let item = POIItem(position: CLLocationCoordinate2DMake(BangDataMap.shared.data[i].lat , BangDataMap.shared.data[i].lng), name: name)
       DispatchQueue.main.async {
-        self.clusterManager.add(item)
+        if !self.arrShownClusterItemName.contains(name) {
+          self.clusterManager.add(item)
+          APIManager.shared.getCertainRoomData(pk: BangDataMap.shared.data[i].pk) { (result) in
+            switch result {
+            case .success(let eachData):
+              BangDataMap.shared.dataOfClusteredRooms.insert(eachData, at: 0)
+            case .failure(let error):
+              print(error)
+            }
+          }
+          self.arrShownClusterItemName.insert(name)
+        }  else {
+                   self.clusterManager.add(item)
+                 }
       }
     }
+  }
+  
+  func addClusterToMapWithFilteredData() {
+    self.clusterManager.clearItems()
+    if BangDataMap.shared.data.isEmpty { print("filteredData is Empty"); return }
+    for i in 0...BangDataMap.shared.data.count-1 {
+        let name = "\(BangDataMap.shared.data[i].pk)"
+        
+        let item = POIItem(position: CLLocationCoordinate2DMake(BangDataMap.shared.data[i].lat , BangDataMap.shared.data[i].lng), name: name)
+        DispatchQueue.main.async {
+          if !self.arrShownClusterItemName.contains(name) {
+            self.clusterManager.add(item)
+            APIManager.shared.getCertainRoomData(pk: BangDataMap.shared.data[i].pk) { (result) in
+              switch result {
+              case .success(let eachData):
+                BangDataMap.shared.dataOfClusteredRooms.insert(eachData, at: 0)
+              case .failure(let error):
+                print(error)
+              }
+            }
+            self.arrShownClusterItemName.insert(name)
+          } else {
+            self.clusterManager.add(item)
+          }
+        }
+      }
+    
+//    self.clusterManager.remove(item: )
   }
   
   // MARK: - 클러스터에 포함된 마커들의 name(pk) 값 얻기
@@ -568,6 +722,7 @@ extension MapViewController: CLLocationManagerDelegate {
     print("locationManagerDidPauseLocationUpdates")
   }
 }
+
 // MARK: - TableViewDataSource
 extension MapViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -593,5 +748,5 @@ extension MapViewController: UITableViewDelegate {
 }
 
 extension MapViewController: GMUClusterRendererDelegate {
-
+  
 }
