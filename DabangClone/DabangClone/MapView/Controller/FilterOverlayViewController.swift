@@ -179,6 +179,7 @@ extension FilterOverlayViewController: UITableViewDataSource {
     switch (filterTag, indexPath.row) {
     case (0, 0):
       let cell = tableView.dequeueReusableCell(withIdentifier: FilterRoomTypeCell.identifier, for: indexPath) as! FilterRoomTypeCell
+      cell.selectionStyle = .none
       return cell
     case (0, 1):
       let cell = tableView.dequeueReusableCell(withIdentifier: ApplyAndCancelTableViewCell.identifier, for: indexPath) as! ApplyAndCancelTableViewCell

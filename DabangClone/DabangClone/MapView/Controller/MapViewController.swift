@@ -474,8 +474,6 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     } else {
       requestRoomWhichFiltered()
     }
-    
-    
   }
   
   func requestRoomInCurrentMapWithoutFiltered(_ position: GMSCameraPosition) {
