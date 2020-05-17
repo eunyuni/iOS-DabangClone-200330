@@ -67,3 +67,15 @@ struct BangInCurrentMapModel: Codable {
         case 원룸주방분리형15룸 = "원룸(주방 분리형(1.5룸))"
         case 투룸 = "투룸"
     }
+
+
+struct FilteredItemsModel: Codable {
+  let count: Int
+  let next: String?
+  let previous: String?
+  let results: [BangInCurrentMapModel]
+  
+  enum CodingKeys: String, CodingKey {
+  case count, next, previous, results
+  }
+}
