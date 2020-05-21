@@ -61,6 +61,7 @@ PODS:
   - FBSDKShareKit/Share (6.5.1):
     - FBSDKCoreKit (~> 6.5.1)
   - FLAnimatedImage (1.0.12)
+  - Gedatsu (1.0.5)
   - KeychainSwift (19.0.0)
   - Kingfisher (5.13.4):
     - Kingfisher/Core (= 5.13.4)
@@ -95,6 +96,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - Gedatsu
   - KeychainSwift
   - Kingfisher (~> 5.0)
   - MultiSlider
@@ -119,6 +121,7 @@ SPEC REPOS:
     - FBSDKLoginKit
     - FBSDKShareKit
     - FLAnimatedImage
+    - Gedatsu
     - KeychainSwift
     - Kingfisher
     - MultiSlider
@@ -144,6 +147,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 8b2bc5fa30ea269e9d7208a1165c0a668c0ae826
   FBSDKShareKit: 9ad7b8d097fc568e911452feb8112ad7f04bb8a2
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  Gedatsu: 09222eaf87b70a9dc76a094b2ccf0d948f39f1a8
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
   MultiSlider: 5b0a78da0b4fd4bbc53c9c2bf917e0de0ebcbb04
@@ -158,6 +162,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
-PODFILE CHECKSUM: 2a97ca454088ea0358b24490ebe66588871b70c6
+PODFILE CHECKSUM: 3582b9cb08119f02419a466144410dd0c123c356
 
 COCOAPODS: 1.8.4

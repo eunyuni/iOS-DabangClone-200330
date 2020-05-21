@@ -140,14 +140,18 @@ class MainRoomTableViewCell: UITableViewCell {
     super.layoutSubviews()
   }
   
-  
-  func setupUI(pk: Int) {
-    let bangDataArr = BangData.shared.data.filter {
-      $0.pk == pk
+    
+  func setupUI(isFromFavoTab: Bool, pk: Int, room: DabangElement?) {
+    if !isFromFavoTab {
+        let bangDataArr = BangData.shared.data.filter {
+            $0.pk == pk
+        }
+        bangData = bangDataArr[0]
+    } else {
+        guard let room = room else { return }
+        bangData = room
     }
-    bangData = bangDataArr[0]
-    
-    
+
     if bangData.salesForm.type == .월세 {
       
       titleLabel.text = "\(bangData.salesForm.type) \(bangData.salesForm.depositChar)/\(bangData.salesForm.monthlyChar)"
@@ -417,7 +421,7 @@ extension MainRoomTableViewCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     if collectionView == self.collectionView {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainRoomCollectionViewCell.identifier, for: indexPath) as! MainRoomCollectionViewCell
-      let url = URL(string: "https://wpsdabangapi.s3.amazonaws.com/\(bangData.postimage[indexPath.row])")
+      let url = URL(string: "https://dabang.s3.amazonaws.com/\(bangData.postimage[indexPath.row])")
       cell.imageView.kf.setImage(with: url)
       cell.imageView.contentMode = .scaleAspectFill
       return cell

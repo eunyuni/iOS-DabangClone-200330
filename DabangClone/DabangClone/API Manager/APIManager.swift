@@ -26,8 +26,6 @@ final class APIManager {
     
     // MARK: - Properties
     static let shared = APIManager()
-    private let tempToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNTkxOTU2MTY0LCJlbWFpbCI6ImFkbWluQGdvb2dsZS5jb20ifQ.JsrV4hCOQl857pVCxcaCup1alS5yE_ftz7Yw2yXD1CA"
-    
     private let keyChain = KeychainSwift(keyPrefix: "DabangCloneUser_")
     var userPk = 0
     private let networkAccessManager = NetworkReachabilityManager(host: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com")
@@ -48,8 +46,9 @@ final class APIManager {
     
     // MARK: - [ Manage JWT ]
     func getAccessTokenFromKeyChain() -> String {
-        let accessToken = keyChain.get(Key.keyChain) ?? ""
-        return accessToken
+//        let accessToken = keyChain.get(Key.keyChain) ?? ""
+        let tempToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNTkxOTU2MTY0LCJlbWFpbCI6ImFkbWluQGdvb2dsZS5jb20ifQ.JsrV4hCOQl857pVCxcaCup1alS5yE_ftz7Yw2yXD1CA"
+        return tempToken
     }
     
     func setAccessTokenIntoKeyChain(token: String, key: String) -> Bool {
@@ -93,7 +92,6 @@ final class APIManager {
                     print("fail222")
                     completion(.failure(error))
                 }
-                
         }
     }
     
@@ -120,15 +118,15 @@ final class APIManager {
                 case .failure(let error):
                     completion(.failure(error))
                 }
+                
         }
     }
     
     //GET: 최근 본 방 리스트
     func getRecentlyCheckedRooms(completion: @escaping (Result<[DabangElement], Error>) -> Void) {
-        let header: HTTPHeaders = [.authorization(bearerToken: tempToken)]
-        AF.request( baseURL + "/members/posts/", method: .get, headers: header)
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
+        AF.request( baseURL + "/members/recentlyPosts/", method: .get, headers: header)
           .responseDecodable(of: CheckedRoom.self) { (response) in
-            print("getRecentlyCheckedRooms - AF.status Code: ", response.response?.statusCode ?? "")
                 switch response.result {
                 case .success(let rooms):
                     completion(.success(rooms.posts ?? []))
@@ -141,11 +139,9 @@ final class APIManager {
     
     //GET: 찜한 방 리스트
     func getMarkedRooms(completion: @escaping (Result<[DabangElement], Error>) -> Void) {
-        let header: HTTPHeaders = [.authorization(bearerToken: tempToken)]
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
         AF.request( baseURL + "/members/postlike/", method: .get, headers: header)
           .responseDecodable(of: MarkedRoom.self) { (response) in
-            
-            print("getMarkedRooms_ AF.status Code: ", response.response?.statusCode ?? "")
                 switch response.result {
                 case .success(let rooms):
                     let markedRooms = rooms.postLike?.map{$0.post} ?? []
@@ -162,7 +158,6 @@ final class APIManager {
     func getComplexInfoList(completion: @escaping (Result<[Complex], Error>) -> Void) {
         AF.request( baseURL + "/posts/complex/", method: .get)
             .responseDecodable(of: [Complex].self) { (response) in
-                print("AF.status Code: ", response.response?.statusCode ?? "")
                 switch response.result {
                 case .success(let complex):
                     completion(.success(complex))
@@ -175,10 +170,9 @@ final class APIManager {
     
     //GET: 최근 본 단지 정보 리스트
     func getRecentlyCheckedComplexList(completion: @escaping (Result<[Complex], Error>) -> Void) {
-        let header: HTTPHeaders = [.authorization(bearerToken: tempToken)]
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
         AF.request( baseURL + "/members/complexs/", method: .get, headers: header)
             .responseDecodable(of: CheckedComplex.self) { (response) in
-                print("getRecentlyCheckedComplexList_ AF.status Code: ", response.response?.statusCode ?? "")
                 switch response.result {
                 case .success(let complex):
                     completion(.success(complex.complexs ?? []))
@@ -190,10 +184,9 @@ final class APIManager {
     
     //GET: 찜한 단지 정보 리스트
     func getMarkedComplexList(completion: @escaping (Result<[Complex], Error>) -> Void) {
-        let header: HTTPHeaders = [.authorization(bearerToken: tempToken)]
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
         AF.request( baseURL + "/members/complike/", method: .get, headers: header)
             .responseDecodable(of: MarkedComplex.self) { (response) in
-                print("getMarkedComplexList_ AF.status Code: ", response.response?.statusCode ?? "")
                 switch response.result {
                 case .success(let complex):
                     let markedComplex = complex.compLike?.map{$0.complexs} ?? []
@@ -206,10 +199,9 @@ final class APIManager {
     
     //GET: 연락한 부동산 리스트
     func getContactedBrokerList(completion: @escaping (Result<[Broker], Error>) -> Void) {
-        let header: HTTPHeaders = [.authorization(bearerToken: tempToken)]
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
         AF.request( baseURL + "/members/brokers/", method: .get, headers: header)
             .responseDecodable(of: ContactedBroker.self) { (response) in
-                print("getContactedBrokerList_ AF.status Code: ", response.response?.statusCode ?? "")
                 switch response.result {
                 case .success(let brokers):
                     completion(.success(brokers.brokers ?? []))
@@ -434,9 +426,9 @@ let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1
     // MARK: - PATCH
     
     //PATCH: 유저 정보 수정
-    func patchUpdateUserInfo(phone: String, image: String, completion: @escaping (Result<User, Error>) -> Void) {
+    func patchUpdateUserInfo(phone: String, username: String, completion: @escaping (Result<User, Error>) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
-        let parameters = ["phone" : phone, "profileImage" : image]
+        let parameters = ["username": username, "phonenumber" : phone]
         AF.request( baseURL + "/members/\(userPk)/", method: .patch, parameters: parameters, headers: header )
             .responseDecodable(of: User.self) { (response) in
                 switch response.result {

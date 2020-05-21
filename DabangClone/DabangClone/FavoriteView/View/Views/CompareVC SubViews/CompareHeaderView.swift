@@ -42,7 +42,7 @@ class CompareHeaderView: UIView {
             self.imageView.contentMode = .scaleAspectFill
         }
         roomStyleLabel.text = data.salesForm.type.rawValue
-        costLabel.text = data.salesForm.type == .전세 ? data.salesForm.depositChar : data.salesForm.monthlyChar
+        costLabel.text = data.salesForm.type == .전세 || data.salesForm.type == .매매 ? data.salesForm.depositChar : data.salesForm.depositChar + data.salesForm.monthlyChar
     }
     
     required init?(coder: NSCoder) {

@@ -20,27 +20,7 @@ class RoomInfoCell: UITableViewCell {
     
     var data: DabangElement! {
         didSet{
-            self.nameLabel.text = data.name
-            self.priceLabel.text = "\(data.salesForm.type.rawValue)" + " " + data.salesForm.depositChar
-            let start = data.areaChar.index(data.areaChar.startIndex, offsetBy: 0)
-            let end = data.areaChar.index(data.areaChar.firstIndex(of: " ") ?? data.areaChar.endIndex, offsetBy: 0)
-            let range = start..<end
-            let mySubstring = data.areaChar[range]
-            
-            self.infoLabel.text = data.type.rawValue + " | \(data.floor) | \(String(mySubstring))m²"
-            
-            self.detailLabel.text = data.dabangDescription
-            etceteraArray = data.optionSet.map({$0.rawValue})
-            etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
-            putLabelInStackView()
-            if !data.postimage.isEmpty {
-            let url = URL(string: "https://dabang.s3.amazonaws.com/\(data.postimage[0])")
-            self.roomImageView.kf.setImage(with: url)
-            self.roomImageView.contentMode = .scaleAspectFill
-            }
-            if self.nameLabel.text == "" {
-                infoStackView.removeArrangedSubview(nameLabel)
-            }
+            reConfigureCell()
         }
     }
     
@@ -104,12 +84,7 @@ class RoomInfoCell: UITableViewCell {
             delegate?.didTapCheckButton(cell: self, isChecked: isCheckButtonSelected)
         }
     }
-  func configue(pk: Int) {
-    let roomPkData = BangData.shared.data.filter {
-      $0.pk == pk
-    }
-    roomPkData[0].address.loadAddress
-  }
+  
     // MARK: - Life Cycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -132,6 +107,32 @@ class RoomInfoCell: UITableViewCell {
     }
     
     // MARK: - Setup
+    
+    private func reConfigureCell() {
+        self.nameLabel.text = data.name
+        
+        self.priceLabel.text = data.salesForm.type == .전세 || data.salesForm.type == .매매
+            ? data.salesForm.type.rawValue + " " + data.salesForm.depositChar
+            : data.salesForm.type.rawValue + " " + data.salesForm.depositChar + "/" + data.salesForm.monthlyChar
+
+        let area = data.areaChar.components(separatedBy: " ").first
+        self.infoLabel.text = data.type.rawValue + " | \(data.floor) | " + (area ?? "") + "m²"
+        self.detailLabel.text = data.dabangDescription
+        
+        etceteraArray = data.optionSet.map({$0.rawValue})
+        etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
+        putLabelInStackView()
+        
+        self.heartButton.isSelected = UserActionTracker.shared.markedRoomList.contains(self.data.pk)
+        if !data.postimage.isEmpty {
+            let url = URL(string: "https://dabang.s3.amazonaws.com/\(data.postimage[0])")
+            self.roomImageView.kf.setImage(with: url)
+            self.roomImageView.contentMode = .scaleAspectFill
+        }
+        if self.nameLabel.text == "" {
+            infoStackView.removeArrangedSubview(nameLabel)
+        }
+    }
     
     private func configureEtcStackView() {
         etceteraStackView.axis = .horizontal
@@ -165,7 +166,7 @@ class RoomInfoCell: UITableViewCell {
     }
     
     private func configureInfoStackView() {
-        infoStackView.autoresizingMask = [.flexibleWidth]
+        infoStackView.autoresizingMask = [.flexibleHeight]
         infoStackView.axis = .vertical
         infoStackView.setCustomSpacing(15, after: priceLabel)
         infoStackView.spacing = 5
@@ -259,14 +260,29 @@ class RoomInfoCell: UITableViewCell {
     // MARK: - Action Handler
     
     @objc private func didTapHeartButton(_ sender: UIButton) {
-        print("tap")
         heartButton.isSelected.toggle()
         if isMarked {
-            //Post Data of this Cell to Server which has database about marked room all together
+            print("marked")
+            APIManager.shared.postMarkRoom(roomPK: self.data.pk) { (result) in
+                switch result {
+                case .success():
+                    print("successfully post marked room")
+                case .failure(let error):
+                    print("failed to post marked room: ",error)
+                }
+            }
         } else {
             //Delete marked data stored in Server
+            print("unmareked")
+            APIManager.shared.deleteMarkedRoom(roomPK: self.data.pk) { (result) in
+                switch result {
+                case .success():
+                    print("successfully delete marked room")
+                case .failure(let error):
+                    print("failed to delete marked room: ",error)
+                }
+            }
         }
-        //찜한방 리스트에 POST RoomID만 보내면 될 듯                                                                                      
     }
     
     @objc private func didTapCheckButton(_ sender: UIButton) {

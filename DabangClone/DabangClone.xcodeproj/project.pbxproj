@@ -211,6 +211,8 @@
 		6FAA9EA12449A3A30005F2B2 /* HomeSaleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAA9EA02449A3A30005F2B2 /* HomeSaleCollectionViewCell.swift */; };
 		6FAA9EA32449A3B70005F2B2 /* HomeRecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAA9EA22449A3B70005F2B2 /* HomeRecommendedCollectionViewCell.swift */; };
 		AAD0A9599381D7CA708D6E31 /* Pods_DabangClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90B70ED9EB0B15C4D6FEDE4D /* Pods_DabangClone.framework */; };
+		CE4F5334246E730200F06225 /* UserActionTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F5333246E730200F06225 /* UserActionTracker.swift */; };
+		CE4F533624710A1400F06225 /* RoomsInComplexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F533524710A1400F06225 /* RoomsInComplexController.swift */; };
 		CEC7B71D245296450089E267 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC7B71C245296450089E267 /* APIManager.swift */; };
 		E77D8C5B243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C5A243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift */; };
 		E77D8C5D243DD87000A263AE /* BrokerageSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77D8C5C243DD87000A263AE /* BrokerageSectionView.swift */; };
@@ -535,6 +537,8 @@
 		6FAA9EA22449A3B70005F2B2 /* HomeRecommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRecommendedCollectionViewCell.swift; sourceTree = "<group>"; };
 		90B70ED9EB0B15C4D6FEDE4D /* Pods_DabangClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DabangClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4C5C9223C55AA5442630D52 /* Pods-DabangClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DabangClone.debug.xcconfig"; path = "Target Support Files/Pods-DabangClone/Pods-DabangClone.debug.xcconfig"; sourceTree = "<group>"; };
+		CE4F5333246E730200F06225 /* UserActionTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActionTracker.swift; sourceTree = "<group>"; };
+		CE4F533524710A1400F06225 /* RoomsInComplexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsInComplexController.swift; sourceTree = "<group>"; };
 		CEC7B71C245296450089E267 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		DF6E307BB0DBA8293AA6779F /* Pods-DabangClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DabangClone.debug.xcconfig"; path = "Target Support Files/Pods-DabangClone/Pods-DabangClone.debug.xcconfig"; sourceTree = "<group>"; };
 		E77D8C5A243DD2EE00A263AE /* BrokerageOfficeSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrokerageOfficeSectionCell.swift; path = DabangClone/HomeView/Controller/BrokerageOfficeSectionCell.swift; sourceTree = SOURCE_ROOT; };
@@ -727,6 +731,7 @@
 			children = (
 				15315A42244857250033EA47 /* FavoriteListViewController.swift */,
 				15315A43244857250033EA47 /* CompareViewController.swift */,
+				CE4F533524710A1400F06225 /* RoomsInComplexController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1196,6 +1201,7 @@
 			isa = PBXGroup;
 			children = (
 				1516004A242495FE0003DDCF /* Extensions.swift */,
+				CE4F5333246E730200F06225 /* UserActionTracker.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1503,6 +1509,7 @@
 				6F41B409242A32D800CACDCE /* SettingSectionView.swift in Sources */,
 				1591219B2451CCCA00DA05D8 /* GMUKMLParser.m in Sources */,
 				E77D8C8324474DC600A263AE /* SaleDetailAlertViewController.swift in Sources */,
+				CE4F5334246E730200F06225 /* UserActionTracker.swift in Sources */,
 				E79D81872429EA340006029E /* RGBodyTableViewCell.swift in Sources */,
 				15D9B3522431C29C00A38A76 /* AddressView.swift in Sources */,
 				15AB31242446E33C002AC5B8 /* DetailInfoStackView.swift in Sources */,
@@ -1560,6 +1567,7 @@
 				E7BB1C14243353F200C66B48 /* RSBodyTableViewCell.swift in Sources */,
 				159121952451CCCA00DA05D8 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				E77D8C7D2447301200A263AE /* SaleDetailRecommendCell.swift in Sources */,
+				CE4F533624710A1400F06225 /* RoomsInComplexController.swift in Sources */,
 				E77D8C792445C93900A263AE /* SaleDetailNearMapCell.swift in Sources */,
 				6F389E6E2448551700A440A4 /* SaleThemeCollectionViewCell.swift in Sources */,
 				E77D8C5F243DF52B00A263AE /* BrokerageHomeInfoCell.swift in Sources */,

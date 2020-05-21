@@ -33,25 +33,8 @@ final class FavoriteViewModel {
     
     lazy var activeData = FavoriteData.checkedRoomInfo(checkedRoomData)
     
-    lazy var data: [FavoriteData] = [
-        .checkedRoomInfo(checkedRoomData),
-        .checkedDanziInfo(checkedDanziData),
-        .markedRoomInfo(markedRoomData),
-        .markedDanziInfo(markedDanziData),
-        .budongsanInfo(contactBudongsanData)
-    ]
-    
     init() {
         print("FavoViewModel init")
-        
-//        APIManager.shared.getUserProfile(userPK: 1) { (result) in
-//            switch result {
-//            case .success(let user):
-//                print(type(of: user))
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
         fetchRecentlyCheckedRooms()
         fetchCheckedComplex()
         fetchMarkedRooms()
@@ -59,20 +42,6 @@ final class FavoriteViewModel {
         fetchContactedBrokersData()
     }
     
-    
-    
-    func fetchAllData() {
-        APIManager.shared.getUserProfile { (result) in
-            switch result {
-            case .success(let user):
-                self.checkedRoomData = user.recentlyCheckedRooms ?? []
-                self.markedRoomData = user.markedRooms ?? []
-                self.delegate?.reloadTableView()
-            case .failure(let error):
-                print("failed to fetch favorite data:", error)
-            }
-        }
-    }
     func tempLocalCreateUser() {
         APIManager.shared.postCreteUser(username: "testname123", password: "123123", email: "testEmail@gmail.com") { (message, isSuccess) in
             if isSuccess {
@@ -84,11 +53,12 @@ final class FavoriteViewModel {
         }
     }
 
-    func fetchMarkedComplex() {
+    private func fetchMarkedComplex() {
         APIManager.shared.getMarkedComplexList { (result) in
             switch result {
             case .success(let complexs):
                 self.markedDanziData = complexs
+                self.activeData = FavoriteData.markedDanziInfo(self.markedDanziData)
                 self.delegate?.reloadTableView()
                 print("fetchMarkedComplex")
             case .failure(let error):
@@ -97,11 +67,12 @@ final class FavoriteViewModel {
         }
     }
     
-    func fetchCheckedComplex() {
+    private func fetchCheckedComplex() {
         APIManager.shared.getRecentlyCheckedComplexList { (result) in
             switch result {
             case .success(let complexs):
                 self.checkedDanziData = complexs
+                self.activeData = FavoriteData.checkedDanziInfo(self.checkedDanziData)
                 self.delegate?.reloadTableView()
                 print("fetchCheckedComplex")
             case .failure(let error):
@@ -110,12 +81,14 @@ final class FavoriteViewModel {
         }
     }
     
-    func fetchMarkedRooms() {
+    private func fetchMarkedRooms() {
         APIManager.shared.getMarkedRooms { (result) in
             switch result {
             case .success(let rooms):
                 self.markedRoomData = rooms
+                self.activeData = FavoriteData.markedRoomInfo(self.markedRoomData)
                 self.delegate?.reloadTableView()
+                UserActionTracker.shared.markedRoomList = rooms.map{$0.pk}
                 print("fetchMarkedRooms")
             case .failure(let error):
                 print("failed to fetch marked rooms: ", error)
@@ -123,11 +96,12 @@ final class FavoriteViewModel {
         }
     }
     
-    func fetchRecentlyCheckedRooms() {
+    private func fetchRecentlyCheckedRooms() {
         APIManager.shared.getRecentlyCheckedRooms { (result) in
             switch result {
             case .success(let rooms):
                 self.checkedRoomData = rooms
+                self.activeData = FavoriteData.checkedRoomInfo(self.checkedRoomData)
                 self.delegate?.reloadTableView()
                 print("fetchRecentlyCheckedRooms")
             case .failure(let error):
@@ -136,11 +110,12 @@ final class FavoriteViewModel {
         }
     }
     
-    func fetchContactedBrokersData() {
+    private func fetchContactedBrokersData() {
         APIManager.shared.getContactedBrokerList { (result) in
             switch result {
             case .success(let brokers):
                 self.contactBudongsanData = brokers
+                self.activeData = FavoriteData.budongsanInfo(self.contactBudongsanData)
                 self.delegate?.reloadTableView()
                 print("fetchContactedBrokersData")
             case .failure(let error):
@@ -149,28 +124,31 @@ final class FavoriteViewModel {
         }
     }
     
-    func setActiveData(_ dataIndex: Int) {
-//        switch dataIndex {
-//        case 0:
-//            fetchRecentlyCheckedRooms()
-//        case 1:
-//            fetchCheckedComplex()
-//        case 2:
-//            fetchMarkedRooms()
-//        case 3:
-//            fetchMarkedComplex()
-//        case 4:
-//            fetchContactedBrokersData()
-//        default:
-//            break
-//        }
-        activeData = data[dataIndex]
+    private func setActiveData(_ dataIndex: Int) {
+        switch dataIndex {
+        case 0:
+            self.activeData = FavoriteData.checkedRoomInfo(self.checkedRoomData)
+            fetchRecentlyCheckedRooms()
+        case 1:
+            self.activeData = FavoriteData.checkedDanziInfo(self.checkedDanziData)
+            fetchCheckedComplex()
+        case 2:
+            self.activeData = FavoriteData.markedRoomInfo(self.markedRoomData)
+            fetchMarkedRooms()
+        case 3:
+            self.activeData = FavoriteData.markedDanziInfo(self.markedDanziData)
+            fetchMarkedComplex()
+        case 4:
+            self.activeData = FavoriteData.budongsanInfo(self.contactBudongsanData)
+            fetchContactedBrokersData()
+        default:
+            break
+        }
     }
     
     func checkActiveDataCount() -> Int {
         switch activeData {
         case .checkedRoomInfo(let rooms):
-            print("check data count:", rooms.count)
             return rooms.count
         case .checkedDanziInfo(let danzis):
             return danzis.count
@@ -191,6 +169,7 @@ final class FavoriteViewModel {
             return cell
         case .checkedDanziInfo(let danzis):
             let cell = tableView.dequeueReusableCell(withIdentifier: DanziInfoCell.identifier, for: indexPath) as! DanziInfoCell
+            cell.delegate = viewController
             cell.set(danziInfo: danzis[indexPath.row])
             return cell
         case .markedRoomInfo(let rooms):
@@ -200,11 +179,12 @@ final class FavoriteViewModel {
             return cell
         case .markedDanziInfo(let danzis):
             let cell = tableView.dequeueReusableCell(withIdentifier: DanziInfoCell.identifier, for: indexPath) as! DanziInfoCell
+            cell.delegate = viewController
             cell.set(danziInfo: danzis[indexPath.row])
             return cell
         case .budongsanInfo(let budongsan):
             let cell = tableView.dequeueReusableCell(withIdentifier: BudongsanInfoCell.identifier, for: indexPath) as! BudongsanInfoCell
-            cell.set(info: budongsan[indexPath.row])
+            cell.set(info: budongsan[indexPath.row], roomPK: budongsan[indexPath.row].pkList?.first ?? nil)
             return cell
         }
         

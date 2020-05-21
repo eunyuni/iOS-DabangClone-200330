@@ -13,6 +13,10 @@ import FBSDKShareKit
 import GoogleMaps
 import GooglePlaces
 
+#if DEBUG
+import Gedatsu
+#endif
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
@@ -32,6 +36,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    UINavigationController(rootViewController: FavoriteListViewController())
     ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     KOSession.shared()?.isAutomaticPeriodicRefresh = true
+    
+    #if DEBUG
+    Gedatsu.open()
+    #endif
     
     return true
   }
