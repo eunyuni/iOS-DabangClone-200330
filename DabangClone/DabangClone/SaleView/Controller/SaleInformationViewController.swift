@@ -27,7 +27,8 @@ class SaleInformationViewController: UIViewController {
   
   //  var saleData: [SaleInfo] = []
   var saleTiny: [SaleTiny] = []
-  
+  var saleTiny2: [SaleTiny] = []
+  var arrayInt: [Int] = []
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -53,6 +54,7 @@ class SaleInformationViewController: UIViewController {
   @objc private func didTapGesture(_ sender: UITapGestureRecognizer){
     let vc = SaleAreaViewController()
     vc.modalPresentationStyle = .custom
+    vc.delegate = self
     present(vc, animated: true, completion: nil)
   }
   // MARK: - setupUI
@@ -88,14 +90,25 @@ class SaleInformationViewController: UIViewController {
 
 extension SaleInformationViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    saleTiny.count
+    if topLabel.text == "전국" {
+      return saleTiny.count
+    } else {
+      return saleTiny2.count
+    }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: SaleInformationTableViewCell.identifier, for: indexPath) as! SaleInformationTableViewCell
-    cell.configue(saleTiny[indexPath.row])
-    cell.delegate = self
-    return cell
+    if topLabel.text == "전국" {
+      let cell = tableView.dequeueReusableCell(withIdentifier: SaleInformationTableViewCell.identifier, for: indexPath) as! SaleInformationTableViewCell
+      cell.configue(saleTiny[indexPath.row])
+      cell.delegate = self
+      return cell
+    } else {
+      let cell = tableView.dequeueReusableCell(withIdentifier: SaleInformationTableViewCell.identifier, for: indexPath) as! SaleInformationTableViewCell
+      cell.configue(saleTiny2[indexPath.row])
+      cell.delegate = self
+      return cell
+    }
   }
   
 }
@@ -121,5 +134,16 @@ extension SaleInformationViewController: SaleInformationTableViewCellDelegate {
         print("getCertainSaleData Error🤪\(error)")
       }
     }
+  }
+}
+
+
+extension SaleInformationViewController: SaleAreaViewControllerDelegate {
+  func abcde(area: String) {
+    topLabel.text = area
+    saleTiny2 = saleTiny.filter({
+      $0.place.contains(self.topLabel.text!)
+    })
+    self.tableView.reloadData()
   }
 }

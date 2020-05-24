@@ -118,7 +118,18 @@ extension SaleDetailViewController: UITableViewDataSource {
       return cell
     case 1:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailSectionCell.identifier, for: indexPath) as! SaleDetailSectionCell
-      cell.configue(parcelPrice: saleData.salesPrice, parcelhousehold: saleData.salesCitizen, recruitmentNotice: saleData.recruit, scheduledDate: saleData.recruit)
+      var price = ""
+      let salesPrice = saleData.salesPrice
+      var check = false
+      for i in salesPrice {
+        if i == " " {
+          check = true
+        }
+        if check {
+          price.append(i)
+        }
+      }
+      cell.configue(parcelPrice: price, parcelhousehold: saleData.salesCitizen, recruitmentNotice: saleData.recruit, scheduledDate: saleData.recruit)
       return cell
     case 2:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailSaleInfoCell.identifier, for: indexPath) as! SaleDetailSaleInfoCell
@@ -129,7 +140,17 @@ extension SaleDetailViewController: UITableViewDataSource {
       return cell
     case 4:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailParcelPriceCell.identifier, for: indexPath) as! SaleDetailParcelPriceCell
-      cell.configue(parcelPriceLabel: "3억3370 ~ 5억2940", flatPriceLabel: "1622", averageLabel: "1323")
+      var pricePyeong: String = "-"
+      if let price = saleData.pricePyeong {
+        pricePyeong = ""
+        for i in price {
+          if i == "만" {
+            break
+          }
+          pricePyeong.append(i)
+        }
+      }
+      cell.configue(parcelPriceLabel: saleData.detailPrice ?? "-", flatPriceLabel: pricePyeong, averageLabel: "1323")
       return cell
     case 6:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailScheduleCell.identifier, for: indexPath) as! SaleDetailScheduleCell
@@ -137,7 +158,7 @@ extension SaleDetailViewController: UITableViewDataSource {
       return cell
     case 8:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailNearMapCell.identifier, for: indexPath) as! SaleDetailNearMapCell
-      cell.configue(addressLabel: "인천광역시 부평구 십정동 186-375 번지 일원", mart: "킴스클럽 부평점", hospital:
+      cell.configue(addressLabel: saleData.place, mart: "킴스클럽 부평점", hospital:
         "가톨릭대학교 인천성모병원", institute: "부평3동주민센터", cultural: "부평아트센터 부평아트하우스", martSpace: "901m", hospitalSpace: "1.8km", instituteSpace: "413m", culturalSpace: "102m")
       return cell
     case 10:
