@@ -19,4 +19,11 @@ class FilterSingleton {
   static let shared = FilterSingleton()
   
   var roomType: String = ""
+  var saleType: String = ""
+}
+
+class TemporaryFilterSaleTypeSingleton {
+  static let shared = TemporaryFilterSaleTypeSingleton()
+  
+  var saleType: [UIButton] = []
 }

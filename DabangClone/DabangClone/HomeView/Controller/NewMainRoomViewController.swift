@@ -28,6 +28,7 @@ class NewMainRoomViewController: UIViewController {
     navigationController?.navigationBar.isHidden = true
     navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     navigationController?.navigationBar.barStyle = .black
+    tabBarController?.tabBar.isHidden = true
     view.backgroundColor = .blue
     setupUI()
   }

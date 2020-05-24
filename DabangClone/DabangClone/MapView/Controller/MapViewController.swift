@@ -500,7 +500,7 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
   }
   
   func requestRoomWhichFiltered() {
-    APIManager.shared.getFilteredItems(type: FilterSingleton.shared.roomType) { response in
+    APIManager.shared.getFilteredItems(salesForm__type: FilterSingleton.shared.saleType, type: FilterSingleton.shared.roomType) { response in
       switch response {
       case .success(let data):
         print("FiteringSuccess :", data.results.isEmpty ? "empty" : data.results[0])
