@@ -74,20 +74,20 @@ class ApplyAndCancelTableViewCell: UITableViewCell {
   
   @objc private func didTapApplyButton(_ sender: UIButton) {
     FilterSingleton.shared.roomType = ""
-      FilterSingleton.shared.roomType = TemporaryFilterSingleton.shared.roomType.map { btn -> String in
-        switch btn.tag {
-        case 0:
-          return "원룸"
-        case 1:
-          return "투룸,쓰리룸"
-        case 2:
-          return "오피스텔"
-        case 3:
-          return "아파트"
-        default:
-          return ""
-        }
-      }.joined(separator: ",")
+    FilterSingleton.shared.roomType = TemporaryFilterSingleton.shared.roomType.map { btn -> String in
+      switch btn.tag {
+      case 0:
+        return "원룸"
+      case 1:
+        return "투룸,쓰리룸"
+      case 2:
+        return "오피스텔"
+      case 3:
+        return "아파트"
+      default:
+        return ""
+      }
+    }.joined(separator: ",")
     
     if !FilterSingleton.shared.roomType.contains("원룸") {
       FilterRoomTypeSingleton.shared.원룸 = false
@@ -97,19 +97,54 @@ class ApplyAndCancelTableViewCell: UITableViewCell {
     if !FilterSingleton.shared.roomType.contains("투룸") {
       FilterRoomTypeSingleton.shared.투쓰리룸 = false
     } else {
-         FilterRoomTypeSingleton.shared.투쓰리룸 = true
-       }
+      FilterRoomTypeSingleton.shared.투쓰리룸 = true
+    }
     if !FilterSingleton.shared.roomType.contains("오피스텔") {
       FilterRoomTypeSingleton.shared.오피스텔 = false
     } else {
-         FilterRoomTypeSingleton.shared.오피스텔 = true
-       }
+      FilterRoomTypeSingleton.shared.오피스텔 = true
+    }
     if !FilterSingleton.shared.roomType.contains("아파트") {
       FilterRoomTypeSingleton.shared.아파트 = false
     } else {
-         FilterRoomTypeSingleton.shared.아파트 = true
-       }
+      FilterRoomTypeSingleton.shared.아파트 = true
+    }
     print("결과",FilterSingleton.shared.roomType)
+    
+    FilterSingleton.shared.saleType = ""
+    
+    FilterSingleton.shared.saleType = TemporaryFilterSaleTypeSingleton.shared.saleType.map { btn -> String in
+      switch btn.tag {
+      case 0:
+        return "월세"
+      case 1:
+        return "전세"
+      case 2:
+        return "매매"
+      default:
+        return ""
+      }
+    }.joined(separator: ",")
+    
+    if !FilterSingleton.shared.saleType.contains("월세") {
+      FilterSaleTypeSingleton.shared.월세 = false
+    } else {
+      FilterSaleTypeSingleton.shared.월세 = true
+    }
+    if !FilterSingleton.shared.saleType.contains("전세") {
+      FilterSaleTypeSingleton.shared.전세 = false
+    } else {
+      FilterSaleTypeSingleton.shared.전세 = true
+    }
+    if !FilterSingleton.shared.saleType.contains("매매") {
+      FilterSaleTypeSingleton.shared.매매 = false
+    } else {
+      FilterSaleTypeSingleton.shared.매매 = true
+    }
+    
+    print("결과",FilterSingleton.shared.saleType)
+    
+    
     delegate?.didTapApplyButtonInRoomTypeCell()
   }
   

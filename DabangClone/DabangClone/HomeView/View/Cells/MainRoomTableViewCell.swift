@@ -18,7 +18,7 @@ class MainRoomTableViewCell: UITableViewCell {
   
   let optionCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewCenteredFlowLayout()).then {
     $0.isPagingEnabled = false
-  $0.isUserInteractionEnabled = false
+    $0.isUserInteractionEnabled = false
   }
   
   var optionArr = ["풀옵션", "빌트인", "반려동물", "보안/안전", "전세자금대출", "주차", "개별난방"]
@@ -129,7 +129,7 @@ class MainRoomTableViewCell: UITableViewCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-//    setupUI()
+    //    setupUI()
   }
   
   required init?(coder: NSCoder) {
@@ -147,12 +147,12 @@ class MainRoomTableViewCell: UITableViewCell {
     }
     if bangDataArr.isEmpty {
       APIManager.shared.getCertainRoomData(pk: pk) { (result) in
-      switch result {
-      case .success(let eachData):
-      bangDataArr.append(eachData)
-      case .failure(let error):
-        print(error)
-      }
+        switch result {
+        case .success(let eachData):
+          bangDataArr.append(eachData)
+        case .failure(let error):
+          print(error)
+        }
       }
     } else {
       bangData = bangDataArr[0]
@@ -222,7 +222,7 @@ class MainRoomTableViewCell: UITableViewCell {
       $0.top.equalTo(collectionView.snp.bottom)
       $0.leading.trailing.equalToSuperview()
       if optionArr.count <= 5 {
-      $0.height.equalTo(270)
+        $0.height.equalTo(270)
       } else {
         $0.height.equalTo(302)
       }
@@ -397,9 +397,11 @@ class MainRoomTableViewCell: UITableViewCell {
     optionCollectionView.snp.makeConstraints {
       $0.top.equalTo(bezel2.snp.bottom).offset(20)
       $0.leading.trailing.equalToSuperview()
-      if optionArr.count <= 5 {
-      $0.height.equalTo(25)
-      } else {
+      if optionArr.count == 0 {
+        $0.height.equalTo(10)
+      } else if optionArr.count <= 5 {
+        $0.height.equalTo(25)
+      } else if optionArr.count > 5 {
         $0.height.equalTo(57)
       }
     }
@@ -408,10 +410,6 @@ class MainRoomTableViewCell: UITableViewCell {
   
   private func setupFlowLayout() {
     guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-    //    flowLayout.itemSize = CGSize(width: NewMainRoomViewController.frammm.width, height: NewMainRoomViewController.frammm.height/3)
-    //    flowLayout.minimumLineSpacing = 0
-    //    flowLayout.minimumInteritemSpacing = 0
-    //    flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     flowLayout.scrollDirection = .horizontal
   }
 }
@@ -419,7 +417,6 @@ class MainRoomTableViewCell: UITableViewCell {
 extension MainRoomTableViewCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if collectionView == self.collectionView {
-      
       return bangData.postimage.count
     } else {
       return bangData.optionSet.count
@@ -449,12 +446,9 @@ extension MainRoomTableViewCell: UICollectionViewDataSource {
       return cell
     }
   }
-  
 }
 
 extension MainRoomTableViewCell: UICollectionViewDelegate {
-  
-  
 }
 
 extension MainRoomTableViewCell: UICollectionViewDelegateFlowLayout {
@@ -463,20 +457,24 @@ extension MainRoomTableViewCell: UICollectionViewDelegateFlowLayout {
     if collectionView == self.collectionView {
       return CGSize(width: NewMainRoomViewController.frammm.width, height: NewMainRoomViewController.frammm.height/3)
     } else {
-      if bangData.optionSet.count == 3 {
-        return CGSize(width: 50, height: 25)
-      } else if bangData.optionSet.count == 4 {
-        return CGSize(width: 60, height: 25)
-      } else if bangData.optionSet.count == 5 {
-        return CGSize(width: 70, height: 25)
-      } else if bangData.optionSet.count == 2 {
-        return CGSize(width: 40, height: 25)
-      } else if bangData.optionSet.count == 6 {
-        return CGSize(width: 80, height: 25)
-      } else {
-        return CGSize(width: 50, height: 25)
+      var optionSetNonNil: [OptionSet] = []
+      if !bangData.optionSet.isEmpty {
+        optionSetNonNil = bangData.optionSet
       }
-    }
+        if optionSetNonNil[indexPath.row].rawValue.count == 3 {
+          return CGSize(width: 50, height: 25)
+        } else if optionSetNonNil[indexPath.row].rawValue.count == 4 {
+          return CGSize(width: 60, height: 25)
+        } else if optionSetNonNil[indexPath.row].rawValue.count == 5 {
+          return CGSize(width: 70, height: 25)
+        } else if optionSetNonNil[indexPath.row].rawValue.count == 2 {
+          return CGSize(width: 40, height: 25)
+        } else if optionSetNonNil[indexPath.row].rawValue.count == 6 {
+          return CGSize(width: 80, height: 25)
+        } else {
+          return CGSize(width: 50, height: 25)
+        }
+      }
   }
   // 위아래 패딩
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

@@ -100,36 +100,36 @@ class MapViewController: UIViewController, FilterOverlayViewControllerDelegate {
   
   private var stackView: UIStackView!
   private lazy var selectButtons = [
-    MapFilterButton(title: "원룸 ⌄", tag: 0).then{
+    MapFilterButton(title: "방 구조 ⌄", tag: 0).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
       
     },
-    MapFilterButton(title: "가격 ⌄", tag: 1).then{
+    MapFilterButton(title: "거래 종류 ⌄", tag: 1).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "관리비 ⌄", tag: 2).then{
+    MapFilterButton(title: "층 수 ⌄", tag: 2).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "방 크기 ⌄", tag: 3).then{
+    MapFilterButton(title: "추가 필터 ⌄", tag: 3).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "층 수 ⌄", tag: 4).then{
+    MapFilterButton(title: "관리비 ⌄", tag: 4).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "방구조 ⌄", tag: 5).then{
+    MapFilterButton(title: "가격 ⌄", tag: 5).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "추가필터 ⌄", tag: 6).then{
+    MapFilterButton(title: "관리비 ⌄", tag: 6).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "거래종류 ⌄", tag: 7).then{
+    MapFilterButton(title: "방 크기 ⌄", tag: 7).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
@@ -171,7 +171,7 @@ class MapViewController: UIViewController, FilterOverlayViewControllerDelegate {
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    self.tabBarController?.tabBar.isHidden = false
     self.view.backgroundColor = .white
     tableView.dataSource = self
     tableView.delegate = self
@@ -474,8 +474,6 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     } else {
       requestRoomWhichFiltered()
     }
-    
-    
   }
   
   func requestRoomInCurrentMapWithoutFiltered(_ position: GMSCameraPosition) {
@@ -502,7 +500,7 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
   }
   
   func requestRoomWhichFiltered() {
-    APIManager.shared.getFilteredItems(type: FilterSingleton.shared.roomType) { response in
+    APIManager.shared.getFilteredItems(salesForm__type: FilterSingleton.shared.saleType, type: FilterSingleton.shared.roomType) { response in
       switch response {
       case .success(let data):
         print("FiteringSuccess :", data.results.isEmpty ? "empty" : data.results[0])
@@ -610,8 +608,8 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
           }
           self.arrShownClusterItemName.insert(name)
         }  else {
-                   self.clusterManager.add(item)
-                 }
+          self.clusterManager.add(item)
+        }
       }
     }
   }
@@ -620,28 +618,28 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     self.clusterManager.clearItems()
     if BangDataMap.shared.data.isEmpty { print("filteredData is Empty"); return }
     for i in 0...BangDataMap.shared.data.count-1 {
-        let name = "\(BangDataMap.shared.data[i].pk)"
-        
-        let item = POIItem(position: CLLocationCoordinate2DMake(BangDataMap.shared.data[i].lat , BangDataMap.shared.data[i].lng), name: name)
-        DispatchQueue.main.async {
-          if !self.arrShownClusterItemName.contains(name) {
-            self.clusterManager.add(item)
-            APIManager.shared.getCertainRoomData(pk: BangDataMap.shared.data[i].pk) { (result) in
-              switch result {
-              case .success(let eachData):
-                BangDataMap.shared.dataOfClusteredRooms.insert(eachData, at: 0)
-              case .failure(let error):
-                print(error)
-              }
+      let name = "\(BangDataMap.shared.data[i].pk)"
+      
+      let item = POIItem(position: CLLocationCoordinate2DMake(BangDataMap.shared.data[i].lat , BangDataMap.shared.data[i].lng), name: name)
+      DispatchQueue.main.async {
+        if !self.arrShownClusterItemName.contains(name) {
+          self.clusterManager.add(item)
+          APIManager.shared.getCertainRoomData(pk: BangDataMap.shared.data[i].pk) { (result) in
+            switch result {
+            case .success(let eachData):
+              BangDataMap.shared.dataOfClusteredRooms.insert(eachData, at: 0)
+            case .failure(let error):
+              print(error)
             }
-            self.arrShownClusterItemName.insert(name)
-          } else {
-            self.clusterManager.add(item)
           }
+          self.arrShownClusterItemName.insert(name)
+        } else {
+          self.clusterManager.add(item)
         }
       }
+    }
     
-//    self.clusterManager.remove(item: )
+    //    self.clusterManager.remove(item: )
   }
   
   // MARK: - 클러스터에 포함된 마커들의 name(pk) 값 얻기

@@ -46,37 +46,12 @@ PODS:
     - SDWebImage/GIF
   - DKPhotoGallery/Resource (0.0.12):
     - SDWebImage/GIF
-<<<<<<< Updated upstream
   - FBSDKCoreKit (6.5.1):
     - FBSDKCoreKit/Basics (= 6.5.1)
     - FBSDKCoreKit/Core (= 6.5.1)
   - FBSDKCoreKit/Basics (6.5.1)
   - FBSDKCoreKit/Core (6.5.1):
     - FBSDKCoreKit/Basics
-=======
-<<<<<<< HEAD
-  - FBSDKCoreKit (7.0.0):
-    - FBSDKCoreKit/Basics (= 7.0.0)
-    - FBSDKCoreKit/Core (= 7.0.0)
-  - FBSDKCoreKit/Basics (7.0.0)
-  - FBSDKCoreKit/Core (7.0.0):
-    - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (7.0.0):
-    - FBSDKLoginKit/Login (= 7.0.0)
-  - FBSDKLoginKit/Login (7.0.0):
-    - FBSDKCoreKit (~> 7.0.0)
-  - FBSDKShareKit (7.0.0):
-    - FBSDKShareKit/Share (= 7.0.0)
-  - FBSDKShareKit/Share (7.0.0):
-    - FBSDKCoreKit (~> 7.0.0)
-=======
-  - FBSDKCoreKit (6.5.1):
-    - FBSDKCoreKit/Basics (= 6.5.1)
-    - FBSDKCoreKit/Core (= 6.5.1)
-  - FBSDKCoreKit/Basics (6.5.1)
-  - FBSDKCoreKit/Core (6.5.1):
-    - FBSDKCoreKit/Basics
->>>>>>> Stashed changes
   - FBSDKLoginKit (6.5.1):
     - FBSDKLoginKit/Login (= 6.5.1)
   - FBSDKLoginKit/Login (6.5.1):
@@ -85,16 +60,12 @@ PODS:
     - FBSDKShareKit/Share (= 6.5.1)
   - FBSDKShareKit/Share (6.5.1):
     - FBSDKCoreKit (~> 6.5.1)
-<<<<<<< Updated upstream
-=======
->>>>>>> develop
->>>>>>> Stashed changes
   - FLAnimatedImage (1.0.12)
   - Gedatsu (1.0.5)
   - KeychainSwift (19.0.0)
-  - Kingfisher (5.14.0):
-    - Kingfisher/Core (= 5.14.0)
-  - Kingfisher/Core (5.14.0)
+  - Kingfisher (5.13.4):
+    - Kingfisher/Core (= 5.13.4)
+  - Kingfisher/Core (5.13.4)
   - MultiSlider (1.10.9):
     - AvailableHapticFeedback
     - SweeterSwift
@@ -172,25 +143,13 @@ SPEC CHECKSUMS:
   DKCamera: a902b66921fca14b7a75266feb8c7568aa7caa71
   DKImagePickerController: 4a3e7948a848c4348e600b3fe5ce41478835fa10
   DKPhotoGallery: 1b4d65d9a485dfdd2002f22daa5b955eafb350ea
-<<<<<<< Updated upstream
   FBSDKCoreKit: 3ecb604427e115bd90ff7fc62ee1e30ebd12285b
   FBSDKLoginKit: 8b2bc5fa30ea269e9d7208a1165c0a668c0ae826
   FBSDKShareKit: 9ad7b8d097fc568e911452feb8112ad7f04bb8a2
-=======
-<<<<<<< HEAD
-  FBSDKCoreKit: 8ad31cd09f793d1d7e84cf20fd6cebfe80ad318d
-  FBSDKLoginKit: 5d1e321dc45ab1fa09198b77fc17c32a06f008c0
-  FBSDKShareKit: 7ec93bf49516a91513d64863f54121155bbd7f78
-=======
-  FBSDKCoreKit: 3ecb604427e115bd90ff7fc62ee1e30ebd12285b
-  FBSDKLoginKit: 8b2bc5fa30ea269e9d7208a1165c0a668c0ae826
-  FBSDKShareKit: 9ad7b8d097fc568e911452feb8112ad7f04bb8a2
->>>>>>> develop
->>>>>>> Stashed changes
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Gedatsu: 09222eaf87b70a9dc76a094b2ccf0d948f39f1a8
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
-  Kingfisher: 7b64389a43139c903ec434788344c288217c792d
+  Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
   MultiSlider: 5b0a78da0b4fd4bbc53c9c2bf917e0de0ebcbb04
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9

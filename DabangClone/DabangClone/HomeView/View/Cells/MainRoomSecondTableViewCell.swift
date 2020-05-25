@@ -117,6 +117,9 @@ class MainRoomSecondTableViewCell: UITableViewCell {
       $0.leading.trailing.equalToSuperview()
       $0.height.equalTo(1)
     }
+    
+//    contentView.snp.makeConstraints {
+//    }
     contentView.clipsToBounds = false
   }
   
@@ -158,6 +161,7 @@ extension MainRoomSecondTableViewCell: UICollectionViewDataSource {
         cell.imageView.addSubview(image)
         cell.imageView.contentMode = .scaleAspectFit
     cell.optionLabel.text = bangData.optionSet[indexPath.row].rawValue
+//    print(bangData.optionSet[indexPath.row].rawValue)
     return cell
   }
 }
