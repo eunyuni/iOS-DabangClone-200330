@@ -16,9 +16,10 @@ class BudongsanInfoCell: UITableViewCell {
    
     var data: Broker! {
         didSet{
-            nameLabel.text = data.companyName ?? "N/A"
-            let url = URL(string: data.image ?? "")
+            nameLabel.text = (data.companyName ?? "N/A")
+            let url = URL(string: "https://dabang.s3.amazonaws.com/" + (data.image ?? ""))
             profileImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "MartIcon"), options: .continueInBackground)
+            self.roomCountButton.setTitle("\(data.pkList?.count ?? 0)개의 방", for: .normal)
         }
     }
     
@@ -26,7 +27,6 @@ class BudongsanInfoCell: UITableViewCell {
     
     let nameLabel: UILabel = {
        let label = UILabel()
-//        label.text = "다방공인중개사무소"
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         return label
     }()
@@ -39,7 +39,7 @@ class BudongsanInfoCell: UITableViewCell {
         btn.clipsToBounds = true
         btn.backgroundColor = .white
         btn.setTitleColor(.gray, for: .normal)
-        btn.setTitle("15개의 방", for: .normal)
+        btn.setTitle("0개의 방", for: .normal)
         return btn
     }()
     
@@ -67,9 +67,18 @@ class BudongsanInfoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(info: Broker) {
-//        roomInfoCell.data = dummyRoom2
+    func set(info: Broker, roomPK: Int?) {
         self.data = info
+        guard let roomPK = roomPK else { return }
+        APIManager.shared.getCertainRoomData(pk: roomPK) { (result) in
+            switch result {
+            case .success(let room):
+                self.roomInfoCell.data = room
+                self.roomInfoCell.heartButton.isSelected = UserActionTracker.shared.markedRoomList.contains(roomPK)
+            case .failure(let error):
+                print("failed to fetch room data from broker: ", error)
+            }
+        }
     }
     
     private func configure() {

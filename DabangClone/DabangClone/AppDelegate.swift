@@ -40,6 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     KOSession.shared()?.isAutomaticPeriodicRefresh = true
     
+    #if DEBUG
+    Gedatsu.open()
+    #endif
+    
     return true
   }
   

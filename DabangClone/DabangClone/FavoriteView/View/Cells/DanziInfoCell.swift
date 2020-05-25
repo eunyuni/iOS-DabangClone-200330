@@ -7,19 +7,28 @@
 //
 
 import UIKit
+import SDWebImage
+
+protocol DanziInfoCellDelegate: class {
+    func didTapAvailableRoomsButtons(roomsPk: [Int])
+    func didTapComplexInfoButton(data: Complex)
+}
+
 
 class DanziInfoCell: UITableViewCell {
     static let identifier = "DanziInfoCell"
     
-    var data: DanziInfo! {
+    var data: Complex! {
         didSet {
-            nameLabel.text = data.name
-            infoLabel.text = data.type + ", " + "\(data.numberOfhouseholds)" + ", " + data.completeYear
-            addressLabel.text = data.address
-            danziImageView.image = data.image
-            availableRoomButton.setAttributedTitle(makeAttributeString(availableRoomCount: data.availableRoomCount), for: .normal)
+            nameLabel.text = data.complexName
+            infoLabel.text = data.buildingType + ", " + "\(data.countPost)" + ", " + data.buildDate
+            addressLabel.text = data.totalCitizen
+            danziImageView.sd_setImage(with: URL(string: "https://dabang.s3.amazonaws.com/" + (data.image.first ?? "")))
+            availableRoomButton.setAttributedTitle(makeAttributeString(availableRoomCount: data.list.count), for: .normal)
         }
     }
+    
+    weak var delegate: DanziInfoCellDelegate?
     
     let overralContainerView: UIView = {
        let view = UIView()
@@ -49,6 +58,7 @@ class DanziInfoCell: UITableViewCell {
     let danziImageView: UIImageView = {
        let iv = UIImageView()
         iv.layer.cornerRadius = 8
+        iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
     }()
@@ -93,53 +103,51 @@ class DanziInfoCell: UITableViewCell {
     private func setUI() {
         backgroundColor = .white
         selectedBackgroundView?.isHidden = true
-        contentView.layer.cornerRadius = 5
-        contentView.layer.borderWidth = 0.5
-        contentView.layer.borderColor = UIColor.lightGray.cgColor
-        contentView.clipsToBounds = true
-        [verticalSeparator, overralContainerView, buttonStackView].forEach({contentView.addSubview($0)})
+        overralContainerView.layer.cornerRadius = 5
+        overralContainerView.layer.borderWidth = 0.5
+        overralContainerView.layer.borderColor = UIColor.lightGray.cgColor
+        overralContainerView.clipsToBounds = true
+        contentView.addSubview(overralContainerView)
         buttonStackView.distribution = .fillEqually
-        overralContainerView.addSubviews([nameLabel, infoLabel, addressLabel, danziImageView])
-        contentView.addSubview(buttonSeparator)
+        overralContainerView.addSubviews([nameLabel, infoLabel, addressLabel, danziImageView,buttonStackView,verticalSeparator])
+        overralContainerView.addSubview(buttonSeparator)
     }
     
     private func setConstraints() {
-        buttonSeparator.snp.makeConstraints {
-            $0.width.equalTo(0.5)
-        }
         overralContainerView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(verticalSeparator.snp.top)
+            $0.top.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview()
         }
+        
         nameLabel.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(10)
         }
+        
         infoLabel.snp.makeConstraints {
             $0.top.equalTo(nameLabel.snp.bottom).offset(10)
             $0.leading.equalTo(nameLabel)
         }
+        
         addressLabel.snp.makeConstraints {
             $0.top.equalTo(infoLabel.snp.bottom).offset(6)
             $0.leading.equalTo(nameLabel)
         }
-        buttonStackView.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(45)
-        }
+        
         danziImageView.snp.makeConstraints {
             $0.top.trailing.equalToSuperview().inset(10)
-            $0.width.equalToSuperview().multipliedBy(0.35)
-            $0.bottom.equalTo(verticalSeparator.snp.top).offset(-10)
-            
+            $0.width.equalToSuperview().multipliedBy(0.38)
+            $0.height.equalTo(100)
         }
-        verticalSeparator.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(buttonStackView.snp.top)
-            $0.height.equalTo(0.5)
+        
+        buttonStackView.snp.makeConstraints {
+            $0.top.equalTo(danziImageView.snp.bottom).offset(10)
+            $0.height.equalTo(50)
+            $0.bottom.leading.trailing.equalToSuperview()
         }
+        
         buttonSeparator.snp.makeConstraints {
             $0.top.bottom.equalTo(buttonStackView)
-            $0.centerX.equalToSuperview()
+            $0.centerX.equalTo(contentView.snp.centerX)
             $0.width.equalTo(0.5)
         }
     }
@@ -148,7 +156,7 @@ class DanziInfoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(danziInfo: DanziInfo) {
+    func set(danziInfo: Complex) {
         self.data = danziInfo
     }
     
@@ -163,14 +171,9 @@ class DanziInfoCell: UITableViewCell {
     @objc private func didTapButtons(_ sender: UIButton) {
         switch sender {
         case availableRoomButton:
-            print("Tap Available")
+            self.delegate?.didTapAvailableRoomsButtons(roomsPk: self.data.list)
         default:
-            print("Tap DanziInfo")
+            self.delegate?.didTapComplexInfoButton(data: self.data)
         }
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
     }
 }

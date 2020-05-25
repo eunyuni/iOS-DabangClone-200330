@@ -6,51 +6,56 @@
 import Foundation
 
 // MARK: - DabangElement
-struct DabangElement: Codable {
-  let pk: Int
-  let broker: Broker
-  let type: BuildingTypeEnum
-  let dabangDescription: String
-  let address: Address
-  let lng, lat: Double
-  let salesForm: SalesForm
-  let floor, totalFloor, areaChar: String
-  let supplyAreaInt: Int
-  let supplyAreaChar: String
-  let shortRent: Bool
-  let managementSet: [String]
-  let parkingDetail: ParkingDetail
-  let parkingtf: Bool
-  let livingExpenses: String?
-  let livingExpensesDetail: LivingExpensesDetail?
-  let moveInChar: MoveInChar
-  let moveInDate: String?
-  let optionSet: [OptionSet]
-  let heatingType: Heating
-  let pet, elevator, builtIn, veranda: Bool
-  let depositLoan: Bool
-  let totalCitizen: String?
-  let totalPark: String?
-  let complete: String?
-  let securitySafetySet: [SecuritySafetySet]
-  let postimage: [String]
-  let complex: Complex?
-  
-  enum CodingKeys: String, CodingKey {
-    case pk, broker, type
-    case dabangDescription = "description"
-    case address, lng, lat, salesForm, floor, totalFloor, areaChar, supplyAreaInt, supplyAreaChar, shortRent
-    case managementSet = "management_set"
-    case parkingDetail
-    case parkingtf = "parkingTF"
-    case livingExpenses = "living_expenses"
-    case livingExpensesDetail = "living_expenses_detail"
-    case moveInChar, moveInDate
-    case optionSet = "option_set"
-    case heatingType, pet, elevator, builtIn, veranda, depositLoan, totalCitizen, totalPark, complete
-    case securitySafetySet = "securitySafety_set"
-    case postimage, complex
-  }
+struct DabangElement: Codable, Equatable {
+    let pk: Int
+    let broker: Broker
+    let name: String?
+    let type: BuildingTypeEnum
+    let dabangDescription: String
+    let address: Address
+    let lng, lat: Double
+    let salesForm: SalesForm
+    let floor, totalFloor, areaChar: String
+    let supplyAreaInt: Int
+    let supplyAreaChar: String
+    let shortRent: Bool
+    let managementSet: [String]
+    let parkingDetail: ParkingDetail
+    let parkingtf: Bool
+    let livingExpenses: String?
+    let livingExpensesDetail: LivingExpensesDetail?
+    let moveInChar: MoveInChar
+    let moveInDate: String?
+    let optionSet: [OptionSet]?
+    let heatingType: Heating
+    let pet, elevator, builtIn, veranda: Bool
+    let depositLoan: Bool
+    let totalCitizen: String?
+    let totalPark: String?
+    let complete: String?
+    let securitySafetySet: [SecuritySafetySet]
+    let postimage: [String]
+    let complex: Complex?
+    
+    enum CodingKeys: String, CodingKey {
+        case pk, broker, type
+        case dabangDescription = "description"
+        case address, lng, lat, salesForm, floor, totalFloor, areaChar, supplyAreaInt, supplyAreaChar, shortRent
+        case managementSet = "management_set"
+        case parkingDetail
+        case parkingtf = "parkingTF"
+        case livingExpenses = "living_expenses"
+        case livingExpensesDetail = "living_expenses_detail"
+        case moveInChar, moveInDate
+        case optionSet = "option_set"
+        case heatingType, pet, elevator, builtIn, veranda, depositLoan, totalCitizen, totalPark, complete
+        case securitySafetySet = "securitySafety_set"
+        case postimage, complex, name
+    }
+    
+    static func == (lhs: DabangElement, rhs: DabangElement) -> Bool {
+        return lhs.pk == rhs.pk
+    }
 }
 
 // MARK: - Address
@@ -62,6 +67,7 @@ struct Address: Codable {
 // MARK: - Broker
 struct Broker: Codable {
   let pk: Int
+    let pkList: [Int]?
   let companyName, address: String?
   let managerName, tel: String
   let image: String?
@@ -73,33 +79,22 @@ struct Broker: Codable {
     case pk, companyName, address, managerName, tel, image, companyNumber, brokerage
     case dabangCreatedAt = "dabangCreated_at"
     case successCount
+    case pkList
   }
 }
 
 
 // MARK: - Complex
 struct Complex: Codable {
-  let pk: Int
-  let complexName: String
-  let buildDate: String
-  let totalCitizen: String
-  let personalPark: String
-  let totalNumber: String
-  let heatingSystem: Heating
-  let minMaxFloor: String
-  let buildingType: BuildingTypeEnum
-  let constructionCompany: String
-  let fuel: Fuel
-  let complexType: ComplexType
-  let floorAreaRatio: String
-  let dryWasteRate: String
-  let complexSale: String
-  let complexPrice: String
-  let areaSale: String
-  let areaPrice: String
-  let image: [String]
-  let list: [Int]
-  let countPost: Int
+    let pk: Int
+    let complexName, buildDate, totalCitizen, personalPark: String
+    let totalNumber, heatingSystem, minMaxFloor, buildingType: String
+    let constructionCompany, fuel, complexType, floorAreaRatio: String
+    let dryWasteRate, complexSale, complexPrice, areaSale: String
+    let areaPrice: String
+    let image: [String]
+    let list: [Int]
+    let countPost: Int
 }
 
 enum BuildingTypeEnum: String, Codable {
@@ -128,7 +123,6 @@ enum Heating: String, Codable {
   case 지역난방 = "지역난방"
   case 중앙난방 = "중앙난방"
 }
-
 
 enum LivingExpensesDetail: String, Codable {
   case empty = "(-)"
@@ -233,6 +227,7 @@ typealias Dabang = [DabangElement]
 
 // MARK: - Encode/decode helpers
 
+
 class JSONNull: Codable, Hashable {
   
   public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
@@ -260,14 +255,14 @@ class JSONNull: Codable, Hashable {
 
 
 struct CoordinateFromAddress {
-  var pk: Int?
-  var coordinate: CLLocationCoordinate2D?
+    var pk: Int?
+    var coordinate: CLLocationCoordinate2D?
 }
 
 
 // MARK: - User Model
 struct User: Codable {
-    let pk: Int
+    let pk: Int?
     let phone: String?
     let profileImage: String?
     let recentlyCheckedRooms: [DabangElement]?
@@ -283,9 +278,52 @@ struct User: Codable {
 }
 
 
+
 class UserData {
-  static let shared = UserData()
-  var user: User!
-  private init() {}
-  
+    static let shared = UserData()
+    var user: User!
+    private init() { }
+}
+
+
+
+// MARK: - Data model only for Favorite Tab
+
+// MARK: 최근 본 방
+struct CheckedRoom: Codable {
+    let pk: Int
+    let posts: [DabangElement]?
+}
+
+// MARK: 찜한 방
+struct MarkedRoom: Codable {
+    let pk: Int
+    let postLike: [PostLike]?
+    
+    struct PostLike: Codable {
+        let post: DabangElement
+    }
+}
+
+// MARK: 최근 본 단지
+struct CheckedComplex: Codable {
+    let pk: Int
+    let complexs: [Complex]?
+}
+
+// MARK: 찜한 단지
+struct MarkedComplex: Codable {
+    let pk: Int
+    let compLike: [CompLike]?
+    
+    struct CompLike: Codable {
+        let complexs: Complex
+    }
+}
+
+// MARK: 연락한 부동산
+struct ContactedBroker: Codable {
+    let pk: Int
+    let brokers: [Broker]?
+
 }

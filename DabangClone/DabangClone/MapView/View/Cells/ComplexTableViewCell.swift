@@ -14,17 +14,32 @@ class ComplexTableViewCell: UITableViewCell {
   static let identifier = "ComplexTableViewCell"
   
   // MARK: -Property
-  private let layout = UICollectionViewFlowLayout().then {
+    
+    private var data: Complex? {
+        didSet{
+            guard let data = data else { return }
+            buildDateLabel.text = data.buildDate
+            totalNumberLabel.text = data.totalNumber
+            totalCitizenLabel.text = data.totalCitizen
+            personalParkLabel.text = data.personalPark
+            buildingTypeLable.text = data.buildingType
+            supplyTypeLable.text = data.constructionCompany
+            complexTypeLabel.text = data.complexType
+            heatingSystemLabel.text = data.heatingSystem
+            cityGasLabel.text = data.fuel
+            ratioLabel.text = data.dryWasteRate
+        }
+    }
+    
+  private var layout = UICollectionViewFlowLayout().then {
     $0.scrollDirection = .horizontal
   }
+    
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
     $0.dataSource = self
     $0.delegate = self
     $0.backgroundColor = .white
-    //    $0.isPagingEnabled = true
-    //    $0.alwaysBounceHorizontal = false
-    //    $0.scrollsToTop = false
-    //    $0.bounces = false
+    $0.isPagingEnabled = true
     $0.register(ComplexCollectionViewCell.self, forCellWithReuseIdentifier: ComplexCollectionViewCell.identifier)
   }
   
@@ -164,7 +179,6 @@ class ComplexTableViewCell: UITableViewCell {
   // MARK: -init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
     setupUI()
   }
   
@@ -178,8 +192,8 @@ class ComplexTableViewCell: UITableViewCell {
   }
   // MARK: -Action
   
-  func configue() {
-    
+  func configue(complex: Complex) {
+    self.data = complex
   }
   
   // MARK: -setupUI
@@ -344,35 +358,18 @@ class ComplexTableViewCell: UITableViewCell {
 }
 
 extension ComplexTableViewCell: UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    5
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    //    if collectionView == self.collectionView {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ComplexCollectionViewCell.identifier, for: indexPath) as! ComplexCollectionViewCell
-    //      let url = URL(string: "https://wpsdabangapi.s3.amazonaws.com/\(bangData.postimage[indexPath.row])")
-    //      cell.imageView.kf.setImage(with: url)
-    //      cell.imageView.contentMode = .scaleAspectFill
-    cell.backgroundColor = .red
-    return cell
-    //    } else {
-    //      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Option", for: indexPath)
-    //      cell.contentView.backgroundColor = UIColor(named: "CostCellColor")
-    //      let label = UILabel().then {
-    //        $0.text = bangData.optionSet[indexPath.row].rawValue
-    //        $0.textColor = .gray
-    //        $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-    //      }
-    //      print(bangData.optionSet[indexPath.row])
-    //      cell.contentView.addSubview(label)
-    //      label.snp.makeConstraints {
-    //        $0.center.equalToSuperview()
-    //      }
-    //      return cell
-    //    }
-  }
-  
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return data?.image.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ComplexCollectionViewCell.identifier, for: indexPath) as! ComplexCollectionViewCell
+        let url = URL(string: "https://dabang.s3.amazonaws.com/" + (data?.image[indexPath.row] ?? ""))
+        cell.imageView.kf.setImage(with: url)
+        cell.imageView.contentMode = .scaleAspectFill
+        return cell
+    }
+    
 }
 
 extension ComplexTableViewCell: UICollectionViewDelegate {
@@ -383,7 +380,6 @@ extension ComplexTableViewCell: UICollectionViewDelegate {
 extension ComplexTableViewCell: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    //    if collectionView == self.collectionView {
     return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
   }
   // 위아래 패딩
