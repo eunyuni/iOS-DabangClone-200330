@@ -8,11 +8,20 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
 
 class BrokerInfoPopUpVC: UIViewController {
 
+    var roomID = Int()
+    
     var brokerData: Broker! {
         didSet{
+            brokerOfficeNameLabel.text = brokerData.companyName
+            brokerNameLabel.text = brokerData.managerName
+            if let url = URL(string: brokerData.image ?? "") {
+               profileImageView.sd_setImage(with: url)
+            }
+            roomIDLabel.text = "\(roomID)"
             
         }
     }
@@ -20,7 +29,6 @@ class BrokerInfoPopUpVC: UIViewController {
     let containerView = UIView()
     let brokerOfficeNameLabel: UILabel = {
        let label = UILabel()
-        label.text = "다방공인중개사무소"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         return label
@@ -28,7 +36,6 @@ class BrokerInfoPopUpVC: UIViewController {
     
     let brokerNameLabel: UILabel = {
        let label = UILabel()
-        label.text = "혜리"
         label.textAlignment = .center
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
@@ -52,7 +59,7 @@ class BrokerInfoPopUpVC: UIViewController {
     let roomIDLabel: UILabel = {
        let label = UILabel()
         label.textAlignment = .center
-        label.text = "매물번호 12345678"
+        
         label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         label.textColor = #colorLiteral(red: 0.2740633488, green: 0.5106971264, blue: 1, alpha: 1)
         return label
@@ -154,8 +161,9 @@ class BrokerInfoPopUpVC: UIViewController {
         }
     }
     
-    func set(brokerData: Broker) {
+    func set(brokerData: Broker, roomPK: Int) {
         self.brokerData = brokerData
+        self.roomID = roomPK
     }
     
     @objc private func handleButtons(_ sender: UIButton) {

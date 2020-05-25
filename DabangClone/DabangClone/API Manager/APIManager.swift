@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import KeychainSwift
+import RxSwift
 
 enum SaleInfoError: Error {
   case badGatewa
@@ -30,7 +31,6 @@ final class APIManager {
     
     // MARK: - Properties
     static let shared = APIManager()
-    
     private let keyChain = KeychainSwift(keyPrefix: "DabangCloneUser_")
     var userPk = 0
     private let networkAccessManager = NetworkReachabilityManager(host: "http://dabang-loadbalancer-779366673.ap-northeast-2.elb.amazonaws.com")
@@ -51,8 +51,9 @@ final class APIManager {
     
     // MARK: - [ Manage JWT ]
     func getAccessTokenFromKeyChain() -> String {
-        let accessToken = keyChain.get(Key.keyChain) ?? ""
-        return accessToken
+//        let accessToken = keyChain.get(Key.keyChain) ?? ""
+        let tempToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNTkxOTU2MTY0LCJlbWFpbCI6ImFkbWluQGdvb2dsZS5jb20ifQ.JsrV4hCOQl857pVCxcaCup1alS5yE_ftz7Yw2yXD1CA"
+        return tempToken
     }
     
     func setAccessTokenIntoKeyChain(token: String, key: String) -> Bool {
@@ -72,29 +73,30 @@ final class APIManager {
         let exp = json["exp"] as! Int
         let expDate = Date(timeIntervalSince1970: TimeInterval(exp))
         if expDate <= Date() {
-            refreshJWT()
+//            refreshJWT()
         }
     }
-
-    func refreshJWT() {
-
+    
+    func logout() -> Bool {
+      return keyChain.clear()
     }
     
     // MARK: - [ API CRUD ]
     // MARK: - GET
     
     //GET: 유저 정보
-    func getUserProfile(completion: @escaping (Result<User, Error>) -> Void) {
+    func getUserProfile(userPK: Int? = nil, completion: @escaping (Result<User, Error>) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
-        AF.request( baseURL + "/members/\(userPk)/", headers: header)
+        AF.request( baseURL + "/members/\(String(describing: userPK))/", headers: header)
             .responseDecodable(of: User.self) { (response) in
                 switch response.result {
                 case .success(let user):
+                    print("success")
                     completion(.success(user))
                 case .failure(let error):
+                    print("fail222")
                     completion(.failure(error))
                 }
-                
         }
     }
     
@@ -123,15 +125,30 @@ final class APIManager {
                 }
         }
     }
+    //GET: pk를 기준으로 특정 방 1개 <Rx>
+    func rxGetCertainRoomData(pk: Int) -> Observable<DabangElement>{
+        return Observable.create() { observer in
+            self.getCertainRoomData(pk: pk) { (result) in
+                switch result {
+                case .success(let room):
+                    observer.onNext(room)
+                case .failure(let error):
+                    print("Emitted Error")
+                    observer.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
     
     //GET: 최근 본 방 리스트
-    func getRecentlyCheckedRooms(userPK: Int, completion: @escaping (Result<[DabangElement], Error>) -> Void) {
+    func getRecentlyCheckedRooms(completion: @escaping (Result<[DabangElement], Error>) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
-        AF.request( baseURL + "/members/\(userPK)/", method: .get, headers: header)
-          .responseDecodable(of: User.self) { (response) in
+        AF.request( baseURL + "/members/recentlyPosts/", method: .get, headers: header)
+          .responseDecodable(of: CheckedRoom.self) { (response) in
                 switch response.result {
-                case .success(let user):
-                    completion(.success(user.recentlyCheckedRooms ?? []))
+                case .success(let rooms):
+                    completion(.success(rooms.posts ?? []))
                 case .failure(let error):
                     completion(.failure(error))
                 }
@@ -141,7 +158,19 @@ final class APIManager {
     
     //GET: 찜한 방 리스트
     func getMarkedRooms(completion: @escaping (Result<[DabangElement], Error>) -> Void) {
-        
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
+        AF.request( baseURL + "/members/postlike/", method: .get, headers: header)
+          .responseDecodable(of: MarkedRoom.self) { (response) in
+                switch response.result {
+                case .success(let rooms):
+                    let markedRooms = rooms.postLike?.map{$0.post} ?? []
+                    print("MarkedRooms:", markedRooms.count)
+                    completion(.success(markedRooms))
+                case .failure(let error):
+                    print("MarkedRooms Failed")
+                    completion(.failure(error))
+                }
+        }
     }
     
     //GET: 전체 단지 정보 리스트
@@ -156,6 +185,49 @@ final class APIManager {
                 }
         }
     }
+    //GET: 최근 본 단지 정보 리스트
+    func getRecentlyCheckedComplexList(completion: @escaping (Result<[Complex], Error>) -> Void) {
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
+        AF.request( baseURL + "/members/complexs/", method: .get, headers: header)
+            .responseDecodable(of: CheckedComplex.self) { (response) in
+                switch response.result {
+                case .success(let complex):
+                    completion(.success(complex.complexs ?? []))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+        }
+    }
+    
+    //GET: 찜한 단지 정보 리스트
+    func getMarkedComplexList(completion: @escaping (Result<[Complex], Error>) -> Void) {
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
+        AF.request( baseURL + "/members/complike/", method: .get, headers: header)
+            .responseDecodable(of: MarkedComplex.self) { (response) in
+                switch response.result {
+                case .success(let complex):
+                    let markedComplex = complex.compLike?.map{$0.complexs} ?? []
+                    completion(.success(markedComplex))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+        }
+    }
+    
+    //GET: 연락한 부동산 리스트
+    func getContactedBrokerList(completion: @escaping (Result<[Broker], Error>) -> Void) {
+        let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
+        AF.request( baseURL + "/members/brokers/", method: .get, headers: header)
+            .responseDecodable(of: ContactedBroker.self) { (response) in
+                switch response.result {
+                case .success(let brokers):
+                    completion(.success(brokers.brokers ?? []))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+        }
+    }
+    
   //MARK: -위치 기준으로 축약된 방 정보/위치 요청
   func getItemsInCurrentMap(km: Double, current position: CLLocationCoordinate2D, completion: @escaping (Result<[BangInCurrentMapModel], Error>) -> Void) {
     
@@ -175,6 +247,43 @@ final class APIManager {
         }
     }
   }
+  
+//  func getFilteredItems(
+//    depositLoan: Bool? = nil, salesForm__type: String? = nil, type: String? = nil, min_monthlyInt: Int? = nil,
+//    max_monthlyInt: Int? = nil, min_depositInt: Int? = nil, max_depositInt: Int? = nil, min_supply_area: Int? = nil,
+//    max_supply_area: Int? = nil, floor: String? = nil, parkingTF: Bool? = nil, pet: Bool? = nil,
+//    shortRent: Bool? = nil, elevator: Bool? = nil, builtIn: Bool? = nil, veranda: Bool? = nil,
+//                        
+//    completion: @escaping (Result<FilteredItemsModel, Error>) -> Void) {
+//    let parameter: Parameters = [
+//      "depositLoan" : depositLoan ?? "", //전세자금대출
+//      "salesForm__type" : salesForm__type ?? "", //매매/월세/전세 - 중복 선택 가능
+//      "type" : type ?? "", // 원룸, 투룸, 쓰리룸, 오피스텔, 아파트 중복선택 가능
+//      "min_monthlyInt" : min_monthlyInt ?? "", // 월세 최소 금액
+//      "max_monthlyInt" : max_monthlyInt ?? "", // 월세 최대 금액
+//      "min_depositInt" : min_depositInt ?? "",// 보증금/전세가 최소 금액(매매가와 동일)
+//      "max_depositInt" : max_depositInt ?? "", // 보증금/전세가 최대 금액(매매가와 동일)
+//      "min_supply_area" : min_supply_area ?? "", // 최소 평수
+//      "max_supply_area" : max_supply_area ?? "", // 최대 평수
+//      "floor" : floor ?? "", //층수, 중복 선택 가능
+//      "parkingTF" : parkingTF ?? "", //Bool값
+//      "pet" : pet ?? "",//Bool값
+//      "shortRent" : shortRent ?? "",//Bool값
+//      "elevator" : elevator ?? "",//Bool값
+//      "builtIn" : builtIn ?? "",//Bool값
+//      "veranda" : veranda ?? "" //Bool값
+//    ]
+//    
+//    AF.request(baseURL + "/posts/", method: .get, parameters: parameter)
+//      .responseDecodable(of: FilteredItemsModel.self) { (response) in
+//        switch response.result {
+//        case .success(let data):
+//          completion(.success(data))
+//        case .failure(let error):
+//          completion(.failure(error))
+//        }
+//    }
+//  }
   
   func getFilteredItems(
     depositLoan: Bool? = nil, salesForm__type: String? = nil, type: String? = nil, min_monthlyInt: Int? = nil,
@@ -299,19 +408,7 @@ final class APIManager {
     
     //POST: 유저 생성
     func postCreteUser(username: String, password: String, email: String, profileImage: UIImage? = nil, completion: @escaping (String,Bool) -> Void) {
-//        let imageData = profileImage?.jpegData(compressionQuality: 0.7) ?? Data()
         let userData: [String: Any] = ["username" : username, "password" : password, "email": email]
-//        let nameData = Data(username.utf8)
-//        let passwordData = Data(password.utf8)
-//        let emailData = Data(email.utf8)
-//
-//        AF.upload(multipartFormData: { (multipartFormData) in
-//            multipartFormData.append(nameData, withName: "username")
-//            multipartFormData.append(imageData, withName: "profileImage")
-//            multipartFormData.append(emailData, withName: "email")
-//            multipartFormData.append(passwordData, withName: "password")
-//        }, to: baseURL + "/members/")
-        
         AF.request( baseURL + "/members/", method: .post, parameters: userData)
             .responseJSON { (response) in
                 switch response.result {
@@ -319,7 +416,6 @@ final class APIManager {
                     let json = JSON(value)
                     let pk = json["pk"]
                     let email = json["email"]
-//                    let succecc = "아이디가 성공적으로 생성되었습니다."
                     completion("pkNumber: \(pk)\n email: \(email)", true)
                 case .failure(_):
                     let fail = "해당 사용자 이름은 이미 존재합니다."
@@ -382,7 +478,26 @@ final class APIManager {
 //      }
 //    }
   
-  
+  func postMyRoomForSale( completion: @escaping (Result<[String:Any], Error>) -> Void) {
+    let roomDatas: [String:String] = RoomForSale.shared.roomDictionary()
+    let images = RoomForSale.shared.images
+    AF.upload(multipartFormData: { (MultipartFormData) in
+      for (key,value) in roomDatas {
+        MultipartFormData.append(value.data(using: .utf8)!, withName: key)
+      }
+      for image in images {
+        let imageData = image.jpegData(compressionQuality: 0.50)
+        MultipartFormData.append(imageData!, withName: "image", fileName: UUID().uuidString + ".png", mimeType: "image/png")
+      }
+    }, to: baseURL + "/posts/create/", method: .post).responseJSON { (response) in
+      switch response.result {
+      case .success(let data):
+        completion(.success(data as! [String:Any]))
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    }
+  }
   func put(completionHandler: @escaping ([String:Any]) -> Void) {
     let userData = DabangTinyElement(pk: 50, type: .원룸, dabangTinyDescription: "테스트", address: Addresss(pk: 20, loadAddress: "", detailAddress: ""), lng: 0.00, lat: 0.00, salesForm: .none, pet: .none, elevator: false, veranda: false, depositLoan: false, postimage: [], complex: .none)
     let parameter = ["elevator" : "true", "veranda" : "false" ]
@@ -449,7 +564,7 @@ let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1
             }
     }
     
-  //POST: 찜한 방
+  //POST: 사진 방
   func postPoto(image: UIImage, imageName : String, completion: @escaping (String) -> Void) {
     let imageData = image.jpegData(compressionQuality: 0.50)
     print(image, imageData!)
@@ -514,9 +629,9 @@ let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1
     // MARK: - PATCH
     
     //PATCH: 유저 정보 수정
-    func patchUpdateUserInfo(phone: String, image: String, completion: @escaping (Result<User, Error>) -> Void) {
+    func patchUpdateUserInfo(phone: String, username: String, completion: @escaping (Result<User, Error>) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
-        let parameters = ["phone" : phone, "profileImage" : image]
+        let parameters = ["username": username, "phonenumber" : phone]
         AF.request( baseURL + "/members/\(userPk)/", method: .patch, parameters: parameters, headers: header )
             .responseDecodable(of: User.self) { (response) in
                 switch response.result {
@@ -531,9 +646,7 @@ let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1
     
     
     // MARK: - DELETE
-  func logout() -> Bool {
-    return keyChain.clear()
-  }
+  
     
     //DELETE: 찜한 방 삭제
     func deleteMarkedRoom(roomPK: Int, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -551,4 +664,14 @@ let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1
     }
     
     
+    // MARK: - Cancel Request
+    
+    func cancelAllRequest() {
+        print("cancel All API Request")
+        AF.session.getTasksWithCompletionHandler { dataTasks, uploadTasks, downloadTasks in
+            dataTasks.forEach { $0.cancel() }
+            uploadTasks.forEach { $0.cancel() }
+            downloadTasks.forEach { $0.cancel() }
+        }
+    }
 }

@@ -56,7 +56,7 @@ class AddPotoViewController: UIViewController {
     for image in imageViews {
       print(image)
       let number = (111111...999999).randomElement()!
-      apiManager.postPoto(image: image, imageName: "\(number)" + "poto") { (url) in
+      apiManager.postPhoto(image: image, imageName: "\(number)" + "poto") { (url) in
         print(url)
       }
     }

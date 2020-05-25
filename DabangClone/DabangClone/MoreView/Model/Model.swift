@@ -23,8 +23,90 @@ struct RoomMenu {
   let menus: [String]?
   var open = false
 }
+class RoomForSale {
+  static let shared = RoomForSale()
+  
+  var roomData: RoomForSaleElement = RoomForSaleElement(type: nil, description: nil, loadAddress: nil, detailAddress: nil, lng: nil, lat: nil, saleFormType: nil, depositChar: nil, monthlyChar: nil, depositInt: nil, monthlyInt: nil, floor: nil, areaChar: nil, supplyAreaInt: nil, supplyAreaChar: nil, shortRent: nil, parkingDetail: nil, parkingTF: nil, living_expenses: nil, living_expenses_detail: nil, moveInChar: nil, moveInDate: nil, heatingType: nil, pet: nil, elevator: nil, builtIn: nil, veranda: nil, depositLoan: nil, totalCitizen: nil, totalPark: nil, complete: nil, option: nil)
+  var images: [UIImage] = []
+//  private init() {
+//    self.roomData = RoomForSaleElement(type: nil, description: nil, loadAddress: nil, detailAddress: nil, lng: nil, lat: nil, saleFormType: nil, depositChar: nil, monthlyChar: nil, depositTnt: nil, monthlyInt: nil, floor: nil, areaChar: nil, supplyAreaInt: nil, supplyAreaChar: nil, shortRent: nil, parkingDetail: nil, parkingTF: nil, living_expenses: nil, living_expenses_detail: nil, moveInChar: nil, moveInDate: nil, heatingType: nil, pet: nil, elevator: nil, builtIn: nil, veranda: nil, depositLoan: nil, totalCitizen: nil, totalPark: nil, complete: nil, option: nil)
+//  }
+  func reset() {
+    self.roomData = RoomForSaleElement(type: nil, description: nil, loadAddress: nil, detailAddress: nil, lng: nil, lat: nil, saleFormType: nil, depositChar: nil, monthlyChar: nil, depositInt: nil, monthlyInt: nil, floor: nil, areaChar: nil, supplyAreaInt: nil, supplyAreaChar: nil, shortRent: nil, parkingDetail: nil, parkingTF: nil, living_expenses: nil, living_expenses_detail: nil, moveInChar: nil, moveInDate: nil, heatingType: nil, pet: nil, elevator: nil, builtIn: nil, veranda: nil, depositLoan: nil, totalCitizen: nil, totalPark: nil, complete: nil, option: nil)
+    self.images.removeAll()
+  }
+  func roomDictionary() -> [String : String] {
+    var result: [String: String] = [:]
+    result["type"] = self.roomData.type
+    result["description"] = self.roomData.description
+    result["loadAddress"] = self.roomData.loadAddress
+    result["detailAddress"] = self.roomData.detailAddress
+    result["lng"] = self.roomData.lng
+    result["lat"] = self.roomData.lat
+    result["saleFormType"] = self.roomData.saleFormType
+    result["depositChar"] = self.roomData.depositChar
+    result["monthlyChar"] = self.roomData.monthlyChar
+    result["depositInt"] = self.roomData.depositInt
+    result["monthlyInt"] = self.roomData.monthlyInt
+    result["floor"] = self.roomData.floor
+    result["areaChar"] = self.roomData.areaChar
+    result["supplyAreaInt"] = self.roomData.supplyAreaInt
+    result["supplyAreaChar"] = self.roomData.supplyAreaChar
+    result["shortRent"] = self.roomData.shortRent
+    result["parkingDetail"] = self.roomData.parkingDetail
+    result["parkingTF"] = self.roomData.parkingTF
+    result["living_expenses"] = self.roomData.living_expenses
+    result["living_expenses_detail"] = self.roomData.living_expenses_detail
+    result["moveInChar"] = self.roomData.moveInChar
+    result["moveInDate"] = self.roomData.moveInDate
+    result["heatingType"] = self.roomData.heatingType
+    result["pet"] = self.roomData.pet
+    result["elevator"] = self.roomData.elevator
+    result["builtIn"] = self.roomData.builtIn
+    result["veranda"] = self.roomData.veranda
+    result["depositLoan"] = self.roomData.depositLoan
+    result["totalCitizen"] = self.roomData.totalCitizen
+    result["totalPark"] =  self.roomData.totalPark
+    result["complete"] = self.roomData.complete
+    result["option"] = self.roomData.option
+    return result
+  }
+}
 
-
+struct RoomForSaleElement {
+  var type: String?
+  var description: String?
+  var loadAddress: String?
+  var detailAddress: String?
+  var lng: String?
+  var lat: String?
+  var saleFormType: String?
+  var depositChar: String?
+  var monthlyChar: String?
+  var depositInt: String?
+  var monthlyInt: String?
+  var floor: String?
+  var areaChar: String?
+  var supplyAreaInt: String?
+  var supplyAreaChar: String?
+  var shortRent: String?
+  var parkingDetail: String?
+  var parkingTF: String?
+  var living_expenses: String?
+  var living_expenses_detail: String?
+  var moveInChar: String?
+  var moveInDate: String?
+  var heatingType: String?
+  var pet: String?
+  var elevator: String?
+  var builtIn: String?
+  var veranda: String?
+  var depositLoan: String?
+  var totalCitizen : String?
+  var totalPark: String?
+  var complete: String?
+  var option: String?
+}
 
 
   var titleArray = ["다방은 어떤 서비스인가요?", "회원가입을 하면 어떤 점이 좋나요?", "회원탈퇴는 어떻게 하나요?", "직거래는 어떻게 방을 내놓나요?", "다방에 등록된 방은 믿을 수 있나요?", "허위매물은 어떻게 관리 하나요?", "매물개수 제한이 있나요?", "공인중개사 연락처 자동저장 기능은 어떻게 해제하나요?"]
@@ -117,3 +199,46 @@ struct RoomMenu {
   ]
 
 
+struct Testt: Codable {
+    let broker: Int
+    let postType, welcomeDescription, loadAddress: String
+    let detailAddress: String
+    let lng, lat: Double
+    let salesFormType, depositChar, monthlyChar: String
+    let depositInt, monthlyInt: Int
+    let floor, totalFloor, areaChar: String
+    let supplyAreaInt: Int
+    let supplyAreaChar: String
+    let shortRent: Bool
+    let managementSet: [String]
+    let parkingDetail: String
+    let parkingTF: Bool
+    let livingExpenses, livingExpensesDetail: String?
+    let moveInChar: String
+    let moveInDate: String?
+    let optionSet: [String]
+    let heatingType: String
+    let pet, elevator, builtIn, veranda: Bool
+    let depositLoan: Bool
+    let totalCitizen, totalPark, complete: String
+    let securitySafetySet: [String]
+    let postimage: [String]
+    let complex: Int
+
+    enum CodingKeys: String, CodingKey {
+        case broker, postType
+        case welcomeDescription = "description"
+        case loadAddress, detailAddress, lng, lat, salesFormType, depositChar, monthlyChar, depositInt, monthlyInt, floor, totalFloor, areaChar, supplyAreaInt, supplyAreaChar, shortRent
+        case managementSet = "management_set"
+        case parkingDetail, parkingTF
+        case livingExpenses = "living_expenses"
+        case livingExpensesDetail = "living_expenses_detail"
+        case moveInChar, moveInDate
+        case optionSet = "option_set"
+        case heatingType, pet, elevator, builtIn, veranda, depositLoan, totalCitizen, totalPark, complete
+        case securitySafetySet = "securitySafety_set"
+        case postimage, complex
+    }
+}
+
+let duckk = Testt(broker: 1, postType: "아파트", welcomeDescription: "한강조망. 집주인 거주로 컨디션 최고. 교통과 생활 편리. 입주 가능- 한강 조망, 단지 내 동형평수 최고라인- 집주인 ", loadAddress: "서울시 성동구 성수동2가 843", detailAddress: "서울시 성동구 성수동2가 843", lng: 37.5412343020006, lat: 127.052138909865, salesFormType: "매매", depositChar: "11억", monthlyChar: "중층", depositInt: 1100000000, monthlyInt: 0, floor: "중층 ", totalFloor: "29층", areaChar: "42.22 / 60.07㎡", supplyAreaInt: 18, supplyAreaChar: "13 / 18평", shortRent: false, managementSet: [], parkingDetail: "", parkingTF: false, livingExpenses: "", livingExpensesDetail: "", moveInChar: "", moveInDate: "", optionSet: [], heatingType: "개별남방", pet: false, elevator: false, builtIn: false, veranda: false, depositLoan: false, totalCitizen: "445세대", totalPark: "1.8대", complete: "2009.06 준공", securitySafetySet: [], postimage: [], complex: 3)

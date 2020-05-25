@@ -18,7 +18,8 @@ class AddressSearchViewController: UIViewController , WKScriptMessageHandler {
   let unwind = "unwind"
   
   var postCode = ""
-  var address = ""
+  var detailAddress = ""
+  var loadAddress = ""
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -40,13 +41,21 @@ class AddressSearchViewController: UIViewController , WKScriptMessageHandler {
     if let postCodData = message.body as? [String: Any] {
       print(postCodData)
       postCode = postCodData["zonecode"] as? String ?? ""
-      address = postCodData["addr"] as? String ?? ""
+      loadAddress = postCodData["roadAddress"] as? String ?? ""
+      detailAddress = postCodData["jibunAddress"] as? String ?? ""
     }
-    print(postCode)
-    print(address)
-    self.navigationController?.popViewController(animated: true)
-  }
+    print(loadAddress)
+    print(detailAddress)
+    RoomForSale.shared.roomData.loadAddress = loadAddress
+    RoomForSale.shared.roomData.detailAddress = detailAddress
+    let vc = self.presentingViewController as! MainTabBarViewController
+    let vcVC = vc.viewControllers![4] as! UINavigationController
+    let roomVC = vcVC.viewControllers.last as! RoomSellScrollViewController
 
+//    print(self.presentedViewController)
+// self.navigationController?.popViewController(animated: true)
+    self.dismiss(animated: true, completion: nil)
+  }
 }
 
 

@@ -17,7 +17,9 @@ class NewMainRoomViewController: UIViewController {
         $0.backgroundColor = .clear
     }
   var pk: Int?
-  
+  var isFromFavoriteTab = false
+  var roomData: DabangElement?
+    
   //MARK: - Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,10 +30,15 @@ class NewMainRoomViewController: UIViewController {
     navigationController?.navigationBar.isHidden = true
     navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     navigationController?.navigationBar.barStyle = .black
+    tabBarController?.tabBar.isHidden = true
     view.backgroundColor = .blue
     setupUI()
   }
   
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UserActionTracker.shared.latestCheckedRoom = self.roomData
+    }
   
   //MARK: - SetupUI & SetupContstraints
   
@@ -67,11 +74,11 @@ extension NewMainRoomViewController: UITableViewDataSource {
     
     if indexPath.row == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainRoomTableViewCell.identifier, for: indexPath) as! MainRoomTableViewCell
-      cell.setupUI(pk: self.pk!)
+      cell.setupUI(isFromFavoTab: isFromFavoriteTab, pk: self.pk!, room: roomData)
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainRoomSecondTableViewCell.identifier, for: indexPath) as! MainRoomSecondTableViewCell
-      cell.reloadCollectionView(pk: self.pk!)
+      cell.reloadCollectionView(isFromFavoTab: isFromFavoriteTab, pk: self.pk!, room: roomData)
       return cell
     }
   }

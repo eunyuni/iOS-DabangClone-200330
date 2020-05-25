@@ -184,7 +184,7 @@ class FilterRoomTypeCell: UITableViewCell {
     
   }
   
-  func initButtonsColor(_ sender: UIButton) {
+  private func initButtonsColor(_ sender: UIButton) {
     if sender.isSelected == true {
       sender.backgroundColor = UIColor(named: "DabangLightBlue")
       sender.setTitleColor(.white, for: .normal)
@@ -197,6 +197,4 @@ class FilterRoomTypeCell: UITableViewCell {
       sender.layer.borderColor = UIColor.lightGray.cgColor
     }
   }
-  
-  
 }
