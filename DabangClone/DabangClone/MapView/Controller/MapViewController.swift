@@ -608,8 +608,8 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
           }
           self.arrShownClusterItemName.insert(name)
         }  else {
-                   self.clusterManager.add(item)
-                 }
+          self.clusterManager.add(item)
+        }
       }
     }
   }
@@ -618,28 +618,28 @@ extension MapViewController: GMSMapViewDelegate,GMUClusterManagerDelegate {
     self.clusterManager.clearItems()
     if BangDataMap.shared.data.isEmpty { print("filteredData is Empty"); return }
     for i in 0...BangDataMap.shared.data.count-1 {
-        let name = "\(BangDataMap.shared.data[i].pk)"
-        
-        let item = POIItem(position: CLLocationCoordinate2DMake(BangDataMap.shared.data[i].lat , BangDataMap.shared.data[i].lng), name: name)
-        DispatchQueue.main.async {
-          if !self.arrShownClusterItemName.contains(name) {
-            self.clusterManager.add(item)
-            APIManager.shared.getCertainRoomData(pk: BangDataMap.shared.data[i].pk) { (result) in
-              switch result {
-              case .success(let eachData):
-                BangDataMap.shared.dataOfClusteredRooms.insert(eachData, at: 0)
-              case .failure(let error):
-                print(error)
-              }
+      let name = "\(BangDataMap.shared.data[i].pk)"
+      
+      let item = POIItem(position: CLLocationCoordinate2DMake(BangDataMap.shared.data[i].lat , BangDataMap.shared.data[i].lng), name: name)
+      DispatchQueue.main.async {
+        if !self.arrShownClusterItemName.contains(name) {
+          self.clusterManager.add(item)
+          APIManager.shared.getCertainRoomData(pk: BangDataMap.shared.data[i].pk) { (result) in
+            switch result {
+            case .success(let eachData):
+              BangDataMap.shared.dataOfClusteredRooms.insert(eachData, at: 0)
+            case .failure(let error):
+              print(error)
             }
-            self.arrShownClusterItemName.insert(name)
-          } else {
-            self.clusterManager.add(item)
           }
+          self.arrShownClusterItemName.insert(name)
+        } else {
+          self.clusterManager.add(item)
         }
       }
+    }
     
-//    self.clusterManager.remove(item: )
+    //    self.clusterManager.remove(item: )
   }
   
   // MARK: - 클러스터에 포함된 마커들의 name(pk) 값 얻기

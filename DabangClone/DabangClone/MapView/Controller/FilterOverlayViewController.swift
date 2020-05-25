@@ -142,9 +142,9 @@ class FilterOverlayViewController: UIViewController {
     stackView.arrangedSubviews.forEach { v in
       let button = v as! MapFilterButton
       v.snp.makeConstraints { make in
-      make.width.equalTo(15 * button.titleLabel!.text!.count + 5)
-      make.height.equalTo(35)
-    }
+        make.width.equalTo(15 * button.titleLabel!.text!.count + 5)
+        make.height.equalTo(35)
+      }
     }
     
     tableView.snp.makeConstraints {
@@ -206,13 +206,13 @@ extension FilterOverlayViewController: UITableViewDataSource {
     case (4, 0):
       let cell = tableView.dequeueReusableCell(withIdentifier: FileteAddCell.identifier, for: indexPath) as! FileteAddCell
       return cell
-      case (4, 1):
+    case (4, 1):
       let cell = tableView.dequeueReusableCell(withIdentifier: ApplyAndCancelTableViewCell.identifier, for: indexPath) as! ApplyAndCancelTableViewCell
       return cell
     case (5, 0):
       let cell = tableView.dequeueReusableCell(withIdentifier: FilterTradeTypeCell.identifier, for: indexPath) as! FilterTradeTypeCell
       return cell
-      case (5, 1):
+    case (5, 1):
       let cell = tableView.dequeueReusableCell(withIdentifier: ApplyAndCancelTableViewCell.identifier, for: indexPath) as! ApplyAndCancelTableViewCell
       return cell
     default:
