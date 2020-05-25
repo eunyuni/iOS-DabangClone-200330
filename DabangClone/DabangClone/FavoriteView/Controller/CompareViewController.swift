@@ -145,7 +145,9 @@ class CompareViewController: UIViewController {
     private func configureAskButtons() {
         var counter = 0
         let askButtons = (0..<compareValuesCount).map({ (num) -> CompareViewAskButton in
-            return CompareViewAskButton()
+            let askBtn = CompareViewAskButton()
+            askBtn.tag = num
+            return askBtn
         })
         askButtons.forEach({
             detailScrollView.addSubview($0)
@@ -168,7 +170,10 @@ class CompareViewController: UIViewController {
     // MARK: - Action Handler
     
     @objc func didTapAskButton(_ sender: UIButton) {
+        let roomID = self.compareValues[sender.tag].pk
+        let brokerData = self.compareValues[sender.tag].broker
         let brokerInfoVC = BrokerInfoPopUpVC()
+        brokerInfoVC.set(brokerData: brokerData, roomPK: roomID)
         brokerInfoVC.modalPresentationStyle = .overFullScreen
         brokerInfoVC.modalTransitionStyle = .crossDissolve
         present(brokerInfoVC, animated: true)

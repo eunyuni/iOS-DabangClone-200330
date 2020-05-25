@@ -84,7 +84,6 @@ class FavoriteListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        
         setNavigationBar()
         setupUI()
         configureUpsideUI()
@@ -98,6 +97,8 @@ class FavoriteListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -261,7 +262,6 @@ class FavoriteListViewController: UIViewController {
         let navi = UINavigationController(rootViewController: compareVC)
         navi.modalPresentationStyle = .overFullScreen
         present(navi, animated: true)
-//        navigationController?.pushViewController(compareVC, animated: true)
     }
     
     @objc private func showCompareViewButton(isCompareMode: Bool) {
@@ -278,8 +278,8 @@ class FavoriteListViewController: UIViewController {
     
     @objc private func reloadData(){
         tableView.refreshControl?.endRefreshing()
-//        checkActiveDataIfEmpty(currentTag)
-        tableView.reloadData()
+        didTapButton(tag: currentTag)
+//        tableView.reloadData()
     }
     
     private func checkActiveDataIfEmpty(_ tag: Int) {
@@ -345,19 +345,14 @@ extension FavoriteListViewController: UITableViewDelegate {
                 }
             } else {
                 // Present Room Detail VC
-                let selectedCell = tableView.cellForRow(at: indexPath) as! RoomInfoCell
-                
                 let vc = NewMainRoomViewController()
-                vc.pk = selectedCell.data.pk
+                vc.isFromFavoriteTab = true
+                vc.roomData = roomCell.data
+                vc.pk = roomCell.data.pk
                 vc.setTableViewReload()
-                vc.modalPresentationStyle = .fullScreen
                 navigationController?.pushViewController(vc, animated: true)
             }
         }
-//        if let danziCell = tableView.cellForRow(at: indexPath) as? DanziInfoCell {
-//           let danziVC =
-//           navigationController.push(danziVC)
-//        }
     }
 }
 
@@ -397,8 +392,8 @@ extension FavoriteListViewController: FavoSelectButtonDelegate {
                         $0.setTitleColor(.lightGray, for: .normal)
                         $0.underLineView.isHidden = true
                      })
-        viewModel.dataIndex = tag
         currentTag = tag
+        viewModel.dataIndex = tag
         controlAtrributes(tag)
         tableView.reloadData()
         checkActiveDataIfEmpty(tag)
@@ -428,9 +423,33 @@ extension FavoriteListViewController: RoomInfoCellDelegate {
 
 extension FavoriteListViewController: FavoriteViewModelDelegate {
     func reloadTableView() {
-        checkActiveDataIfEmpty(currentTag)
         tableView.reloadData()
+        checkActiveDataIfEmpty(viewModel.dataIndex)
     }
+}
+
+extension FavoriteListViewController: DanziInfoCellDelegate {
+    func didTapAvailableRoomsButtons(roomsPk: [Int]) {
+        let vc = RoomsInComplexController()
+        vc.roomsPK = roomsPk
+        //        vc.rooms = data
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func didTapAvailableRoomsButtons() {
+        print("delegate response")
+        let vc = RoomsInComplexController()
+//        vc.rooms = data
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func didTapComplexInfoButton(data: Complex) {
+        let vc = ComplexViewController()
+        vc.setupData(complex: data)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
 }
 
     // MARK: - Static Properties

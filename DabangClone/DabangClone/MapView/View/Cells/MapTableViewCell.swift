@@ -87,9 +87,11 @@ class MapTableViewCell: UITableViewCell {
     } else {
       self.setUIFromData(data: roomPkData[0])
     }
+
   }
   
   func setUIFromData(data: BangInCurrentMapModel) {
+
     self.nameLabel.text = ""
     if data.salesForm.type == .월세 {
       self.priceLabel.text = "\(data.salesForm.type)" + " " + "\(data.salesForm.depositChar)" + "/" + "\(data.salesForm.monthlyChar)"
@@ -109,6 +111,7 @@ class MapTableViewCell: UITableViewCell {
     putLabelInStackView()
     if !data.postimage.isEmpty {
     let url = URL(string: "https://dabang.s3.amazonaws.com/\(data.postimage[0])")
+
     self.roomImageView.kf.setImage(with: url)
     self.roomImageView.contentMode = .scaleAspectFill
     }
@@ -132,11 +135,12 @@ class MapTableViewCell: UITableViewCell {
     self.infoLabel.text = data.type.rawValue + " | \(data.floor) | \(String(mySubstring))m²"
     
     self.detailLabel.text = data.dabangDescription
-    etceteraArray = data.optionSet.map({$0.rawValue})
+    etceteraArray = data.optionSet?.map({$0.rawValue}) ?? []
     etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
     putLabelInStackView()
     if !data.postimage.isEmpty {
     let url = URL(string: "https://dabang.s3.amazonaws.com/\(data.postimage[0])")
+
     self.roomImageView.kf.setImage(with: url)
     self.roomImageView.contentMode = .scaleAspectFill
     }

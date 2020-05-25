@@ -37,12 +37,12 @@ class CompareHeaderView: UIView {
     private func setViewData() {
         roomIDLabel.text = "매물번호 \(data.pk)"
         if !data.postimage.isEmpty {
-            let url = URL(string: "https://wpsdabangapi.s3.amazonaws.com/\(data.postimage[0])")
+            let url = URL(string: "https://dabang.s3.amazonaws.com/\(data.postimage[0])")
             self.imageView.kf.setImage(with: url)
             self.imageView.contentMode = .scaleAspectFill
         }
         roomStyleLabel.text = data.salesForm.type.rawValue
-        costLabel.text = data.salesForm.type == .전세 ? data.salesForm.depositChar : data.salesForm.monthlyChar
+        costLabel.text = data.salesForm.type == .전세 || data.salesForm.type == .매매 ? data.salesForm.depositChar : data.salesForm.depositChar + data.salesForm.monthlyChar
     }
     
     required init?(coder: NSCoder) {
