@@ -68,7 +68,11 @@ class AddRoomViewController: UIViewController {
     $0.textColor = #colorLiteral(red: 0.4352585971, green: 0.4353140593, blue: 0.4352396429, alpha: 1)
     $0.font = .systemFont(ofSize: 13)
   }
-  private var uiImages: [UIImage] = []
+  private var uiImages: [UIImage] = [] {
+    didSet {
+      RoomForSale.shared.images = uiImages
+    }
+  }
   private let addressTapGesture = UITapGestureRecognizer()
   private let basicInfoTapGesture = UITapGestureRecognizer()
   private let additionalTapGesture = UITapGestureRecognizer()
@@ -101,15 +105,22 @@ class AddRoomViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.potoCollectionView.reloadData()
+    checkRoomForSale()
   }
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = "duck"
+    title = "방 내농기"
     setupUI()
   }
   
 
   // MARK: - Action
+  private func checkRoomForSale() {
+    let roomForSaleData = RoomForSale.shared
+    if roomForSaleData.roomData.loadAddress != nil {
+      addressView.setComplete()
+    }
+  }
   @objc private func didTapCompletionButton(_ sender: UIButton) {
     
   }
@@ -239,18 +250,18 @@ class AddRoomViewController: UIViewController {
 
 extension AddRoomViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    if uiImages.isEmpty {
+    if RoomForSale.shared.images.isEmpty {
       emptyView.isHidden = false
-      return uiImages.count
+      return RoomForSale.shared.images.count
     } else {
       emptyView.isHidden = true
-      return uiImages.count
+      return RoomForSale.shared.images.count
     }
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddRoomCollectionViewCell.identifier, for: indexPath) as! AddRoomCollectionViewCell
-    cell.configue(image: uiImages[indexPath.item])
+    cell.configue(image: RoomForSale.shared.images[indexPath.item])
     return cell
   }
 }

@@ -15,7 +15,7 @@ class RoomGuideViewController: UIViewController, RGBodyTableViewCellDelegate {
   
   
   // MARK: -Property
-  
+  var roomForSaleData = RoomForSale.shared
   let tableView = UITableView().then {
     $0.allowsSelection = false
     $0.separatorStyle = .none
@@ -31,10 +31,14 @@ class RoomGuideViewController: UIViewController, RGBodyTableViewCellDelegate {
     
     navigationItem.title = "방 내놓기 안내"
     view.backgroundColor = .white
-    
+//    roomForSaleData = RoomForSaleElement(type: nil, description: nil, loadAddress: nil, detailAddress: nil, lng: nil, lat: nil, saleFormType: nil, depositChar: nil, monthlyChar: nil, depositTnt: nil, monthlyInt: nil, floor: nil, areaChar: nil, supplyAreaInt: nil, supplyAreaChar: nil, shortRent: nil, parkingDetail: nil, parkingTF: nil, living_expenses: nil, living_expenses_detail: nil, moveInChar: nil, moveInDate: nil, heatingType: nil, pet: nil, elevator: nil, builtIn: nil, veranda: nil, depositLoan: nil, totalCitizen: nil, totalPark: nil, complete: nil, option: nil)
     setupUI()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    roomForSaleData.reset()
+  }
   
   // MARK: -Action
   // MARK: -setupUI

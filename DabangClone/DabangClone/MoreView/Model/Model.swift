@@ -23,8 +23,90 @@ struct RoomMenu {
   let menus: [String]?
   var open = false
 }
+class RoomForSale {
+  static let shared = RoomForSale()
+  
+  var roomData: RoomForSaleElement = RoomForSaleElement(type: nil, description: nil, loadAddress: nil, detailAddress: nil, lng: nil, lat: nil, saleFormType: nil, depositChar: nil, monthlyChar: nil, depositInt: nil, monthlyInt: nil, floor: nil, areaChar: nil, supplyAreaInt: nil, supplyAreaChar: nil, shortRent: nil, parkingDetail: nil, parkingTF: nil, living_expenses: nil, living_expenses_detail: nil, moveInChar: nil, moveInDate: nil, heatingType: nil, pet: nil, elevator: nil, builtIn: nil, veranda: nil, depositLoan: nil, totalCitizen: nil, totalPark: nil, complete: nil, option: nil)
+  var images: [UIImage] = []
+//  private init() {
+//    self.roomData = RoomForSaleElement(type: nil, description: nil, loadAddress: nil, detailAddress: nil, lng: nil, lat: nil, saleFormType: nil, depositChar: nil, monthlyChar: nil, depositTnt: nil, monthlyInt: nil, floor: nil, areaChar: nil, supplyAreaInt: nil, supplyAreaChar: nil, shortRent: nil, parkingDetail: nil, parkingTF: nil, living_expenses: nil, living_expenses_detail: nil, moveInChar: nil, moveInDate: nil, heatingType: nil, pet: nil, elevator: nil, builtIn: nil, veranda: nil, depositLoan: nil, totalCitizen: nil, totalPark: nil, complete: nil, option: nil)
+//  }
+  func reset() {
+    self.roomData = RoomForSaleElement(type: nil, description: nil, loadAddress: nil, detailAddress: nil, lng: nil, lat: nil, saleFormType: nil, depositChar: nil, monthlyChar: nil, depositInt: nil, monthlyInt: nil, floor: nil, areaChar: nil, supplyAreaInt: nil, supplyAreaChar: nil, shortRent: nil, parkingDetail: nil, parkingTF: nil, living_expenses: nil, living_expenses_detail: nil, moveInChar: nil, moveInDate: nil, heatingType: nil, pet: nil, elevator: nil, builtIn: nil, veranda: nil, depositLoan: nil, totalCitizen: nil, totalPark: nil, complete: nil, option: nil)
+    self.images.removeAll()
+  }
+  func roomDictionary() -> [String : String] {
+    var result: [String: String] = [:]
+    result["type"] = self.roomData.type
+    result["description"] = self.roomData.description
+    result["loadAddress"] = self.roomData.loadAddress
+    result["detailAddress"] = self.roomData.detailAddress
+    result["lng"] = self.roomData.lng
+    result["lat"] = self.roomData.lat
+    result["saleFormType"] = self.roomData.saleFormType
+    result["depositChar"] = self.roomData.depositChar
+    result["monthlyChar"] = self.roomData.monthlyChar
+    result["depositInt"] = self.roomData.depositInt
+    result["monthlyInt"] = self.roomData.monthlyInt
+    result["floor"] = self.roomData.floor
+    result["areaChar"] = self.roomData.areaChar
+    result["supplyAreaInt"] = self.roomData.supplyAreaInt
+    result["supplyAreaChar"] = self.roomData.supplyAreaChar
+    result["shortRent"] = self.roomData.shortRent
+    result["parkingDetail"] = self.roomData.parkingDetail
+    result["parkingTF"] = self.roomData.parkingTF
+    result["living_expenses"] = self.roomData.living_expenses
+    result["living_expenses_detail"] = self.roomData.living_expenses_detail
+    result["moveInChar"] = self.roomData.moveInChar
+    result["moveInDate"] = self.roomData.moveInDate
+    result["heatingType"] = self.roomData.heatingType
+    result["pet"] = self.roomData.pet
+    result["elevator"] = self.roomData.elevator
+    result["builtIn"] = self.roomData.builtIn
+    result["veranda"] = self.roomData.veranda
+    result["depositLoan"] = self.roomData.depositLoan
+    result["totalCitizen"] = self.roomData.totalCitizen
+    result["totalPark"] =  self.roomData.totalPark
+    result["complete"] = self.roomData.complete
+    result["option"] = self.roomData.option
+    return result
+  }
+}
 
-
+struct RoomForSaleElement {
+  var type: String?
+  var description: String?
+  var loadAddress: String?
+  var detailAddress: String?
+  var lng: String?
+  var lat: String?
+  var saleFormType: String?
+  var depositChar: String?
+  var monthlyChar: String?
+  var depositInt: String?
+  var monthlyInt: String?
+  var floor: String?
+  var areaChar: String?
+  var supplyAreaInt: String?
+  var supplyAreaChar: String?
+  var shortRent: String?
+  var parkingDetail: String?
+  var parkingTF: String?
+  var living_expenses: String?
+  var living_expenses_detail: String?
+  var moveInChar: String?
+  var moveInDate: String?
+  var heatingType: String?
+  var pet: String?
+  var elevator: String?
+  var builtIn: String?
+  var veranda: String?
+  var depositLoan: String?
+  var totalCitizen : String?
+  var totalPark: String?
+  var complete: String?
+  var option: String?
+}
 
 
   var titleArray = ["다방은 어떤 서비스인가요?", "회원가입을 하면 어떤 점이 좋나요?", "회원탈퇴는 어떻게 하나요?", "직거래는 어떻게 방을 내놓나요?", "다방에 등록된 방은 믿을 수 있나요?", "허위매물은 어떻게 관리 하나요?", "매물개수 제한이 있나요?", "공인중개사 연락처 자동저장 기능은 어떻게 해제하나요?"]
