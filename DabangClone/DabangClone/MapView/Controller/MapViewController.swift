@@ -100,36 +100,36 @@ class MapViewController: UIViewController, FilterOverlayViewControllerDelegate {
   
   private var stackView: UIStackView!
   private lazy var selectButtons = [
-    MapFilterButton(title: "원룸 ⌄", tag: 0).then{
+    MapFilterButton(title: "방 구조 ⌄", tag: 0).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
       
     },
-    MapFilterButton(title: "가격 ⌄", tag: 1).then{
+    MapFilterButton(title: "거래 종류 ⌄", tag: 1).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "관리비 ⌄", tag: 2).then{
+    MapFilterButton(title: "층 수 ⌄", tag: 2).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "방 크기 ⌄", tag: 3).then{
+    MapFilterButton(title: "추가 필터 ⌄", tag: 3).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "층 수 ⌄", tag: 4).then{
+    MapFilterButton(title: "관리비 ⌄", tag: 4).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "방구조 ⌄", tag: 5).then{
+    MapFilterButton(title: "가격 ⌄", tag: 5).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "추가필터 ⌄", tag: 6).then{
+    MapFilterButton(title: "관리비 ⌄", tag: 6).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "거래종류 ⌄", tag: 7).then{
+    MapFilterButton(title: "방 크기 ⌄", tag: 7).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
@@ -171,7 +171,7 @@ class MapViewController: UIViewController, FilterOverlayViewControllerDelegate {
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    self.tabBarController?.tabBar.isHidden = false
     self.view.backgroundColor = .white
     tableView.dataSource = self
     tableView.delegate = self

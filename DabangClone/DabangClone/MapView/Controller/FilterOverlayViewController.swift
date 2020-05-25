@@ -54,35 +54,35 @@ class FilterOverlayViewController: UIViewController {
   
   private var stackView: UIStackView!
   private let selectButtons = [
-    MapFilterButton(title: "원룸 ⌄", tag: 0).then{
+    MapFilterButton(title: "방 구조 ⌄", tag: 0).then{
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "가격 ⌄", tag: 1).then {
+    MapFilterButton(title: "거래 종류 ⌄", tag: 1).then {
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "관리비 ⌄", tag: 2).then {
+    MapFilterButton(title: "층 수 ⌄", tag: 2).then {
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "방 크기 ⌄", tag: 3).then {
+    MapFilterButton(title: "추가 필터 ⌄", tag: 3).then {
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "층 수 ⌄", tag: 4).then {
+    MapFilterButton(title: "관리비 ⌄", tag: 4).then {
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "방구조 ⌄", tag: 5).then {
+    MapFilterButton(title: "가격 ⌄", tag: 5).then {
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "추가필터 ⌄", tag: 6).then {
+    MapFilterButton(title: "관리비 ⌄", tag: 6).then {
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
-    MapFilterButton(title: "거래종류 ⌄", tag: 7).then {
+    MapFilterButton(title: "방 크기 ⌄", tag: 7).then {
       $0.setTitleColor(.black, for: .normal)
       $0.addTarget(self, action: #selector(didTapDetailFilterButton(_:)), for: .touchUpInside)
     },
@@ -168,7 +168,7 @@ class FilterOverlayViewController: UIViewController {
 extension FilterOverlayViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch filterTag {
-    case 0, 1, 4, 5, 6, 7:
+    case 0, 1, 2, 3, 4, 5:
       return 2
     default:
       return 0
@@ -191,28 +191,28 @@ extension FilterOverlayViewController: UITableViewDataSource {
     case (1, 1):
       let cell = tableView.dequeueReusableCell(withIdentifier: ApplyAndCancelTableViewCell.identifier, for: indexPath) as! ApplyAndCancelTableViewCell
       return cell
-    case (4, 0):
+    case (2, 0):
       let cell = tableView.dequeueReusableCell(withIdentifier: FilterFloorCountCell.identifier, for: indexPath) as! FilterFloorCountCell
       return cell
-    case (4, 1):
+    case (2, 1):
+      let cell = tableView.dequeueReusableCell(withIdentifier: ApplyAndCancelTableViewCell.identifier, for: indexPath) as! ApplyAndCancelTableViewCell
+      return cell
+    case (3, 0):
+      let cell = tableView.dequeueReusableCell(withIdentifier: FilterRoomStructureCell.identifier, for: indexPath) as! FilterRoomStructureCell
+      return cell
+    case (3, 1):
+      let cell = tableView.dequeueReusableCell(withIdentifier: ApplyAndCancelTableViewCell.identifier, for: indexPath) as! ApplyAndCancelTableViewCell
+      return cell
+    case (4, 0):
+      let cell = tableView.dequeueReusableCell(withIdentifier: FileteAddCell.identifier, for: indexPath) as! FileteAddCell
+      return cell
+      case (4, 1):
       let cell = tableView.dequeueReusableCell(withIdentifier: ApplyAndCancelTableViewCell.identifier, for: indexPath) as! ApplyAndCancelTableViewCell
       return cell
     case (5, 0):
-      let cell = tableView.dequeueReusableCell(withIdentifier: FilterRoomStructureCell.identifier, for: indexPath) as! FilterRoomStructureCell
-      return cell
-    case (5, 1):
-      let cell = tableView.dequeueReusableCell(withIdentifier: ApplyAndCancelTableViewCell.identifier, for: indexPath) as! ApplyAndCancelTableViewCell
-      return cell
-    case (6, 0):
-      let cell = tableView.dequeueReusableCell(withIdentifier: FileteAddCell.identifier, for: indexPath) as! FileteAddCell
-      return cell
-      case (6, 1):
-      let cell = tableView.dequeueReusableCell(withIdentifier: ApplyAndCancelTableViewCell.identifier, for: indexPath) as! ApplyAndCancelTableViewCell
-      return cell
-    case (7, 0):
       let cell = tableView.dequeueReusableCell(withIdentifier: FilterTradeTypeCell.identifier, for: indexPath) as! FilterTradeTypeCell
       return cell
-      case (7, 1):
+      case (5, 1):
       let cell = tableView.dequeueReusableCell(withIdentifier: ApplyAndCancelTableViewCell.identifier, for: indexPath) as! ApplyAndCancelTableViewCell
       return cell
     default:
