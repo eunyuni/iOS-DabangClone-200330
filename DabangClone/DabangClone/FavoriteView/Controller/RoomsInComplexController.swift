@@ -14,6 +14,11 @@ class RoomsInComplexController: UIViewController {
 
     let tableView = UITableView()
     var disposeBag = DisposeBag()
+    var roomsPK = [Int]() {
+        didSet{
+            subscribeDataSource()
+        }
+    }
     
     var rooms: [DabangElement]? {
         didSet {
@@ -24,18 +29,6 @@ class RoomsInComplexController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        UserActionTracker.shared.complexAvailableRooms
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                if self.rooms == nil {
-                    self.rooms = [DabangElement]()
-                    self.rooms?.append($0)
-                } else {
-                    self.rooms?.append($0)
-                }
-            })
-        .disposed(by: disposeBag)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +50,23 @@ class RoomsInComplexController: UIViewController {
         }
     }
     
+    private func subscribeDataSource() {
+        roomsPK.forEach({
+            APIManager.shared.rxGetCertainRoomData(pk: $0)
+            .retry()
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                if self.rooms == nil {
+                    self.rooms = [DabangElement]()
+                    self.rooms?.append($0)
+                } else {
+                    self.rooms?.append($0)
+                }
+            })
+            .disposed(by: disposeBag)
+        })
+    }
 }
 
 extension RoomsInComplexController: UITableViewDataSource {

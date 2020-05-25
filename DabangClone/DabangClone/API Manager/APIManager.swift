@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import KeychainSwift
+import RxSwift
 
 enum LoginWays {
     case local
@@ -118,7 +119,21 @@ final class APIManager {
                 case .failure(let error):
                     completion(.failure(error))
                 }
-                
+        }
+    }
+    //GET: pk를 기준으로 특정 방 1개 <Rx>
+    func rxGetCertainRoomData(pk: Int) -> Observable<DabangElement>{
+        return Observable.create() { observer in
+            self.getCertainRoomData(pk: pk) { (result) in
+                switch result {
+                case .success(let room):
+                    observer.onNext(room)
+                case .failure(let error):
+                    print("Emitted Error")
+                    observer.onError(error)
+                }
+            }
+            return Disposables.create()
         }
     }
     
@@ -461,4 +476,14 @@ let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1
     }
     
     
+    // MARK: - Cancel Request
+    
+    func cancelAllRequest() {
+        print("cancel All API Request")
+        AF.session.getTasksWithCompletionHandler { dataTasks, uploadTasks, downloadTasks in
+            dataTasks.forEach { $0.cancel() }
+            uploadTasks.forEach { $0.cancel() }
+            downloadTasks.forEach { $0.cancel() }
+        }
+    }
 }

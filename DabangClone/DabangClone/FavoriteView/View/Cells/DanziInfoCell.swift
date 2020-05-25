@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 protocol DanziInfoCellDelegate: class {
-    func didTapAvailableRoomsButtons()
+    func didTapAvailableRoomsButtons(roomsPk: [Int])
     func didTapComplexInfoButton(data: Complex)
 }
 
@@ -171,18 +171,7 @@ class DanziInfoCell: UITableViewCell {
     @objc private func didTapButtons(_ sender: UIButton) {
         switch sender {
         case availableRoomButton:
-            self.data.list.forEach({
-                APIManager.shared.getCertainRoomData(pk: $0) { (result) in
-                    switch result {
-                    case .success(let room):
-                        print("success")
-                        UserActionTracker.shared.complexAvailableRooms.onNext(room)
-                    case .failure(let error):
-                        print("failed to load rooms: ", error)
-                    }
-                }
-            })
-            self.delegate?.didTapAvailableRoomsButtons()
+            self.delegate?.didTapAvailableRoomsButtons(roomsPk: self.data.list)
         default:
             self.delegate?.didTapComplexInfoButton(data: self.data)
         }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RxCocoa
 import RxSwift
 
 class UserActionTracker {
@@ -17,9 +16,6 @@ class UserActionTracker {
     private init() {}
     
     var latestCheckedRoom: DabangElement?
-    
     var markedRoomList = [Int]()
-    
     var complexAvailableRooms = PublishSubject<DabangElement>()
-    
 }

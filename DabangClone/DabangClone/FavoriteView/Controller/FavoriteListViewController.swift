@@ -429,6 +429,13 @@ extension FavoriteListViewController: FavoriteViewModelDelegate {
 }
 
 extension FavoriteListViewController: DanziInfoCellDelegate {
+    func didTapAvailableRoomsButtons(roomsPk: [Int]) {
+        let vc = RoomsInComplexController()
+        vc.roomsPK = roomsPk
+        //        vc.rooms = data
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func didTapAvailableRoomsButtons() {
         print("delegate response")
         let vc = RoomsInComplexController()

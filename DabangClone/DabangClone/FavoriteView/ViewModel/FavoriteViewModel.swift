@@ -125,6 +125,7 @@ final class FavoriteViewModel {
     }
     
     private func setActiveData(_ dataIndex: Int) {
+        APIManager.shared.cancelAllRequest()
         switch dataIndex {
         case 0:
             self.activeData = FavoriteData.checkedRoomInfo(self.checkedRoomData)

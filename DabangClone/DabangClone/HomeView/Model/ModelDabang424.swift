@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - DabangElement
-struct DabangElement: Codable {
+struct DabangElement: Codable, Equatable {
     let pk: Int
     let broker: Broker
     let name: String?
@@ -51,6 +51,10 @@ struct DabangElement: Codable {
         case heatingType, pet, elevator, builtIn, veranda, depositLoan, totalCitizen, totalPark, complete
         case securitySafetySet = "securitySafety_set"
         case postimage, complex, name
+    }
+    
+    static func == (lhs: DabangElement, rhs: DabangElement) -> Bool {
+        return lhs.pk == rhs.pk
     }
 }
 
