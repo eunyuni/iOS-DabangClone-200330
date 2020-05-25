@@ -22,4 +22,5 @@ target 'DabangClone' do
   pod 'SwiftyJSON'
   pod 'KeychainSwift'
   pod 'DKImagePickerController'
+  pod 'Gedatsu', configuration: %w(Debug)
 end
