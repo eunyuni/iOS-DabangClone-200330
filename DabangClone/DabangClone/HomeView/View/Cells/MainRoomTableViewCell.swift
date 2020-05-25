@@ -116,7 +116,7 @@ class MainRoomTableViewCell: UITableViewCell {
   
   let detailInfoStackView = DetailInfoStackView()
   
-  var bangData = BangData.shared.data[7]
+  var bangData = BangDataMap.shared.dataOfClusteredRooms[0]
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -142,10 +142,22 @@ class MainRoomTableViewCell: UITableViewCell {
   
   
   func setupUI(pk: Int) {
-    let bangDataArr = BangData.shared.data.filter {
+    var bangDataArr = BangDataMap.shared.dataOfClusteredRooms.filter {
       $0.pk == pk
     }
-    bangData = bangDataArr[0]
+    if bangDataArr.isEmpty {
+      APIManager.shared.getCertainRoomData(pk: pk) { (result) in
+      switch result {
+      case .success(let eachData):
+      bangDataArr.append(eachData)
+      case .failure(let error):
+        print(error)
+      }
+      }
+    } else {
+      bangData = bangDataArr[0]
+    }
+    
     
     
     if bangData.salesForm.type == .월세 {
@@ -417,7 +429,7 @@ extension MainRoomTableViewCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     if collectionView == self.collectionView {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainRoomCollectionViewCell.identifier, for: indexPath) as! MainRoomCollectionViewCell
-      let url = URL(string: "https://wpsdabangapi.s3.amazonaws.com/\(bangData.postimage[indexPath.row])")
+      let url = URL(string: "https://dabang.s3.amazonaws.com/\(bangData.postimage[indexPath.row])")
       cell.imageView.kf.setImage(with: url)
       cell.imageView.contentMode = .scaleAspectFill
       return cell

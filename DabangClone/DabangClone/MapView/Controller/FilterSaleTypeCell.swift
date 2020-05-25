@@ -24,21 +24,25 @@ class FilterSaleTypeCell: UITableViewCell {
     $0.font = .systemFont(ofSize: 13, weight: .regular)
     $0.textColor = .gray
   }
-  private let monthlyButton = UIButton().then {
+  private lazy var monthlyButton = UIButton().then {
     $0.setTitle("월세", for: .normal)
     $0.setTitleColor(.white, for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14)
     $0.backgroundColor = UIColor(named: "DabangLightBlue")
     $0.layer.cornerRadius = 4
+    $0.isSelected = true
+    $0.addTarget(self, action: #selector(selectedFilteringButton(_:)), for: .touchUpInside)
   }
-  private let charterButton = UIButton().then {
+  private lazy var charterButton = UIButton().then {
     $0.setTitle("전세", for: .normal)
     $0.setTitleColor(.white, for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14)
     $0.backgroundColor = UIColor(named: "DabangLightBlue")
     $0.layer.cornerRadius = 4
+    $0.isSelected = true
+    $0.addTarget(self, action: #selector(selectedFilteringButton(_:)), for: .touchUpInside)
   }
-  private let tradingButton = UIButton().then {
+  private lazy var tradingButton = UIButton().then {
     $0.setTitle("매매", for: .normal)
     $0.setTitleColor(.black, for: .normal)
     $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .light)
@@ -46,6 +50,8 @@ class FilterSaleTypeCell: UITableViewCell {
     $0.layer.borderWidth = 0.6
     $0.layer.borderColor = UIColor.lightGray.cgColor
     $0.layer.cornerRadius = 4
+    $0.isSelected = false
+    $0.addTarget(self, action: #selector(selectedFilteringButton(_:)), for: .touchUpInside)
   }
   // MARK: -init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -107,8 +113,21 @@ class FilterSaleTypeCell: UITableViewCell {
       $0.width.equalTo(40)
       $0.height.equalTo(monthlyButton)
     }
-
-    
   }
   
+  @objc private func selectedFilteringButton(_ sender: UIButton) {
+      if sender.isSelected == false {
+        sender.backgroundColor = UIColor(named: "DabangLightBlue")
+        sender.setTitleColor(.white, for: .normal)
+        sender.layer.borderWidth = 0
+        sender.layer.borderColor = UIColor.clear.cgColor
+        sender.isSelected = true
+      } else {
+        sender.backgroundColor = UIColor(named: "LightGrayColor")
+        sender.setTitleColor(.black, for: .normal)
+        sender.layer.borderWidth = 0.6
+        sender.layer.borderColor = UIColor.lightGray.cgColor
+        sender.isSelected = false
+      }
+  }
 }

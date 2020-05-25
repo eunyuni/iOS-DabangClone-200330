@@ -104,7 +104,7 @@ extension SaleNewsViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SaleNewsDetailTableViewCell.identifier, for: indexPath) as! SaleNewsDetailTableViewCell
-    cell.configue()
+    cell.configue(newsTheme[indexPath.row])
     return cell
   }
   

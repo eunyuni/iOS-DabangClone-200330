@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    checkAuth()
+    //    checkAuth()
     APIManager.shared.logout()
     self.view.backgroundColor = .white
     getTest()
@@ -40,11 +40,13 @@ class HomeViewController: UIViewController {
     APIManager.shared.put() { data in
       print(data)
     }
+    
+    
   }
   
   
   override func viewDidAppear(_ animated: Bool) {
-   super.viewDidAppear(animated)
+    super.viewDidAppear(animated)
     let udDay = (UserDefaults.standard.value(forKey: "TodayPopUp") as? Int) ?? 0
     if udDay != checkToday() {
       doFirstViewAlert()
@@ -54,9 +56,9 @@ class HomeViewController: UIViewController {
   
   // MARK: - Action
   private func doFirstViewAlert() {
-   let AlertVC = HomeAlertViewController()
-   AlertVC.modalPresentationStyle = .overFullScreen
-   present(AlertVC, animated: false)
+    let AlertVC = HomeAlertViewController()
+    AlertVC.modalPresentationStyle = .overFullScreen
+    present(AlertVC, animated: false)
   }
   
   // MARK: - setupUI
@@ -79,11 +81,11 @@ class HomeViewController: UIViewController {
   }
   
   private func checkToday() -> Int {
-     let now = Date()
-       let date = DateFormatter()
-       date.locale = Locale(identifier: "ko_kr")
-       date.dateFormat = "dd"
-       return Int(date.string(from: now)) ?? 0
+    let now = Date()
+    let date = DateFormatter()
+    date.locale = Locale(identifier: "ko_kr")
+    date.dateFormat = "dd"
+    return Int(date.string(from: now)) ?? 0
   }
 }
 
@@ -129,7 +131,7 @@ extension HomeViewController: UITableViewDataSource {
         
         if let jsonObjects = try? JSONDecoder().decode([DabangElement].self, from: response.data ?? Data()) {
           BangData.shared.data = jsonObjects
-            print(BangData.shared.data[10])
+          print(BangData.shared.data[10])
         } else {
           print("fail")
         }

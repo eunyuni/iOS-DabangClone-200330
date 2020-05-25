@@ -7,7 +7,7 @@
 import Foundation
 
 // MARK: - DabangTinyElement
-struct DabangTinyElement: Encodable {
+struct DabangTinyElement: Codable {
     let pk: Int
     let type: DabangTinyType?
     let dabangTinyDescription: String?
@@ -26,32 +26,32 @@ struct DabangTinyElement: Encodable {
 }
 
 // MARK: - Address
-struct Addresss: Encodable {
+struct Addresss: Codable {
     let pk: Int
     let loadAddress, detailAddress: String?
 }
 
 // MARK: - Complex
-struct Complexx: Encodable {
+struct Complexx: Codable {
     let pk: Int
     let complexName: String
 }
 
 // MARK: - SalesForm
-struct SalesFormm: Encodable {
+struct SalesFormm: Codable {
     let pk: Int
     let type: SalesFormType
     let depositChar, monthlyChar: String
     let depositInt, monthlyInt: Int
 }
 
-enum SalesFormTypee: String, Encodable {
+enum SalesFormTypee: String, Codable {
     case 매매 = "매매"
     case 월세 = "월세"
     case 전세 = "전세"
 }
 
-enum DabangTinyType: String, Encodable {
+enum DabangTinyType: String, Codable {
     case 쓰리룸 = "쓰리룸"
     case 아파트 = "아파트"
     case 오피스텔 = "오피스텔"

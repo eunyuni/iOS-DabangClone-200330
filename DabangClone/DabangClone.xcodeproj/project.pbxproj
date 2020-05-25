@@ -37,6 +37,9 @@
 		15315A63244857250033EA47 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A54244857250033EA47 /* EmptyStateView.swift */; };
 		15315A66244857680033EA47 /* BudongsanInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A64244857670033EA47 /* BudongsanInfoCell.swift */; };
 		15315A67244857680033EA47 /* RoomInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15315A65244857680033EA47 /* RoomInfoCell.swift */; };
+		153D186D246D635A003ACB3F /* FilterOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153D186C246D635A003ACB3F /* FilterOverlayViewController.swift */; };
+		153D186F246D77C7003ACB3F /* ApplyAndCancelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153D186E246D77C7003ACB3F /* ApplyAndCancelTableViewCell.swift */; };
+		153D18B724705A3E003ACB3F /* FilteringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153D18B624705A3E003ACB3F /* FilteringModel.swift */; };
 		155B8555244C7EEC009AC6AF /* ThreeRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155B8550244C7EE9009AC6AF /* ThreeRoomTableViewCell.swift */; };
 		155B8556244C7EEC009AC6AF /* OfficeTelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155B8551244C7EEA009AC6AF /* OfficeTelTableViewCell.swift */; };
 		155B8557244C7EEC009AC6AF /* ApartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155B8552244C7EEA009AC6AF /* ApartTableViewCell.swift */; };
@@ -317,6 +320,9 @@
 		15315A54244857250033EA47 /* EmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		15315A64244857670033EA47 /* BudongsanInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudongsanInfoCell.swift; sourceTree = "<group>"; };
 		15315A65244857680033EA47 /* RoomInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomInfoCell.swift; sourceTree = "<group>"; };
+		153D186C246D635A003ACB3F /* FilterOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOverlayViewController.swift; sourceTree = "<group>"; };
+		153D186E246D77C7003ACB3F /* ApplyAndCancelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyAndCancelTableViewCell.swift; sourceTree = "<group>"; };
+		153D18B624705A3E003ACB3F /* FilteringModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringModel.swift; sourceTree = "<group>"; };
 		155B8550244C7EE9009AC6AF /* ThreeRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeRoomTableViewCell.swift; sourceTree = "<group>"; };
 		155B8551244C7EEA009AC6AF /* OfficeTelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficeTelTableViewCell.swift; sourceTree = "<group>"; };
 		155B8552244C7EEA009AC6AF /* ApartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApartTableViewCell.swift; sourceTree = "<group>"; };
@@ -996,6 +1002,7 @@
 				E78AD968243727130098BE6E /* Padding.swift */,
 				159121AE24544C3300DA05D8 /* GoogleGeocodingModel.swift */,
 				15D7A92C246AAF0A00D7D7C1 /* MapModel.swift */,
+				153D18B624705A3E003ACB3F /* FilteringModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1020,6 +1027,7 @@
 				1516005224287E6F0003DDCF /* MapViewController.swift */,
 				E78AD962243711C80098BE6E /* FilterViewController.swift */,
 				E7DA164D245891370053E455 /* ComplexViewController.swift */,
+				153D186C246D635A003ACB3F /* FilterOverlayViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1220,6 +1228,7 @@
 				E7DA1651245891F00053E455 /* ComplexCollectionViewCell.swift */,
 				E7DA1653245891F00053E455 /* ComplexRecommendCollectionViewCell.swift */,
 				E7DA1652245891F00053E455 /* ComplexRecommendTableViewCell.swift */,
+				153D186E246D77C7003ACB3F /* ApplyAndCancelTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1268,9 +1277,9 @@
 				E77D8C722443C15600A263AE /* SaleDetailSaleInfoCell.swift */,
 				E77D8C742445882700A263AE /* SaleDetailParcelPriceCell.swift */,
 				E77D8C76244593BA00A263AE /* SaleDetailScheduleCell.swift */,
+				E77D8C7E2447306100A263AE /* SaleDetailRecommendCollectionCell.swift */,
 				E77D8C782445C93900A263AE /* SaleDetailNearMapCell.swift */,
 				E77D8C7C2447301200A263AE /* SaleDetailRecommendCell.swift */,
-				E77D8C7E2447306100A263AE /* SaleDetailRecommendCollectionCell.swift */,
 				6F389E63244853D400A440A4 /* SaleTopTableViewCell.swift */,
 				6F389E6B244854E100A440A4 /* SaleTopCollectionViewCell.swift */,
 				6F389E65244853F700A440A4 /* SaleNewsTableViewCell.swift */,
@@ -1607,6 +1616,7 @@
 				157C4E712437142E008559FD /* AddressViewController.swift in Sources */,
 				157C4E7324371F60008559FD /* RoomSellScrollViewController.swift in Sources */,
 				156B617024346CF900054FE9 /* CheckBoxCell.swift in Sources */,
+				153D186F246D77C7003ACB3F /* ApplyAndCancelTableViewCell.swift in Sources */,
 				158473E32435E8BF00C49FC1 /* TitleTableViewCell.swift in Sources */,
 				E77D8C6D2443466D00A263AE /* SaleDetailViewController.swift in Sources */,
 				152DD9B6242B3EEA00C80E10 /* FrequentlyTableViewCell.swift in Sources */,
@@ -1629,6 +1639,7 @@
 				E77D8C6F244348D500A263AE /* SaleDetailMainCell.swift in Sources */,
 				1516004D24285FCB0003DDCF /* SignUpViewController.swift in Sources */,
 				E7E60443243B1AC30050D540 /* FindBottomView.swift in Sources */,
+				153D18B724705A3E003ACB3F /* FilteringModel.swift in Sources */,
 				15315A62244857250033EA47 /* BrokerInfoPopUpVC.swift in Sources */,
 				1591219E2451CCCA00DA05D8 /* GMUPlacemark.m in Sources */,
 				E7BB1C0A243208A300C66B48 /* CountfloorsViewController.swift in Sources */,
@@ -1699,6 +1710,7 @@
 				E7BB1C002431DC8200C66B48 /* SaveView.swift in Sources */,
 				159121AD2452295D00DA05D8 /* MapTableViewCell.swift in Sources */,
 				15315A5F244857250033EA47 /* CompareDetailView.swift in Sources */,
+				153D186D246D635A003ACB3F /* FilterOverlayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
