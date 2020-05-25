@@ -11,6 +11,10 @@ import Alamofire
 import SwiftyJSON
 import KeychainSwift
 
+enum SaleInfoError: Error {
+  case badGatewa
+}
+
 enum LoginWays {
     case local
     case apple
@@ -209,12 +213,51 @@ final class APIManager {
     }
   }
     
-    
   
-  //GET: 전체 분양 정보 리스트
-  func getSaleInfoList(completion: @escaping (Result<SaleAll, Error>) -> Void) {
+  
+  //GET: 전체 분양 전체 리스트
+  func getSaleAllList(completion: @escaping (Result<SaleAll, Error>) -> Void) {
     AF.request( baseURL + "/presales/", method: .get)
       .responseDecodable(of: SaleAll.self) { (response) in
+        print("responseCode--->", response.response?.statusCode)
+        guard let code =  response.response?.statusCode, code != 502 else {
+          completion(.failure(SaleInfoError.badGatewa))
+          return
+        }
+//        print(response.res)
+        switch response.result {
+        case .success(let complex):
+          completion(.success(complex))
+        case .failure(let error):
+          completion(.failure(error))
+        }
+    }
+    
+//    guard let url = URL(string: baseURL + "/presales/") else { return }
+//    var request = URLRequest(url: url)
+//    request.httpMethod = "GET"
+//    let task = URLSession.shared.dataTask(with: request) {
+//      (data, response, error) in
+//
+//      if let response = response as? HTTPURLResponse {
+//        print(response.statusCode)
+//      }
+//
+//      guard let data = data else { return }
+//      let string = String(data: data, encoding: .utf8)
+//      print("RESPONSE---------------------------------------")
+//      print(string ?? "씨발")
+//
+//    }
+//
+//    task.resume()
+    
+  }
+  
+  //GET: 전체 분양 Tiny 리스트
+  func getSaleTinyList(completion: @escaping (Result<[SaleTiny], Error>) -> Void) {
+    AF.request( baseURL + "/presales/tiny", method: .get)
+      .responseDecodable(of: [SaleTiny].self) { (response) in
         switch response.result {
         case .success(let complex):
           completion(.success(complex))
@@ -223,6 +266,7 @@ final class APIManager {
         }
     }
   }
+  
   
   //GET: id를 기준으로 특정 분양 1개
   func getCertainSaleData(id: Int, completion: @escaping (Result<SaleInfo, Error>) -> Void) {

@@ -29,10 +29,10 @@ class SaleNewsTableViewCell: UITableViewCell {
     $0.setTitleColor(.blue, for: .normal)
   }
   private let leftView = ImageNewsView().then {
-    $0.configue(imageName: "newsImage", title: "정책", detail: "서울시 도시철도 9호선 4단계 국토교통부 기본계 어쩌구 저쩌구")
+    $0.configue(imageName: "newsImage1", title: "정책", detail: "LH, 올해 첫 행복주택 입주자 모집...전국 2,670가구 대상")
   }
   private let rightView = ImageNewsView().then {
-    $0.configue(imageName: "newsImage", title: "정책", detail: "서울시 도시철도 9호선 4단계 국토교통부 기본계 어쩌구 저쩌구")
+    $0.configue(imageName: "newsImage", title: "정책", detail: "서울시 도시철도 9호선 4단계 국토교통부 기본계 사업성 저쩌구")
   }
   private let firstNewsView = NewsView().then {
     $0.configue(title: "정책", detail: "\"껑충 뛴 공시가 낮춰달라\"…이의신청 2만건 넘어설 듯")

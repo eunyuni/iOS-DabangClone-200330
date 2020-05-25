@@ -49,8 +49,27 @@ GTX권 단지 모음
 
 
 
-//class SaleData {
-//  static let shared = SaleData()
-//  var data: [Sale] = []
-//}
+struct NewsTheme {
+  var typeLabel: String
+  var titleLabel: String
+  var DetailLabel: String
+  var Image: UIImage?
+}
+
+let newsTheme : [NewsTheme] = [
+  NewsTheme(typeLabel: "정책", titleLabel: "분양권 전매금지 강화...천안∙춘천까지 '신축 수요'몰리나", DetailLabel: "서울경제 | 2020.05.12", Image: UIImage(named: "newsDetailImage1")),
+NewsTheme(typeLabel: "정책", titleLabel: "8월부터 수도권∙광역시 분양권 전매금지...또 풍선효과?", DetailLabel: "서울경제 | 2020.05.11", Image: UIImage(named: "newsDetailImage2")),
+NewsTheme(typeLabel: "정책", titleLabel: "비규제 수도권∙지방광역시도 분양권 전매제한 강화...6개월→소유권 이전 등기시", DetailLabel: "서울경제 | 2020.05.11", Image: UIImage(named: "newsDetailImage")),
+NewsTheme(typeLabel: "정책", titleLabel: "LH, 올해 첫 행복주택 입주자 모집...전국 2,670가구 대상", DetailLabel: "서울경제 | 2020.05.7", Image: UIImage(named: "newsDetailImage3")),
+NewsTheme(typeLabel: "정책", titleLabel: "'시세의30~70%' 청년∙신혼부부 매입임대주택, 18일부터 입주자 모집", DetailLabel: "서울경제 | 2020.05.6", Image: UIImage(named: "newsDetailImage4")),
+]
+
+struct MainImageTheme {
+  var image: UIImage?
+}
+
+let mainImageTheme: [MainImageTheme] = [
+MainImageTheme(image: UIImage(named: "SaleMainImage1")),
+MainImageTheme(image: UIImage(named: "SaleMainImage2")),
+]
 

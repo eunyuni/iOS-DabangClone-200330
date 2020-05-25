@@ -87,13 +87,15 @@ extension SaleViewController: UITableViewDelegate {
 extension SaleViewController: SaleTopTableViewCellDelegate {
   func didTapInformationButton() {
     let vc = SaleInformationViewController()
-    APIManager.shared.getSaleInfoList { (response) in
+    APIManager.shared.getSaleTinyList { (response) in
       switch response {
-      case .success(let sales):
-        vc.saleData = sales.results
-        print("saleList Success❤️")
+      case .success(let saleTiny):
+        vc.saleTiny = saleTiny
+        vc.saleReload()
+        print("SaleTinySuccess ❤️")
       case .failure(let error):
-        print(error.localizedDescription)
+        print("Error...........\(error)"
+        )
       }
     }
     navigationController?.pushViewController(vc, animated: true)

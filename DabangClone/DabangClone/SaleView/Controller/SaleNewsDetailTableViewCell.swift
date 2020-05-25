@@ -44,11 +44,11 @@ class SaleNewsDetailTableViewCell: UITableViewCell {
   }
   
   // MARK: - Action
-  func configue() {
-    newsTypeLabel.text = "정책"
-    newsTitleLabel.text = "13일부터 조정지역 3억 주택 자금도 탈탈 터는 데..모호한 기준은 여전"
-    newsDetailLabel.text = "서울경제 | 2020.03.17"
-    newsImageView.image = UIImage(named: "newsDetailImage")
+  func configue(_ news: NewsTheme) {
+    newsTypeLabel.text = news.typeLabel
+    newsTitleLabel.text = news.titleLabel
+    newsDetailLabel.text = news.DetailLabel
+    newsImageView.image = news.Image
   }
   // MARK: - setupUI
   private func setupUI() {
