@@ -12,6 +12,10 @@ import SwiftyJSON
 import KeychainSwift
 import RxSwift
 
+enum SaleInfoError: Error {
+  case badGatewa
+}
+
 enum LoginWays {
     case local
     case apple
@@ -226,6 +230,7 @@ final class APIManager {
         }
     }
     
+  //MARK: -위치 기준으로 축약된 방 정보/위치 요청
   func getItemsInCurrentMap(km: Double, current position: CLLocationCoordinate2D, completion: @escaping (Result<[BangInCurrentMapModel], Error>) -> Void) {
     
     let parameter: Parameters = [
@@ -242,12 +247,163 @@ final class APIManager {
         case .failure(let error):
           completion(.failure(error))
         }
-        
     }
+  }
+  
+//  func getFilteredItems(
+//    depositLoan: Bool? = nil, salesForm__type: String? = nil, type: String? = nil, min_monthlyInt: Int? = nil,
+//    max_monthlyInt: Int? = nil, min_depositInt: Int? = nil, max_depositInt: Int? = nil, min_supply_area: Int? = nil,
+//    max_supply_area: Int? = nil, floor: String? = nil, parkingTF: Bool? = nil, pet: Bool? = nil,
+//    shortRent: Bool? = nil, elevator: Bool? = nil, builtIn: Bool? = nil, veranda: Bool? = nil,
+//                        
+//    completion: @escaping (Result<FilteredItemsModel, Error>) -> Void) {
+//    let parameter: Parameters = [
+//      "depositLoan" : depositLoan ?? "", //전세자금대출
+//      "salesForm__type" : salesForm__type ?? "", //매매/월세/전세 - 중복 선택 가능
+//      "type" : type ?? "", // 원룸, 투룸, 쓰리룸, 오피스텔, 아파트 중복선택 가능
+//      "min_monthlyInt" : min_monthlyInt ?? "", // 월세 최소 금액
+//      "max_monthlyInt" : max_monthlyInt ?? "", // 월세 최대 금액
+//      "min_depositInt" : min_depositInt ?? "",// 보증금/전세가 최소 금액(매매가와 동일)
+//      "max_depositInt" : max_depositInt ?? "", // 보증금/전세가 최대 금액(매매가와 동일)
+//      "min_supply_area" : min_supply_area ?? "", // 최소 평수
+//      "max_supply_area" : max_supply_area ?? "", // 최대 평수
+//      "floor" : floor ?? "", //층수, 중복 선택 가능
+//      "parkingTF" : parkingTF ?? "", //Bool값
+//      "pet" : pet ?? "",//Bool값
+//      "shortRent" : shortRent ?? "",//Bool값
+//      "elevator" : elevator ?? "",//Bool값
+//      "builtIn" : builtIn ?? "",//Bool값
+//      "veranda" : veranda ?? "" //Bool값
+//    ]
+//    
+//    AF.request(baseURL + "/posts/", method: .get, parameters: parameter)
+//      .responseDecodable(of: FilteredItemsModel.self) { (response) in
+//        switch response.result {
+//        case .success(let data):
+//          completion(.success(data))
+//        case .failure(let error):
+//          completion(.failure(error))
+//        }
+//    }
+//  }
+  
+  func getFilteredItems(
+    depositLoan: Bool? = nil, salesForm__type: String? = nil, type: String? = nil, min_monthlyInt: Int? = nil,
+    max_monthlyInt: Int? = nil, min_depositInt: Int? = nil, max_depositInt: Int? = nil, min_supply_area: Int? = nil,
+    max_supply_area: Int? = nil, floor: String? = nil, parkingTF: Bool? = nil, pet: Bool? = nil,
+    shortRent: Bool? = nil, elevator: Bool? = nil, builtIn: Bool? = nil, veranda: Bool? = nil,
+                        
+    completion: @escaping (Result<FilteredItemsModel, Error>) -> Void) {
+    let parameter: Parameters = [
+      "depositLoan" : depositLoan ?? "", //전세자금대출
+      "salesForm__type" : salesForm__type ?? "", //매매/월세/전세 - 중복 선택 가능
+      "type" : type ?? "", // 원룸, 투룸, 쓰리룸, 오피스텔, 아파트 중복선택 가능
+      "min_monthlyInt" : min_monthlyInt ?? "", // 월세 최소 금액
+      "max_monthlyInt" : max_monthlyInt ?? "", // 월세 최대 금액
+      "min_depositInt" : min_depositInt ?? "",// 보증금/전세가 최소 금액(매매가와 동일)
+      "max_depositInt" : max_depositInt ?? "", // 보증금/전세가 최대 금액(매매가와 동일)
+      "min_supply_area" : min_supply_area ?? "", // 최소 평수
+      "max_supply_area" : max_supply_area ?? "", // 최대 평수
+      "floor" : floor ?? "", //층수, 중복 선택 가능
+      "parkingTF" : parkingTF ?? "", //Bool값
+      "pet" : pet ?? "",//Bool값
+      "shortRent" : shortRent ?? "",//Bool값
+      "elevator" : elevator ?? "",//Bool값
+      "builtIn" : builtIn ?? "",//Bool값
+      "veranda" : veranda ?? "" //Bool값
+    ]
     
+    AF.request(baseURL + "/posts/", method: .get, parameters: parameter)
+      .responseDecodable(of: FilteredItemsModel.self) { (response) in
+        switch response.result {
+        case .success(let data):
+          completion(.success(data))
+        case .failure(let error):
+          completion(.failure(error))
+        }
+    }
   }
     
+  
+  
+  //GET: 전체 분양 전체 리스트
+  func getSaleAllList(completion: @escaping (Result<SaleAll, Error>) -> Void) {
+    AF.request( baseURL + "/presales/", method: .get)
+      .responseDecodable(of: SaleAll.self) { (response) in
+        print("responseCode--->", response.response?.statusCode)
+        guard let code =  response.response?.statusCode, code != 502 else {
+          completion(.failure(SaleInfoError.badGatewa))
+          return
+        }
+//        print(response.res)
+        switch response.result {
+        case .success(let complex):
+          completion(.success(complex))
+        case .failure(let error):
+          completion(.failure(error))
+        }
+    }
     
+//    guard let url = URL(string: baseURL + "/presales/") else { return }
+//    var request = URLRequest(url: url)
+//    request.httpMethod = "GET"
+//    let task = URLSession.shared.dataTask(with: request) {
+//      (data, response, error) in
+//
+//      if let response = response as? HTTPURLResponse {
+//        print(response.statusCode)
+//      }
+//
+//      guard let data = data else { return }
+//      let string = String(data: data, encoding: .utf8)
+//      print("RESPONSE---------------------------------------")
+//      print(string ?? "씨발")
+//
+//    }
+//
+//    task.resume()
+    
+  }
+  
+  //GET: 전체 분양 Tiny 리스트
+  func getSaleTinyList(completion: @escaping (Result<[SaleTiny], Error>) -> Void) {
+    AF.request( baseURL + "/presales/tiny", method: .get)
+      .responseDecodable(of: [SaleTiny].self) { (response) in
+        switch response.result {
+        case .success(let complex):
+          completion(.success(complex))
+        case .failure(let error):
+          completion(.failure(error))
+        }
+    }
+  }
+  
+  
+  //GET: id를 기준으로 특정 분양 1개
+  func getCertainSaleData(id: Int, completion: @escaping (Result<SaleInfo, Error>) -> Void) {
+    AF.request( baseURL + "/presales/" + "\(id)" + "/", method: .get).responseDecodable(of: SaleInfo.self) { (response) in
+      switch response.result {
+      case .success(let sale):
+        completion(.success(sale))
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    }
+  }
+  
+  //GET: theme를 기준으로 특정 분양정보 1개
+  func getCertainThemeData(pk: Int, completion: @escaping (Result<DabangElement, Error>) -> Void) {
+      let parameter = ["pk" : pk]
+      AF.request( baseURL + "/posts/list/", parameters: parameter)
+          .responseDecodable(of: DabangElement.self) { (response) in
+              switch response.result {
+              case .success(let room):
+                  completion(.success(room))
+              case .failure(let error):
+                  completion(.failure(error))
+              }
+      }
+  }
     // MARK: - POST
   
   
@@ -324,6 +480,26 @@ final class APIManager {
 //      }
 //    }
   
+  func postMyRoomForSale( completion: @escaping (Result<[String:Any], Error>) -> Void) {
+    let roomDatas: [String:String] = RoomForSale.shared.roomDictionary()
+    let images = RoomForSale.shared.images
+    AF.upload(multipartFormData: { (MultipartFormData) in
+      for (key,value) in roomDatas {
+        MultipartFormData.append(value.data(using: .utf8)!, withName: key)
+      }
+      for image in images {
+        let imageData = image.jpegData(compressionQuality: 0.50)
+        MultipartFormData.append(imageData!, withName: "image", fileName: UUID().uuidString + ".png", mimeType: "image/png")
+      }
+    }, to: baseURL + "/posts/create/", method: .post).responseJSON { (response) in
+      switch response.result {
+      case .success(let data):
+        completion(.success(data as! [String:Any]))
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    }
+  }
   func put(completionHandler: @escaping ([String:Any]) -> Void) {
     let userData = DabangTinyElement(pk: 50, type: .원룸, dabangTinyDescription: "테스트", address: Addresss(pk: 20, loadAddress: "", detailAddress: ""), lng: 0.00, lat: 0.00, salesForm: .none, pet: .none, elevator: false, veranda: false, depositLoan: false, postimage: [], complex: .none)
     let parameter = ["elevator" : "true", "veranda" : "false" ]
@@ -389,6 +565,20 @@ let testImgData2 = UIImage(named: "AreaImage")!.jpegData(compressionQuality: 0.1
                 completion(message)
             }
     }
+    
+  //POST: 사진 방
+  func postPoto(image: UIImage, imageName : String, completion: @escaping (String) -> Void) {
+    let imageData = image.jpegData(compressionQuality: 0.50)
+    print(image, imageData!)
+    let test = baseURL + "/posts/imageupload/"
+    AF.upload(multipartFormData: { (multipartFormData) in
+      multipartFormData.append(imageData!, withName: "image", fileName: imageName + ".png", mimeType: "image/png")
+    }, to: test).responseJSON { response in
+      guard let json = try? JSONSerialization.jsonObject(with: response.data ?? Data()) as? [String : Any] else { return }
+      guard let message = json["image"] as? String else { return }
+      completion(message)
+    }
+  }
     
     //POST: 방 찜하기
     func postMarkRoom(roomPK: Int, completion: @escaping (Result<Void, Error>) -> Void) {

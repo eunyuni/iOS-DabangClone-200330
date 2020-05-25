@@ -119,7 +119,7 @@ class RoomInfoCell: UITableViewCell {
         self.infoLabel.text = data.type.rawValue + " | \(data.floor) | " + (area ?? "") + "m²"
         self.detailLabel.text = data.dabangDescription
         
-        etceteraArray = data.optionSet.map({$0.rawValue})
+        etceteraArray = data.optionSet?.map({$0.rawValue}) ?? []
         etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
         putLabelInStackView()
         

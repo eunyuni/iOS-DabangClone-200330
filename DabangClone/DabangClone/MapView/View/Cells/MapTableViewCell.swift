@@ -69,15 +69,27 @@ class MapTableViewCell: UITableViewCell {
         }
     }
   func configure(pk: Int) {
-    let roomPkData = BangData.shared.data.filter {
+    let roomPkData = BangDataMap.shared.data.filter {
       $0.pk == pk
     }
-    roomPkData[0].address.loadAddress
     roomPK = pk
-    setUIFromData(data: roomPkData[0])
+    if roomPkData.isEmpty {
+      
+      APIManager.shared.getCertainRoomData(pk: pk) { (result) in
+        switch result {
+        case .success(let data):
+          let spareData: [DabangElement] = [data]
+          self.setUIFromSpareData(data: spareData[0])
+        case .failure(let error):
+          print("error :", error)
+        }
+      }
+    } else {
+      self.setUIFromData(data: roomPkData[0])
+    }
   }
   
-  func setUIFromData(data: DabangElement) {
+  func setUIFromData(data: BangInCurrentMapModel) {
     self.nameLabel.text = ""
     if data.salesForm.type == .월세 {
       self.priceLabel.text = "\(data.salesForm.type)" + " " + "\(data.salesForm.depositChar)" + "/" + "\(data.salesForm.monthlyChar)"
@@ -96,7 +108,35 @@ class MapTableViewCell: UITableViewCell {
     etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
     putLabelInStackView()
     if !data.postimage.isEmpty {
-    let url = URL(string: "https://wpsdabangapi.s3.amazonaws.com/\(data.postimage[0])")
+    let url = URL(string: "https://dabang.s3.amazonaws.com/\(data.postimage[0])")
+    self.roomImageView.kf.setImage(with: url)
+    self.roomImageView.contentMode = .scaleAspectFill
+    }
+    if self.nameLabel.text == "" {
+        infoStackView.removeArrangedSubview(nameLabel)
+  }
+  }
+  
+  func setUIFromSpareData(data: DabangElement) {
+    self.nameLabel.text = ""
+    if data.salesForm.type == .월세 {
+      self.priceLabel.text = "\(data.salesForm.type)" + " " + "\(data.salesForm.depositChar)" + "/" + "\(data.salesForm.monthlyChar)"
+    } else {
+      self.priceLabel.text = "\(data.salesForm.type)" + " " + "\(data.salesForm.depositChar)"
+    }
+    let start = data.areaChar.index(data.areaChar.startIndex, offsetBy: 0)
+    let end = data.areaChar.index(data.areaChar.firstIndex(of: " ") ?? data.areaChar.endIndex, offsetBy: 0)
+    let range = start..<end
+    let mySubstring = data.areaChar[range]
+    
+    self.infoLabel.text = data.type.rawValue + " | \(data.floor) | \(String(mySubstring))m²"
+    
+    self.detailLabel.text = data.dabangDescription
+    etceteraArray = data.optionSet?.map({$0.rawValue}) ?? []
+    etceteraStackView.arrangedSubviews.forEach({$0.removeFromSuperview()})
+    putLabelInStackView()
+    if !data.postimage.isEmpty {
+    let url = URL(string: "https://dabang.s3.amazonaws.com/\(data.postimage[0])")
     self.roomImageView.kf.setImage(with: url)
     self.roomImageView.contentMode = .scaleAspectFill
     }

@@ -81,6 +81,7 @@ class SaleDetailSectionCell: UITableViewCell {
   
   func configue(parcelPrice: String, parcelhousehold:String, recruitmentNotice: String, scheduledDate: String) {
     self.parcelPriceLabel.text = parcelPrice
+//    self.parcelPriceLabel.text = "\(parcelPrice)"
     self.parcelhouseholdLabel.text = parcelhousehold
     self.recruitmentNoticeLabel.text = recruitmentNotice
     self.scheduledDateLabel.text = scheduledDate
@@ -132,7 +133,7 @@ class SaleDetailSectionCell: UITableViewCell {
       $0.top.equalTo(parcelPriceLabel)
     }
     recruitmentNotice.snp.makeConstraints {
-      $0.leading.equalTo(parcelhousehold.snp.trailing).offset(50)
+      $0.leading.equalTo(parcelhousehold.snp.trailing).offset(44)
       $0.top.equalTo(parcelPrice)
     }
     recruitmentNoticeLabel.snp.makeConstraints {
@@ -140,7 +141,7 @@ class SaleDetailSectionCell: UITableViewCell {
       $0.top.equalTo(parcelPriceLabel)
     }
     scheduledDate.snp.makeConstraints {
-      $0.leading.equalTo(recruitmentNotice.snp.trailing).offset(72)
+      $0.leading.equalTo(recruitmentNotice.snp.trailing).offset(62)
       $0.top.equalTo(parcelPrice)
     }
     scheduledDateLabel.snp.makeConstraints {

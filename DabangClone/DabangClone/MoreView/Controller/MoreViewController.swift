@@ -31,7 +31,7 @@ class MoreViewController: UIViewController {
   //MARK: - 프로퍼티
   let userName = "PandaMan"
   let userEmail = "user@user.com"
-  
+  var roomForSaleData = RoomForSale.shared.roomData
   
   let testTextField = UITextField().then {
     $0.backgroundColor = .gray

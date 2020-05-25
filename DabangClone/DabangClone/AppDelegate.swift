@@ -12,6 +12,9 @@ import FBSDKLoginKit
 import FBSDKShareKit
 import GoogleMaps
 import GooglePlaces
+#if DEBUG
+import Gedatsu
+#endif
 
 #if DEBUG
 import Gedatsu
@@ -24,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
+    #if DEBUG
+    Gedatsu.open()
+    #endif
+    
     GMSServices.provideAPIKey("AIzaSyDY0ppRrZhsxpXVHhJ4qZRWLMcpEhCjDgY")
     GMSPlacesClient.provideAPIKey("AIzaSyDY0ppRrZhsxpXVHhJ4qZRWLMcpEhCjDgY")
     

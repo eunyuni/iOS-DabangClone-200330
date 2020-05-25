@@ -21,6 +21,8 @@ class SaleDetailViewController: UIViewController {
   private let navigationView = UIView().then {
     $0.backgroundColor = .clear
   }
+  var saleData: SaleInfo!
+  var pk: Int!
   
   // MARK: -Lift cycle
   
@@ -28,11 +30,22 @@ class SaleDetailViewController: UIViewController {
     super.viewDidLoad()
     
     setupUI()
+//    self.title
+//    apiData()
   }
   
   // MARK: -Action
-  
-  
+//  private func apiData() {
+//    APIManager.shared.getCertainSaleData(id: pk) { (result) in
+//      switch result {
+//      case .success(let sale):
+//        self.saleData = sale
+//      case .failure(let error):
+//        print(error)
+//      }
+//    }
+//  }
+//  
   // MARK: -setupUI
   private func setupUI() {
     view.addSubviews([
@@ -94,22 +107,50 @@ extension SaleDetailViewController: UITableViewDataSource {
     switch indexPath.row {
     case 0:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailMainCell.identifier, for: indexPath) as! SaleDetailMainCell
-      cell.backgroundColor = .yellow
+      if saleData.image.isEmpty {
+//        let image = "saleEmptyImage"
+        print("이미지없엉..")
+      } else {
+        let url = URL(string: "https://dabang.s3.amazonaws.com/" + saleData.image[0])!
+        cell.configue(imgae: url)
+      }
+      cell.backgroundColor = .white
       return cell
     case 1:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailSectionCell.identifier, for: indexPath) as! SaleDetailSectionCell
-      cell.configue(parcelPrice: "3.3억~", parcelhousehold: "837세대", recruitmentNotice: "20.03.13", scheduledDate: "준비중")
+      var price = ""
+      let salesPrice = saleData.salesPrice
+      var check = false
+      for i in salesPrice {
+        if i == " " {
+          check = true
+        }
+        if check {
+          price.append(i)
+        }
+      }
+      cell.configue(parcelPrice: price, parcelhousehold: saleData.salesCitizen, recruitmentNotice: saleData.recruit, scheduledDate: saleData.recruit)
       return cell
     case 2:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailSaleInfoCell.identifier, for: indexPath) as! SaleDetailSaleInfoCell
-      cell.configue(buildingType: "아파트", supplyType: "민간분양", totalHouseholds: "총 1409 세대 / 분양 837 세대", sizeComplex: "총 9개동 / 지하 3층 ~ 지상 39층", exclusiveArea: "46m / 59m / 75m / 84m", constructionCompany: "현대건설(주)", pilotCompany: "백운2구역주택재개발정비사업조합", regulatoryPeriod: "입주자로 선정된 날부터 6개월", others: "전매제한, 분양가상한제 미적용")
+      cell.configue(buildingType: saleData.salesType.rawValue, supplyType: saleData.supplyType.rawValue, totalHouseholds: "총 \(saleData.totalCitizen) / 분양 \(saleData.salesCitizen)", sizeComplex: "\(saleData.complexScale) / \(saleData.minMaxFloor)", exclusiveArea: saleData.area, constructionCompany: saleData.builder, pilotCompany: saleData.developer, regulatoryPeriod: "입주자로 선정된 날부터 6개월", others: "전매제한, 분양가상한제 미적용")
       return cell
     case 3, 5, 7, 9:
       let cell = tableView.dequeueReusableCell(withIdentifier: GrayLineViewCell.identifier, for: indexPath) as! GrayLineViewCell
       return cell
     case 4:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailParcelPriceCell.identifier, for: indexPath) as! SaleDetailParcelPriceCell
-      cell.configue(parcelPriceLabel: "3억3370 ~ 5억2940", flatPriceLabel: "1622", averageLabel: "1323")
+      var pricePyeong: String = "-"
+      if let price = saleData.pricePyeong {
+        pricePyeong = ""
+        for i in price {
+          if i == "만" {
+            break
+          }
+          pricePyeong.append(i)
+        }
+      }
+      cell.configue(parcelPriceLabel: saleData.detailPrice ?? "-", flatPriceLabel: pricePyeong, averageLabel: "1323")
       return cell
     case 6:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailScheduleCell.identifier, for: indexPath) as! SaleDetailScheduleCell
@@ -117,7 +158,7 @@ extension SaleDetailViewController: UITableViewDataSource {
       return cell
     case 8:
       let cell = tableView.dequeueReusableCell(withIdentifier: SaleDetailNearMapCell.identifier, for: indexPath) as! SaleDetailNearMapCell
-      cell.configue(addressLabel: "인천광역시 부평구 십정동 186-375 번지 일원", mart: "킴스클럽 부평점", hospital:
+      cell.configue(addressLabel: saleData.place, mart: "킴스클럽 부평점", hospital:
         "가톨릭대학교 인천성모병원", institute: "부평3동주민센터", cultural: "부평아트센터 부평아트하우스", martSpace: "901m", hospitalSpace: "1.8km", instituteSpace: "413m", culturalSpace: "102m")
       return cell
     case 10:

@@ -12,6 +12,8 @@ protocol MapFilterButtonDelegate: class {
 }
 class MapFilterButton: UIButton {
   weak var delegate: MapFilterButtonDelegate?
+  lazy var text = self.titleLabel?.text
+  lazy var textCount = self.text?.count ?? 1
   override init(frame: CGRect) {
     super.init(frame: frame)
     configure()
@@ -28,7 +30,8 @@ class MapFilterButton: UIButton {
   }
   
   private func configure() {
-    self.layer.cornerRadius = 5
+    frame.size = CGSize(width: (15 * textCount) + 50, height: 35)
+    self.layer.cornerRadius = 2
     self.layer.borderWidth = 0.6
     self.layer.borderColor = UIColor.lightGray.cgColor
     addCharacterSpacing(kernValue: -10)

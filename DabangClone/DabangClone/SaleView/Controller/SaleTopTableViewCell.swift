@@ -24,7 +24,7 @@ class SaleTopTableViewCell: UITableViewCell {
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
     $0.dataSource = self
     $0.delegate = self
-    //    $0.isPagingEnabled = true
+    $0.isPagingEnabled = true
     //    $0.alwaysBounceHorizontal = false
     //    $0.scrollsToTop = false
     //    $0.bounces = false
@@ -35,9 +35,7 @@ class SaleTopTableViewCell: UITableViewCell {
     $0.titleLabel?.font = .systemFont(ofSize: 16)
     $0.setTitleColor(.black, for: .normal)
   }
-//  private let bottomView = UIView().then {
-//    $0.backgroundColor = .lightGray
-//  }
+
   // MARK: - Init
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -81,12 +79,13 @@ class SaleTopTableViewCell: UITableViewCell {
 
 extension SaleTopTableViewCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    5
+    2
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SaleTopCollectionViewCell.identifier, for: indexPath ) as! SaleTopCollectionViewCell
     cell.backgroundColor = .red
+    cell.configue(mainImageTheme[indexPath.row])
     return cell
   }
 }

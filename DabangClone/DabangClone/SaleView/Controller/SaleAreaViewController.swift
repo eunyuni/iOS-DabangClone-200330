@@ -7,16 +7,23 @@
 //
 
 import UIKit
+protocol SaleAreaViewControllerDelegate: class {
+  func abcde(area: String)
+}
 
 class SaleAreaViewController: UIViewController {
+  
+  weak var delegate: SaleAreaViewControllerDelegate?
+  
   private lazy var backdropView = UIView(frame: self.view.bounds).then {
     $0.backgroundColor = UIColor.black.withAlphaComponent(0.5)
   }
-  
   private let menuView = UIView()
   private let menuHeight = UIScreen.main.bounds.height / 2
   private var isPresenting = false
-  
+  private var isactive = true
+  private var selectButtons:[Int] = []
+  var i: IndexPath? = nil
   private let topLabel = UILabel().then {
     $0.font = .systemFont(ofSize: 16)
     $0.text = "지역선택(시/도)"
@@ -33,11 +40,12 @@ class SaleAreaViewController: UIViewController {
     $0.backgroundColor = .black
   }
   private let layout = UICollectionViewFlowLayout().then {
-    $0.scrollDirection = .horizontal
+    $0.scrollDirection = .vertical
   }
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
     
     $0.backgroundColor = .white
+    $0.allowsSelection = true
     //    $0.isPagingEnabled = true
     //    $0.alwaysBounceHorizontal = false
     //    $0.scrollsToTop = false
@@ -46,6 +54,7 @@ class SaleAreaViewController: UIViewController {
   }
   
   private let areaDatas = ["전국" , "서울특별시" , "부산광역시", "대구광역시", "인천광역시", "광주광역시", "대전광역시", "울산광역시", "세종특별자치시", "경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주특별자치도"]
+  
   // MARK: - Lift cycle
   init() {
     super.init(nibName: nil, bundle: nil)
@@ -62,6 +71,7 @@ class SaleAreaViewController: UIViewController {
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapGesture(_:)))
     backdropView.addGestureRecognizer(tapGesture)
     cancelButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
+    okButton.addTarget(self, action: #selector(didTapOkButton(_:)), for: .touchUpInside)
     setupUI()
   }
   // MARK: - Action
@@ -71,10 +81,20 @@ class SaleAreaViewController: UIViewController {
   @objc private func didTapButton(_ sender: UIButton) {
     dismiss(animated: true, completion: nil)
   }
+  @objc private func didTapOkButton(_ sender: UIButton) {
+    guard let index = i?.row else {
+      dismiss(animated: true)
+      return
+    }
+    print("지역선택--->",areaDatas[index])
+    delegate?.abcde(area: areaDatas[index])
+    dismiss(animated: true)
+  }
+  
   // MARK: - setupUI
   private func setupUI() {
     self.view.backgroundColor = .clear
-    print("Check")
+    //    print("Check")
     collectionView.dataSource = self
     collectionView.delegate = self
     self.view.addSubviews([backdropView, menuView])
@@ -160,17 +180,20 @@ extension SaleAreaViewController: UIViewControllerTransitioningDelegate, UIViewC
 
 extension SaleAreaViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    print("check")
-    print(areaDatas.count)
+    //    print("check")
     return areaDatas.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SaleAreaCollectionViewCell.identifier, for: indexPath ) as! SaleAreaCollectionViewCell
     cell.configue(title: areaDatas[indexPath.item])
-    print(areaDatas[indexPath.item])
+    //    print(areaDatas[indexPath.item])
+    selectButtons.append(indexPath.item)
+    //    print(selectButtons)
     return cell
   }
+  
+  
 }
 
 extension SaleAreaViewController: UICollectionViewDelegateFlowLayout {
@@ -195,4 +218,33 @@ extension SaleAreaViewController: UICollectionViewDelegateFlowLayout {
 
 extension SaleAreaViewController: UICollectionViewDelegate {
   
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+    if i == nil {
+      let cell = collectionView.cellForItem(at: indexPath) as! SaleAreaCollectionViewCell
+      cell.contentView.backgroundColor = .white
+      cell.contentView.layer.borderColor = UIColor.black.cgColor
+      cell.contentView.layer.borderWidth = 0.6
+      i = indexPath
+    } else {
+      if i == indexPath {
+        let cell = collectionView.cellForItem(at: i!) as! SaleAreaCollectionViewCell
+        cell.contentView.backgroundColor = UIColor(named: "TextFieldColor")
+        cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
+        cell.contentView.layer.borderWidth = 0.2
+        i = nil
+      } else {
+        let cell = collectionView.cellForItem(at: i!) as! SaleAreaCollectionViewCell
+        cell.contentView.backgroundColor = UIColor(named: "TextFieldColor")
+        cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
+        cell.contentView.layer.borderWidth = 0.2
+        i = nil
+        let seletedCell = collectionView.cellForItem(at: indexPath) as! SaleAreaCollectionViewCell
+        seletedCell.contentView.backgroundColor = .white
+        seletedCell.contentView.layer.borderColor = UIColor.black.cgColor
+        seletedCell.contentView.layer.borderWidth = 0.6
+        i = indexPath
+      }
+    }
+  }
 }

@@ -25,18 +25,36 @@ class SaleInformationViewController: UIViewController {
   }
   private let tapGesture = UITapGestureRecognizer()
   
+  //  var saleData: [SaleInfo] = []
+  var saleTiny: [SaleTiny] = []
+  var saleTiny2: [SaleTiny] = []
+  var arrayInt: [Int] = []
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     tabBarController?.tabBar.isHidden = true
     self.view.backgroundColor = .white 
     setupUI()
+    //    apiData()
   }
-  
   // MARK: - Action
+  //  private func apiData() {
+  //    APIManager.shared.getCertainSaleData(id: 88) { (result) in
+  //      switch result {
+  //      case .success(let sale):
+  //        self.saleData = [sale]
+  //      case .failure(let error):
+  //        print(error)
+  //      }
+  //    }
+  //  }
+  func saleReload() {
+    tableView.reloadData()
+  }
   @objc private func didTapGesture(_ sender: UITapGestureRecognizer){
     let vc = SaleAreaViewController()
     vc.modalPresentationStyle = .custom
+    vc.delegate = self
     present(vc, animated: true, completion: nil)
   }
   // MARK: - setupUI
@@ -72,14 +90,25 @@ class SaleInformationViewController: UIViewController {
 
 extension SaleInformationViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    4
+    if topLabel.text == "전국" {
+      return saleTiny.count
+    } else {
+      return saleTiny2.count
+    }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: SaleInformationTableViewCell.identifier, for: indexPath) as! SaleInformationTableViewCell
-    cell.configue()
-    cell.delegate = self
-    return cell
+    if topLabel.text == "전국" {
+      let cell = tableView.dequeueReusableCell(withIdentifier: SaleInformationTableViewCell.identifier, for: indexPath) as! SaleInformationTableViewCell
+      cell.configue(saleTiny[indexPath.row])
+      cell.delegate = self
+      return cell
+    } else {
+      let cell = tableView.dequeueReusableCell(withIdentifier: SaleInformationTableViewCell.identifier, for: indexPath) as! SaleInformationTableViewCell
+      cell.configue(saleTiny2[indexPath.row])
+      cell.delegate = self
+      return cell
+    }
   }
   
 }
@@ -92,9 +121,29 @@ extension SaleInformationViewController: UITableViewDelegate {
 }
 
 extension SaleInformationViewController: SaleInformationTableViewCellDelegate {
-  func didTapSaleDetailCell() {
+  
+  func didTapSaleDetailCell(id: Int) {
     let vc = SaleDetailViewController()
-    navigationController?.pushViewController(vc, animated: true)
+    APIManager.shared.getCertainSaleData(id: id) { (response) in
+      switch response {
+      case .success(let saleInfo):
+        vc.saleData = saleInfo
+        print("getCertainSaleData❤️ id->\(id) ")
+        self.navigationController?.pushViewController(vc, animated: true)
+      case .failure(let error):
+        print("getCertainSaleData Error🤪\(error)")
+      }
+    }
   }
+}
 
+
+extension SaleInformationViewController: SaleAreaViewControllerDelegate {
+  func abcde(area: String) {
+    topLabel.text = area
+    saleTiny2 = saleTiny.filter({
+      $0.place.contains(self.topLabel.text!)
+    })
+    self.tableView.reloadData()
+  }
 }
