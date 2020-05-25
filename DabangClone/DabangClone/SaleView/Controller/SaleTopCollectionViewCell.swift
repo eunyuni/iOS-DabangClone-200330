@@ -12,11 +12,12 @@ class SaleTopCollectionViewCell: UICollectionViewCell {
     // MARK: - Identifier
     static let identifier = "SaleTopCollectionViewCell"
     // MARK: - Property
-    private let imageView = UIImageView().then {
-      $0.image = UIImage(named: "SaleMainImage1")
+  private var imageView = UIImageView()
+//      .then {
+//      $0.image = UIImage(named: "SaleMainImage1")
 //      $0.layer.cornerRadius = 4
 //      $0.clipsToBounds = true
-    }
+//    }
     // MARK: - Init
     override init(frame: CGRect) {
       super.init(frame: frame)
@@ -28,7 +29,9 @@ class SaleTopCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Action
-    
+    func configue(_ image: MainImageTheme) {
+      self.imageView.image = image.image
+    }
     // MARK: - setupUI
     private func setupUI() {
       self.contentView.addSubviews([imageView])

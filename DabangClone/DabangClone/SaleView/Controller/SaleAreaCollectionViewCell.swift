@@ -31,6 +31,11 @@ class SaleAreaCollectionViewCell: UICollectionViewCell {
   func configue(title: String) {
     self.titleLabel.text = title
   }
+  func titleName() -> String {
+    return self.titleLabel.text ?? ""
+  }
+  
+ 
   
   @objc private func didTapGesture(_ sender: UITapGestureRecognizer) {
     if isactive {
@@ -47,11 +52,11 @@ class SaleAreaCollectionViewCell: UICollectionViewCell {
   // MARK: - setupUI
   private func setupUI() {
     self.addSubviews([titleLabel])
-    tapGesture.addTarget(self, action: #selector(didTapGesture(_:)))
+//    tapGesture.addTarget(self, action: #selector(didTapGesture(_:)))
     self.contentView.layer.borderWidth = 0.2
     self.contentView.layer.borderColor = UIColor.lightGray.cgColor
     self.contentView.backgroundColor = UIColor(named: "TextFieldColor")
-    self.addGestureRecognizer(tapGesture)
+//    self.addGestureRecognizer(tapGesture)
     setupConstraint()
   }
   // 스퀘드 체제
@@ -60,5 +65,20 @@ class SaleAreaCollectionViewCell: UICollectionViewCell {
     titleLabel.snp.makeConstraints {
       $0.center.equalToSuperview()
     }
+  }
+}
+
+
+extension UICollectionViewCell {
+  func select() {
+    self.contentView.backgroundColor = .white
+    self.contentView.layer.borderColor = UIColor.black.cgColor
+    self.contentView.layer.borderWidth = 0.6
+  }
+  
+  func notSelect() {
+    self.contentView.backgroundColor = UIColor(named: "TextFieldColor")
+    self.contentView.layer.borderColor = UIColor.lightGray.cgColor
+    self.contentView.layer.borderWidth = 0.2
   }
 }

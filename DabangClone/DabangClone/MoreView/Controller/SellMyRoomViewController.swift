@@ -49,6 +49,9 @@ class SellMyRoomViewController: UIViewController, DidSelectRoomTypeDelegate {
     setupUI()
     print(SelectedRoomSingleton.shared.selectedRoom)
   }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+  }
   
   private func setupUI() {
     nextButton.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
