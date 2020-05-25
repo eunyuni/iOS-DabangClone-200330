@@ -174,47 +174,44 @@ final class APIManager {
           completion(.failure(error))
         }
     }
-<<<<<<< Updated upstream
-=======
   }
   
-  func getFilteredItems(
-    depositLoan: Bool? = nil, salesForm__type: String? = nil, type: String? = nil, min_monthlyInt: Int? = nil,
-    max_monthlyInt: Int? = nil, min_depositInt: Int? = nil, max_depositInt: Int? = nil, min_supply_area: Int? = nil,
-    max_supply_area: Int? = nil, floor: String? = nil, parkingTF: Bool? = nil, pet: Bool? = nil,
-    shortRent: Bool? = nil, elevator: Bool? = nil, builtIn: Bool? = nil, veranda: Bool? = nil,
-                        
-    completion: @escaping (Result<FilteredItemsModel, Error>) -> Void) {
-    let parameter: Parameters = [
-      "depositLoan" : depositLoan ?? "", //전세자금대출
-      "salesForm__type" : salesForm__type ?? "", //매매/월세/전세 - 중복 선택 가능
-      "type" : type ?? "", // 원룸, 투룸, 쓰리룸, 오피스텔, 아파트 중복선택 가능
-      "min_monthlyInt" : min_monthlyInt ?? "", // 월세 최소 금액
-      "max_monthlyInt" : max_monthlyInt ?? "", // 월세 최대 금액
-      "min_depositInt" : min_depositInt ?? "",// 보증금/전세가 최소 금액(매매가와 동일)
-      "max_depositInt" : max_depositInt ?? "", // 보증금/전세가 최대 금액(매매가와 동일)
-      "min_supply_area" : min_supply_area ?? "", // 최소 평수
-      "max_supply_area" : max_supply_area ?? "", // 최대 평수
-      "floor" : floor ?? "", //층수, 중복 선택 가능
-      "parkingTF" : parkingTF ?? "", //Bool값
-      "pet" : pet ?? "",//Bool값
-      "shortRent" : shortRent ?? "",//Bool값
-      "elevator" : elevator ?? "",//Bool값
-      "builtIn" : builtIn ?? "",//Bool값
-      "veranda" : veranda ?? "" //Bool값
-    ]
-    
-    AF.request(baseURL + "/posts/", method: .get, parameters: parameter)
-      .responseDecodable(of: FilteredItemsModel.self) { (response) in
-        switch response.result {
-        case .success(let data):
-          completion(.success(data))
-        case .failure(let error):
-          completion(.failure(error))
-        }
-    }
->>>>>>> Stashed changes
-  }
+//  func getFilteredItems(
+//    depositLoan: Bool? = nil, salesForm__type: String? = nil, type: String? = nil, min_monthlyInt: Int? = nil,
+//    max_monthlyInt: Int? = nil, min_depositInt: Int? = nil, max_depositInt: Int? = nil, min_supply_area: Int? = nil,
+//    max_supply_area: Int? = nil, floor: String? = nil, parkingTF: Bool? = nil, pet: Bool? = nil,
+//    shortRent: Bool? = nil, elevator: Bool? = nil, builtIn: Bool? = nil, veranda: Bool? = nil,
+//                        
+//    completion: @escaping (Result<FilteredItemsModel, Error>) -> Void) {
+//    let parameter: Parameters = [
+//      "depositLoan" : depositLoan ?? "", //전세자금대출
+//      "salesForm__type" : salesForm__type ?? "", //매매/월세/전세 - 중복 선택 가능
+//      "type" : type ?? "", // 원룸, 투룸, 쓰리룸, 오피스텔, 아파트 중복선택 가능
+//      "min_monthlyInt" : min_monthlyInt ?? "", // 월세 최소 금액
+//      "max_monthlyInt" : max_monthlyInt ?? "", // 월세 최대 금액
+//      "min_depositInt" : min_depositInt ?? "",// 보증금/전세가 최소 금액(매매가와 동일)
+//      "max_depositInt" : max_depositInt ?? "", // 보증금/전세가 최대 금액(매매가와 동일)
+//      "min_supply_area" : min_supply_area ?? "", // 최소 평수
+//      "max_supply_area" : max_supply_area ?? "", // 최대 평수
+//      "floor" : floor ?? "", //층수, 중복 선택 가능
+//      "parkingTF" : parkingTF ?? "", //Bool값
+//      "pet" : pet ?? "",//Bool값
+//      "shortRent" : shortRent ?? "",//Bool값
+//      "elevator" : elevator ?? "",//Bool값
+//      "builtIn" : builtIn ?? "",//Bool값
+//      "veranda" : veranda ?? "" //Bool값
+//    ]
+//    
+//    AF.request(baseURL + "/posts/", method: .get, parameters: parameter)
+//      .responseDecodable(of: FilteredItemsModel.self) { (response) in
+//        switch response.result {
+//        case .success(let data):
+//          completion(.success(data))
+//        case .failure(let error):
+//          completion(.failure(error))
+//        }
+//    }
+//  }
   
   func getFilteredItems(
     depositLoan: Bool? = nil, salesForm__type: String? = nil, type: String? = nil, min_monthlyInt: Int? = nil,
@@ -422,10 +419,6 @@ final class APIManager {
 //      }
 //    }
   
-<<<<<<< Updated upstream
-  
-=======
-<<<<<<< HEAD
   func postMyRoomForSale( completion: @escaping (Result<[String:Any], Error>) -> Void) {
     let roomDatas: [String:String] = RoomForSale.shared.roomDictionary()
     let images = RoomForSale.shared.images
@@ -446,10 +439,6 @@ final class APIManager {
       }
     }
   }
-=======
-  
->>>>>>> develop
->>>>>>> Stashed changes
   func put(completionHandler: @escaping ([String:Any]) -> Void) {
     let userData = DabangTinyElement(pk: 50, type: .원룸, dabangTinyDescription: "테스트", address: Addresss(pk: 20, loadAddress: "", detailAddress: ""), lng: 0.00, lat: 0.00, salesForm: .none, pet: .none, elevator: false, veranda: false, depositLoan: false, postimage: [], complex: .none)
     let parameter = ["elevator" : "true", "veranda" : "false" ]
