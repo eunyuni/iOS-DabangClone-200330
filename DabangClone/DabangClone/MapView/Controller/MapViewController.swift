@@ -171,7 +171,6 @@ class MapViewController: UIViewController, FilterOverlayViewControllerDelegate {
   // MARK: - Lift cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.tabBarController?.tabBar.isHidden = false
     self.view.backgroundColor = .white
     tableView.dataSource = self
     tableView.delegate = self
@@ -201,6 +200,10 @@ class MapViewController: UIViewController, FilterOverlayViewControllerDelegate {
     self.setupUI()
     // Call cluster() after items have been added to perform the clustering and rendering on map.
     // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
+  }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.tabBarController?.tabBar.isHidden = false
   }
   
   override func viewDidAppear(_ animated: Bool) {

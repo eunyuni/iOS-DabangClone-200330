@@ -16,10 +16,6 @@ import GooglePlaces
 import Gedatsu
 #endif
 
-#if DEBUG
-import Gedatsu
-#endif
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   

@@ -185,8 +185,6 @@ final class APIManager {
                 }
         }
     }
-  
-    
     //GET: 최근 본 단지 정보 리스트
     func getRecentlyCheckedComplexList(completion: @escaping (Result<[Complex], Error>) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]

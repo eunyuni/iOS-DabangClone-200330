@@ -13,6 +13,7 @@ class MainRoomTableViewCell: UITableViewCell {
     static let identifier = "MainRoomTableViewCell"
     
     let roomData = findRoomDataFromRoomID(rooms, roomID: 1)
+
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
@@ -23,8 +24,10 @@ class MainRoomTableViewCell: UITableViewCell {
     
     var optionArr = ["풀옵션", "빌트인", "반려동물", "보안/안전", "전세자금대출", "주차", "개별난방"]
     
+
     let titleView = UIView().then {
         $0.backgroundColor = .white
+
     }
     let titleLabel = UILabel().then {
         $0.text = ""
@@ -478,6 +481,7 @@ class MainRoomTableViewCell: UITableViewCell {
 
 
 extension MainRoomTableViewCell: UICollectionViewDataSource {
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.collectionView {
             return bangData.postimage.count
