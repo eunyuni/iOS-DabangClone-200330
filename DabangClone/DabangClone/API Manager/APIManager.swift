@@ -16,10 +16,6 @@ enum SaleInfoError: Error {
   case badGatewa
 }
 
-enum SaleInfoError: Error {
-  case badGatewa
-}
-
 enum LoginWays {
     case local
     case apple
