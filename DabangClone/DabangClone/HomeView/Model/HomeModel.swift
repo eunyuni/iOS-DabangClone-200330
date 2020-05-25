@@ -28,11 +28,11 @@ extension HomeInfo {
     case .관심지역:
       title = "관심지역 모든 방"
     case .단지:
-      title = "덕덕님의 관심있게 본 단지"
+      title = "문경호님의 관심있게 본 단지"
     case .분양정보:
       title = "분양정보"
     case .추천콘텐츠:
-      title = "덕덕님의 위한 추천 콘텐츠"
+      title = "문경호님의 위한 추천 콘텐츠"
     }
     return title
   }
@@ -48,88 +48,24 @@ let datas :[HomeData] = [
   HomeData(homeInfo: .추천콘텐츠, homeCellType: .추천콘텐츠),
 ]
 
-//enum BaseInfo {
-//  case 빈케이스
-//  case 가격
-//  case 층수
-//  case 방크기
-//  case 단기임대
-//  case 관리비
-//  case 주차
-//  case 입주가능일
-//}
-//enum AdditionalInfo {
-//  case 빈케이스
-//  case 옵션
-//  case 난방종류
-//  case 반려동물
-//  case 엘리베이터
-//  case 복층
-//  case 일쩜오룸
-//  case 빌트인
-//  case 베란다
-//  case 전세자금대출
-//  case 준공년도
-//}
-//enum CellType {
-//  case Title
-//  case Input
-//  case AbleSegment
-//  case IsThere
-//  case ThreeSegment
-//  case CheckBox
-//}
-//extension BaseInfo {
-//  func setTitle() -> String {
-//    var title: String!
-//    switch self {
-//    case BaseInfo.빈케이스:
-//      title = ""
-//    case BaseInfo.가격:
-//      title = "가격"
-//    case BaseInfo.층수:
-//      title = "층수"
-//    case BaseInfo.방크기:
-//      title = "방 크기"
-//    case BaseInfo.단기임대:
-//      title = "단기임대"
-//    case BaseInfo.관리비:
-//      title = "관리비"
-//    case BaseInfo.주차:
-//      title = "주차"
-//    case BaseInfo.입주가능일:
-//      title = "입주가능일"
-//    }
-//    return title
-//  }
-//}
-//extension AdditionalInfo {
-//  func setTitle() -> String {
-//    var title: String!
-//    switch self {
-//    case AdditionalInfo.빈케이스:
-//      title = ""
-//    case AdditionalInfo.옵션:
-//      title = "옵션"
-//    case AdditionalInfo.난방종류:
-//      title = "난방종류"
-//    case AdditionalInfo.반려동물:
-//      title = "반려동물"
-//    case AdditionalInfo.엘리베이터:
-//      title = "엘리베이터"
-//    case AdditionalInfo.복층:
-//      title = "복층"
-//    case AdditionalInfo.일쩜오룸:
-//      title = "1.5룸, 주방분리형"
-//    case AdditionalInfo.빌트인:
-//      title = "빌트인"
-//    case AdditionalInfo.베란다:
-//      title = "베란다/발코니"
-//    case AdditionalInfo.전세자금대출:
-//      title = "전세자금대출"
-//    case AdditionalInfo.준공년도:
-//        title = "준공년도"
-//    }
-//    return title
-//  }
-//}
+struct contentData {
+  var image: String
+  var title: String
+  var url: String
+  var count: String
+}
+
+let contentDatas: [contentData] = [
+  contentData(image: "contentsImage1", title: "'청년맞춤' 전월세", url: "https://post.naver.com/viewer/postView.nhn?volumeNo=20499127&memberNo=2120568", count: "42,353"),
+  contentData(image: "contentsImage2", title: "공적마스크 판매처", url: "https://post.naver.com/viewer/postView.nhn?volumeNo=20499127&memberNo=2120568", count: "12,448"),
+  contentData(image: "contentsImage3", title: "다방 광고 찰영 현장", url: "https://post.naver.com/viewer/postView.nhn?volumeNo=27253794&memberNo=2120568", count: "75,151"),
+  contentData(image: "contentsImage4", title: "방 계약가능 여부 미", url: "https://post.naver.com/viewer/postView.nhn?volumeNo=20499127&memberNo=2120568", count: "9,754"),
+  contentData(image: "contentsImage5", title: "이사 준비한다면 필독!", url: "https://post.naver.com/viewer/postView.nhn?volumeNo=25389507&memberNo=2120568", count: "25,748"),
+  contentData(image: "contentsImage6", title: "방 구하기 전, 매몰", url: "https://post.naver.com/viewer/postView.nhn?volumeNo=25443036&memberNo=2120568", count: "83,474"),
+  contentData(image: "contentsImage7", title: "다방 허위매몰 예방", url: "https://post.naver.com/viewer/postView.nhn?volumeNo=20499127&memberNo=2120568", count: "32,487"),
+  contentData(image: "contentImage8", title: "나에게 꼭 맞는 방", url: "https://post.naver.com/viewer/postView.nhn?volumeNo=20499127&memberNo=2120568", count: "33,100"),
+  contentData(image: "contentImage9", title: "아파트 청약정보 한", url: "https://post.naver.com/viewer/postView.nhn?volumeNo=20499127&memberNo=2120568", count: "44,451"),
+  contentData(image: "contentImage10", title: "만 19~34세라면?", url: "https://post.naver.com/viewer/postView.nhn?volumeNo=26344001&memberNo=2120568", count: "68,284"),
+  contentData(image: "contentImage11", title: "부동산 용어 정리", url: "https://post.naver.com/viewer/postView.nhn?volumeNo=26344001&memberNo=2120568", count: "40,148"),
+  contentData(image: "contentImage12", title: "분양가상한제가 뭔", url: "https://post.naver.com/viewer/postView.nhn?volumeNo=26344001&memberNo=2120568", count: "91,565"),
+]

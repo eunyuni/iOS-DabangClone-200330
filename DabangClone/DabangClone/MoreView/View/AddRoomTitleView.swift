@@ -71,4 +71,9 @@ class AddRoomTitleView: UIView {
     self.titleLabel.text = title
     self.leftImageView.image = UIImage(named: Image)
   }
+  
+  func setComplete() {
+    detailLabel.text = "입력완료"
+    detailLabel.textColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+  }
 }

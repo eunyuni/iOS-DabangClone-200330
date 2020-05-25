@@ -125,15 +125,19 @@ class ThreeRoomTableViewCell: UITableViewCell {
     switch sender {
     case oneButton:
       SelectedRoomSingleton.shared.selectedRoom = SelectedRoom(roomStyle: .쓰리룸, roomType: .단독주택)
+      RoomForSale.shared.roomData.type = "쓰리룸"
       delegate?.didSelectRoomType()
     case twoButton:
       SelectedRoomSingleton.shared.selectedRoom = SelectedRoom(roomStyle: .쓰리룸, roomType: .다가구주택)
+      RoomForSale.shared.roomData.type = "쓰리룸"
       delegate?.didSelectRoomType()
     case threeButton:
       SelectedRoomSingleton.shared.selectedRoom = SelectedRoom(roomStyle: .쓰리룸, roomType: .빌라연립다세대)
+      RoomForSale.shared.roomData.type = "쓰리룸"
       delegate?.didSelectRoomType()
     case fourButton:
       SelectedRoomSingleton.shared.selectedRoom = SelectedRoom(roomStyle: .쓰리룸, roomType: .상가주택)
+      RoomForSale.shared.roomData.type = "쓰리룸"
       delegate?.didSelectRoomType()
     default:
       break

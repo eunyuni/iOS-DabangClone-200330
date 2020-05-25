@@ -101,9 +101,11 @@ class OfficeTelTableViewCell: UITableViewCell {
     switch sender {
     case oneButton:
       SelectedRoomSingleton.shared.selectedRoom = SelectedRoom(roomStyle: .오피스텔, roomType: .오피스텔)
+      RoomForSale.shared.roomData.type = "오피스텔"
       delegate?.didSelectRoomType()
     case twoButton:
       SelectedRoomSingleton.shared.selectedRoom = SelectedRoom(roomStyle: .오피스텔, roomType: .도시형생활주택)
+      RoomForSale.shared.roomData.type = "오피스텔"
       delegate?.didSelectRoomType()
     default:
       break
