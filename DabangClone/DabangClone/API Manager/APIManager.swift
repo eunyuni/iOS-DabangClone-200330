@@ -160,12 +160,13 @@ final class APIManager {
     func getMarkedRooms(completion: @escaping (Result<[DabangElement], Error>) -> Void) {
         let header: HTTPHeaders = [.authorization(bearerToken: getAccessTokenFromKeyChain())]
         AF.request( baseURL + "/members/postlike/", method: .get, headers: header)
-          .responseDecodable(of: MarkedRoom.self) { (response) in
+          .responseDecodable(of: [DabangElement].self) { (response) in
+            print("status: ", response.response!.statusCode)
                 switch response.result {
                 case .success(let rooms):
-                    let markedRooms = rooms.postLike?.map{$0.post} ?? []
-                    print("MarkedRooms:", markedRooms.count)
-                    completion(.success(markedRooms))
+//                    let markedRooms = rooms.postLike?.map{$0.post} ?? []
+//                    print("MarkedRooms:", markedRooms.count)
+                    completion(.success(rooms))
                 case .failure(let error):
                     print("MarkedRooms Failed")
                     completion(.failure(error))
