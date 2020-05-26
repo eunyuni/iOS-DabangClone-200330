@@ -67,7 +67,7 @@ struct Address: Codable {
 // MARK: - Broker
 struct Broker: Codable {
   let pk: Int
-    let pkList: [Int]?
+  let pkList: [Int]?
   let companyName, address: String?
   let managerName, tel: String
   let image: String?
