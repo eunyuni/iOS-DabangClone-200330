@@ -19,7 +19,7 @@
 
 | 분양정보목록                                                 | 분양디테일화면                                               | 지역별보기                                                   | 1:1 문의                                                     |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![분양정보모두보기.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6utmcld5g306o0dw7wp.gif) | ![분양디테일.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6uskiixbg306o0dwkjq.gif) | ![지역별보기.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t5x8i6ng306o0dwhdv.gif) | ![1대1문의.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t618xu7g306o0dwat1.gif) |
+| ![](https://user-images.githubusercontent.com/57210827/88653796-7d934080-d107-11ea-84b7-600d80f561fb.gif) | ![](https://user-images.githubusercontent.com/57210827/88653762-74a26f00-d107-11ea-988d-1ad2297f3d2b.gif) | ![지역별보기.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t5x8i6ng306o0dwhdv.gif) | ![1대1문의.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t618xu7g306o0dwat1.gif) |
 
 
 
