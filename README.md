@@ -12,21 +12,28 @@
   - Framework : UIKit, CoreLocation, RxSwift
   - Library : FBSDKCoreKit, FBSDKLoginKit, FBSDKShareKit, SnapKit, RxCocoa, RxViewController, Alamofire, Then, Kingfisher, SwiftSVG, SDWebImage, MultiSlider, SwiftyJSON, KeychainSwift, DKImagePickerController, Gedatsu, GoogleMaps
 - 팀원 : 5명( iOS 4명 + Backend 1명)
-- 맡은 역할 :
-- 성과 :
-- 아쉬운 점 :
+
+
+
+## 담당 기능 구현
+
+| 분양정보목록                                                 | 분양디테일화면                                               | 지역별보기                                                   | 1:1 문의                                                     |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![분양정보모두보기.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t5dn38pg306o0dw7wp.gif) | ![분양디테일.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t5kowung306o0dwkjq.gif) | ![지역별보기.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t5x8i6ng306o0dwhdv.gif) | ![1대1문의.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t618xu7g306o0dwat1.gif) |
+
+
 
 ## Design
 
 - Flow chart : 초기 기획 단계에서 앱의 흐름과 주요 기능을 파악, UI 분석
 
-![DabangXDRecord.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6s14ybnkg30dw0bhx7c.gif)
+![DabangXDRecord.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6sdlj1j4g30dw0bhx7c.gif)
 
 
 
 ## Implementation
 
-### Feature
+##### Feature
 
 | 소셜 로그인 기능 구현 (Kakao, Apple, Facebook)               | 메인화면                                                     | 분양 정보관 구현                                             | 구글 맵 + 클러스터링,<br /> 위치 기반 매물 연동              |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
