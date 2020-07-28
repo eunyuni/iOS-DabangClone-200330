@@ -26,10 +26,10 @@
 ## 성과
 
 - Alamofire, Kingfisher, SnapKit, Then등의 라이브러리를 적용하여 생산성 향상
-- UI 오토레이아웃 이해도 향상
+- UI Autolayout 이해도 향상
 - TableView와 CollectionView의 재사용 셀 활용도 향상
 - 필요한 데이터 구조를 파악하여 백엔드팀과 원활한 커뮤니케이션 
-- itrm, GitKraken으로 안정적으로 프로젝트 관리
+- iterm, GitKraken으로 안정적으로 프로젝트 관리
 
 
 
