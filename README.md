@@ -20,7 +20,7 @@
 
 - Flow chart : 초기 기획 단계에서 앱의 흐름과 주요 기능을 파악, UI 분석
 
-![Design_XD](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6rkb6bk8g30d10dwqvg.gif)
+![DabangXDRecord.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6s14ybnkg30dw0bhx7c.gif)
 
 
 
