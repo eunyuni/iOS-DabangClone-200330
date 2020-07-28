@@ -23,11 +23,22 @@
 
 
 
+## 성과
+
+- Alamofire, Kingfisher, SnapKit, Then등의 라이브러리를 적용하여 생산성 향상
+- UI 오토레이아웃 이해도 향상
+- GitKraken으로 안정적으로 프로젝트 관리
+- TableView와 CollectionView의 활용도 향상
+
+
+
 ## Design
 
 - Flow chart : 초기 기획 단계에서 앱의 흐름과 주요 기능을 파악, UI 분석
 
-![DabangXDRecord.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6sdlj1j4g30dw0bhx7c.gif)
+![DabangFlowChart](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6tikop8bj327a0u010x.jpg)
+
+![](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6sdlj1j4g30dw0bhx7c.gif)
 
 
 
