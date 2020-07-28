@@ -17,9 +17,9 @@
 
 ## 담당 기능 구현
 
-| 분양정보목록                                                 | 분양디테일화면                                               | 지역별보기                                                   | 1:1 문의                                                     |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![분양정보모두보기.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6uj0y9m1g306o0dw7wp.gif) | ![분양디테일.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6ugh12kvg306o0dwkjq.gif) | ![지역별보기.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t5x8i6ng306o0dwhdv.gif) | ![1대1문의.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t618xu7g306o0dwat1.gif) |
+| 분양정보목록 | 분양디테일화면 | 지역별보기                                                   | 1:1 문의                                                     |
+| ------------ | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+|              |                | ![지역별보기.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t5x8i6ng306o0dwhdv.gif) | ![1대1문의.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t618xu7g306o0dwat1.gif) |
 
 
 
@@ -37,7 +37,7 @@
 
 - Flow chart : 초기 기획 단계에서 앱의 흐름과 주요 기능을 파악, UI 분석
 
-![DabangFlowChart](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6ufz2wslj327a0u046m.jpg)
+![DabangFlowChart](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6ur90omzj327a0u010x.jpg)
 
 
 
