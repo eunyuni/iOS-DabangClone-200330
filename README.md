@@ -19,7 +19,7 @@
 
 | 분양정보목록                                                 | 분양디테일화면                                               | 지역별보기                                                   | 1:1 문의                                                     |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![분양정보모두보기.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t5dn38pg306o0dw7wp.gif) | ![분양디테일.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t5kowung306o0dwkjq.gif) | ![지역별보기.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t5x8i6ng306o0dwhdv.gif) | ![1대1문의.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t618xu7g306o0dwat1.gif) |
+| ![분양정보모두보기.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6uj0y9m1g306o0dw7wp.gif) | ![분양디테일.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6ugh12kvg306o0dwkjq.gif) | ![지역별보기.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t5x8i6ng306o0dwhdv.gif) | ![1대1문의.mov](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6t618xu7g306o0dwat1.gif) |
 
 
 
@@ -27,8 +27,9 @@
 
 - Alamofire, Kingfisher, SnapKit, Then등의 라이브러리를 적용하여 생산성 향상
 - UI 오토레이아웃 이해도 향상
-- GitKraken으로 안정적으로 프로젝트 관리
-- TableView와 CollectionView의 활용도 향상
+- TableView와 CollectionView의 재사용 셀 활용도 향상
+- 필요한 데이터 구조를 파악하여 백엔드팀과 원활한 커뮤니케이션 
+- itrm, GitKraken으로 안정적으로 프로젝트 관리
 
 
 
@@ -36,9 +37,7 @@
 
 - Flow chart : 초기 기획 단계에서 앱의 흐름과 주요 기능을 파악, UI 분석
 
-![DabangFlowChart](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6tikop8bj327a0u010x.jpg)
-
-![](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6sdlj1j4g30dw0bhx7c.gif)
+![DabangFlowChart](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh6ufz2wslj327a0u046m.jpg)
 
 
 
